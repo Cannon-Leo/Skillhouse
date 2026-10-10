@@ -3,19 +3,19 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { FigmaIcon } from "./FigmaIcon";
 
-describe("UI FigmaIcon Component", () => {
+describe("UI FigmaIcon Component (Lucide unified)", () => {
   it("renders with default hidden aria state when alt is empty", () => {
     const { container } = render(<FigmaIcon name="search-normal" />);
     const span = container.firstChild as HTMLElement;
     expect(span).toHaveAttribute("aria-hidden", "true");
-    const img = container.querySelector("img");
-    expect(img).toHaveAttribute("src", "/figma/search-normal.svg");
+    const svg = container.querySelector("svg");
+    expect(svg).toBeInTheDocument();
   });
 
-  it("sets accessible alt text and removes aria-hidden when alt is provided", () => {
+  it("sets accessible aria-label and img role when alt is provided", () => {
     render(<FigmaIcon name="monitor" alt="Monitor Icon" />);
-    const img = screen.getByAltText("Monitor Icon");
-    expect(img).toBeInTheDocument();
+    const iconWrapper = screen.getByRole("img", { name: "Monitor Icon" });
+    expect(iconWrapper).toBeInTheDocument();
   });
 
   it("applies custom size styles", () => {

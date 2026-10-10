@@ -2,7 +2,20 @@
 
 import React from "react";
 import { Checkbox } from "../ui/Checkbox";
-import Image from "next/image";
+import {
+  Monitor,
+  Presentation,
+  Video,
+  Image as ImageIcon,
+  Archive,
+  Upload,
+  Download,
+  FolderOpen,
+  ShieldCheck,
+  Search,
+  Tag,
+  Code2,
+} from "lucide-react";
 import styles from "./FilterItem.module.css";
 
 export interface FilterItemProps {
@@ -15,6 +28,24 @@ export interface FilterItemProps {
   className?: string;
 }
 
+const FILTER_ICON_MAP: Record<
+  string,
+  React.ComponentType<{ size?: number; className?: string; "aria-hidden"?: boolean }>
+> = {
+  monitor: Monitor,
+  presentation: Presentation,
+  video: Video,
+  image: ImageIcon,
+  archive: Archive,
+  upload: Upload,
+  import: Download,
+  "folder-open": FolderOpen,
+  "shield-tick": ShieldCheck,
+  "search-normal": Search,
+  tag: Tag,
+  code: Code2,
+};
+
 export const FilterItem: React.FC<FilterItemProps> = ({
   id,
   label,
@@ -24,6 +55,8 @@ export const FilterItem: React.FC<FilterItemProps> = ({
   onChange,
   className = "",
 }) => {
+  const IconComponent = iconName ? FILTER_ICON_MAP[iconName] || Monitor : null;
+
   return (
     <label
       htmlFor={`cb-${id}`}
@@ -39,15 +72,9 @@ export const FilterItem: React.FC<FilterItemProps> = ({
 
       <div className={styles.contentRow}>
         <div className={styles.labelGroup}>
-          {iconName && (
-            <span className={styles.iconWrapper}>
-              <Image
-                src={`/figma/${iconName}.svg`}
-                alt=""
-                width={16}
-                height={16}
-                unoptimized
-              />
+          {IconComponent && (
+            <span className={styles.iconWrapper} aria-hidden="true" data-testid={`filter-icon-${iconName}`}>
+              <IconComponent size={16} />
             </span>
           )}
           <span className={styles.label}>{label}</span>

@@ -128,7 +128,7 @@ describe("Features NavBar Component", () => {
 
     // Open user menu
     fireEvent.click(avatarBtn);
-    expect(screen.getByText("Directory history")).toBeInTheDocument();
+    expect(screen.getByText("Bookmarks")).toBeInTheDocument();
     expect(screen.getByText("Profile")).toBeInTheDocument();
 
     // Click Logout
@@ -166,9 +166,9 @@ describe("Features NavBar Component", () => {
     fireEvent.click(screen.getByText("Account settings"));
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
-    // Reopen and test Host switch
+    // Reopen and test Bookmarks
     fireEvent.click(avatarBtn);
-    fireEvent.click(screen.getByText("Host"));
+    fireEvent.click(screen.getByText("Bookmarks"));
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
     // Click square action button

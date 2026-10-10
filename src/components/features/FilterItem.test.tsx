@@ -58,7 +58,7 @@ describe("Features FilterItem Component", () => {
         onChange={() => {}}
       />
     );
-    const img = container.querySelector("img");
-    expect(img).toHaveAttribute("src", "/figma/presentation.svg");
+    const svg = container.querySelector("svg");
+    expect(svg).toBeInTheDocument();
   });
 });

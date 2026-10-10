@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import styles from "./FilterSection.module.css";
 
 export interface FilterSectionProps {
@@ -39,14 +39,9 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
         <h3 className={styles.title}>{title}</h3>
         <span
           className={`${styles.chevron} ${!isOpen ? styles.collapsed : ""}`}
+          aria-hidden="true"
         >
-          <Image
-            src="/figma/arrow-down.svg"
-            alt=""
-            width={12}
-            height={12}
-            unoptimized
-          />
+          <ChevronDown size={14} />
         </span>
       </div>
 

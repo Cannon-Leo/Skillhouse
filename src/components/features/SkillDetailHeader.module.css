@@ -113,9 +113,9 @@
 /* Row C (State 2): Subscription Orange Banner (Node 752:11137) */
 .subscriptionBanner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg); /* 16px */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm); /* 10px */
   padding: var(--space-lg); /* 16px */
   background-color: var(--color-brand); /* #FB6320 */
   border-radius: var(--radius-none); /* 0px */
@@ -139,8 +139,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3xs); /* 4px */
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 
 .bannerTitle {
@@ -158,6 +157,12 @@
   line-height: var(--leading-normal); /* 1.45em */
   color: var(--color-brand-light); /* #FFE3D7 */
   word-break: break-word;
+}
+
+.bannerArrowRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .bannerArrow {

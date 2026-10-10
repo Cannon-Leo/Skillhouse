@@ -303,13 +303,13 @@ export const NavBar: React.FC<NavBarProps> = ({
 
               {userMenuOpen && (
                 <UserMenuPopover
+                  variant="attending"
+                  onBookmarks={() => setUserMenuOpen(false)}
                   onDirectoryHistory={() => setUserMenuOpen(false)}
                   onProfile={() => setUserMenuOpen(false)}
                   onAccountSettings={() => setUserMenuOpen(false)}
                   onHelpCenter={() => setUserMenuOpen(false)}
-                  onSwitchHost={() => setUserMenuOpen(false)}
-                  onSwitchServiceProvider={() => setUserMenuOpen(false)}
-                  onMyListings={() => setUserMenuOpen(false)}
+                  onClose={() => setUserMenuOpen(false)}
                   onLogout={() => {
                     setUserMenuOpen(false);
                     onSignOut?.();

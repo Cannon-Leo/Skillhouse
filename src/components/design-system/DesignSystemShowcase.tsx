@@ -16,6 +16,7 @@ import { SkillDetailHeader } from "../features/SkillDetailHeader";
 import { NavBar } from "../features/NavBar";
 import { CategoriesDropdown } from "../features/CategoriesDropdown";
 import { LoginModal } from "../features/LoginModal";
+import { UserMenuPopover } from "../features/UserMenuPopover";
 import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
 import styles from "./DesignSystemShowcase.module.css";
 
@@ -29,6 +30,9 @@ export const DesignSystemShowcase: React.FC = () => {
   const [demoDropdownTab, setDemoDropdownTab] = useState<"use-case" | "role" | "output">("use-case");
   const [demoDropdownOverlayOpen, setDemoDropdownOverlayOpen] = useState(false);
   const [demoNavSignedIn, setDemoNavSignedIn] = useState(false);
+  const [demoUserMenuVariant, setDemoUserMenuVariant] = useState<"attending" | "extended">("attending");
+  const [demoUserMenuActiveItem, setDemoUserMenuActiveItem] = useState<string>("bookmarks");
+  const [demoUserMenuFeedback, setDemoUserMenuFeedback] = useState<string | null>(null);
   const [cbAllSkills, setCbAllSkills] = useState(true);
   const [filterActive, setFilterActive] = useState<Record<string, boolean>>({
     web: true,
@@ -899,11 +903,115 @@ export const DesignSystemShowcase: React.FC = () => {
           </div>
         )}
       </section>
-      {/* 13. Connect Your Agent Integration Section (Figma Node 759:12087) */}
+      {/* 15. User Profile Dropdown Menu & Interactive States (Figma Node 760:12903) */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            12. Connect Your Agent Section
+            15. User Profile Dropdown Menu &amp; Interactive States
+            <span className={styles.nodeBadge}>Node 760:12903 (drop down menu/attending)</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Authentic attending user dropdown menu matching Figma Node 760:12903: fixed <code>200px</code> width, <code>#FFECD8</code> surface cream background, <code>16px</code> padding, dual elevation shadow (<code>0px 4px 6px -2px rgba(0,0,0,0.06), 0px 12px 16px -4px rgba(0,0,0,0.1)</code>), 18px vector icons, 1px dividers, press micro-interaction (scale 0.96), and full keyboard navigation.
+          </p>
+        </div>
+
+        <div className={styles.sandboxCard} style={{ gap: "24px" }}>
+          <div className={styles.popoverShowcaseContainer}>
+            {/* Live Interactive Dropdown Preview */}
+            <div className={styles.popoverInteractiveArea}>
+              <UserMenuPopover
+                variant={demoUserMenuVariant}
+                activeItem={demoUserMenuActiveItem}
+                className={styles.popoverStaticWrapper}
+                onBookmarks={() => setDemoUserMenuFeedback("Navigating to Bookmarks...")}
+                onDirectoryHistory={() => setDemoUserMenuFeedback("Navigating to Directory history...")}
+                onProfile={() => setDemoUserMenuFeedback("Opening User Profile...")}
+                onAccountSettings={() => setDemoUserMenuFeedback("Opening Account settings...")}
+                onHelpCenter={() => setDemoUserMenuFeedback("Opening Help center...")}
+                onSwitchHost={() => setDemoUserMenuFeedback("Switched to Host mode")}
+                onSwitchServiceProvider={() => setDemoUserMenuFeedback("Switched to Service Provider mode")}
+                onMyListings={() => setDemoUserMenuFeedback("Opening My Listings & Services...")}
+                onLogout={() => setDemoUserMenuFeedback("Signed out of session")}
+                onClose={() => setDemoUserMenuFeedback("Menu closed via Escape / Click outside")}
+              />
+            </div>
+
+            {/* Interactive Control Panel */}
+            <div className={styles.popoverControlsCard}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
+                  Dropdown Variant:
+                </span>
+                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                  <Button
+                    variant={demoUserMenuVariant === "attending" ? "primary" : "outline"}
+                    size="sm"
+                    onClick={() => setDemoUserMenuVariant("attending")}
+                  >
+                    Attending (Figma Node 760:12903)
+                  </Button>
+                  <Button
+                    variant={demoUserMenuVariant === "extended" ? "primary" : "outline"}
+                    size="sm"
+                    onClick={() => setDemoUserMenuVariant("extended")}
+                  >
+                    Extended (Figma Node 753:11852)
+                  </Button>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
+                  Simulate Active / Focused Route:
+                </span>
+                <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                  {[
+                    { id: "none", label: "None (Idle)" },
+                    { id: "bookmarks", label: "Bookmarks" },
+                    { id: "profile", label: "Profile" },
+                    { id: "settings", label: "Account settings" },
+                    { id: "help", label: "Help center" },
+                  ].map((item) => (
+                    <Button
+                      key={item.id}
+                      variant={demoUserMenuActiveItem === (item.id === "none" ? "" : item.id) ? "primary" : "outline"}
+                      size="sm"
+                      onClick={() => setDemoUserMenuActiveItem(item.id === "none" ? "" : item.id)}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ padding: "12px 16px", background: "var(--color-surface-hover)", border: "1px solid var(--color-border)", borderRadius: "4px" }}>
+                <span style={{ fontSize: "12px", fontWeight: 600, display: "block", marginBottom: "4px" }}>
+                  Interactive Feedback Status:
+                </span>
+                <span style={{ fontSize: "13px", fontFamily: "var(--font-mono)", color: demoUserMenuFeedback ? "var(--color-brand)" : "var(--color-text-muted)" }}>
+                  {demoUserMenuFeedback || "Click any item in the preview or use Arrow keys to test."}
+                </span>
+              </div>
+
+              <div style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+                <strong>Interactive Specs:</strong>
+                <ul style={{ margin: "4px 0 0 18px", padding: 0 }}>
+                  <li><strong>Hover feedback:</strong> Translates <code>translateX(2px)</code> with <code>#FBE1C7</code> peach background.</li>
+                  <li><strong>Press feedback:</strong> Exact <code>scale(0.96)</code> compression on active click.</li>
+                  <li><strong>Keyboard operable:</strong> ArrowDown / ArrowUp traverses items, Home / End jumps, Escape triggers close.</li>
+                  <li><strong>Elevation:</strong> Dual shadow <code>0px 4px 6px -2px rgba(0,0,0,0.06), 0px 12px 16px -4px rgba(0,0,0,0.1)</code>.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 16. Connect Your Agent Integration Section (Figma Node 759:12087) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            16. Connect Your Agent Section
             <span className={styles.nodeBadge}>Node 759:12087</span>
           </h2>
           <p className={styles.sectionDesc}>

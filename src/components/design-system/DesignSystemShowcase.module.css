@@ -334,3 +334,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* User Menu Popover Showcase */
+.popoverShowcaseContainer {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.popoverInteractiveArea {
+  position: relative;
+  width: 200px;
+  min-height: 260px;
+  flex-shrink: 0;
+}
+
+.popoverStaticWrapper {
+  position: static !important;
+}
+
+.popoverControlsCard {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

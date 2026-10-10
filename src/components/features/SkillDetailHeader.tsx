@@ -213,15 +213,17 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
               </span>
             </div>
 
-            <span className={styles.bannerArrow}>
-              <Image
-                src="/figma/node_752_11153.svg"
-                alt=""
-                width={16}
-                height={16}
-                unoptimized
-              />
-            </span>
+            <div className={styles.bannerArrowRow}>
+              <span className={styles.bannerArrow}>
+                <Image
+                  src="/figma/node_752_11153.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                  unoptimized
+                />
+              </span>
+            </div>
           </div>
         )}
 

@@ -1,7 +1,8 @@
 /* UserMenuPopover Styles
- * Exact Figma Node 753:11852 specs:
- * Width: 200px, background: #FFECD8, padding: 16px, gap: 14px between rows
+ * Exact Figma Node 760:12903 specs: "drop down menu/attending"
+ * Width: 200px, background: #FFECD8 (Surface Cream), padding: 16px, gap: 14px
  * Box shadow: 0px 4px 6px -2px rgba(0,0,0,0.06), 0px 12px 16px -4px rgba(0,0,0,0.1)
+ * Border: 1px solid rgba(166, 166, 166, 0.5)
  */
 
 .popoverContainer {
@@ -9,16 +10,17 @@
   top: calc(100% + 8px);
   right: 0;
   width: 200px;
-  background-color: #FFECD8;
-  border: 1px solid rgba(166, 166, 166, 0.4);
+  background-color: var(--color-surface-cream, #FFECD8);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
   border-radius: 4px;
   box-shadow: 
     0px 4px 6px -2px rgba(0, 0, 0, 0.06), 
     0px 12px 16px -4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: var(--space-lg, 16px);
   z-index: 1000;
   user-select: none;
   animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
 }
 
 @keyframes popoverFadeIn {
@@ -42,32 +44,43 @@
 .menuGroup {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
   width: 100%;
 }
 
 .menuItem {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-xs, 8px);
   width: 100%;
-  padding: 4px 0;
+  padding: 6px 8px;
   background: transparent;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   text-align: left;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: background-color var(--transition-fast, 150ms ease), transform var(--transition-fast, 150ms ease), color var(--transition-fast, 150ms ease);
+  box-sizing: border-box;
 }
 
 .menuItem:hover {
-  opacity: 0.75;
-  transform: translateX(1px);
+  background-color: var(--color-surface-peach, #FBE1C7);
+  transform: translateX(2px);
+}
+
+.menuItem:active {
+  transform: scale(0.96) translateX(2px);
 }
 
 .menuItem:focus-visible {
   outline: 2px solid var(--color-brand, #FB6320);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline-offset: 1px;
+  background-color: var(--color-surface-peach, #FBE1C7);
+}
+
+.activeItem {
+  background-color: var(--color-surface-peach, #FBE1C7);
+  border-left: 2px solid var(--color-brand, #FB6320);
 }
 
 .itemIcon {
@@ -77,63 +90,75 @@
 }
 
 .itemLabel {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
-  font-size: 14px;
+  font-family: var(--font-sans), var(--font-geist-sans), "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--text-sm, 14px);
   line-height: 1.4em;
   font-weight: 400;
-  color: #000000;
+  color: var(--color-dark, #000000);
   white-space: nowrap;
+}
+
+.activeItem .itemLabel {
+  font-weight: 600;
+  color: var(--color-dark, #000000);
 }
 
 .divider {
   width: 100%;
-  height: 1px;
-  background-color: #D0D5DD;
-  margin: 2px 0;
+  height: 0px;
+  border: none;
+  border-top: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  margin: 0;
 }
 
+.logoutItem:hover {
+  background-color: rgba(224, 82, 21, 0.12);
+}
+
+.logoutItem:hover .itemLabel {
+  color: var(--color-brand, #FB6320);
+}
+
+/* Extended variant styling */
 .switchGroup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
 }
 
 .switchHeader {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 12px;
   line-height: 1.4em;
   font-weight: 500;
   color: #C9A272;
+  padding: 0 8px;
 }
 
 .menuItemSubtle {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 2px 0;
+  padding: 4px 8px;
   background: transparent;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   text-align: left;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: background-color var(--transition-fast, 150ms ease), transform var(--transition-fast, 150ms ease);
 }
 
 .menuItemSubtle:hover {
-  opacity: 0.75;
-  transform: translateX(1px);
+  background-color: var(--color-surface-peach, #FBE1C7);
+  transform: translateX(2px);
+}
+
+.menuItemSubtle:active {
+  transform: scale(0.96);
 }
 
 .menuItemSubtle:focus-visible {
   outline: 2px solid var(--color-brand, #FB6320);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-.logoutItem:hover {
-  opacity: 0.85;
-}
-
-.logoutItem .itemLabel {
-  color: #000000;
+  outline-offset: 1px;
 }
