@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { ConnectAgentBanner } from "./ConnectAgentBanner";
 
-describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
+describe("Features ConnectAgentBanner Component (Figma 759:12088)", () => {
   beforeEach(() => {
     Object.assign(navigator, {
       clipboard: {
@@ -37,7 +37,7 @@ describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
     expect(screen.getByText("02")).toBeInTheDocument();
     expect(screen.getByText("Authorize in your browser")).toBeInTheDocument();
     expect(screen.getByText("03")).toBeInTheDocument();
-    expect(screen.getByText("Install and verify")).toBeInTheDocument();
+    expect(screen.getByText(/Install and/i)).toBeInTheDocument();
   });
 
   it("toggles agent selection on click and keyboard press", () => {
@@ -64,23 +64,23 @@ describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
     expect(claudeAgent).toHaveAttribute("aria-pressed", "false");
   });
 
-  it("copies prompt instruction to clipboard when clicking copy button", () => {
+  it("copies prompt instruction to clipboard when clicking prompt area", () => {
     render(<ConnectAgentBanner />);
 
-    const copyBtn = screen.getByRole("button", { name: "Copy agent instruction prompt" });
-    fireEvent.click(copyBtn);
+    const promptBtn = screen.getByRole("button", { name: "Copy agent instruction prompt" });
+    fireEvent.click(promptBtn);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       expect.stringContaining("https://skillry.dev/skills/bs-visual-canvas-deck/install.md")
     );
-    expect(screen.getByText("Copied")).toBeInTheDocument();
+    expect(screen.getByText("Copied!")).toBeInTheDocument();
   });
 
   it("handles Connect Skillhouse button click with custom callback", () => {
     const handleConnect = vi.fn();
     render(<ConnectAgentBanner onConnect={handleConnect} />);
 
-    const connectBtn = screen.getByRole("button", { name: "Connect Skillhouse CLI" });
+    const connectBtn = screen.getByRole("button", { name: "Connect Skillhouse" });
     fireEvent.click(connectBtn);
 
     expect(handleConnect).toHaveBeenCalledTimes(1);
@@ -89,7 +89,7 @@ describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
   it("handles fallback connect copy when no callback is provided", () => {
     render(<ConnectAgentBanner />);
 
-    const connectBtn = screen.getByRole("button", { name: "Connect Skillhouse CLI" });
+    const connectBtn = screen.getByRole("button", { name: "Connect Skillhouse" });
     fireEvent.click(connectBtn);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalled();
@@ -106,5 +106,12 @@ describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
 
     expect(screen.getByText("Custom Title")).toBeInTheDocument();
     expect(screen.getByText("Custom Subtitle")).toBeInTheDocument();
+  });
+
+  it("renders decorative bottom bracket accents (Figma 759:12167) with aria-hidden", () => {
+    render(<ConnectAgentBanner />);
+    const bracket = screen.getByTestId("bracket-container");
+    expect(bracket).toBeInTheDocument();
+    expect(bracket).toHaveAttribute("aria-hidden", "true");
   });
 });

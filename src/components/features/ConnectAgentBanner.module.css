@@ -1,4 +1,4 @@
-/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 */
+/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 (Desktop - 3) */
 
 .section {
   width: 100%;
@@ -9,9 +9,20 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  overflow-x: hidden;
 }
 
-/* Figma Frame 1618871300: 1360px wide, min-height 516px, white background, no border, soft shadow */
+/* Outer wrapper for card + bottom accents flush underneath */
+.cardWrapper {
+  width: 100%;
+  max-width: 1360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Figma Frame 1618871300: 1360px wide, 516px height, white background, no outer border, soft shadow */
 .card {
   width: 100%;
   max-width: 1360px;
@@ -25,9 +36,11 @@
   gap: 40px;
   padding: 92px 64px 92px 64px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
-/* Left Column: 536px wide, vertical stack with 24px gap */
+/* Left Column: exactly 536px wide, 24px vertical itemSpacing (Figma 759:12090) */
 .leftColumn {
   width: 536px;
   max-width: 100%;
@@ -43,7 +56,7 @@
   gap: 24px;
 }
 
-/* Figma 759:12089: Geist Pixel 48px, line-height 48px, letter-spacing -1.92px (-0.04em), #000000 */
+/* Figma 759:12091: Geist Pixel Square 48px, line-height 48px, letter-spacing -1.92px (-0.04em), #000000 */
 .title {
   font-family: var(--font-pixel), var(--font-geist-pixel), monospace, sans-serif;
   font-size: 48px;
@@ -54,7 +67,7 @@
   font-weight: 400;
 }
 
-/* Figma 759:12091: Geist 16px, line-height 24px, color #7F776E */
+/* Figma 759:12092: Geist 16px, line-height 24px, color #7F776E */
 .subtitle {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 16px;
@@ -80,7 +93,7 @@
   color: #FB6320;
 }
 
-/* Agents Grid: 536px wide, 2 rows of 3 items, row gap 20px, col gap 24px */
+/* Agents Grid: exactly 536px wide, 2 rows of 3 items (Figma 759:12094) */
 .agentsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -139,7 +152,7 @@
   white-space: nowrap;
 }
 
-/* Right Column: exactly 548px wide, 24px vertical gap */
+/* Right Column: exactly 548px wide, 24px vertical gap (Figma 759:12131) */
 .rightColumn {
   width: 548px;
   max-width: 100%;
@@ -152,20 +165,23 @@
 /* Figma 759:12132: 548x265px, fill #54382C, border 1px solid rgba(166, 166, 166, 0.5), no border-radius */
 .terminalBox {
   width: 100%;
+  height: 265px;
   background: #54382C;
   border: 1px solid rgba(166, 166, 166, 0.5);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Figma 759:12147: padding 20px, border-bottom 1px solid rgba(166, 166, 166, 0.5) */
 .terminalHeader {
   padding: 20px;
+  height: 64px;
   border-bottom: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
@@ -203,35 +219,12 @@
   color: #FFFFFF;
 }
 
-/* Copy button */
-.copyButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 4px;
-  padding: 4px 10px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 12px;
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.copyButton:hover {
-  background: rgba(255, 255, 255, 0.16);
-  color: #FFFFFF;
-}
-
-.copyLabel {
-  font-size: 12px;
-}
-
 /* Figma 759:12158: padding 16px 20px 48px 20px */
 .promptArea {
-  padding: 16px 20px 48px 20px;
+  padding: 16px 20px 24px 20px;
   box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
 }
 
 .promptText {
@@ -253,9 +246,22 @@
   word-break: break-all;
 }
 
-/* Figma 759:12159: padding 16px 20px 16px 20px, border-top 1px solid rgba(166, 166, 166, 0.5) */
+.copiedToast {
+  position: absolute;
+  right: 20px;
+  top: 16px;
+  background: #03A400;
+  color: #FFFFFF;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Figma 759:12159: padding 16px 20px 16px 20px, height 70px, border-top 1px solid rgba(166, 166, 166, 0.5) */
 .stepsFooter {
   padding: 16px 20px;
+  height: 70px;
   border-top: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
@@ -268,6 +274,14 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
+}
+
+.stepBadgeInstall {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 /* Figma step prefix: Geist 13px, opacity 0.5 white */
@@ -284,6 +298,15 @@
   font-size: 13px;
   line-height: 18.85px;
   color: #FFFFFF;
+}
+
+/* Figma node 759:12162: 'Install and verify' wrapped into two lines */
+.stepTextWrap {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 13px;
+  line-height: 18.85px;
+  color: #FFFFFF;
+  text-align: left;
 }
 
 /* Figma 759:12163: 548x48px, background #FB6320, centered, no border-radius, white text 14px Geist 500 */
@@ -314,14 +337,15 @@
   transform: scale(0.96);
 }
 
-/* Figma 759:12167: bottom decorative bracket svg, width 746.1px, height 32.2px */
+/* Figma 759:12167: bottom decorative bracket svg, width 746.1px, height 32.2px, flush to bottom of card */
 .bracketContainer {
-  margin-top: 0;
+  margin-top: -1px;
   width: 100%;
   max-width: 746px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 0;
 }
 
 .bracketSvg {
@@ -341,27 +365,9 @@
 
 @media (max-width: 1200px) {
   .card {
-    padding: 48px 32px;
-    gap: 32px;
-  }
-  .leftColumn {
-    width: auto;
-    flex: 1;
-  }
-  .rightColumn {
-    width: 480px;
-  }
-  .title {
-    font-size: 40px;
-    line-height: 40px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .card {
     flex-direction: column;
     align-items: stretch;
-    padding: 40px 28px;
+    padding: 48px 32px;
     gap: 40px;
   }
   .leftColumn {
@@ -369,6 +375,14 @@
   }
   .rightColumn {
     width: 100%;
+  }
+  .terminalBox {
+    height: auto;
+    min-height: 265px;
+  }
+  .title {
+    font-size: 40px;
+    line-height: 40px;
   }
 }
 
@@ -390,6 +404,7 @@
   .stepsFooter {
     flex-direction: column;
     align-items: flex-start;
+    height: auto;
     gap: 8px;
   }
   .bracketContainer {
