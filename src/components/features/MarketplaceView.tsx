@@ -6,7 +6,9 @@ import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
 import { SkillDetailHeader } from "@/components/features/SkillDetailHeader";
+import { ConnectAgentBanner } from "./ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
+import { RequestSkillModal } from "@/components/features/RequestSkillModal";
 import { Button } from "@/components/ui/Button";
 import styles from "@/app/page.module.css";
 
@@ -25,91 +27,83 @@ interface SkillItem {
   isFree?: boolean;
 }
 
-const SKILLS_DATA: SkillItem[] = [
+const INITIAL_SKILLS: SkillItem[] = [
   {
-    id: "visual-canvas-deck",
-    title: "Visual Canvas Deck",
-    version: "v1.0.3",
-    price: "$5",
-    description:
-      "A skill for generating high-converting slide decks and pitch presentations directly in browser canvas or PowerPoint formats with verified design tokens.",
-    installPrompt: "npx skillhouse add visual-canvas-deck",
-    previewImage: "/figma/skill-card-preview.png",
-    models: [
-      "/figma/logo-1.png",
-      "/figma/logo-2.png",
-      "/figma/logo-3.png",
-      "/figma/logo-4.png",
-    ],
-    roles: ["Product Manager", "Graphic Designer"],
-    output: "slides",
-    category: "Design",
-    isFree: false,
+    id: "web-dev-pro",
+    title: "Web Development Pro",
+    version: "1.0.0",
+    price: "Free",
+    isFree: true,
+    description: "Generates modern responsive websites using clean HTML, CSS, and TypeScript with optimal performance and SEO best practices.",
+    installPrompt: "npx create-agent-skill web-dev-pro",
+    previewImage: "/figma/image_sample.png",
+    models: ["Claude 3.5 Sonnet", "GPT-4o"],
+    roles: ["Software Engineer", "Fullstack"],
+    output: "code",
+    category: "Development",
   },
   {
-    id: "pixel-promo-video",
-    title: "Pixel Promo Video",
-    version: "v2.1.0",
+    id: "brand-identity",
+    title: "Brand Identity Designer",
+    version: "2.1.0",
+    price: "$19",
+    isFree: false,
+    description: "Synthesizes color palettes, typography scales, logo systems, and visual guidelines into an exportable token set.",
+    installPrompt: "npx create-agent-skill brand-identity",
+    previewImage: "/figma/image_sample.png",
+    models: ["Claude 3.5 Sonnet"],
+    roles: ["Product Designer", "Brand Director"],
+    output: "design",
+    category: "Design",
+  },
+  {
+    id: "social-media-copy",
+    title: "Social Media Strategist",
+    version: "1.2.0",
     price: "Free",
-    description:
-      "Turn product screenshots and briefs into high-energy promo videos with automated audio synthesis and motion keyframe timing.",
-    installPrompt: "npx skillhouse add pixel-promo-video",
-    previewImage: "/figma/skill-card-preview.png",
-    models: [
-      "/figma/logo-2.png",
-      "/figma/logo-3.png",
-      "/figma/logo-5.png",
-      "/figma/logo-6.png",
-    ],
-    roles: ["Content creator", "Marketer"],
-    output: "video",
+    isFree: true,
+    description: "Crafts engaging multi-platform social media posts, threads, and newsletters calibrated to your brand voice.",
+    installPrompt: "npx create-agent-skill social-media-copy",
+    previewImage: "/figma/image_sample.png",
+    models: ["GPT-4o", "Llama 3"],
+    roles: ["Marketing Lead", "Copywriter"],
+    output: "copy",
     category: "Marketing",
-    isFree: true,
   },
   {
-    id: "api-tester-pro",
-    title: "API Tester Pro",
-    version: "v1.4.0",
-    price: "Free",
-    description:
-      "Automated test harness generation and schema contract checking across OpenAPI and GraphQL endpoints with coverage reports.",
-    installPrompt: "npx skillhouse add api-tester-pro",
-    previewImage: "/figma/skill-card-preview.png",
-    models: [
-      "/figma/logo-1.png",
-      "/figma/logo-4.png",
-      "/figma/logo-6.png",
-    ],
-    roles: ["Software Engineer"],
-    output: "web",
-    category: "Engineering",
-    isFree: true,
-  },
-  {
-    id: "brand-identity-suite",
-    title: "Brand Identity Suite",
-    version: "v1.2.0",
-    price: "$8",
-    description:
-      "Generate complete multi-channel identity guidelines, typographic scales, and color harmonizations for early-stage ventures.",
-    installPrompt: "npx skillhouse add brand-identity-suite",
-    previewImage: "/figma/skill-card-preview.png",
-    models: [
-      "/figma/logo-1.png",
-      "/figma/logo-2.png",
-      "/figma/logo-6.png",
-    ],
-    roles: ["Founder", "Designer"],
-    output: "image",
-    category: "Design",
+    id: "data-analyst-agent",
+    title: "Automated Data Insights",
+    version: "3.0.0",
+    price: "$29",
     isFree: false,
+    description: "Processes CSV, JSON, and SQL tables to generate automated visual reports, outlier detection, and executive summaries.",
+    installPrompt: "npx create-agent-skill automated-data-insights",
+    previewImage: "/figma/image_sample.png",
+    models: ["Claude 3.5 Sonnet", "Gemini 1.5 Pro"],
+    roles: ["Data Analyst", "Operations"],
+    output: "report",
+    category: "Analytics",
   },
 ];
 
 export function MarketplaceView() {
   const router = useRouter();
 
+  const [skills] = useState<SkillItem[]>(INITIAL_SKILLS);
+  const [selectedSkill, setSelectedSkill] = useState<SkillItem>(INITIAL_SKILLS[0]);
+  const [bookmarkedSkills, setBookmarkedSkills] = useState<Record<string, boolean>>({});
+  const [isUserSubscribed, setIsUserSubscribed] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  // Request a Skill Modal state
+  const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
+  const [requestSkillPrefill, setRequestSkillPrefill] = useState("");
+  const [requestTriggerSource, setRequestTriggerSource] = useState("homepage");
+
   const [filters, setFilters] = useState<FilterState>({
     recommendations: ["all"],
     outputs: [],
@@ -117,45 +111,47 @@ export function MarketplaceView() {
     useCases: [],
   });
 
-  const [selectedSkillId, setSelectedSkillId] = useState<string>("visual-canvas-deck");
-  const [isUserSubscribed, setIsUserSubscribed] = useState(false);
-  const [bookmarkedSkills, setBookmarkedSkills] = useState<Record<string, boolean>>({});
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  const selectedSkill =
-    SKILLS_DATA.find((s) => s.id === selectedSkillId) || SKILLS_DATA[0];
-
-  const handleToggleBookmark = (id: string, isBookmarked: boolean) => {
-    setBookmarkedSkills((prev) => ({
-      ...prev,
-      [id]: isBookmarked,
-    }));
-  };
-
   const handleSelectSkill = (skill: SkillItem) => {
-    setSelectedSkillId(skill.id);
-    if (typeof window !== "undefined" && window.innerWidth <= 1200) {
+    setSelectedSkill(skill);
+    if (window.innerWidth <= 1200) {
       setMobileDrawerOpen(true);
     }
   };
 
-  const filteredSkills = SKILLS_DATA.filter((skill) => {
+  const handleToggleBookmark = (skillId: string, isBookmarked: boolean) => {
+    setBookmarkedSkills((prev) => ({
+      ...prev,
+      [skillId]: isBookmarked,
+    }));
+  };
+
+  const handleOpenRequestSkill = (source: string, prefillTitle: string = "") => {
+    setRequestTriggerSource(source);
+    setRequestSkillPrefill(prefillTitle);
+    setIsRequestSkillOpen(true);
+  };
+
+  const filteredSkills = skills.filter((skill) => {
     if (searchValue.trim()) {
       const q = searchValue.toLowerCase();
-      const matchTitle = skill.title.toLowerCase().includes(q);
-      const matchDesc = skill.description.toLowerCase().includes(q);
-      if (!matchTitle && !matchDesc) return false;
+      const match =
+        skill.title.toLowerCase().includes(q) ||
+        skill.description.toLowerCase().includes(q) ||
+        skill.output.toLowerCase().includes(q) ||
+        (skill.category && skill.category.toLowerCase().includes(q));
+      if (!match) return false;
     }
 
-    if (filters.recommendations.includes("free") && !skill.isFree) {
+    if (filters.recommendations.includes("free") && !skill.isFree && skill.price.toLowerCase() !== "free") {
+      return false;
+    }
+    if (filters.recommendations.includes("paid") && (skill.isFree || skill.price.toLowerCase() === "free")) {
       return false;
     }
 
-    if (filters.outputs.length > 0 && !filters.outputs.includes(skill.output)) {
-      return false;
+    if (filters.outputs.length > 0) {
+      const matchOutput = filters.outputs.some(o => skill.output.toLowerCase().includes(o));
+      if (!matchOutput) return false;
     }
 
     if (filters.roles.length > 0) {
@@ -185,6 +181,7 @@ export function MarketplaceView() {
         }}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
+        onRequestSkill={() => handleOpenRequestSkill("navigation")}
         isSignedIn={isSignedIn}
         onOpenLoginModal={() => setIsLoginModalOpen(true)}
         onGetStarted={() => setIsLoginModalOpen(true)}
@@ -216,9 +213,9 @@ export function MarketplaceView() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => setIsLoginModalOpen(true)}
+              onClick={() => handleOpenRequestSkill("homepage")}
             >
-              {isSignedIn ? "Submit a Skill" : "Sign in / Submit"}
+              Request a skill
             </Button>
           </div>
         </div>
@@ -259,41 +256,68 @@ export function MarketplaceView() {
           </div>
 
           {filteredSkills.length > 0 ? (
-            <div className={styles.grid}>
-              {filteredSkills.map((skill) => (
-                <SkillCard
-                  key={skill.id}
-                  title={skill.title}
-                  category={skill.category || (skill.output.charAt(0).toUpperCase() + skill.output.slice(1))}
-                  previewImage={skill.previewImage}
-                  models={skill.models}
-                  isBookmarked={Boolean(bookmarkedSkills[skill.id])}
-                  onBookmarkToggle={(isBookmarked) => handleToggleBookmark(skill.id, isBookmarked)}
-                  onClick={() => handleSelectSkill(skill)}
-                />
-              ))}
-            </div>
+            <>
+              <div className={styles.grid}>
+                {filteredSkills.map((skill) => (
+                  <SkillCard
+                    key={skill.id}
+                    title={skill.title}
+                    category={skill.category || (skill.output.charAt(0).toUpperCase() + skill.output.slice(1))}
+                    previewImage={skill.previewImage}
+                    models={skill.models}
+                    isBookmarked={Boolean(bookmarkedSkills[skill.id])}
+                    onBookmarkToggle={(isBookmarked) => handleToggleBookmark(skill.id, isBookmarked)}
+                    onClick={() => handleSelectSkill(skill)}
+                  />
+                ))}
+              </div>
+
+              {/* End of results CTA (P0 spec) */}
+              <div className={styles.browseBottomTrigger}>
+                <span className={styles.browseBottomText}>
+                  Can’t find what you need? Request a skill.
+                </span>
+                <button
+                  type="button"
+                  className={styles.browseBottomBtn}
+                  onClick={() => handleOpenRequestSkill("skills_browse_bottom")}
+                >
+                  Request a skill
+                </button>
+              </div>
+            </>
           ) : (
             <div className={styles.emptyState}>
               <h3 className={styles.emptyTitle}>No matching skills found</h3>
               <p className={styles.emptyDesc}>
-                Try adjusting your search terms or clearing selected filter criteria.
+                {searchValue.trim()
+                  ? `We couldn’t find any skills matching "${searchValue}". You can submit a request and let creators know what you need.`
+                  : "Try adjusting your search terms or clearing selected filter criteria."}
               </p>
-              <Button
-                variant="brand"
-                size="md"
-                onClick={() => {
-                  setSearchValue("");
-                  setFilters({
-                    recommendations: ["all"],
-                    outputs: [],
-                    roles: [],
-                    useCases: [],
-                  });
-                }}
-              >
-                Reset all filters
-              </Button>
+              <div className={styles.emptyActions}>
+                <Button
+                  variant="brand"
+                  size="md"
+                  onClick={() => handleOpenRequestSkill("search_empty_state", searchValue.trim())}
+                >
+                  Request this skill
+                </Button>
+                <Button
+                  variant="outline"
+                  size="md"
+                  onClick={() => {
+                    setSearchValue("");
+                    setFilters({
+                      recommendations: ["all"],
+                      outputs: [],
+                      roles: [],
+                      useCases: [],
+                    });
+                  }}
+                >
+                  Reset all filters
+                </Button>
+              </div>
             </div>
           )}
         </main>
@@ -316,6 +340,9 @@ export function MarketplaceView() {
           />
         </aside>
       </div>
+
+      {/* 3.5 Connect Your Agent Banner Section (Figma 4640:6028) */}
+      <ConnectAgentBanner />
 
       {/* 4. Slide-over Detail Drawer (Tablet & Mobile <=1200px) */}
       <div
@@ -359,7 +386,15 @@ export function MarketplaceView() {
         </div>
       </div>
 
-      {/* 5. Login Modal & Backdrop Overlay (Figma 4621:371148 & 4597:367764) */}
+      {/* 5. Request a Skill Modal Flow */}
+      <RequestSkillModal
+        isOpen={isRequestSkillOpen}
+        onClose={() => setIsRequestSkillOpen(false)}
+        initialTitle={requestSkillPrefill}
+        triggerSource={requestTriggerSource}
+      />
+
+      {/* 6. Login Modal & Backdrop Overlay (Figma 4621:371148 & 4597:367764) */}
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}

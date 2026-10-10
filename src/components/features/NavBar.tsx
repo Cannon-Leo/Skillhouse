@@ -21,6 +21,7 @@ export interface NavBarProps {
   searchValue?: string;
   onSearchChange?: (value: string) => void;
   onSelectCategory?: (category: string) => void;
+  onRequestSkill?: () => void;
   onGetStarted?: () => void;
   onOpenLoginModal?: () => void;
   isSignedIn?: boolean;
@@ -39,6 +40,7 @@ export const NavBar: React.FC<NavBarProps> = ({
   searchValue = "",
   onSearchChange,
   onSelectCategory,
+  onRequestSkill,
   onGetStarted,
   onOpenLoginModal,
   isSignedIn = false,
@@ -50,8 +52,8 @@ export const NavBar: React.FC<NavBarProps> = ({
   },
   className = "",
 }) => {
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const categoriesRef = useRef<HTMLDivElement>(null);
@@ -65,6 +67,7 @@ export const NavBar: React.FC<NavBarProps> = ({
     }
   };
 
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -80,98 +83,111 @@ export const NavBar: React.FC<NavBarProps> = ({
         setUserMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
+    if (categoriesOpen || userMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [categoriesOpen, userMenuOpen]);
+
+  // Handle escape key to close popups
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setCategoriesOpen(false);
+        setUserMenuOpen(false);
+      }
+    };
+    if (categoriesOpen || userMenuOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [categoriesOpen, userMenuOpen]);
 
   return (
     <header className={`${styles.header} ${className}`}>
-      <div className={styles.container}>
-        {/* Brand Logo */}
+      <div className={styles.headerInner}>
+        {/* Brand Logo & Name */}
         <div
           className={styles.brand}
-          onClick={() => {
-            onViewChange?.("marketplace");
-            setMobileMenuOpen(false);
-          }}
+          onClick={() => onViewChange?.("marketplace")}
           role="button"
           tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && onViewChange?.("marketplace")}
           aria-label="Skillhouse Home"
         >
-          <div className={styles.brandBadge}>
+          <div className={styles.logoIcon}>
             <Image
-              src="/figma/Logo black.svg"
+              src="/figma/logo_square.svg"
               alt="Skillhouse Logo"
-              width={38}
-              height={40}
-              unoptimized
+              width={22}
+              height={22}
+              priority
             />
           </div>
-          
+          <span className={styles.brandName}>Skillhouse</span>
         </div>
 
-        {/* Desktop Navigation Links (Node 744:1077) */}
+        {/* Desktop Primary Navigation Links */}
         <nav className={styles.navLinks} aria-label="Main Navigation">
           <button
             type="button"
-            className={`${styles.navItem} ${currentView === "marketplace" ? styles.active : ""}`}
+            className={styles.navItem}
             onClick={() => onViewChange?.("marketplace")}
           >
             Skills
           </button>
 
+          {/* Categories with Mega Menu Dropdown */}
           <div ref={categoriesRef} className={styles.categoriesContainer}>
             <button
               type="button"
-              className={styles.navItem}
+              className={`${styles.navItem} ${styles.categoriesButton}`}
               onClick={() => setCategoriesOpen(!categoriesOpen)}
               aria-expanded={categoriesOpen}
               aria-haspopup="true"
             >
               <span>Categories</span>
-              <span
+              <ChevronDown
+                size={14}
                 className={`${styles.dropdownArrow} ${categoriesOpen ? styles.open : ""}`}
-                aria-hidden="true"
-              >
-                {categoriesOpen ? (
-                  <Image
-                    src="/figma/node_arrow_up.svg"
-                    alt=""
-                    width={16}
-                    height={16}
-                    unoptimized
-                  />
-                ) : (
-                  <ChevronDown size={14} />
-                )}
-              </span>
+              />
             </button>
-
+            {categoriesOpen ? (
+              <div
+                className={styles.dropdownOverlayBackdrop}
+                onClick={() => setCategoriesOpen(false)}
+                aria-hidden="true"
+                data-testid="categories-backdrop"
+              />
+            ) : null}
             {categoriesOpen && (
-              <>
-                {/* Backdrop Overlay per Figma Node 750:4067 */}
-                <div 
-                  className={styles.dropdownBackdrop} 
-                  onClick={() => setCategoriesOpen(false)}
-                  aria-hidden="true"
+              <div className={styles.megaMenuWrapper}>
+                <CategoriesDropdown
+                  onSelectCategory={(cat) => {
+                    onSelectCategory?.(cat);
+                    setCategoriesOpen(false);
+                  }}
+                  onSeeAllSkills={() => {
+                    onViewChange?.("marketplace");
+                    setCategoriesOpen(false);
+                  }}
                 />
-                <div className={styles.dropdownPositioner}>
-                  <CategoriesDropdown
-                    onSelectCategory={(category: string) => {
-                      setCategoriesOpen(false);
-                      onSelectCategory?.(category);
-                    }}
-                    onSeeAllSkills={() => {
-                      setCategoriesOpen(false);
-                      onViewChange?.("marketplace");
-                    }}
-                  />
-                </div>
-              </>
+              </div>
             )}
           </div>
 
+          <button
+            type="button"
+            className={styles.navItem}
+            onClick={() => (onRequestSkill ? onRequestSkill() : alert("Request a skill"))}
+          >
+            Request a skill
+          </button>
           <button
             type="button"
             className={styles.navItem}
@@ -179,7 +195,6 @@ export const NavBar: React.FC<NavBarProps> = ({
           >
             Submit a skill
           </button>
-
           <button
             type="button"
             className={styles.navItem}
@@ -224,7 +239,7 @@ export const NavBar: React.FC<NavBarProps> = ({
                 className={styles.headerSquareActionButton}
                 aria-label="Create skill or workflow"
                 title="Create skill or workflow"
-                onClick={() => alert("Create or publish skill")}
+                onClick={() => (onRequestSkill ? onRequestSkill() : alert("Create or publish skill"))}
               >
                 <Image
                   src="/figma/node_4621_371856.svg"
@@ -245,15 +260,17 @@ export const NavBar: React.FC<NavBarProps> = ({
                 aria-label="User profile menu"
                 data-testid="header-avatar-button"
               >
-                <div className={styles.avatarWrapper}>
-                  <Image
-                    src={user.avatarUrl || "/figma/header_avatar_figma.png"}
-                    alt={user.name}
-                    width={40}
-                    height={40}
-                    className={styles.avatarImage}
-                    unoptimized
-                  />
+                <div className={styles.avatarContainer}>
+                  <div className={styles.avatarWrapper}>
+                    <Image
+                      src={user.avatarUrl || "/figma/header_avatar_figma.png"}
+                      alt={user.name}
+                      width={40}
+                      height={40}
+                      className={styles.avatarImage}
+                      unoptimized
+                    />
+                  </div>
                   <span className={styles.onlineIndicator} aria-hidden="true" />
                 </div>
                 <Image
@@ -336,6 +353,17 @@ export const NavBar: React.FC<NavBarProps> = ({
               }}
             >
               <span>Design System</span>
+              <ChevronRight size={16} />
+            </button>
+            <button
+              type="button"
+              className={styles.mobileDrawerLink}
+              onClick={() => {
+                onRequestSkill?.();
+                setMobileMenuOpen(false);
+              }}
+            >
+              <span>Request a skill</span>
               <ChevronRight size={16} />
             </button>
             <button

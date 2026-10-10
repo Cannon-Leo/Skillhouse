@@ -1,0 +1,363 @@
+/* ConnectAgentBanner.module.css */
+
+.section {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 48px 40px 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 1360px;
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid rgba(241, 217, 207, 0.75);
+  border-radius: 12px;
+  box-shadow: 0px 9px 26.1px 0px rgba(241, 217, 207, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 56px 64px;
+  box-sizing: border-box;
+  transition: box-shadow var(--transition-normal);
+}
+
+.leftColumn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-family: var(--font-pixel), var(--font-geist-pixel), sans-serif;
+  font-size: 46px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--color-text-primary, #000000);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #7F776E;
+  margin: 0;
+}
+
+.guideLink {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #7F776E;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  width: fit-content;
+  transition: color var(--transition-fast);
+}
+
+.guideLink:hover {
+  color: var(--color-brand, #FB6320);
+}
+
+.agentsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 48px;
+  margin-top: 8px;
+}
+
+.agentItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.agentItem:hover {
+  background: rgba(251, 99, 32, 0.06);
+}
+
+.agentItem.agentSelected {
+  background: rgba(251, 99, 32, 0.12);
+  outline: 1px solid var(--color-brand, #FB6320);
+}
+
+.agentLogoWrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(251, 225, 199, 0.45);
+  border: 1px solid rgba(125, 112, 106, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agentLogo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.agentName {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary, #000000);
+  white-space: nowrap;
+}
+
+.rightColumn {
+  width: 540px;
+  max-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.terminalBox {
+  background: #54392D;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.terminalHeader {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.terminalHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terminalAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(251, 225, 199, 0.55);
+  border: 0.5px solid #7D706A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarIcon {
+  color: #54392D;
+}
+
+.terminalTitle {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  padding: 4px 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copyButton:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+.copyLabel {
+  font-size: 12px;
+}
+
+.promptArea {
+  padding: 18px 20px 42px;
+  min-height: 96px;
+}
+
+.promptText {
+  margin: 0;
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #FFFFFF;
+}
+
+.keyword {
+  color: #EA8900;
+  font-weight: 600;
+}
+
+.url {
+  color: #03A400;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.stepsFooter {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(166, 166, 166, 0.35);
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stepBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepNum {
+  font-family: var(--font-pixel), var(--font-geist-mono), monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+}
+
+.stepText {
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 12.5px;
+  color: #FFFFFF;
+}
+
+.connectButton {
+  width: 100%;
+  height: 48px;
+  background: var(--color-brand, #FB6320);
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.connectButton:hover {
+  background: #e05316;
+  transform: scale(0.98);
+}
+
+.connectButton:active {
+  transform: scale(0.96);
+}
+
+.bracketContainer {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 746px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.bracketLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(241, 217, 207, 0.8) 50%, transparent 100%);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .card {
+    padding: 44px 48px;
+    gap: 36px;
+  }
+  .rightColumn {
+    width: 480px;
+  }
+  .title {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 40px 32px;
+    gap: 36px;
+  }
+  .rightColumn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 32px 20px 48px;
+  }
+  .card {
+    padding: 28px 20px;
+  }
+  .title {
+    font-size: 32px;
+  }
+  .agentsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+  }
+  .stepsFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titleBreak {
+    display: none;
+  }
+  .agentsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

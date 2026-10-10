@@ -344,3 +344,51 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Request a Skill Trigger Enhancements */
+.emptyActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.browseBottomTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: var(--color-surface-cream, #FFECD8);
+  border: 1px solid rgba(128, 67, 0, 0.15);
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.browseBottomText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #1E1E1E;
+}
+
+.browseBottomBtn {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(128, 67, 0, 0.3);
+  color: #804300;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.browseBottomBtn:hover {
+  border-color: var(--color-brand, #FB6320);
+  color: var(--color-brand, #FB6320);
+  background-color: #FFF9F5;
+}

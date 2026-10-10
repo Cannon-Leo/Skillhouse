@@ -26,7 +26,6 @@ export interface SkillDetailHeaderProps {
 export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   title = "Visual Canvas Deck",
   version = "1.0.3",
-  price: _price = "$5",
   isFree = false,
   isSubscribed = false,
   description = "A skill for generating high-converting slide decks and pitch presentations directly in browser canvas or PowerPoint formats with verified design tokens.",
@@ -34,7 +33,6 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   className = "",
   isBookmarked: controlledBookmarked,
   onBookmarkToggle,
-  onBuy: _onBuy,
   onSubscribe,
 }) => {
   const [internalBookmarked, setInternalBookmarked] = useState(false);

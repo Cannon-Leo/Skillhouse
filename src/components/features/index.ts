@@ -11,3 +11,5 @@ export * from "./LoginModal";
 export * from "./AdCard";
 export * from "./CategoriesDropdown";
 export * from "./UserMenuPopover";
+export { RequestSkillModal } from "./RequestSkillModal";
+export type { RequestSkillModalProps, SkillRequestData } from "./RequestSkillModal";
