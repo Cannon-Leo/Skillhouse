@@ -10,3 +10,4 @@ export * from "./LoginModal";
 
 export * from "./AdCard";
 export * from "./CategoriesDropdown";
+export * from "./UserMenuPopover";

@@ -127,12 +127,12 @@ describe("Features NavBar Component", () => {
 
     // Open user menu
     fireEvent.click(avatarBtn);
-    expect(screen.getByText("Jane Doe")).toBeInTheDocument();
-    expect(screen.getByText("jane@test.com")).toBeInTheDocument();
+    expect(screen.getByText("Directory history")).toBeInTheDocument();
+    expect(screen.getByText("Profile")).toBeInTheDocument();
 
-    // Click Sign out
-    const signOutBtn = screen.getByRole("menuitem", { name: /sign out/i });
-    fireEvent.click(signOutBtn);
+    // Click Logout
+    const logoutBtn = screen.getByRole("menuitem", { name: /logout/i });
+    fireEvent.click(logoutBtn);
     expect(handleSignOut).toHaveBeenCalledTimes(1);
   });
 
@@ -147,5 +147,30 @@ describe("Features NavBar Component", () => {
     const toggleBadge = screen.getByRole("button", { name: /design system/i });
     fireEvent.click(toggleBadge);
     expect(handleViewChange).toHaveBeenCalledWith("design-system");
+  });
+  it("handles user menu popover callbacks in signed-in state", () => {
+    const handleSignOut = vi.fn();
+    render(<NavBar isSignedIn={true} onSignOut={handleSignOut} />);
+
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+    fireEvent.click(avatarBtn);
+
+    // Profile click
+    fireEvent.click(screen.getByText("Profile"));
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+    // Reopen and test Account settings
+    fireEvent.click(avatarBtn);
+    fireEvent.click(screen.getByText("Account settings"));
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+    // Reopen and test Host switch
+    fireEvent.click(avatarBtn);
+    fireEvent.click(screen.getByText("Host"));
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+    // Click square action button
+    const actionBtn = screen.getByLabelText("Create skill or workflow");
+    fireEvent.click(actionBtn);
   });
 });

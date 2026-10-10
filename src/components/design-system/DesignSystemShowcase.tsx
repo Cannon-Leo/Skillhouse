@@ -525,7 +525,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <span className={styles.nodeBadge}>Nodes 725:11237, 749:1756, 749:2815</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Master action header integrating Geist Pixel Square titles, interactive states for Free skills (Node 749:1756), Subscribed members (Node 749:2815), and Standard Paid skills.
+            Master action header integrating Geist Pixel Square titles, stats strip, circle action buttons, and interactive states for Free skills (Node 752:11246) and Subscribed members (Node 752:11110).
           </p>
         </div>
 
@@ -578,31 +578,7 @@ export const DesignSystemShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* State 3: Paid Skill (Standard Guest) */}
-          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
-              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
-                State 3: Standard Paid Skill (Figma Node 725:11237)
-              </span>
-              <span className={styles.nodeBadge} style={{ margin: 0 }}>
-                Default · $5 Buy Now + Subscription Upsell
-              </span>
-            </div>
-            <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
-              Shows individual purchase button row ($5 Buy now) alongside full subscription banner.
-            </p>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <SkillDetailHeader
-                title="Visual Canvas Deck"
-                version="1.0.3"
-                price="$5"
-                isFree={false}
-                isSubscribed={false}
-                onBuy={() => alert("Buy now triggered ($5)")}
-                onSubscribe={() => alert("All Skills Subscription opened")}
-              />
-            </div>
-          </div>
+
         </div>
       </section>
       {/* 13. Header Nav Options & Login Modal (Nodes 744:1024, 4621:371148, 4597:367764) */}
@@ -613,7 +589,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <span className={styles.nodeBadge}>Nodes 744:1024, 4621:371148, 4597:367764</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Updated header (#FFEEDD warm cream background, 1px subtle border) supporting Variant 1 (Default: black 40px Get started button) and Variant 2 (Signed-in: 40x40 circular avatar with dropdown chevron). Login Modal with #FFEEDD surface, Geist Pixel Square 24px title, Google &amp; GitHub OAuth buttons, and blur(8px) backdrop overlay.
+            Header nav options matching Figma 4626:372065 (#FFEEDD surface) supporting Variant 1 (Default: black 40px Get started button) and Variant 2 (Signed-in: 40x40 orange plus action box, circular avatar with online dot and chevron). User popover matching Figma Node 753:11852.
           </p>
         </div>
 

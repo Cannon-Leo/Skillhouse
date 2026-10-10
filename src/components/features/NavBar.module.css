@@ -580,3 +580,49 @@
     transform: translateY(0);
   }
 }
+
+/* Square 40x40 Action Button (Figma Node 4621:371855) */
+.headerSquareActionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  flex-shrink: 0;
+}
+
+.headerSquareActionButton:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.headerSquareActionButton:active {
+  transform: scale(0.96);
+}
+
+/* User Menu Container & Online Indicator (Figma Node 4621:371883) */
+.userMenuContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.onlineIndicator {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  background-color: #12B76A;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  pointer-events: none;
+}

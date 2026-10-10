@@ -26,7 +26,7 @@ export interface SkillDetailHeaderProps {
 export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   title = "Visual Canvas Deck",
   version = "1.0.3",
-  price = "$5",
+  price: _price = "$5",
   isFree = false,
   isSubscribed = false,
   description = "A skill for generating high-converting slide decks and pitch presentations directly in browser canvas or PowerPoint formats with verified design tokens.",
@@ -34,7 +34,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   className = "",
   isBookmarked: controlledBookmarked,
   onBookmarkToggle,
-  onBuy,
+  onBuy: _onBuy,
   onSubscribe,
 }) => {
   const [internalBookmarked, setInternalBookmarked] = useState(false);
@@ -176,53 +176,38 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
         </span>
       </div>
 
-      {/* 3. Monetization & Free Row (Figma Node 752:11110 vs 752:11246 vs Subscribed) */}
+      {/* 3. Monetization & Free Row (Figma Node 752:11110 vs 752:11246) */}
       {isFree ? (
         <div className={styles.freePriceRow}>
           <span className={styles.freePriceText}>Free</span>
         </div>
       ) : (
-        <>
-          {!isSubscribed && (
-            <div className={styles.priceRow}>
-              <span className={styles.price}>{price}</span>
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={onBuy}
-              >
-                Buy now
-              </Button>
-            </div>
-          )}
-
-          <div
-            className={styles.subscriptionBanner}
-            onClick={onSubscribe}
-            role="button"
-            tabIndex={0}
-            aria-label="Subscribe to All Skills"
-          >
-            <div className={styles.bannerContent}>
-              <span className={styles.bannerTitle}>
-                {isSubscribed ? "All-Access Subscription Active" : "Subscribe — All Skills, one subscription"}
-              </span>
-              <span className={styles.bannerSubtitle}>
-                No exclusions. Access all curated, verified and continuously updated skills
-              </span>
-            </div>
-
-            <span className={styles.bannerArrow}>
-              <Image
-                src="/figma/node_752_11153.svg"
-                alt=""
-                width={16}
-                height={16}
-                unoptimized
-              />
+        <div
+          className={styles.subscriptionBanner}
+          onClick={onSubscribe}
+          role="button"
+          tabIndex={0}
+          aria-label="Subscribe to All Skills"
+        >
+          <div className={styles.bannerContent}>
+            <span className={styles.bannerTitle}>
+              {isSubscribed ? "All-Access Subscription Active" : "Subscribe — All Skills, one subscription"}
+            </span>
+            <span className={styles.bannerSubtitle}>
+              No exclusions. Access all curated, verified and continuously updated skills
             </span>
           </div>
-        </>
+
+          <span className={styles.bannerArrow}>
+            <Image
+              src="/figma/node_752_11153.svg"
+              alt=""
+              width={16}
+              height={16}
+              unoptimized
+            />
+          </span>
+        </div>
       )}
 
       {/* 5. Action Buttons Grid (Node 725:11313) */}

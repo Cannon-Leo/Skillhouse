@@ -93,6 +93,7 @@ describe("Features SkillDetailHeader Component", () => {
     expect(screen.getByText(/all-access subscription active/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
   });
+
   it("handles bookmark toggle and share link click", () => {
     const handleBookmark = vi.fn();
     render(<SkillDetailHeader onBookmarkToggle={handleBookmark} />);
@@ -103,5 +104,13 @@ describe("Features SkillDetailHeader Component", () => {
     const shareBtn = screen.getByRole("button", { name: /share skill/i });
     fireEvent.click(shareBtn);
     expect(screen.getByRole("status")).toHaveTextContent(/link copied/i);
+  });
+
+  it("triggers onSubscribe when subscription banner is clicked", () => {
+    const handleSubscribe = vi.fn();
+    render(<SkillDetailHeader isFree={false} onSubscribe={handleSubscribe} />);
+    const banner = screen.getByRole("button", { name: /subscribe to all skills/i });
+    fireEvent.click(banner);
+    expect(handleSubscribe).toHaveBeenCalledTimes(1);
   });
 });

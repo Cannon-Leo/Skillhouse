@@ -8,12 +8,11 @@ import {
   Menu,
   X,
   LogOut,
-  User,
-  Settings,
 } from "lucide-react";
 import { Button } from "../ui/Button";
 import { SearchInput } from "../ui/SearchInput";
 import { CategoriesDropdown } from "./CategoriesDropdown";
+import { UserMenuPopover } from "./UserMenuPopover";
 import styles from "./NavBar.module.css";
 
 export interface NavBarProps {
@@ -219,6 +218,24 @@ export const NavBar: React.FC<NavBarProps> = ({
           {/* Signed In vs Default Variants (Figma 744:1024) */}
           {isSignedIn ? (
             <div ref={userMenuRef} className={styles.userMenuContainer}>
+              {/* Orange Action Box (Figma Node 4621:371855) */}
+              <button
+                type="button"
+                className={styles.headerSquareActionButton}
+                aria-label="Create skill or workflow"
+                title="Create skill or workflow"
+                onClick={() => alert("Create or publish skill")}
+              >
+                <Image
+                  src="/figma/node_4621_371856.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                  unoptimized
+                />
+              </button>
+
+              {/* User Avatar with Online Dot + Chevron (Figma Node 4621:371883) */}
               <button
                 type="button"
                 className={styles.avatarButton}
@@ -230,61 +247,39 @@ export const NavBar: React.FC<NavBarProps> = ({
               >
                 <div className={styles.avatarWrapper}>
                   <Image
-                    src={user.avatarUrl || "/figma/header_avatar.png"}
+                    src={user.avatarUrl || "/figma/header_avatar_figma.png"}
                     alt={user.name}
                     width={40}
                     height={40}
                     className={styles.avatarImage}
                     unoptimized
                   />
+                  <span className={styles.onlineIndicator} aria-hidden="true" />
                 </div>
-                <ChevronDown
-                  size={16}
+                <Image
+                  src="/figma/node_4621_371885.svg"
+                  alt=""
+                  width={18}
+                  height={18}
                   className={`${styles.avatarChevron} ${userMenuOpen ? styles.avatarChevronOpen : ""}`}
+                  unoptimized
                 />
               </button>
 
               {userMenuOpen && (
-                <div className={styles.userDropdown} role="menu">
-                  <div className={styles.userDropdownHeader}>
-                    <span className={styles.userDropdownName}>{user.name}</span>
-                    {user.email && (
-                      <span className={styles.userDropdownEmail}>{user.email}</span>
-                    )}
-                  </div>
-                  <div className={styles.userDropdownDivider} />
-                  <button
-                    type="button"
-                    className={styles.userDropdownItem}
-                    role="menuitem"
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    <User size={15} />
-                    <span>My Saved Skills</span>
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.userDropdownItem}
-                    role="menuitem"
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    <Settings size={15} />
-                    <span>API Keys & Workflows</span>
-                  </button>
-                  <div className={styles.userDropdownDivider} />
-                  <button
-                    type="button"
-                    className={`${styles.userDropdownItem} ${styles.signOutItem}`}
-                    role="menuitem"
-                    onClick={() => {
-                      setUserMenuOpen(false);
-                      onSignOut?.();
-                    }}
-                  >
-                    <LogOut size={15} />
-                    <span>Sign out</span>
-                  </button>
-                </div>
+                <UserMenuPopover
+                  onDirectoryHistory={() => setUserMenuOpen(false)}
+                  onProfile={() => setUserMenuOpen(false)}
+                  onAccountSettings={() => setUserMenuOpen(false)}
+                  onHelpCenter={() => setUserMenuOpen(false)}
+                  onSwitchHost={() => setUserMenuOpen(false)}
+                  onSwitchServiceProvider={() => setUserMenuOpen(false)}
+                  onMyListings={() => setUserMenuOpen(false)}
+                  onLogout={() => {
+                    setUserMenuOpen(false);
+                    onSignOut?.();
+                  }}
+                />
               )}
             </div>
           ) : (
