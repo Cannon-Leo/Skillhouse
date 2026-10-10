@@ -200,14 +200,6 @@ export const NavBar: React.FC<NavBarProps> = ({
           <button
             type="button"
             className={styles.navItem}
-            onClick={() => (onRequestSkill ? onRequestSkill() : alert("Request a skill"))}
-          >
-            Request a skill
-          </button>
-
-          <button
-            type="button"
-            className={styles.navItem}
             onClick={() => alert("Submit a skill modal")}
           >
             Submit a skill

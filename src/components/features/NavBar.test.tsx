@@ -175,20 +175,16 @@ describe("Features NavBar Component", () => {
     fireEvent.click(actionBtn);
   });
 
-  it("handles onRequestSkill callback when Request a skill link is clicked", () => {
+  it("handles onRequestSkill callback from mobile drawer", () => {
     const handleRequestSkill = vi.fn();
     render(<NavBar onRequestSkill={handleRequestSkill} />);
 
-    const requestBtn = screen.getByRole("button", { name: "Request a skill" });
-    fireEvent.click(requestBtn);
-    expect(handleRequestSkill).toHaveBeenCalledTimes(1);
-
-    // Also from mobile drawer
+    // Open mobile drawer
     const mobileBtn = screen.getByRole("button", { name: /open menu/i });
     fireEvent.click(mobileBtn);
     const drawer = screen.getByRole("dialog", { name: /mobile navigation/i });
     const mobileRequest = within(drawer).getByRole("button", { name: /request a skill/i });
     fireEvent.click(mobileRequest);
-    expect(handleRequestSkill).toHaveBeenCalledTimes(2);
+    expect(handleRequestSkill).toHaveBeenCalledTimes(1);
   });
 });
