@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/Button";
+import { Copy, Download, Upload, Archive } from "lucide-react";
 import { Checkbox } from "../ui/Checkbox";
 import { SearchInput } from "../ui/SearchInput";
 import { Pill } from "../ui/Pill";
@@ -341,14 +342,14 @@ export const DesignSystemShowcase: React.FC = () => {
             <Button
               variant="outline-brand"
               size="md"
-              leftIcon={<Image src="/figma/copy.svg" alt="" width={16} height={16} unoptimized />}
+              leftIcon={<Copy size={16} />}
             >
               Copy install prompt
             </Button>
             <Button
               variant="outline"
               size="md"
-              leftIcon={<Image src="/figma/import.svg" alt="" width={16} height={16} unoptimized />}
+              leftIcon={<Download size={16} />}
             >
               Download ZIP
             </Button>
@@ -372,10 +373,10 @@ export const DesignSystemShowcase: React.FC = () => {
               Disabled State
             </Button>
             <Button variant="icon-border" size="icon-sm" title="Upload action">
-              <Image src="/figma/upload.svg" alt="" width={14} height={14} unoptimized />
+              <Upload size={14} />
             </Button>
             <Button variant="icon-border" size="icon-sm" title="Archive action">
-              <Image src="/figma/archive.svg" alt="" width={14} height={14} unoptimized />
+              <Archive size={14} />
             </Button>
           </div>
         </div>

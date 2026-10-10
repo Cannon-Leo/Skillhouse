@@ -1,6 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import {
+  Bookmark,
+  Share2,
+  Download,
+  Tag,
+  ShieldCheck,
+  Copy,
+  Info,
+} from "lucide-react";
 import Image from "next/image";
 import { SkillAudienceBox } from "./SkillAudienceBox";
 import { SkillRuntimeSpecs } from "./SkillRuntimeSpecs";
@@ -110,13 +119,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
               title={isBookmarked ? "Saved in bookmarks" : "Bookmark skill"}
               onClick={handleBookmarkToggle}
             >
-              <Image
-                src="/figma/node_752_11116.svg"
-                alt=""
-                width={14}
-                height={14}
-                unoptimized
-              />
+              <Bookmark size={14} aria-hidden="true" fill={isBookmarked ? "currentColor" : "none"} />
             </button>
 
             <button
@@ -132,13 +135,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
                 setTimeout(() => setToastMessage(null), 2500);
               }}
             >
-              <Image
-                src="/figma/node_752_11118.svg"
-                alt=""
-                width={14}
-                height={14}
-                unoptimized
-              />
+              <Share2 size={14} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -146,46 +143,22 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
         {/* Row B: Meta Stats Row (Nodes 752:11255 / 752:11119) */}
         <div className={styles.metaStatsRow}>
           <span className={styles.statItem} title="Installs">
-            <Image
-              src="/figma/node_752_11121.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
+            <Download size={14} aria-hidden="true" />
             <span>295</span>
           </span>
 
           <span className={styles.statItem} title="Saved">
-            <Image
-              src="/figma/node_752_11116.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
+            <Bookmark size={14} aria-hidden="true" />
             <span>295</span>
           </span>
 
           <span className={styles.statItem} title="Version">
-            <Image
-              src="/figma/node_752_11130.svg"
-              alt=""
-              width={11}
-              height={14}
-              unoptimized
-            />
+            <Tag size={13} aria-hidden="true" />
             <span>{version}</span>
           </span>
 
           <span className={styles.statItem} title="Security status">
-            <Image
-              src="/figma/node_752_11134.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
+            <ShieldCheck size={14} aria-hidden="true" />
             <span>Secure</span>
           </span>
         </div>
@@ -215,13 +188,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
 
             <div className={styles.bannerArrowRow}>
               <span className={styles.bannerArrow}>
-                <Image
-                  src="/figma/node_752_11153.svg"
-                  alt=""
-                  width={16}
-                  height={16}
-                  unoptimized
-                />
+                <Image src="/figma/node_752_11153.svg" alt="" width={16} height={16} unoptimized />
               </span>
             </div>
           </div>
@@ -235,13 +202,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
             onClick={handleCopyPrompt}
             aria-label={copied ? "Prompt Copied!" : "Copy install prompt"}
           >
-            <Image
-              src="/figma/copy.svg"
-              alt=""
-              width={16}
-              height={16}
-              unoptimized
-            />
+            <Copy size={16} aria-hidden="true" />
             <span>{copied ? "Prompt Copied!" : "Copy install prompt"}</span>
           </button>
 
@@ -251,13 +212,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
             onClick={handleDownloadZip}
             aria-label="Download ZIP archive"
           >
-            <Image
-              src="/figma/import.svg"
-              alt=""
-              width={16}
-              height={16}
-              unoptimized
-            />
+            <Download size={16} aria-hidden="true" />
             <span>Download ZIP</span>
           </button>
         </div>
@@ -276,13 +231,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
           onClick={() => setShowInfo(!showInfo)}
           aria-expanded={showInfo}
         >
-          <Image
-            src="/figma/info-circle.svg"
-            alt=""
-            width={12}
-            height={12}
-            unoptimized
-          />
+          <Info size={12} aria-hidden="true" />
           <span>What do I get when I buy this Skill?</span>
         </button>
 

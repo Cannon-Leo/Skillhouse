@@ -10,6 +10,7 @@ Before creating, modifying, or implementing any UI, you MUST inspect the existin
    - Check `DESIGN_SYSTEM.md` and `:root` variables in `src/app/globals.css`.
    - Inspect primitives in `src/components/primitives/` (`Button`, `Card`, `Input`).
    - Inspect UI elements in `src/components/ui/` (`Checkbox`, `Pill`, `SearchInput`, `FigmaIcon`, `Overlay`).
+   - Icons: Strictly enforce `lucide-react` across all components, controls, badges, and interactive elements. Avoid raw SVG icon assets or alternate libraries.
    - Inspect features in `src/components/features/`.
 2. Reuse is the default:
    - Tokens: `--color-brand: #FB6320`, `--font-pixel`, `--font-sans`, `--font-mono`.

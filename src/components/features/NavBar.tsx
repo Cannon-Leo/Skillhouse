@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
+  Plus,
   ChevronDown,
   ChevronRight,
   Menu,
@@ -158,17 +159,7 @@ export const NavBar: React.FC<NavBarProps> = ({
                 className={`${styles.dropdownArrow} ${categoriesOpen ? styles.open : ""}`}
                 aria-hidden="true"
               >
-                {categoriesOpen ? (
-                  <Image
-                    src="/figma/node_arrow_up.svg"
-                    alt=""
-                    width={16}
-                    height={16}
-                    unoptimized
-                  />
-                ) : (
-                  <ChevronDown size={14} />
-                )}
+                <ChevronDown size={14} />
               </span>
             </button>
 
@@ -259,13 +250,7 @@ export const NavBar: React.FC<NavBarProps> = ({
                 title="Create skill or workflow"
                 onClick={() => (onRequestSkill ? onRequestSkill() : alert("Create or publish skill"))}
               >
-                <Image
-                  src="/figma/node_4621_371856.svg"
-                  alt=""
-                  width={40}
-                  height={40}
-                  unoptimized
-                />
+                <Plus size={20} color="#FFFFFF" strokeWidth={2.5} aria-hidden="true" />
               </button>
 
               {/* User Avatar with Online Dot + Chevron (Figma Node 4621:371883) */}
@@ -291,13 +276,10 @@ export const NavBar: React.FC<NavBarProps> = ({
                   </div>
                   <span className={styles.onlineIndicator} aria-hidden="true" />
                 </div>
-                <Image
-                  src="/figma/node_4621_371885.svg"
-                  alt=""
-                  width={18}
-                  height={18}
+                <ChevronDown
+                  size={18}
                   className={`${styles.avatarChevron} ${userMenuOpen ? styles.avatarChevronOpen : ""}`}
-                  unoptimized
+                  aria-hidden="true"
                 />
               </button>
 

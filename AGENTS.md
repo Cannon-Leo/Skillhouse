@@ -24,6 +24,7 @@ Before writing UI code:
 * Use existing components instead of building replacements.
 * Compose existing components when a new layout is needed.
 * Use existing design tokens instead of hardcoded values (`--color-brand: #FB6320`, `--font-pixel`, `--font-sans`, `--font-mono`).
+* Icons: Strictly enforce `lucide-react` for all UI, action, navigation, and indicator icons across the entire codebase.
 * Geometry: Strict `0px` radius on buttons, cards, containers, inputs; `4px` on checkboxes; concentric pill/circular on badges and avatars.
 * Container max-width: 1600px with 40px horizontal padding on desktop (`box-sizing: border-box`).
 * Do not bypass the design system with arbitrary CSS, inline styles, or rogue one-offs.
