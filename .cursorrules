@@ -1,16 +1,21 @@
-# Skillhouse UI & Architecture Context
+# Skillhouse — Cursor & Agent Design System Rules
 
-## Design System
-- **Colors**: Primary brand color is Orange (`#FB6320`), accessible green for verified badges (`#03A400`), strict black (`#000000`) for dark backgrounds, off-white (`#F8F8F8`) for text on dark backgrounds.
-- **Typography**: Uses Geist Sans (body), Geist Mono (code), and Geist Pixel (brand elements/headers).
-- **Layout Constraints**: Max-width of 1600px globally. Horizontal paddings for all major wrapper inner containers (NavBar, Hero, Main, Footer) is strictly 40px on Desktop. `box-sizing: border-box` is mandatory to ensure perfect vertical flush alignment on large viewports.
-- **Micro-interactions**: Use `lucide-react` for icons.
+## Priority: Mandatory. Overrides default implementation behaviour.
 
-## Frameworks
-- Next.js 16.4.0 (App Router), Turbopack enabled.
-- React 19.
-- CSS Modules for strict component scoping and vanilla CSS logic. Avoid Tailwind.
+Before creating, modifying, or implementing any UI, you MUST inspect the existing design system and reuse its established components, tokens, patterns, and conventions.
 
-## Best Practices
-- **"use client"**: Explicitly define `"use client"` at the top of any component file containing event listeners (e.g., `onClick`), state (`useState`), or refs.
-- **Performance**: Favor Server Components where interactivity is not required.
+**Never create a new component, style, token, variant, or interaction pattern before verifying that an existing solution cannot meet the requirement.**
+
+1. Inspect Before Implementing:
+   - Check `DESIGN_SYSTEM.md` and `:root` variables in `src/app/globals.css`.
+   - Inspect primitives in `src/components/primitives/` (`Button`, `Card`, `Input`).
+   - Inspect UI elements in `src/components/ui/` (`Checkbox`, `Pill`, `SearchInput`, `FigmaIcon`, `Overlay`).
+   - Inspect features in `src/components/features/`.
+2. Reuse is the default:
+   - Tokens: `--color-brand: #FB6320`, `--font-pixel`, `--font-sans`, `--font-mono`.
+   - Geometry: 0px radius on buttons/cards/inputs; 4px on checkboxes; circular on avatars/badges.
+   - Max-width: 1600px with 40px desktop padding.
+3. Build order:
+   Tokens -> Primitives -> Reusable Components -> Composite Components -> Sections -> Screens -> Validation.
+4. Validation:
+   Run `npm run gauntlet` before finishing. Zero lint, type, or test regressions.

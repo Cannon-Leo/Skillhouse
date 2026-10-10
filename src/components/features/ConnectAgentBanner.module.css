@@ -298,14 +298,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  padding: 0 24px;
 }
 
 .accentSvg {
   opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .accentSvgFlipped {
   opacity: 0.7;
+  flex-shrink: 0;
   transform: scaleX(-1);
 }
 
@@ -355,7 +359,14 @@
     gap: 8px;
   }
   .bracketContainer {
-    max-width: 320px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 }
 
@@ -366,5 +377,8 @@
   .agentsGrid {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+  .bracketContainer {
+    padding: 0 12px;
   }
 }

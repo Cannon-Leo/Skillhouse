@@ -108,3 +108,10 @@ describe("Features ConnectAgentBanner Component (Figma 4640:6028)", () => {
     expect(screen.getByText("Custom Subtitle")).toBeInTheDocument();
   });
 });
+
+  it("renders decorative bottom bracket accents (Figma 759:12167) with aria-hidden", () => {
+    render(<ConnectAgentBanner />);
+    const bracket = screen.getByTestId("bracket-container");
+    expect(bracket).toBeInTheDocument();
+    expect(bracket).toHaveAttribute("aria-hidden", "true");
+  });

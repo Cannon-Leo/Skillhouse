@@ -209,7 +209,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
       </div>
 
       {/* Decorative Bottom Accents (Figma 759:12167) */}
-      <div className={styles.bracketContainer} aria-hidden="true">
+      <div className={styles.bracketContainer} aria-hidden="true" data-testid="bracket-container">
         <Image
           src="/figma/agent-cloud-accent.svg"
           alt=""
