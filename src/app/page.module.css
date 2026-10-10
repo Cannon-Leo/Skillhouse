@@ -12,13 +12,14 @@
 .heroBar {
   background: linear-gradient(180deg, #FFF9F5 0%, var(--color-bg-page) 100%);
   border-bottom: 1px solid var(--color-border);
-  padding: 36px 24px;
+  padding: 36px 0;
   width: 100%;
   box-sizing: border-box;
 }
 
 .heroInner {
   max-width: 1600px;
+  padding: 0 40px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -66,7 +67,7 @@
 .layoutContainer {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 40px;
   display: flex;
   gap: 32px;
   width: 100%;
@@ -194,7 +195,7 @@
   max-width: 480px;
   height: 100%;
   background-color: var(--color-bg-page);
-  padding: 16px;
+  padding: 16px 40px;
   overflow-y: auto;
   box-shadow: var(--shadow-xl);
   display: flex;
@@ -261,7 +262,7 @@
 
   .layoutContainer {
     flex-direction: column;
-    padding: 16px;
+    padding:  16px;
     gap: 20px;
   }
 
@@ -309,7 +310,7 @@
 
   .detailDrawerContent {
     max-width: 100%;
-    padding: 16px;
+    padding: 16px 40px;
   }
 }
 

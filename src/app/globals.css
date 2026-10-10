@@ -38,8 +38,8 @@
   --color-text-primary: #000000;
   --color-text-secondary: #464646;
   --color-text-body: #242426;
-  --color-text-muted: #7F776E;
-  --color-text-tertiary: #9B9B9B;
+  --color-text-muted: #625E59; /* improved contrast */
+  --color-text-tertiary: #757575; /* improved contrast */
 
   /* Surfaces & Backgrounds */
   --color-bg-page: #FFFFFF;

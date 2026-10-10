@@ -7,15 +7,13 @@ describe("Features SkillCard Component", () => {
   const defaultProps = {
     title: "Pixel Promo Video",
     category: "Design",
-    price: "$49",
     previewImage: "/figma/skill-card-preview.png",
   };
 
-  it("renders title, category, price, and image alt text", () => {
+  it("renders title, category, and image alt text", () => {
     render(<SkillCard {...defaultProps} />);
     expect(screen.getByText("Pixel Promo Video")).toBeInTheDocument();
     expect(screen.getByText("Design")).toBeInTheDocument();
-    expect(screen.getByText("$49")).toBeInTheDocument();
     expect(screen.getByAltText("Pixel Promo Video")).toBeInTheDocument();
   });
 
@@ -92,7 +90,7 @@ describe("Features SkillCard Component", () => {
     const models = ["/logo-1.png", "/logo-2.png", "/logo-3.png", "/logo-4.png", "/logo-5.png"];
     render(<SkillCard {...defaultProps} models={models} />);
     const modelRow = screen.getByLabelText("Supported models");
-    expect(modelRow.children.length).toBe(5); // 1 price + 4 logos
+    expect(modelRow.children.length).toBe(4); // 4 logos
   });
 });
 

@@ -56,7 +56,6 @@ describe("Features SkillDetailHeader Component", () => {
     fireEvent.click(infoBtn);
     expect(screen.queryByText(/included in this package:/i)).not.toBeInTheDocument();
   });
-});
 
   it("handles copy failure and falls back gracefully", async () => {
     Object.assign(navigator, {
@@ -71,3 +70,19 @@ describe("Features SkillDetailHeader Component", () => {
       expect(screen.getByRole("status")).toHaveTextContent(/copied to clipboard!/i);
     });
   });
+
+  it("renders Free state matching Node 749:1756 with no pricing row or subscription banner", () => {
+    render(<SkillDetailHeader isFree={true} price="Free" />);
+    expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
+    expect(screen.queryByText(/subscribe — all skills/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /download zip/i })).toBeInTheDocument();
+  });
+
+  it("renders Subscribed state matching Node 749:2815 with subscription banner and no separate buy now row", () => {
+    render(<SkillDetailHeader isFree={false} isSubscribed={true} price="" />);
+    expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
+    expect(screen.getByText(/all-access subscription active/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
+  });
+});

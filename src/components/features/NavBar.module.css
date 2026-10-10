@@ -12,7 +12,7 @@
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
   padding: 16px 40px;
@@ -36,26 +36,14 @@
 
 .brandBadge {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 38px;
-  height: 40px;
-  background-color: #000000;
-  border-radius: 4px;
-  color: #F8F8F8;
-  font-family: var(--font-pixel);
-  font-size: 9.87px;
-  line-height: 0.9em;
-  letter-spacing: -0.04em;
-  padding: 4px 2px;
-  box-sizing: border-box;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  transition: transform var(--transition-fast);
 }
 
 .brand:hover .brandBadge {
-  transform: scale(1.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .brandTitle {
@@ -547,5 +535,47 @@
   .docBadge,
   .desktopCtaWrapper {
     display: none;
+  }
+}
+
+/* Backdrop overlay matching Figma Node 750:4067
+ * fills: rgba(66, 65, 69, 0.54), backdrop-filter: blur(8px)
+ */
+.dropdownBackdrop {
+  position: fixed;
+  top: 72px; /* starts right under the 72px navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: calc(100vh - 72px);
+  background-color: rgba(66, 65, 69, 0.54);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 998;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownPositioner {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  z-index: 999;
+  animation: slideDownFade 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

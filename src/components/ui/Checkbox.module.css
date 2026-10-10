@@ -92,6 +92,6 @@
 .count {
   font-size: var(--text-xs);
   line-height: 20px;
-  color: #9B9B9B;
+  color: var(--color-text-tertiary);
   margin-left: auto;
 }

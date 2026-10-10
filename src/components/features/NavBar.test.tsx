@@ -10,8 +10,7 @@ describe("Features NavBar Component", () => {
 
   it("renders brand, navigation links, and search bar", () => {
     render(<NavBar />);
-    expect(screen.getByText("Skill")).toBeInTheDocument();
-    expect(screen.getByText("house")).toBeInTheDocument();
+    expect(screen.getByAltText("Skillhouse Logo")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Skills" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /categories/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Search skills / outputs")).toBeInTheDocument();
@@ -30,7 +29,8 @@ describe("Features NavBar Component", () => {
   });
 
   it("toggles categories mega menu, clicks item, and closes on outside click", () => {
-    render(<NavBar />);
+    const handleSelectCategory = vi.fn();
+    render(<NavBar onSelectCategory={handleSelectCategory} />);
     const catBtn = screen.getByRole("button", { name: /categories/i });
     expect(catBtn).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
@@ -41,14 +41,15 @@ describe("Features NavBar Component", () => {
     expect(screen.getByRole("menu")).toBeInTheDocument();
 
     // Click an item in the mega menu
-    const menuItem = screen.getByRole("menuitem", { name: /slides & pitch decks/i });
+    const menuItem = screen.getByText("Web design");
     fireEvent.click(menuItem);
+    expect(handleSelectCategory).toHaveBeenCalledWith("Web design");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
-    // Open and click browse all
+    // Open and click See all Skills
     fireEvent.click(catBtn);
-    const browseAll = screen.getByRole("button", { name: /browse all skills/i });
-    fireEvent.click(browseAll);
+    const seeAllBtn = screen.getByRole("button", { name: /see all skills/i });
+    fireEvent.click(seeAllBtn);
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
     // Click outside to close

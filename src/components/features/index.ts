@@ -7,3 +7,6 @@ export * from "./SkillDetailHeader";
 export * from "./SkillAudienceBox";
 export * from "./SkillRuntimeSpecs";
 export * from "./LoginModal";
+
+export * from "./AdCard";
+export * from "./CategoriesDropdown";

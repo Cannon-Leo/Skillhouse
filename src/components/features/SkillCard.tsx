@@ -8,7 +8,6 @@ export interface SkillCardProps {
   id?: string;
   title: string;
   category?: string;
-  price?: string;
   previewImage?: string;
   models?: string[];
   isBookmarked?: boolean;
@@ -21,7 +20,6 @@ export const SkillCard: React.FC<SkillCardProps> = ({
   id,
   title = "Pixel Promo Video",
   category = "Design",
-  price,
   previewImage = "/figma/skill-card-preview.png",
   models = [
     "/figma/logo-1.png",
@@ -72,9 +70,9 @@ export const SkillCard: React.FC<SkillCardProps> = ({
         />
         
         <div className={styles.imageOverlays}>
-          {category && (
+          {category ? (
             <span className={styles.pill}>{category}</span>
-          )}
+          ) : <span />}
           <button 
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
@@ -109,7 +107,6 @@ export const SkillCard: React.FC<SkillCardProps> = ({
         </h3>
 
         <div className={styles.logomarksRow} aria-label="Supported models">
-          {price && <span className={styles.price}>{price}</span>}
           {models.slice(0, 4).map((logo, index) => (
             <div
               key={index}

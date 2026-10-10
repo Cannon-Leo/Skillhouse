@@ -9,9 +9,13 @@ import { Pill } from "../ui/Pill";
 import { FilterItem } from "../features/FilterItem";
 import { FilterSection } from "../features/FilterSection";
 import { SkillCard } from "../features/SkillCard";
+import { AdCard } from "../features/AdCard";
 import { SkillAudienceBox } from "../features/SkillAudienceBox";
 import { SkillRuntimeSpecs } from "../features/SkillRuntimeSpecs";
 import { SkillDetailHeader } from "../features/SkillDetailHeader";
+import { NavBar } from "../features/NavBar";
+import { CategoriesDropdown } from "../features/CategoriesDropdown";
+import { LoginModal } from "../features/LoginModal";
 import styles from "./DesignSystemShowcase.module.css";
 
 export const DesignSystemShowcase: React.FC = () => {
@@ -20,6 +24,11 @@ export const DesignSystemShowcase: React.FC = () => {
   const [cb1, setCb1] = useState(false);
   const [cb2, setCb2] = useState(true);
   const [demoPillSelected, setDemoPillSelected] = useState<string>("Claude Code");
+  const [demoLoginModalOpen, setDemoLoginModalOpen] = useState(false);
+  const [demoDropdownTab, setDemoDropdownTab] = useState<"use-case" | "role" | "output">("use-case");
+  const [demoDropdownOverlayOpen, setDemoDropdownOverlayOpen] = useState(false);
+  const [demoNavSignedIn, setDemoNavSignedIn] = useState(false);
+  const [cbAllSkills, setCbAllSkills] = useState(true);
   const [filterActive, setFilterActive] = useState<Record<string, boolean>>({
     web: true,
     slides: false,
@@ -315,7 +324,19 @@ export const DesignSystemShowcase: React.FC = () => {
 
         <div className={styles.sandboxCard}>
           <div className={styles.sandboxRow}>
-            <span className={styles.stateLabel}>Raw Checkboxes</span>
+            <span className={styles.stateLabel}>Raw Checkboxes & Node 673:2298</span>
+          <div style={{ padding: "8px 0", maxWidth: "260px" }}>
+            <span style={{ fontSize: "11px", color: "var(--color-text-muted)", display: "block", marginBottom: "4px" }}>
+              Exact Node 673:2298 (24x24px, #FB6320 fill, space-between count):
+            </span>
+            <FilterItem
+              id="demo-all-skills"
+              label="All skills"
+              count="387"
+              checked={cbAllSkills}
+              onChange={(val) => setCbAllSkills(val)}
+            />
+          </div>
             <Checkbox
               label="Unchecked Default"
               checked={cb1}
@@ -393,7 +414,6 @@ export const DesignSystemShowcase: React.FC = () => {
               id="card-1"
               title="Pixel Promo Video"
               category="Video"
-              price="$8"
               previewImage="/figma/skill-card-preview.png"
               onClick={() => alert("Opened Pixel Promo Video")}
             />
@@ -401,9 +421,16 @@ export const DesignSystemShowcase: React.FC = () => {
               id="card-2"
               title="Visual Canvas Deck"
               category="Slides"
-              price="$5"
               previewImage="/figma/skill-card-preview.png"
               onClick={() => alert("Opened Visual Canvas Deck")}
+            />
+            <AdCard
+              id="ad-1"
+              title="Deploy Skills with Vercel"
+              description="Deploy AI agent skills in seconds with zero configuration."
+              badgeLabel="Sponsored"
+              ctaText="Start Free"
+              onClick={() => alert("Ad clicked: Vercel")}
             />
           </div>
         </div>
@@ -490,24 +517,260 @@ export const DesignSystemShowcase: React.FC = () => {
         </div>
       </section>
 
-      {/* 12. Master Action Header (Node 725:11237) */}
+      {/* 12. Master Action Header (Node 725:11237, 749:1756, 749:2815) */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            11. Composite Skill Detail Action Panel
-            <span className={styles.nodeBadge}>Node 725:11237 (main-header)</span>
+            11. Composite Skill Detail Action Panel & States
+            <span className={styles.nodeBadge}>Nodes 725:11237, 749:1756, 749:2815</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Master action header integrating Geist Pixel Square titles, orange subscription banner (#FB6320), copy prompt button, Node 725:11328 audience container, and Node 725:11346 runtime specs.
+            Master action header integrating Geist Pixel Square titles, interactive states for Free skills (Node 749:1756), Subscribed members (Node 749:2815), and Standard Paid skills.
           </p>
         </div>
 
-        <div className={styles.sandboxCard} style={{ alignItems: "center" }}>
-          <SkillDetailHeader
-            onBuy={() => alert("Buy now triggered ($5)")}
-            onSubscribe={() => alert("All Skills Subscription opened")}
-          />
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px", width: "100%" }}>
+          {/* State 1: Free Skill */}
+          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
+              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
+                State 1: Free Skill (Figma Node 749:1756)
+              </span>
+              <span className={styles.nodeBadge} style={{ margin: 0 }}>
+                isFree=true · No Buy Row · No Subscription Banner
+              </span>
+            </div>
+            <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
+              Directly renders installation actions (Copy prompt + Download ZIP) with zero payment barriers.
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <SkillDetailHeader
+                title="System Design Architecture Deck"
+                version="1.0.0"
+                price="Free"
+                isFree={true}
+                description="Open-source interactive architecture templates with verified tokens and visual wireframes."
+              />
+            </div>
+          </div>
+
+          {/* State 2: Active Subscriber */}
+          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
+              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
+                State 2: Subscribed Member (Figma Node 749:2815)
+              </span>
+              <span className={styles.nodeBadge} style={{ margin: 0 }}>
+                isSubscribed=true · Active Banner · No Buy Row
+              </span>
+            </div>
+            <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
+              Shows active all-access status banner without standalone checkout button.
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <SkillDetailHeader
+                title="Interactive 3D Spline Canvas"
+                version="2.1.4"
+                price="$5"
+                isSubscribed={true}
+                description="Embed interactive webgl 3D canvas decks with smooth spring motion and token export."
+              />
+            </div>
+          </div>
+
+          {/* State 3: Paid Skill (Standard Guest) */}
+          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
+              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
+                State 3: Standard Paid Skill (Figma Node 725:11237)
+              </span>
+              <span className={styles.nodeBadge} style={{ margin: 0 }}>
+                Default · $5 Buy Now + Subscription Upsell
+              </span>
+            </div>
+            <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
+              Shows individual purchase button row ($5 Buy now) alongside full subscription banner.
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <SkillDetailHeader
+                title="Visual Canvas Deck"
+                version="1.0.3"
+                price="$5"
+                isFree={false}
+                isSubscribed={false}
+                onBuy={() => alert("Buy now triggered ($5)")}
+                onSubscribe={() => alert("All Skills Subscription opened")}
+              />
+            </div>
+          </div>
         </div>
+      </section>
+      {/* 13. Header Nav Options & Login Modal (Nodes 744:1024, 4621:371148, 4597:367764) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            12. Header Nav Variants & Login Modal with Backdrop
+            <span className={styles.nodeBadge}>Nodes 744:1024, 4621:371148, 4597:367764</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Updated header (#FFEEDD warm cream background, 1px subtle border) supporting Variant 1 (Default: black 40px Get started button) and Variant 2 (Signed-in: 40x40 circular avatar with dropdown chevron). Login Modal with #FFEEDD surface, Geist Pixel Square 24px title, Google &amp; GitHub OAuth buttons, and blur(8px) backdrop overlay.
+          </p>
+        </div>
+
+        <div className={styles.sandboxCard} style={{ flexDirection: "column", gap: "20px" }}>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+            <Button
+              variant="brand"
+              size="sm"
+              onClick={() => setDemoLoginModalOpen(true)}
+            >
+              Open Live Login Modal
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setDemoNavSignedIn(!demoNavSignedIn)}
+            >
+              Toggle Header State: {demoNavSignedIn ? "Signed In" : "Default (Guest)"}
+            </Button>
+          </div>
+
+          <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
+            <span style={{ fontSize: "12px", fontWeight: 600, padding: "8px 16px", display: "block", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)" }}>
+              Interactive Header Preview ({demoNavSignedIn ? "Variant: Property 1=signed in" : "Variant: Property 1=default"})
+            </span>
+            <NavBar
+              isSignedIn={demoNavSignedIn}
+              onOpenLoginModal={() => setDemoLoginModalOpen(true)}
+              onGetStarted={() => setDemoLoginModalOpen(true)}
+              onSignOut={() => setDemoNavSignedIn(false)}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Live Modal Demo */}
+      <LoginModal
+        isOpen={demoLoginModalOpen}
+        onClose={() => setDemoLoginModalOpen(false)}
+        onLogin={() => {
+          setDemoNavSignedIn(true);
+          setDemoLoginModalOpen(false);
+        }}
+      />
+
+      {/* 14. Categories Mega Menu Dropdown & Variants (Node 750:3470, 750:4067) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            13. Categories Mega Menu Dropdown &amp; Overlay
+            <span className={styles.nodeBadge}>Nodes 750:3470, 750:4067</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Interactive dropdown menu featuring 3 active tab variants (By use-case, By role, By output), exact Figma vector icons (#000000 import icon, #7F776E arrow chevron), #FEF6ED warm cream surface, #CFD9E8 borders, and full backdrop overlay (rgba(66, 65, 69, 0.54) with 8px blur).
+          </p>
+        </div>
+
+        <div className={styles.sandboxCard} style={{ flexDirection: "column", gap: "24px" }}>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+            <Button
+              variant="brand"
+              size="sm"
+              onClick={() => setDemoDropdownOverlayOpen(true)}
+            >
+              Test with Fullscreen Blur Overlay (Node 750:4067)
+            </Button>
+            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+              <span style={{ fontSize: "13px", fontWeight: 600 }}>Active Tab Variant:</span>
+              <Button
+                variant={demoDropdownTab === "use-case" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setDemoDropdownTab("use-case")}
+              >
+                1. By use-case (215)
+              </Button>
+              <Button
+                variant={demoDropdownTab === "role" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setDemoDropdownTab("role")}
+              >
+                2. By role (216)
+              </Button>
+              <Button
+                variant={demoDropdownTab === "output" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setDemoDropdownTab("output")}
+              >
+                3. By output (217)
+              </Button>
+            </div>
+          </div>
+
+          {/* Interactive Standalone Component Container */}
+          <div style={{ display: "flex", justifyContent: "center", width: "100%", padding: "16px 0" }}>
+            <CategoriesDropdown
+              activeTab={demoDropdownTab}
+              onTabChange={(tab) => setDemoDropdownTab(tab)}
+              onSelectCategory={(cat, tab) => alert(`Selected: ${cat} from ${tab}`)}
+              onSeeAllSkills={() => alert("Navigating to all skills")}
+            />
+          </div>
+        </div>
+
+        {/* Modal Overlay Demonstration */}
+        {demoDropdownOverlayOpen && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(66, 65, 69, 0.54)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              zIndex: 9999,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingTop: "90px",
+            }}
+            onClick={() => setDemoDropdownOverlayOpen(false)}
+          >
+            <div 
+              style={{ maxWidth: "620px", width: "100%" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "8px" }}>
+                <button
+                  type="button"
+                  style={{
+                    background: "rgba(0, 0, 0, 0.6)",
+                    border: "none",
+                    borderRadius: "4px",
+                    color: "#FFFFFF",
+                    padding: "6px 12px",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDemoDropdownOverlayOpen(false)}
+                >
+                  Close Overlay [Esc]
+                </button>
+              </div>
+              <CategoriesDropdown
+                onSelectCategory={(cat) => {
+                  alert(`Selected: ${cat}`);
+                  setDemoDropdownOverlayOpen(false);
+                }}
+                onSeeAllSkills={() => {
+                  alert("See all Skills clicked");
+                  setDemoDropdownOverlayOpen(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );

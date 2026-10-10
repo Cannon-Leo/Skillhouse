@@ -5,24 +5,15 @@ import Image from "next/image";
 import {
   ChevronDown,
   ChevronRight,
-  Monitor,
-  Import,
-  ShieldCheck,
-  FolderOpen,
-  Archive,
-  Presentation,
-  Info,
-  Video,
   Menu,
   X,
-  Layout,
-  FileText,
   LogOut,
   User,
   Settings,
 } from "lucide-react";
 import { Button } from "../ui/Button";
 import { SearchInput } from "../ui/SearchInput";
+import { CategoriesDropdown } from "./CategoriesDropdown";
 import styles from "./NavBar.module.css";
 
 export interface NavBarProps {
@@ -30,6 +21,7 @@ export interface NavBarProps {
   onViewChange?: (view: "marketplace" | "design-system") => void;
   searchValue?: string;
   onSearchChange?: (value: string) => void;
+  onSelectCategory?: (category: string) => void;
   onGetStarted?: () => void;
   onOpenLoginModal?: () => void;
   isSignedIn?: boolean;
@@ -47,6 +39,7 @@ export const NavBar: React.FC<NavBarProps> = ({
   onViewChange,
   searchValue = "",
   onSearchChange,
+  onSelectCategory,
   onGetStarted,
   onOpenLoginModal,
   isSignedIn = false,
@@ -92,33 +85,6 @@ export const NavBar: React.FC<NavBarProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const menuColumns = [
-    {
-      title: "By Output",
-      items: [
-        { name: "Slides & Pitch decks", icon: <Presentation size={16} /> },
-        { name: "Video & Motion", icon: <Video size={16} /> },
-        { name: "Web Design & Code", icon: <Monitor size={16} /> },
-        { name: "Document & PDF", icon: <FileText size={16} /> },
-      ],
-    },
-    {
-      title: "By Capability",
-      items: [
-        { name: "Brand Identity", icon: <ShieldCheck size={16} /> },
-        { name: "System Templates", icon: <Layout size={16} /> },
-        { name: "API & Integrations", icon: <Import size={16} /> },
-        { name: "Asset Management", icon: <FolderOpen size={16} /> },
-      ],
-    },
-    {
-      title: "Resources",
-      items: [
-        { name: "Skillhouse Archive", icon: <Archive size={16} /> },
-        { name: "Documentation & Guides", icon: <Info size={16} /> },
-      ],
-    },
-  ];
 
   return (
     <header className={`${styles.header} ${className}`}>
@@ -135,10 +101,15 @@ export const NavBar: React.FC<NavBarProps> = ({
           aria-label="Skillhouse Home"
         >
           <div className={styles.brandBadge}>
-            <span className={styles.brandTitle}>Skill</span>
-            <span className={styles.brandSub}>house</span>
+            <Image
+              src="/figma/Logo black.svg"
+              alt="Skillhouse Logo"
+              width={38}
+              height={40}
+              unoptimized
+            />
           </div>
-          <span className={styles.brandDot} />
+          
         </div>
 
         {/* Desktop Navigation Links (Node 744:1077) */}
@@ -162,45 +133,43 @@ export const NavBar: React.FC<NavBarProps> = ({
               <span>Categories</span>
               <span
                 className={`${styles.dropdownArrow} ${categoriesOpen ? styles.open : ""}`}
+                aria-hidden="true"
               >
-                <ChevronDown size={14} />
+                {categoriesOpen ? (
+                  <Image
+                    src="/figma/node_arrow_up.svg"
+                    alt=""
+                    width={16}
+                    height={16}
+                    unoptimized
+                  />
+                ) : (
+                  <ChevronDown size={14} />
+                )}
               </span>
             </button>
 
             {categoriesOpen && (
-              <div className={styles.megaMenu} role="menu">
-                <div className={styles.megaMenuColumns}>
-                  {menuColumns.map((col, colIdx) => (
-                    <div key={colIdx} className={styles.megaMenuColumn}>
-                      <h4 className={styles.columnTitle}>{col.title}</h4>
-                      <ul className={styles.columnList}>
-                        {col.items.map((item, itemIdx) => (
-                          <li key={itemIdx}>
-                            <button
-                              className={styles.megaMenuItem}
-                              onClick={() => setCategoriesOpen(false)}
-                              role="menuitem"
-                            >
-                              <span className={styles.itemIcon}>{item.icon}</span>
-                              <span className={styles.itemName}>{item.name}</span>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+              <>
+                {/* Backdrop Overlay per Figma Node 750:4067 */}
+                <div 
+                  className={styles.dropdownBackdrop} 
+                  onClick={() => setCategoriesOpen(false)}
+                  aria-hidden="true"
+                />
+                <div className={styles.dropdownPositioner}>
+                  <CategoriesDropdown
+                    onSelectCategory={(category: string) => {
+                      setCategoriesOpen(false);
+                      onSelectCategory?.(category);
+                    }}
+                    onSeeAllSkills={() => {
+                      setCategoriesOpen(false);
+                      onViewChange?.("marketplace");
+                    }}
+                  />
                 </div>
-                <div className={styles.megaMenuFooterMinimal}>
-                  <Button
-                    variant="ghost"
-                    className={styles.browseAllBtn}
-                    onClick={() => setCategoriesOpen(false)}
-                  >
-                    <span>Browse all skills</span>
-                    <ChevronRight size={14} />
-                  </Button>
-                </div>
-              </div>
+              </>
             )}
           </div>
 
