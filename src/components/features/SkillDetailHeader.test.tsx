@@ -71,12 +71,20 @@ describe("Features SkillDetailHeader Component", () => {
     });
   });
 
-  it("renders Free state matching Node 749:1756 with no pricing row or subscription banner", () => {
+  it("renders Free state matching Node 752:11246 with Free label, no buy row and no subscription banner", () => {
     render(<SkillDetailHeader isFree={true} price="Free" />);
+    expect(screen.getByText("Free")).toBeInTheDocument();
     expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
     expect(screen.queryByText(/subscribe — all skills/i)).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /download zip/i })).toBeInTheDocument();
+  });
+
+  it("renders stats items from Figma Node 752:11119 (295 installs, v1.0.1, Secure)", () => {
+    render(<SkillDetailHeader />);
+    expect(screen.getAllByText("295").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("v1.0.1")).toBeInTheDocument();
+    expect(screen.getByText("Secure")).toBeInTheDocument();
   });
 
   it("renders Subscribed state matching Node 749:2815 with subscription banner and no separate buy now row", () => {
@@ -84,5 +92,16 @@ describe("Features SkillDetailHeader Component", () => {
     expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
     expect(screen.getByText(/all-access subscription active/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
+  });
+  it("handles bookmark toggle and share link click", () => {
+    const handleBookmark = vi.fn();
+    render(<SkillDetailHeader onBookmarkToggle={handleBookmark} />);
+    const bookmarkBtn = screen.getByRole("button", { name: /bookmark skill/i });
+    fireEvent.click(bookmarkBtn);
+    expect(handleBookmark).toHaveBeenCalledWith(true);
+
+    const shareBtn = screen.getByRole("button", { name: /share skill/i });
+    fireEvent.click(shareBtn);
+    expect(screen.getByRole("status")).toHaveTextContent(/link copied/i);
   });
 });

@@ -90,126 +90,139 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
         </div>
 
         <div className={styles.actionIcons}>
-          <Button
-            variant={isBookmarked ? "brand" : "icon-border"}
-            size="icon-sm"
+          <button
+            type="button"
+            className={`${styles.circleActionButton} ${isBookmarked ? styles.bookmarkedActive : ""}`}
             aria-label={isBookmarked ? "Remove from bookmarks" : "Bookmark skill"}
             aria-pressed={isBookmarked}
             title={isBookmarked ? "Saved in bookmarks" : "Bookmark skill"}
             onClick={handleBookmarkToggle}
           >
-            <svg 
-              width="14" 
-              height="14" 
-              viewBox="0 0 24 24" 
-              fill={isBookmarked ? "currentColor" : "none"} 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </Button>
-
-          <Button
-            variant="icon-border"
-            size="icon-sm"
-            aria-label="Upload variant"
-            title="Upload variant"
-          >
             <Image
-              src="/figma/upload.svg"
+              src="/figma/node_752_11116.svg"
               alt=""
               width={14}
               height={14}
               unoptimized
             />
-          </Button>
+          </button>
+
+          <button
+            type="button"
+            className={styles.circleActionButton}
+            aria-label="Share skill"
+            title="Share skill"
+            onClick={() => {
+              navigator.clipboard?.writeText?.(window.location.href);
+              setToastMessage("Link copied to clipboard!");
+              setTimeout(() => setToastMessage(null), 2500);
+            }}
+          >
+            <Image
+              src="/figma/node_752_11118.svg"
+              alt=""
+              width={14}
+              height={14}
+              unoptimized
+            />
+          </button>
         </div>
       </div>
 
-      {/* 2. Stats & Verification Row (Node 725:11257) */}
+      {/* 2. Stats & Verification Row (Figma Node 752:11119) */}
       <div className={styles.metaStatsRow}>
-        <div className={styles.statsLeft}>
-          <span className={styles.statItem} title="Installs">
-            <Image
-              src="/figma/import.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
-            <span>1,420</span>
-          </span>
+        <span className={styles.statItem} title="Installs">
+          <Image
+            src="/figma/node_752_11121.svg"
+            alt=""
+            width={14}
+            height={14}
+            unoptimized
+          />
+          <span>295</span>
+        </span>
 
-          <span className={styles.statItem} title="Forks">
-            <Image
-              src="/figma/folder-open.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
-            <span>384</span>
-          </span>
-        </div>
+        <span className={styles.statItem} title="Saved">
+          <Image
+            src="/figma/node_752_11116.svg"
+            alt=""
+            width={14}
+            height={14}
+            unoptimized
+          />
+          <span>295</span>
+        </span>
 
-        <div className={styles.statsRight}>
-          <span className={styles.verifiedBadge} title="Verified Skill">
-            <Image
-              src="/figma/shield-tick.svg"
-              alt=""
-              width={14}
-              height={14}
-              unoptimized
-            />
-            <span>Verified</span>
-          </span>
-        </div>
+        <span className={styles.statItem} title="Version">
+          <Image
+            src="/figma/node_752_11130.svg"
+            alt=""
+            width={11}
+            height={14}
+            unoptimized
+          />
+          <span>v1.0.1</span>
+        </span>
+
+        <span className={styles.statItem} title="Security status">
+          <Image
+            src="/figma/node_752_11134.svg"
+            alt=""
+            width={14}
+            height={14}
+            unoptimized
+          />
+          <span>Secure</span>
+        </span>
       </div>
 
-      {/* 3. Monetization Row (Figma Node 749:1756 vs 749:2815 vs Default) */}
-      {!isFree && !isSubscribed && (
-        <div className={styles.priceRow}>
-          <span className={styles.price}>{price}</span>
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={onBuy}
-          >
-            Buy now
-          </Button>
+      {/* 3. Monetization & Free Row (Figma Node 752:11110 vs 752:11246 vs Subscribed) */}
+      {isFree ? (
+        <div className={styles.freePriceRow}>
+          <span className={styles.freePriceText}>Free</span>
         </div>
-      )}
+      ) : (
+        <>
+          {!isSubscribed && (
+            <div className={styles.priceRow}>
+              <span className={styles.price}>{price}</span>
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={onBuy}
+              >
+                Buy now
+              </Button>
+            </div>
+          )}
 
-      {!isFree && (
-        <div
-          className={styles.subscriptionBanner}
-          onClick={onSubscribe}
-          role="button"
-          tabIndex={0}
-          aria-label="Subscribe to All Skills"
-        >
-          <div className={styles.bannerContent}>
-            <span className={styles.bannerTitle}>
-              {isSubscribed ? "All-Access Subscription Active" : "Subscribe — All Skills, one subscription"}
-            </span>
-            <span className={styles.bannerSubtitle}>
-              No exclusions. Access all curated, verified and continuously updated skills
+          <div
+            className={styles.subscriptionBanner}
+            onClick={onSubscribe}
+            role="button"
+            tabIndex={0}
+            aria-label="Subscribe to All Skills"
+          >
+            <div className={styles.bannerContent}>
+              <span className={styles.bannerTitle}>
+                {isSubscribed ? "All-Access Subscription Active" : "Subscribe — All Skills, one subscription"}
+              </span>
+              <span className={styles.bannerSubtitle}>
+                No exclusions. Access all curated, verified and continuously updated skills
+              </span>
+            </div>
+
+            <span className={styles.bannerArrow}>
+              <Image
+                src="/figma/node_752_11153.svg"
+                alt=""
+                width={16}
+                height={16}
+                unoptimized
+              />
             </span>
           </div>
-
-          <span className={styles.bannerArrow}>
-            <Image
-              src="/figma/arrow-right.svg"
-              alt=""
-              width={16}
-              height={16}
-              unoptimized
-            />
-          </span>
-        </div>
+        </>
       )}
 
       {/* 5. Action Buttons Grid (Node 725:11313) */}
