@@ -79,11 +79,16 @@ describe("Features SkillDetailHeader Component", () => {
     expect(screen.getByRole("button", { name: /download zip/i })).toBeInTheDocument();
   });
 
-  it("renders Premium state matching Node 752:11109 with orange subscription banner", () => {
+  it("renders Premium state matching Node 752:11109 with orange subscription banner and arrow row below subtitle", () => {
     render(<SkillDetailHeader isFree={false} price="$5" variant="premium" />);
-    expect(screen.getByTestId("premium-subscription-banner")).toBeInTheDocument();
+    const banner = screen.getByTestId("premium-subscription-banner");
+    expect(banner).toBeInTheDocument();
     expect(screen.queryByTestId("free-price-indicator")).not.toBeInTheDocument();
     expect(screen.getByText(/subsribe - all skills, one subscription/i)).toBeInTheDocument();
+    expect(screen.getByText(/no exclusions. access all curated, verified and continuously updated skills/i)).toBeInTheDocument();
+    // Arrow icon rendered inside banner
+    const arrowImg = banner.querySelector("img");
+    expect(arrowImg).toBeInTheDocument();
   });
 
   it("renders stats items from Figma Node 752:11119 (295 installs, v1.0.1, Secure)", () => {

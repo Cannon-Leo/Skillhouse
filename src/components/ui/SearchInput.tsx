@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, forwardRef, useImperativeHandle } from "react";
-import Image from "next/image";
+import { Search } from "lucide-react";
 import styles from "./SearchInput.module.css";
 
 export interface SearchInputProps
@@ -65,14 +65,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           }`}
           onClick={() => internalRef.current?.focus()}
         >
-          <span className={styles.icon}>
-            <Image
-              src="/figma/search-normal.svg"
-              alt=""
-              width={18}
-              height={18}
-              unoptimized
-            />
+          <span className={styles.icon} aria-hidden="true">
+            <Search size={18} />
           </span>
 
           <input
