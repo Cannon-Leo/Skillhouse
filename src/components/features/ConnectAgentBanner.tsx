@@ -64,7 +64,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
   return (
     <section
       className={`${styles.section} ${className}`}
-      aria-label="Connect your AI agent (Node 759:12087)"
+      aria-label="Connect your AI agent (Node 759:12088)"
     >
       <div className={styles.card}>
         {/* Left Column: Title, Subtitle, Guides, and Supported Agents (Figma 759:12090) */}
@@ -209,21 +209,17 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
       </div>
 
       {/* Decorative Bottom Accents (Figma 759:12167) */}
-      <div className={styles.bracketContainer} aria-hidden="true" data-testid="bracket-container">
+      <div
+        className={styles.bracketContainer}
+        aria-hidden="true"
+        data-testid="bracket-container"
+      >
         <Image
-          src="/figma/agent-cloud-accent.svg"
+          src="/figma/agent-bottom-brackets.svg"
           alt=""
-          width={54}
-          height={32}
-          className={styles.accentSvg}
-          unoptimized
-        />
-        <Image
-          src="/figma/agent-cloud-accent.svg"
-          alt=""
-          width={54}
-          height={32}
-          className={styles.accentSvgFlipped}
+          width={747}
+          height={33}
+          className={styles.bracketSvg}
           unoptimized
         />
       </div>
