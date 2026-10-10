@@ -758,11 +758,11 @@ export const DesignSystemShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* State 4: Mobile Handheld Simulation */}
+          {/* State 4: Mobile Closed Header State (375px) */}
           <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
             <div style={{ padding: "8px 16px", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 4: Mobile Handheld View Simulation (375px)</span>
-              <span style={{ fontSize: "11px", color: "#7F776E" }}>Compact logo • Hamburger menu • Full-bleed mobile sheet</span>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 4: Mobile Header View (375px)</span>
+              <span style={{ fontSize: "11px", color: "#7F776E" }}>Compact header • Hamburger toggle (menu opens upon tap)</span>
             </div>
             <div style={{ maxWidth: "375px", margin: "0 auto", borderLeft: "1px dashed #D0D5DD", borderRight: "1px dashed #D0D5DD", background: "#FFEEDD" }}>
               <NavBar
