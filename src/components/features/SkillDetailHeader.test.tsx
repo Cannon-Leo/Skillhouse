@@ -87,8 +87,8 @@ describe("Features SkillDetailHeader Component", () => {
     expect(screen.getByText(/subsribe - all skills, one subscription/i)).toBeInTheDocument();
     expect(screen.getByText(/no exclusions. access all curated, verified and continuously updated skills/i)).toBeInTheDocument();
     // Arrow icon rendered inside banner
-    const arrowImg = banner.querySelector("img[src*='node_752_11153.svg']");
-    expect(arrowImg).toBeInTheDocument();
+    const arrowIcon = banner.querySelector("svg");
+    expect(arrowIcon).toBeInTheDocument();
   });
 
   it("renders stats items from Figma Node 752:11119 (295 installs, v1.0.1, Secure)", () => {

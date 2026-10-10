@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
+import {
+  Bookmark,
+  User,
+  Settings,
+  HelpCircle,
+  LogOut,
+} from "lucide-react";
 import styles from "./UserMenuPopover.module.css";
 
 export type UserMenuItemId =
@@ -165,14 +171,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={handleBookmarksClick}
             data-testid="user-menu-item-bookmarks"
           >
-            <Image
-              src="/figma/node_760_12959_bookmarks.svg"
-              alt=""
-              width={18}
-              height={18}
-              className={styles.itemIcon}
-              unoptimized
-            />
+            <Bookmark size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>
               {variant === "extended" && onDirectoryHistory && !onBookmarks
                 ? "Directory history"
@@ -191,14 +190,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={onProfile}
             data-testid="user-menu-item-profile"
           >
-            <Image
-              src="/figma/node_760_12971_profile.svg"
-              alt=""
-              width={18}
-              height={18}
-              className={styles.itemIcon}
-              unoptimized
-            />
+            <User size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>Profile</span>
           </button>
         </div>
@@ -219,14 +211,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={onAccountSettings}
             data-testid="user-menu-item-settings"
           >
-            <Image
-              src="/figma/node_760_12979_settings.svg"
-              alt=""
-              width={18}
-              height={18}
-              className={styles.itemIcon}
-              unoptimized
-            />
+            <Settings size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>Account settings</span>
           </button>
 
@@ -241,14 +226,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={onHelpCenter}
             data-testid="user-menu-item-help"
           >
-            <Image
-              src="/figma/node_760_12995_help.svg"
-              alt=""
-              width={18}
-              height={18}
-              className={styles.itemIcon}
-              unoptimized
-            />
+            <HelpCircle size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>Help center</span>
           </button>
         </div>
@@ -310,14 +288,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={onLogout}
             data-testid="user-menu-item-logout"
           >
-            <Image
-              src="/figma/node_760_13042_logout.svg"
-              alt=""
-              width={18}
-              height={18}
-              className={styles.itemIcon}
-              unoptimized
-            />
+            <LogOut size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>Logout</span>
           </button>
         </div>

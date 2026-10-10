@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import {
+  ChevronRight,
   Bookmark,
   Share2,
   Download,
@@ -188,7 +189,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
 
             <div className={styles.bannerArrowRow}>
               <span className={styles.bannerArrow}>
-                <Image src="/figma/node_752_11153.svg" alt="" width={16} height={16} unoptimized />
+                <ChevronRight size={16} aria-hidden="true" data-testid="subscription-banner-arrow" />
               </span>
             </div>
           </div>
