@@ -581,19 +581,19 @@ export const DesignSystemShowcase: React.FC = () => {
 
         </div>
       </section>
-      {/* 13. Header Nav Options & Login Modal (Nodes 744:1024, 4621:371148, 4597:367764) */}
+      {/* 12. Header Nav Responsive & Interactive States (Nodes 744:1024, 4626:372065, 753:11852) */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            12. Header Nav Variants & Login Modal with Backdrop
-            <span className={styles.nodeBadge}>Nodes 744:1024, 4621:371148, 4597:367764</span>
+            12. Header Nav Responsive &amp; Interactive States
+            <span className={styles.nodeBadge}>Nodes 744:1024, 4626:372065, 753:11852</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Header nav options matching Figma 4626:372065 (#FFEEDD surface) supporting Variant 1 (Default: black 40px Get started button) and Variant 2 (Signed-in: 40x40 orange plus action box, circular avatar with online dot and chevron). User popover matching Figma Node 753:11852.
+            Comprehensive showcase of the Header Navigation across all responsive viewport states and interactive user conditions.
           </p>
         </div>
 
-        <div className={styles.sandboxCard} style={{ flexDirection: "column", gap: "20px" }}>
+        <div className={styles.sandboxCard} style={{ flexDirection: "column", gap: "28px" }}>
           <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
             <Button
               variant="brand"
@@ -607,24 +607,68 @@ export const DesignSystemShowcase: React.FC = () => {
               size="sm"
               onClick={() => setDemoNavSignedIn(!demoNavSignedIn)}
             >
-              Toggle Header State: {demoNavSignedIn ? "Signed In" : "Default (Guest)"}
+              Toggle Auth State: {demoNavSignedIn ? "Signed In (Figma 4626:372065)" : "Default / Guest (Figma 744:1024)"}
             </Button>
           </div>
 
+          {/* State 1: Desktop Guest View */}
           <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
-            <span style={{ fontSize: "12px", fontWeight: 600, padding: "8px 16px", display: "block", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)" }}>
-              Interactive Header Preview ({demoNavSignedIn ? "Variant: Property 1=signed in" : "Variant: Property 1=default"})
-            </span>
+            <div style={{ padding: "8px 16px", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 1: Desktop Guest View (Figma 744:1024)</span>
+              <span style={{ fontSize: "11px", color: "#7F776E" }}>Desktop &gt; 992px • Get started CTA • Search bar</span>
+            </div>
             <NavBar
-              isSignedIn={demoNavSignedIn}
+              isSignedIn={false}
               onOpenLoginModal={() => setDemoLoginModalOpen(true)}
               onGetStarted={() => setDemoLoginModalOpen(true)}
+            />
+          </div>
+
+          {/* State 2: Desktop Signed In View */}
+          <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
+            <div style={{ padding: "8px 16px", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 2: Desktop Authenticated View (Figma 4626:372065 &amp; 753:11852)</span>
+              <span style={{ fontSize: "11px", color: "#7F776E" }}>40x40 orange plus action box • Online indicator • Popover menu</span>
+            </div>
+            <NavBar
+              isSignedIn={true}
               onSignOut={() => setDemoNavSignedIn(false)}
             />
           </div>
+
+          {/* State 3: Tablet Simulation */}
+          <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
+            <div style={{ padding: "8px 16px", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 3: Tablet View Simulation (768px - 992px)</span>
+              <span style={{ fontSize: "11px", color: "#7F776E" }}>Hamburger toggle • Search bar visible • Quick drawer</span>
+            </div>
+            <div style={{ maxWidth: "768px", margin: "0 auto", borderLeft: "1px dashed #D0D5DD", borderRight: "1px dashed #D0D5DD" }}>
+              <NavBar
+                isSignedIn={demoNavSignedIn}
+                onOpenLoginModal={() => setDemoLoginModalOpen(true)}
+                onGetStarted={() => setDemoLoginModalOpen(true)}
+                onSignOut={() => setDemoNavSignedIn(false)}
+              />
+            </div>
+          </div>
+
+          {/* State 4: Mobile Handheld Simulation */}
+          <div style={{ width: "100%", border: "1px solid var(--color-border)", borderRadius: "4px", overflow: "hidden" }}>
+            <div style={{ padding: "8px 16px", background: "var(--color-surface-cream)", borderBottom: "1px solid var(--color-border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>State 4: Mobile Handheld View Simulation (375px)</span>
+              <span style={{ fontSize: "11px", color: "#7F776E" }}>Compact logo • Hamburger menu • Full-bleed mobile sheet</span>
+            </div>
+            <div style={{ maxWidth: "375px", margin: "0 auto", borderLeft: "1px dashed #D0D5DD", borderRight: "1px dashed #D0D5DD", background: "#FFEEDD" }}>
+              <NavBar
+                isSignedIn={demoNavSignedIn}
+                onOpenLoginModal={() => setDemoLoginModalOpen(true)}
+                onGetStarted={() => setDemoLoginModalOpen(true)}
+                onSignOut={() => setDemoNavSignedIn(false)}
+              />
+            </div>
+          </div>
         </div>
       </section>
-
       {/* Live Modal Demo */}
       <LoginModal
         isOpen={demoLoginModalOpen}

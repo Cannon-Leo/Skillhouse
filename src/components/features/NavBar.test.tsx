@@ -148,6 +148,7 @@ describe("Features NavBar Component", () => {
     fireEvent.click(toggleBadge);
     expect(handleViewChange).toHaveBeenCalledWith("design-system");
   });
+
   it("handles user menu popover callbacks in signed-in state", () => {
     const handleSignOut = vi.fn();
     render(<NavBar isSignedIn={true} onSignOut={handleSignOut} />);
@@ -173,7 +174,6 @@ describe("Features NavBar Component", () => {
     const actionBtn = screen.getByLabelText("Create skill or workflow");
     fireEvent.click(actionBtn);
   });
-});
 
   it("handles onRequestSkill callback when Request a skill link is clicked", () => {
     const handleRequestSkill = vi.fn();
@@ -191,3 +191,4 @@ describe("Features NavBar Component", () => {
     fireEvent.click(mobileRequest);
     expect(handleRequestSkill).toHaveBeenCalledTimes(2);
   });
+});

@@ -16,12 +16,12 @@ describe("Features SkillDetailHeader Component", () => {
     render(
       <SkillDetailHeader
         title="Custom Header Title"
-        version="2.0.0"
+        version="v2.0.0"
         description="Custom skill description text"
       />
     );
     expect(screen.getByRole("heading", { level: 1, name: "Custom Header Title" })).toBeInTheDocument();
-    expect(screen.getByText("2.0.0")).toBeInTheDocument();
+    expect(screen.getByText("v2.0.0")).toBeInTheDocument();
     expect(screen.getByText("Custom skill description text")).toBeInTheDocument();
   });
 
@@ -71,13 +71,19 @@ describe("Features SkillDetailHeader Component", () => {
     });
   });
 
-  it("renders Free state matching Node 752:11246 with Free label, no buy row and no subscription banner", () => {
-    render(<SkillDetailHeader isFree={true} price="Free" />);
+  it("renders Free state matching Node 752:11245 with Free label and no subscription banner", () => {
+    render(<SkillDetailHeader isFree={true} price="Free" variant="free" />);
     expect(screen.getByText("Free")).toBeInTheDocument();
-    expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
-    expect(screen.queryByText(/subscribe — all skills/i)).not.toBeInTheDocument();
+    expect(screen.queryByTestId("premium-subscription-banner")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /download zip/i })).toBeInTheDocument();
+  });
+
+  it("renders Premium state matching Node 752:11109 with orange subscription banner", () => {
+    render(<SkillDetailHeader isFree={false} price="$5" variant="premium" />);
+    expect(screen.getByTestId("premium-subscription-banner")).toBeInTheDocument();
+    expect(screen.queryByTestId("free-price-indicator")).not.toBeInTheDocument();
+    expect(screen.getByText(/subsribe - all skills, one subscription/i)).toBeInTheDocument();
   });
 
   it("renders stats items from Figma Node 752:11119 (295 installs, v1.0.1, Secure)", () => {
@@ -87,9 +93,8 @@ describe("Features SkillDetailHeader Component", () => {
     expect(screen.getByText("Secure")).toBeInTheDocument();
   });
 
-  it("renders Subscribed state matching Node 749:2815 with subscription banner and no separate buy now row", () => {
-    render(<SkillDetailHeader isFree={false} isSubscribed={true} price="" />);
-    expect(screen.queryByText("Buy now")).not.toBeInTheDocument();
+  it("renders Subscribed state with active subscription message", () => {
+    render(<SkillDetailHeader isFree={false} isSubscribed={true} price="" variant="premium" />);
     expect(screen.getByText(/all-access subscription active/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /copy install prompt/i })).toBeInTheDocument();
   });
@@ -108,7 +113,7 @@ describe("Features SkillDetailHeader Component", () => {
 
   it("triggers onSubscribe when subscription banner is clicked", () => {
     const handleSubscribe = vi.fn();
-    render(<SkillDetailHeader isFree={false} onSubscribe={handleSubscribe} />);
+    render(<SkillDetailHeader isFree={false} onSubscribe={handleSubscribe} variant="premium" />);
     const banner = screen.getByRole("button", { name: /subscribe to all skills/i });
     fireEvent.click(banner);
     expect(handleSubscribe).toHaveBeenCalledTimes(1);

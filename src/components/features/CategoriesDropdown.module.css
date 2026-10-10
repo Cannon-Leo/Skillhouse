@@ -160,7 +160,13 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  opacity: 0.9;
+  color: #7F776E;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.itemRow:hover .itemIcon {
+  color: var(--color-brand, #FB6320);
+  transform: scale(1.1);
 }
 
 .itemText {
@@ -185,6 +191,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   padding: 0 16px;
   height: 36px;
   background: transparent;
@@ -240,4 +247,12 @@
     flex-direction: column;
     gap: 12px;
   }
+}
+
+.seeAllIcon {
+  transition: transform 0.15s ease;
+}
+
+.seeAllButton:hover .seeAllIcon {
+  transform: translateX(3px);
 }

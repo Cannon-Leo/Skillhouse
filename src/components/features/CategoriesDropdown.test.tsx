@@ -61,4 +61,19 @@ describe("CategoriesDropdown Component", () => {
 
     expect(handleSeeAll).toHaveBeenCalledTimes(1);
   });
+
+  it("renders contextual semantic icons for each category item", () => {
+    const { container } = render(<CategoriesDropdown />);
+    
+    // Check that icons are rendered inside item rows
+    const itemRows = container.querySelectorAll("button._itemRow_4e4f50, button[class*=\"itemRow\"]");
+    expect(itemRows.length).toBeGreaterThan(0);
+    
+    // Check that each item row has an SVG icon
+    itemRows.forEach((row) => {
+      const svg = row.querySelector("svg");
+      expect(svg).toBeInTheDocument();
+    });
+  });
 });
+

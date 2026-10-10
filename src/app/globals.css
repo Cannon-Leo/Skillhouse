@@ -62,6 +62,33 @@
   --radius-pill: 30px;
   --radius-circle: 42px;
 
+
+  /* ========================================================
+     SKILLHOUSE SPACING SYSTEM (Concatenated from Figma Nodes)
+     Observed empirical scale across meyaj2 & IsangAI
+     ======================================================== */
+  --space-3xs: 4px;   /* Micro gap: model avatars (752:11312), chevron/category (744:1080), banner header (752:11150) */
+  --space-2xs: 6px;   /* Stat items icon-to-text (752:11256), info link icon (752:11287), checkbox vertical padding (673:2298) */
+  --space-xs: 8px;    /* Element padding & tight gaps: round btn padding (752:11251), pill padding (752:11295), audience label gap (752:11292), button icon gap (EL-18198c27), checkbox row gap (673:2298) */
+  --space-sm: 10px;   /* Action button group gap (752:11275, 752:11154), round icon buttons gap (752:11250) */
+  --space-md: 12px;   /* Component row gap: audience pills gap (752:11294), install guide pills gap (752:11346), button vertical padding (EL-18198c27) */
+  --space-lg: 16px;   /* Section container padding & sub-blocks gap: top block gap (EL-f6efe3b4), audience box padding/gap (752:11291), runtime specs box padding/gap (752:11309), orange banner padding/gap (752:11137), meta row gap (752:11255), description gap (752:11285), header vertical padding (744:1063) */
+  --space-xl: 24px;   /* Composite container section gap: root gap between panel sections (752:11245, 752:11109), button horizontal padding (EL-18198c27), nav item gap (744:1077), modal top/horizontal padding (4621:371149) */
+  --space-2xl: 32px;  /* Major layout gap: header content gap (744:1063) */
+  --space-3xl: 40px;  /* Page / Header horizontal padding: desktop nav padding (744:1063) */
+  --space-4xl: 48px;  /* Wide grid / spec column gap: runtime specs row gap (EL-9aeb4880, 752:11310) */
+
+  /* Structural Component Dimensions */
+  --dim-btn-round: 28px;      /* 28x28px circular bookmark/share button (EL-e8dd6c0d) */
+  --dim-pill-height: 28px;    /* 28px height peach audience/install guide pill (EL-d7837055) */
+  --dim-avatar-spec: 28px;    /* 28x28px circular model logomark avatar in runs-in specs (EL-53eec184) */
+  --dim-spec-label: 97px;     /* 97px fixed category label width in runtime specs (layout_630da271) */
+  --dim-btn-action: 48px;     /* 48px primary action button height (layout_18198c27) */
+  --dim-panel-width: 437px;   /* 437px designed panel width (nodes 752:11245, 752:11109) */
+  --dim-icon-xs: 12px;        /* 12x12px info-circle icon (752:11288) */
+  --dim-icon-sm: 14px;        /* 14x14px action button icon (752:11252) & stat icons (752:11257) */
+  --dim-icon-md: 16px;        /* 16x16px primary action button icon (copy/import) (752:11278) */
+
   /* Typography */
   --font-pixel: "Geist Pixel Square", "Geist Pixel", monospace;
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

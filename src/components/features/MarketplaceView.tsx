@@ -325,7 +325,6 @@ export function MarketplaceView() {
         {/* Right Detail Panel (Desktop >1200px) */}
         <aside className={styles.detailSection} aria-label="Selected Skill Details">
           <SkillDetailHeader
-            id={selectedSkill.id}
             isBookmarked={Boolean(bookmarkedSkills[selectedSkill.id])}
             onBookmarkToggle={(isBookmarked) => handleToggleBookmark(selectedSkill.id, isBookmarked)}
             title={selectedSkill.title}
@@ -372,7 +371,6 @@ export function MarketplaceView() {
           </div>
 
           <SkillDetailHeader
-            id={selectedSkill.id}
             isBookmarked={Boolean(bookmarkedSkills[selectedSkill.id])}
             onBookmarkToggle={(isBookmarked) => handleToggleBookmark(selectedSkill.id, isBookmarked)}
             title={selectedSkill.title}
