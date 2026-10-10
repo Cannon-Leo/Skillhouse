@@ -667,7 +667,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <span className={styles.nodeBadge}>Nodes 750:3470, 750:4067</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Interactive dropdown menu featuring 3 active tab variants (By use-case, By role, By output), exact Figma vector icons (#000000 import icon, #7F776E arrow chevron), #FEF6ED warm cream surface, #CFD9E8 borders, and full backdrop overlay (rgba(66, 65, 69, 0.54) with 8px blur).
+            Interactive dropdown menu featuring 3 active tab variants (By use-case, By role, By output), exact Figma vector icons (#000000 import icon, #7F776E arrow chevron), #FFECD8 cream surface, #CFD9E8 borders, and full backdrop overlay (rgba(66, 65, 69, 0.54) with 8px blur).
           </p>
         </div>
 

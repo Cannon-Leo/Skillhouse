@@ -1,6 +1,6 @@
 /* CategoriesDropdown Component Styles
  * Exact Figma specs: Node 750:3470 (variants: Component 215, 216, 217)
- * Background: #FEF6ED, Border: #CFD9E8, Shadow: 0px 16px 24px -6px rgba(16,25,40,0.08)
+ * Background: #FFECD8, Border: #CFD9E8, Shadow: 0px 16px 24px -6px rgba(16,25,40,0.08)
  */
 
 .dropdownContainer {
@@ -9,7 +9,7 @@
   align-items: stretch;
   width: 620px;
   max-width: 95vw;
-  background-color: #FEF6ED;
+  background-color: #FFECD8;
   border: 1px solid #CFD9E8;
   border-radius: 4px;
   box-shadow: 

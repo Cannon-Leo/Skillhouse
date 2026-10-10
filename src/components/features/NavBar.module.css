@@ -107,6 +107,7 @@
 /* Mega Menu Dropdown */
 .categoriesContainer {
   position: relative;
+  z-index: 1000;
 }
 
 .megaMenu {
