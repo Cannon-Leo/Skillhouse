@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
+  background-color: var(--color-surface-cream);
+  border: 1px solid var(--color-border);
+  border-radius: 0px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.variant-white {
+  background-color: var(--color-white);
+}
+
+.variant-cream {
+  background-color: var(--color-surface-cream);
+}
+
+.inputWrapper:hover {
+  border-color: var(--color-border-hover);
+}
+
+.inputWrapper.isFocused {
+  border-color: var(--color-brand);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-focus);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.clearButton:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--color-dark);
+}
+
+.shortcutBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-subtle);
+  padding: 2px 5px;
+  border-radius: 0px;
+  pointer-events: none;
+  flex-shrink: 0;
+}

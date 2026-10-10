@@ -1,0 +1,180 @@
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  background-color: #FFEEDD;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.05),
+              0px 0px 3px -1px rgba(16, 25, 40, 0.04),
+              0px 16px 24px -6px rgba(16, 25, 40, 0.08);
+  box-sizing: border-box;
+  animation: modalScaleEnter 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow: hidden;
+}
+
+@keyframes modalScaleEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #7F776E;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  z-index: 10;
+}
+
+.closeButton:hover {
+  color: #000000;
+  transform: scale(1.05);
+}
+
+.closeButton:active {
+  transform: scale(0.96);
+}
+
+.header {
+  padding: 24px 24px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-pixel);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2em;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.descriptionWrapper {
+  padding: 8px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45em;
+  color: #7F776E;
+  text-align: center;
+  max-width: 332px;
+  margin: 0;
+}
+
+.actions {
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.oauthButton {
+  height: 48px;
+  width: 100%;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.oauthButton:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.oauthButton:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.oauthButton:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.oauthButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.providerIcon {
+  object-fit: contain;
+}
+
+.buttonText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4em;
+  color: #000000;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: #000000;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-width: calc(100vw - 32px);
+  }
+  .title {
+    font-size: 20px;
+  }
+  .description {
+    font-size: 13px;
+  }
+  .actions {
+    padding: 16px 20px 20px;
+  }
+}

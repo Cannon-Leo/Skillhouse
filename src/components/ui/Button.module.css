@@ -1,0 +1,173 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              transform var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Sizes */
+.size-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: var(--text-xs);
+}
+
+.size-md {
+  height: 40px;
+  padding: 12px 24px;
+  font-size: var(--text-sm);
+  line-height: 1.4em;
+}
+
+.size-lg {
+  height: 48px;
+  padding: 12px 24px;
+  font-size: var(--text-sm);
+  line-height: 1.4em;
+}
+
+.size-icon-sm {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 0px;
+}
+
+.size-icon-md {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 0px;
+}
+
+/* Variants */
+
+/* Primary Black (Node 673:15 - Sharp 0px corners) */
+.variant-primary {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--color-dark-hover);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+/* Brand Orange (Node 671:8317 - Sharp 0px corners) */
+.variant-brand {
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+.variant-brand:hover:not(:disabled) {
+  background-color: var(--color-brand-hover);
+  box-shadow: var(--shadow-brand);
+  transform: translateY(-1px);
+}
+
+/* Outline Dark (Node 725:11317 - Sharp 0px corners) */
+.variant-outline {
+  background-color: transparent;
+  color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+  box-shadow: var(--shadow-xs);
+}
+
+.variant-outline:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Outline Brand (Node 725:11313 - Sharp 0px corners) */
+.variant-outline-brand {
+  background-color: transparent;
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand);
+  box-shadow: var(--shadow-xs);
+}
+
+.variant-outline-brand:hover:not(:disabled) {
+  background-color: var(--color-brand-subtle);
+  border-color: var(--color-brand-hover);
+  color: var(--color-brand-hover);
+}
+
+/* Ghost / Subtle */
+.variant-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid transparent;
+}
+
+.variant-ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-hover);
+  color: var(--color-dark);
+}
+
+/* Icon button with subtle border */
+.variant-icon-border {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-body);
+  box-shadow: var(--shadow-xs);
+}
+
+.variant-icon-border:hover:not(:disabled) {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* States */
+.disabled,
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.loading {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  display: inline-block;
+}
+
+.fullWidth {
+  width: 100%;
+}
