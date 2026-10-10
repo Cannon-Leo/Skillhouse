@@ -1,30 +1,30 @@
-/* ConnectAgentBanner.module.css */
+/* ConnectAgentBanner.module.css — Figma Node 759:12087 */
 
 .section {
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 48px 40px 64px;
+  background: #FFEEDD;
+  padding: 60px 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .card {
   width: 100%;
   max-width: 1360px;
+  min-height: 516px;
   background: var(--color-white, #FFFFFF);
-  border: 1px solid rgba(241, 217, 207, 0.75);
-  border-radius: 12px;
-  box-shadow: 0px 9px 26.1px 0px rgba(241, 217, 207, 0.85);
+  border: 1px solid rgba(241, 217, 207, 0.6);
+  border-radius: 8px;
+  box-shadow: 0px 9px 26.1px 0px rgba(241, 217, 207, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 48px;
-  padding: 56px 64px;
+  padding: 64px 64px;
   box-sizing: border-box;
-  transition: box-shadow var(--transition-normal);
 }
 
 .leftColumn {
@@ -32,22 +32,23 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
 .headingGroup {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .title {
   font-family: var(--font-pixel), var(--font-geist-pixel), sans-serif;
-  font-size: 46px;
-  line-height: 1.05;
+  font-size: 48px;
+  line-height: 1;
   letter-spacing: -0.04em;
-  color: var(--color-text-primary, #000000);
+  color: #000000;
   margin: 0;
+  font-weight: 400;
 }
 
 .subtitle {
@@ -60,7 +61,7 @@
 
 .guideLink {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   color: #7F776E;
   text-decoration: underline;
@@ -77,8 +78,8 @@
 .agentsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px 48px;
-  margin-top: 8px;
+  gap: 20px 64px;
+  margin-top: 12px;
 }
 
 .agentItem {
@@ -86,7 +87,7 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-radius: 8px;
   transition: all var(--transition-fast);
   user-select: none;
@@ -104,51 +105,53 @@
 .agentLogoWrapper {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: rgba(251, 225, 199, 0.45);
-  border: 1px solid rgba(125, 112, 106, 0.2);
+  border-radius: 54px;
+  background: rgba(251, 225, 199, 0.26);
+  border: 0.3px solid rgba(166, 166, 166, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0px 1.5px 3px 0px rgba(16, 24, 40, 0.06);
 }
 
 .agentLogo {
-  width: 22px;
-  height: 22px;
+  width: 22.5px;
+  height: 22.5px;
   object-fit: contain;
 }
 
 .agentName {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary, #000000);
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
   white-space: nowrap;
 }
 
 .rightColumn {
-  width: 540px;
+  width: 548px;
   max-width: 100%;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .terminalBox {
+  width: 100%;
+  min-height: 265px;
   background: #54392D;
   border: 1px solid rgba(166, 166, 166, 0.5);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .terminalHeader {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(166, 166, 166, 0.35);
+  padding: 20px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -163,22 +166,26 @@
 .terminalAvatar {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: 36px;
   background: rgba(251, 225, 199, 0.55);
-  border: 0.5px solid #7D706A;
+  border: 0.2px solid #7D706A;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
 
 .avatarIcon {
-  color: #54392D;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
 }
 
 .terminalTitle {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 1.45;
   font-weight: 500;
   color: #FFFFFF;
 }
@@ -208,21 +215,20 @@
 }
 
 .promptArea {
-  padding: 18px 20px 42px;
-  min-height: 96px;
+  padding: 16px 20px 48px;
+  min-height: 110px;
 }
 
 .promptText {
   margin: 0;
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 13.5px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.45;
   color: #FFFFFF;
 }
 
 .keyword {
   color: #EA8900;
-  font-weight: 600;
 }
 
 .url {
@@ -232,9 +238,8 @@
 }
 
 .stepsFooter {
-  padding: 14px 20px;
-  border-top: 1px solid rgba(166, 166, 166, 0.35);
-  background: rgba(0, 0, 0, 0.15);
+  padding: 16px 20px;
+  border-top: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -249,22 +254,21 @@
 }
 
 .stepNum {
-  font-family: var(--font-pixel), var(--font-geist-mono), monospace;
-  font-size: 11px;
+  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.04em;
 }
 
 .stepText {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 12.5px;
+  font-size: 13px;
   color: #FFFFFF;
 }
 
 .connectButton {
   width: 100%;
   height: 48px;
-  background: var(--color-brand, #FB6320);
+  background: #FB6320;
   border: none;
   border-radius: 4px;
   color: #FFFFFF;
@@ -276,12 +280,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
 .connectButton:hover {
-  background: #e05316;
-  transform: scale(0.98);
+  background: #E05215;
 }
 
 .connectButton:active {
@@ -289,33 +292,34 @@
 }
 
 .bracketContainer {
-  margin-top: 16px;
+  margin-top: 32px;
   width: 100%;
   max-width: 746px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  opacity: 0.6;
-  pointer-events: none;
 }
 
-.bracketLine {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(241, 217, 207, 0.8) 50%, transparent 100%);
+.accentSvg {
+  opacity: 0.7;
+}
+
+.accentSvgFlipped {
+  opacity: 0.7;
+  transform: scaleX(-1);
 }
 
 /* Responsive Breakpoints */
 @media (max-width: 1200px) {
   .card {
-    padding: 44px 48px;
+    padding: 48px 40px;
     gap: 36px;
   }
   .rightColumn {
     width: 480px;
   }
   .title {
-    font-size: 38px;
+    font-size: 40px;
   }
 }
 
@@ -333,7 +337,7 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 32px 20px 48px;
+    padding: 40px 16px;
   }
   .card {
     padding: 28px 20px;
@@ -349,6 +353,9 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+  .bracketContainer {
+    max-width: 320px;
   }
 }
 

@@ -16,6 +16,7 @@ import { SkillDetailHeader } from "../features/SkillDetailHeader";
 import { NavBar } from "../features/NavBar";
 import { CategoriesDropdown } from "../features/CategoriesDropdown";
 import { LoginModal } from "../features/LoginModal";
+import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
 import styles from "./DesignSystemShowcase.module.css";
 
 export const DesignSystemShowcase: React.FC = () => {
@@ -897,6 +898,22 @@ export const DesignSystemShowcase: React.FC = () => {
             </div>
           </div>
         )}
+      </section>
+      {/* 13. Connect Your Agent Integration Section (Figma Node 759:12087) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            12. Connect Your Agent Section
+            <span className={styles.nodeBadge}>Node 759:12087</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            High-converting onboarding banner with supported agent CLIs (Claude Code, Antigravity, Kimi Code CLI, Gemini CLI, Codex, Cursor), dark syntax-highlighted install prompt, and 3-step verification flow.
+          </p>
+        </div>
+
+        <div style={{ width: "100%", borderRadius: "8px", overflow: "hidden" }}>
+          <ConnectAgentBanner />
+        </div>
       </section>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Copy, Check, Sparkles } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import styles from "./ConnectAgentBanner.module.css";
 
 export interface SupportedAgent {
@@ -21,12 +21,12 @@ export interface ConnectAgentBannerProps {
 }
 
 const DEFAULT_AGENTS: SupportedAgent[] = [
-  { id: "claude-code", name: "Claude Code", logo: "/figma/logo-1.png" },
-  { id: "antigravity", name: "Antigravity", logo: "/figma/logo-2.png" },
-  { id: "kimi-code", name: "Kimi Code CLI", logo: "/figma/logo-3.png" },
-  { id: "gemini-cli", name: "Gemini CLI", logo: "/figma/logo-4.png" },
-  { id: "codex", name: "Codex", logo: "/figma/logo-5.png" },
-  { id: "cursor", name: "Cursor", logo: "/figma/logo-6.png" },
+  { id: "claude-code", name: "Claude Code", logo: "/figma/agent-claude.png" },
+  { id: "antigravity", name: "Antigravity", logo: "/figma/agent-antigravity.png" },
+  { id: "kimi-code", name: "Kimi Code CLI", logo: "/figma/agent-kimi.png" },
+  { id: "gemini-cli", name: "Gemini CLI", logo: "/figma/agent-gemini.png" },
+  { id: "codex", name: "Codex", logo: "/figma/agent-codex.png" },
+  { id: "cursor", name: "Cursor", logo: "/figma/agent-cursor.png" },
 ];
 
 const DEFAULT_PROMPT =
@@ -64,10 +64,10 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
   return (
     <section
       className={`${styles.section} ${className}`}
-      aria-label="Connect your AI agent"
+      aria-label="Connect your AI agent (Node 759:12087)"
     >
       <div className={styles.card}>
-        {/* Left Column: Title, Subtitle, Guides, and Supported Agents */}
+        {/* Left Column: Title, Subtitle, Guides, and Supported Agents (Figma 759:12090) */}
         <div className={styles.leftColumn}>
           <div className={styles.headingGroup}>
             <h2 className={styles.title}>
@@ -138,14 +138,21 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Code/Terminal Card & Connect Button */}
+        {/* Right Column: Code/Terminal Card & Connect Button (Figma 759:12131) */}
         <div className={styles.rightColumn}>
           <div className={styles.terminalBox}>
-            {/* Header */}
+            {/* Header (Figma 759:12147) */}
             <div className={styles.terminalHeader}>
               <div className={styles.terminalHeaderLeft}>
                 <div className={styles.terminalAvatar}>
-                  <Sparkles size={13} className={styles.avatarIcon} />
+                  <Image
+                    src="/figma/agent-antigravity.png"
+                    alt=""
+                    width={15}
+                    height={15}
+                    className={styles.avatarIcon}
+                    unoptimized
+                  />
                 </div>
                 <span className={styles.terminalTitle}>Ask your agent to install it</span>
               </div>
@@ -161,7 +168,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
               </button>
             </div>
 
-            {/* Instruction Snippet */}
+            {/* Instruction Snippet (Figma 759:12158) */}
             <div className={styles.promptArea}>
               <p className={styles.promptText}>
                 <span className={styles.keyword}>Read</span>{" "}
@@ -172,7 +179,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
               </p>
             </div>
 
-            {/* Steps Footer */}
+            {/* Steps Footer (Figma 759:12159) */}
             <div className={styles.stepsFooter}>
               <div className={styles.stepBadge}>
                 <span className={styles.stepNum}>01</span>
@@ -189,7 +196,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
             </div>
           </div>
 
-          {/* Primary CTA Button */}
+          {/* Primary CTA Button (Figma 759:12163) */}
           <button
             type="button"
             onClick={handleConnectClick}
@@ -201,9 +208,24 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
         </div>
       </div>
 
-      {/* Decorative Bottom Accents (Figma 4640:6027) */}
+      {/* Decorative Bottom Accents (Figma 759:12167) */}
       <div className={styles.bracketContainer} aria-hidden="true">
-        <span className={styles.bracketLine} />
+        <Image
+          src="/figma/agent-cloud-accent.svg"
+          alt=""
+          width={54}
+          height={32}
+          className={styles.accentSvg}
+          unoptimized
+        />
+        <Image
+          src="/figma/agent-cloud-accent.svg"
+          alt=""
+          width={54}
+          height={32}
+          className={styles.accentSvgFlipped}
+          unoptimized
+        />
       </div>
     </section>
   );
