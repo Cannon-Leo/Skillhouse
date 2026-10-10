@@ -13,6 +13,7 @@ describe("Features NavBar Component", () => {
     expect(screen.getByAltText("Skillhouse Logo")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Skills" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /categories/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Request a skill" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Search skills / outputs")).toBeInTheDocument();
   });
 
@@ -175,16 +176,21 @@ describe("Features NavBar Component", () => {
     fireEvent.click(actionBtn);
   });
 
-  it("handles onRequestSkill callback from mobile drawer", () => {
+  it("handles onRequestSkill callback from desktop and mobile drawer", () => {
     const handleRequestSkill = vi.fn();
     render(<NavBar onRequestSkill={handleRequestSkill} />);
 
-    // Open mobile drawer
+    // Click desktop nav link
+    const requestBtn = screen.getByRole("button", { name: "Request a skill" });
+    fireEvent.click(requestBtn);
+    expect(handleRequestSkill).toHaveBeenCalledTimes(1);
+
+    // Open mobile drawer and click
     const mobileBtn = screen.getByRole("button", { name: /open menu/i });
     fireEvent.click(mobileBtn);
     const drawer = screen.getByRole("dialog", { name: /mobile navigation/i });
     const mobileRequest = within(drawer).getByRole("button", { name: /request a skill/i });
     fireEvent.click(mobileRequest);
-    expect(handleRequestSkill).toHaveBeenCalledTimes(1);
+    expect(handleRequestSkill).toHaveBeenCalledTimes(2);
   });
 });
