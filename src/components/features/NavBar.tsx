@@ -31,6 +31,7 @@ export interface NavBarProps {
     email?: string;
     avatarUrl?: string;
   };
+  responsiveMode?: "desktop" | "tablet" | "mobile";
   className?: string;
 }
 
@@ -50,6 +51,7 @@ export const NavBar: React.FC<NavBarProps> = ({
     email: "alex@skillhouse.ai",
     avatarUrl: "/figma/header_avatar_figma.png",
   },
+  responsiveMode,
   className = "",
 }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
@@ -102,7 +104,7 @@ export const NavBar: React.FC<NavBarProps> = ({
   }, [categoriesOpen, userMenuOpen]);
 
   return (
-    <header className={`${styles.header} ${className}`}>
+    <header className={`${styles.header} ${responsiveMode === "tablet" ? styles.modeTablet : ""} ${responsiveMode === "mobile" ? styles.modeMobile : ""} ${className}`}>
       <div className={styles.container}>
         {/* Brand Logo (Node 744:1064) */}
         <div

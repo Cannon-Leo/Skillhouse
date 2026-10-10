@@ -49,6 +49,31 @@ export const DesignSystemShowcase: React.FC = () => {
     { name: "Surface Peach (Avatars)", hex: "#FBE1C7", desc: "Figma node 673:2956 model logomark background", var: "--color-surface-peach" },
   ];
 
+    const spacingScaleTokens = [
+    { token: "--space-3xs", value: "4px", multiplier: "0.5x", px: 4, usage: "Model avatars overlap (752:11312), chevron/category gap (744:1080), banner header gap (752:11150)" },
+    { token: "--space-2xs", value: "6px", multiplier: "0.75x", px: 6, usage: "Stat item icon-to-label gap (752:11256), info link icon gap (752:11287), checkbox vertical padding (673:2298)" },
+    { token: "--space-xs", value: "8px", multiplier: "1x (Base)", px: 8, usage: "Round button padding (752:11251), pill tag padding (752:11295), audience label gap (752:11292), checkbox row gap (673:2298)" },
+    { token: "--space-sm", value: "10px", multiplier: "1.25x", px: 10, usage: "Primary action button group gap (752:11275, 752:11154), round icon buttons gap (752:11250)" },
+    { token: "--space-md", value: "12px", multiplier: "1.5x", px: 12, usage: "Audience pills gap (752:11294), runtime install guide pills gap (752:11346), button vertical padding (EL-18198c27)" },
+    { token: "--space-lg", value: "16px", multiplier: "2x", px: 16, usage: "Audience & runtime box padding/gap (752:11291, 752:11309), orange banner padding/gap (752:11137), meta row gap (752:11255), description gap (752:11285)" },
+    { token: "--space-xl", value: "24px", multiplier: "3x", px: 24, usage: "Root composite panel gap (752:11245, 752:11109), button horizontal padding, nav links gap (744:1077), mega menu padding (750:3470)" },
+    { token: "--space-2xl", value: "32px", multiplier: "4x", px: 32, usage: "Major layout section gap, header content gap (744:1063), modal inner padding (4621:371148)" },
+    { token: "--space-3xl", value: "40px", multiplier: "5x", px: 40, usage: "Header desktop horizontal padding (744:1063), container edge spacing" },
+    { token: "--space-4xl", value: "48px", multiplier: "6x", px: 48, usage: "Wide runtime specs row gap between fixed label & logomarks (752:11310)" },
+  ];
+
+  const structuralDimensionTokens = [
+    { token: "--dim-panel-width", value: "437px", usage: "Composite Skill Detail Action Panel width (Figma nodes 752:11245 & 752:11109)" },
+    { token: "--dim-btn-action", value: "48px", usage: "Primary action button height for 'Copy install prompt' & 'Download ZIP' (layout_18198c27)" },
+    { token: "--dim-spec-label", value: "97px", usage: "Fixed category label column width in runtime specs (layout_630da271)" },
+    { token: "--dim-btn-round", value: "28px", usage: "Circular bookmark & share icon button diameter (EL-e8dd6c0d)" },
+    { token: "--dim-pill-height", value: "28px", usage: "Peach audience & install guide pill component height (EL-d7837055)" },
+    { token: "--dim-avatar-spec", value: "28px", usage: "Circular model logomark avatar in runs-in specs (EL-53eec184)" },
+    { token: "--dim-icon-md", value: "16px", usage: "Primary action button icon size (copy/import) (752:11278) & banner chevron (752:11153)" },
+    { token: "--dim-icon-sm", value: "14px", usage: "Stat strip icons (752:11257) & circular action button icons (752:11252)" },
+    { token: "--dim-icon-xs", value: "12px", usage: "Info-circle license helper icon (752:11288)" },
+  ];
+
   const neutralTokens = [
     { name: "Dark / Black", hex: "#000000", desc: "Primary black button, display titles, borders", var: "--color-dark" },
     { name: "Dark Hover", hex: "#1C1C1E", desc: "Hover state for black buttons and active body text", var: "--color-dark-hover" },
@@ -70,7 +95,8 @@ export const DesignSystemShowcase: React.FC = () => {
         <div className={styles.metaInfo}>
           <span className={styles.metaPill}>Font: Geist Pixel Square (.ttf)</span>
           <span className={styles.metaPill}>Signature Accent: #FB6320</span>
-          <span className={styles.metaPill}>9 Canvas Nodes Mapped</span>
+          <span className={styles.metaPill}>10-Step Empirical Spacing Scale</span>
+          <span className={styles.metaPill}>14 Canvas Nodes Mapped</span>
         </div>
       </section>
 
@@ -191,11 +217,89 @@ export const DesignSystemShowcase: React.FC = () => {
         </div>
       </section>
 
+      {/* 4. Empirical Spacing Scale & Structural Dimensions */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            04. Empirical Spacing Scale &amp; Structural Dimensions
+            <span className={styles.nodeBadge}>Concatenated Across All Figma Nodes</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Unified spacing scale and fixed structural dimensions distilled from repeated metrics across all inspected Figma nodes (<code>meyaj2</code> nodes 752:11245, 752:11109, 744:1024, 750:3470, 673:2298 and <code>IsangAI</code> nodes 4621:371148, 4597:367764).
+          </p>
+        </div>
+
+        <div className={styles.sandboxCard} style={{ gap: "24px" }}>
+          <div>
+            <h3 style={{ fontSize: "15px", fontWeight: 700, margin: "0 0 12px 0", color: "var(--color-dark)" }}>
+              A. Core Spacing Scale (--space-*)
+            </h3>
+            <div className={styles.spacingTableWrapper}>
+              <table className={styles.spacingTable}>
+                <thead>
+                  <tr>
+                    <th>Token</th>
+                    <th>Value</th>
+                    <th>Scale Multiplier</th>
+                    <th>Visual Bar</th>
+                    <th>Observed Figma Node Usages</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {spacingScaleTokens.map((s, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <code className={styles.spacingTokenCode}>{s.token}</code>
+                      </td>
+                      <td>
+                        <span className={styles.spacingVal}>{s.value}</span>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: "12px", color: "var(--color-text-muted)" }}>{s.multiplier}</span>
+                      </td>
+                      <td>
+                        <div className={styles.spacingBarContainer}>
+                          <div
+                            className={styles.spacingBar}
+                            style={{ width: (s.px * 3) + "px" }}
+                          />
+                          <span style={{ fontSize: "11px", color: "var(--color-text-muted)" }}>{s.value}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: "12px", color: "var(--color-text-secondary)" }}>{s.usage}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 style={{ fontSize: "15px", fontWeight: 700, margin: "0 0 12px 0", color: "var(--color-dark)" }}>
+              B. Structural Component Dimensions (--dim-*)
+            </h3>
+            <div className={styles.dimGrid}>
+              {structuralDimensionTokens.map((d, idx) => (
+                <div key={idx} className={styles.dimCard}>
+                  <div className={styles.dimHeader}>
+                    <span className={styles.dimToken}>{d.token}</span>
+                    <span className={styles.dimVal}>{d.value}</span>
+                  </div>
+                  <p className={styles.dimUsage}>{d.usage}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. Button Primitives */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            04. Button Primitives
+            05. Button Primitives
             <span className={styles.nodeBadge}>Nodes 673:15 & 671:8317</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -276,7 +380,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            05. Search Input Field
+            06. Search Input Field
             <span className={styles.nodeBadge}>Node 694:4027</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -314,7 +418,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            06. Checkbox & Filter Items
+            07. Checkbox & Filter Items
             <span className={styles.nodeBadge}>Nodes 673:226, 673:228, 673:2316, 673:2327</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -400,7 +504,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            07. Skill Card Grid Item
+            08. Skill Card Grid Item
             <span className={styles.nodeBadge}>Node 673:3035 (skill - grid)</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -440,7 +544,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            08. Skill Audience Container
+            09. Skill Audience Container
             <span className={styles.nodeBadge}>Node 725:11328 (often used by)</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -463,7 +567,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            09. Skill Runtime & Environment Specs
+            10. Skill Runtime & Environment Specs
             <span className={styles.nodeBadge}>Node 725:11346 (runs in)</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -493,7 +597,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            10. Peach Pill / Tag Primitive
+            11. Peach Pill / Tag Primitive
             <span className={styles.nodeBadge}>Template EL-d7837055 (sort-select)</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -517,75 +621,75 @@ export const DesignSystemShowcase: React.FC = () => {
         </div>
       </section>
 
-      {/* 12. Master Action Header (Node 725:11237, 749:1756, 749:2815) */}
+      {/* 12. Composite Skill Detail Action Panel & States (Nodes 752:11245 & 752:11109) */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            11. Composite Skill Detail Action Panel & States
-            <span className={styles.nodeBadge}>Nodes 725:11237, 749:1756, 749:2815</span>
+            12. Composite Skill Detail Action Panel &amp; States
+            <span className={styles.nodeBadge}>Component 219 (Nodes 752:11245 &amp; 752:11109)</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Master action header integrating Geist Pixel Square titles, stats strip, circle action buttons, and interactive states for Free skills (Node 752:11246) and Subscribed members (Node 752:11110).
+            Master action panel matching Component 219 specs: exact <code>437px</code> panel width, <code>24px</code> root section gap (<code>--space-xl</code>), Geist Pixel Square title (28px 1em), 28x28px circular bookmark/share actions, 4-stat meta row (295, 295, v1.0.1, Secure), 10px action button gap with 48px height, 1px divider, audience container, and runtime specs.
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "32px", width: "100%" }}>
-          {/* State 1: Free Skill */}
-          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
-              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
-                State 1: Free Skill (Figma Node 749:1756)
+        <div className={styles.stateComparisonGrid}>
+          {/* State 1: Free Skill (Figma Node 752:11245 - Property 1=free) */}
+          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "10px", flexWrap: "wrap", gap: "8px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-dark)" }}>
+                Variant 1: Free Skill (Node 752:11245)
               </span>
               <span className={styles.nodeBadge} style={{ margin: 0 }}>
-                isFree=true · No Buy Row · No Subscription Banner
+                Property 1=free · Geist Pixel &quot;Free&quot; (20px)
               </span>
             </div>
             <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
-              Directly renders installation actions (Copy prompt + Download ZIP) with zero payment barriers.
+              Renders Geist Pixel Square &quot;Free&quot; price text with zero subscription banner. Immediate install and download actions.
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <SkillDetailHeader
-                title="System Design Architecture Deck"
-                version="1.0.0"
+                title="Visual Canvas Deck"
+                version="v1.0.1"
                 price="Free"
                 isFree={true}
-                description="Open-source interactive architecture templates with verified tokens and visual wireframes."
+                variant="free"
+                description="This skill generates stunning visual canvas decks using react-canvas and Tailwind CSS for rapid prototyping."
               />
             </div>
           </div>
 
-          {/* State 2: Active Subscriber */}
-          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "8px" }}>
-              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-dark)" }}>
-                State 2: Subscribed Member (Figma Node 749:2815)
+          {/* State 2: Premium Skill (Figma Node 752:11109 - Property 1=premium) */}
+          <div className={styles.sandboxCard} style={{ flexDirection: "column", alignItems: "stretch", gap: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)", paddingBottom: "10px", flexWrap: "wrap", gap: "8px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-dark)" }}>
+                Variant 2: Premium Skill (Node 752:11109)
               </span>
               <span className={styles.nodeBadge} style={{ margin: 0 }}>
-                isSubscribed=true · Active Banner · No Buy Row
+                Property 1=premium · #FB6320 All-Access Banner
               </span>
             </div>
             <p style={{ fontSize: "12px", color: "var(--color-text-muted)", margin: 0 }}>
-              Shows active all-access status banner without standalone checkout button.
+              Renders the signature #FB6320 orange subscription banner (&quot;Subsribe - All Skills, one subscription&quot;) with zero standalone price label.
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <SkillDetailHeader
-                title="Interactive 3D Spline Canvas"
-                version="2.1.4"
+                title="Visual Canvas Deck"
+                version="v1.0.1"
                 price="$5"
-                isSubscribed={true}
-                description="Embed interactive webgl 3D canvas decks with smooth spring motion and token export."
+                isFree={false}
+                variant="premium"
+                description="This skill generates stunning visual canvas decks using react-canvas and Tailwind CSS for rapid prototyping."
               />
             </div>
           </div>
-
-
         </div>
       </section>
       {/* 12. Header Nav Responsive & Interactive States (Nodes 744:1024, 4626:372065, 753:11852) */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            12. Header Nav Responsive &amp; Interactive States
+            13. Header Nav Responsive &amp; Interactive States
             <span className={styles.nodeBadge}>Nodes 744:1024, 4626:372065, 753:11852</span>
           </h2>
           <p className={styles.sectionDesc}>
@@ -645,6 +749,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <div style={{ maxWidth: "768px", margin: "0 auto", borderLeft: "1px dashed #D0D5DD", borderRight: "1px dashed #D0D5DD" }}>
               <NavBar
                 isSignedIn={demoNavSignedIn}
+                responsiveMode="tablet"
                 onOpenLoginModal={() => setDemoLoginModalOpen(true)}
                 onGetStarted={() => setDemoLoginModalOpen(true)}
                 onSignOut={() => setDemoNavSignedIn(false)}
@@ -661,6 +766,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <div style={{ maxWidth: "375px", margin: "0 auto", borderLeft: "1px dashed #D0D5DD", borderRight: "1px dashed #D0D5DD", background: "#FFEEDD" }}>
               <NavBar
                 isSignedIn={demoNavSignedIn}
+                responsiveMode="mobile"
                 onOpenLoginModal={() => setDemoLoginModalOpen(true)}
                 onGetStarted={() => setDemoLoginModalOpen(true)}
                 onSignOut={() => setDemoNavSignedIn(false)}
@@ -683,7 +789,7 @@ export const DesignSystemShowcase: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            13. Categories Mega Menu Dropdown &amp; Overlay
+            14. Categories Mega Menu Dropdown &amp; Overlay
             <span className={styles.nodeBadge}>Nodes 750:3470, 750:4067</span>
           </h2>
           <p className={styles.sectionDesc}>

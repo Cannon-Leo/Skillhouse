@@ -638,3 +638,43 @@
   z-index: 2;
   box-sizing: content-box;
 }
+
+/* Simulation overrides for responsive showcase & container constraints */
+.modeTablet .container,
+.header:has([data-mode="tablet"]) .container {
+  padding: 16px 24px;
+  gap: 20px;
+}
+.modeTablet .navLinks,
+.header:has([data-mode="tablet"]) .navLinks {
+  display: none !important;
+}
+.modeTablet .mobileMenuButton,
+.header:has([data-mode="tablet"]) .mobileMenuButton {
+  display: flex !important;
+}
+
+.modeMobile .container,
+.header:has([data-mode="mobile"]) .container {
+  padding: 12px 16px;
+  min-height: 60px;
+  gap: 12px;
+}
+.modeMobile .navLinks,
+.header:has([data-mode="mobile"]) .navLinks {
+  display: none !important;
+}
+.modeMobile .mobileMenuButton,
+.header:has([data-mode="mobile"]) .mobileMenuButton {
+  display: flex !important;
+}
+.modeMobile .searchWrapper,
+.header:has([data-mode="mobile"]) .searchWrapper {
+  display: none !important;
+}
+.modeMobile .docBadge,
+.modeMobile .desktopCtaWrapper,
+.header:has([data-mode="mobile"]) .docBadge,
+.header:has([data-mode="mobile"]) .desktopCtaWrapper {
+  display: none !important;
+}
