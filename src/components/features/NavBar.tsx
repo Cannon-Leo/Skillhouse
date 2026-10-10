@@ -250,7 +250,13 @@ export const NavBar: React.FC<NavBarProps> = ({
                 title="Create skill or workflow"
                 onClick={() => (onRequestSkill ? onRequestSkill() : alert("Create or publish skill"))}
               >
-                <Plus size={20} color="#FFFFFF" strokeWidth={2.5} aria-hidden="true" />
+                <Image
+                  src="/figma/node_4621_371856.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                  unoptimized
+                />
               </button>
 
               {/* User Avatar with Online Dot + Chevron (Figma Node 4621:371883) */}
