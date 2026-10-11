@@ -21,10 +21,10 @@ export interface ConnectAgentBannerProps {
 
 const DEFAULT_AGENTS: SupportedAgent[] = [
   { id: "claude-code", name: "Claude Code", logo: "/figma/agent-claude.png" },
-  { id: "antigravity", name: "Antigravity", logo: "/figma/agent-antigravity.png" },
   { id: "kimi-code", name: "Kimi Code CLI", logo: "/figma/agent-kimi.png" },
-  { id: "gemini-cli", name: "Gemini CLI", logo: "/figma/agent-gemini.png" },
   { id: "codex", name: "Codex", logo: "/figma/agent-codex.png" },
+  { id: "gemini-cli", name: "Gemini CLI", logo: "/figma/agent-gemini.png" },
+  { id: "antigravity", name: "Antigravity", logo: "/figma/agent-antigravity.png" },
   { id: "cursor", name: "Cursor", logo: "/figma/agent-cursor.png" },
 ];
 
