@@ -43,3 +43,6 @@ Thumbs.db
 .vscode/
 .superpowers/
 .agent/
+
+# Scratch preview files
+public/preview-*.html
