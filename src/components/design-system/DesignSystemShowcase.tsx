@@ -1027,7 +1027,7 @@ export const DesignSystemShowcase: React.FC = () => {
         </div>
       </section>
       {/* 17. Category Skill Grid & Cards (Figma Node 751:4789) */}
-      <section className={styles.section}>
+      <section className={styles.section} id="category-cards">
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
             17. Category Skill Grid & Cards
