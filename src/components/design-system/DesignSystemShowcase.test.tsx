@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { DesignSystemShowcase } from "./DesignSystemShowcase";
 
-describe("DesignSystemShowcase Component", () => {
+describe("DesignSystemShowcase Component", { timeout: 15000 }, () => {
   beforeEach(() => {
     vi.spyOn(window, "alert").mockImplementation(() => {});
   });

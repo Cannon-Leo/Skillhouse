@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { CategorySkillCard } from "./CategorySkillCard";
 import styles from "./CategorySkillGrid.module.css";
 
@@ -43,46 +42,6 @@ export const CategorySkillGrid: React.FC<CategorySkillGridProps> = ({
       style={style}
       data-testid="category-skill-grid"
     >
-      {/* Decorative connecting bridges (Figma Nodes 751:4791, 751:4838) */}
-      <div className={styles.decorationsOverlay} aria-hidden="true">
-        {/* Row 1 Vertical Bridges */}
-        <div className={`${styles.bridgeV} ${styles.bridgeV1_1}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-        <div className={`${styles.bridgeV} ${styles.bridgeV1_2}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-        <div className={`${styles.bridgeV} ${styles.bridgeV1_3}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-
-        {/* Row 2 Vertical Bridges */}
-        <div className={`${styles.bridgeV} ${styles.bridgeV2_1}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-        <div className={`${styles.bridgeV} ${styles.bridgeV2_2}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-        <div className={`${styles.bridgeV} ${styles.bridgeV2_3}`}>
-          <Image src="/figma/grid_bridge_v_ffeedd.svg" alt="" width={33} height={55} unoptimized />
-        </div>
-
-        {/* Horizontal Bridges between Row 1 and Row 2 */}
-        <div className={`${styles.bridgeH} ${styles.bridgeH1}`}>
-          <Image src="/figma/grid_bridge_h_ffeedd.svg" alt="" width={55} height={31} unoptimized />
-        </div>
-        <div className={`${styles.bridgeH} ${styles.bridgeH2}`}>
-          <Image src="/figma/grid_bridge_h_ffeedd.svg" alt="" width={55} height={31} unoptimized />
-        </div>
-        <div className={`${styles.bridgeH} ${styles.bridgeH3}`}>
-          <Image src="/figma/grid_bridge_h_ffeedd.svg" alt="" width={55} height={31} unoptimized />
-        </div>
-        <div className={`${styles.bridgeH} ${styles.bridgeH4}`}>
-          <Image src="/figma/grid_bridge_h_ffeedd.svg" alt="" width={55} height={31} unoptimized />
-        </div>
-      </div>
-
-      {/* Interactive Cards Grid */}
       <div className={styles.cardGrid}>
         {categories.map((cat) => (
           <CategorySkillCard

@@ -7,71 +7,32 @@
   box-sizing: border-box;
 }
 
-/* 4-column layout matching Figma 751:4789 */
+/* Desktop layout (default): clean 4-column grid with exact Figma dimensions */
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(4, 225px);
-  column-gap: 32px;
-  row-gap: 31px;
+  gap: 32px;
   justify-content: space-between;
   position: relative;
   z-index: 1;
 }
 
-/* Decorative bridges connecting cards */
-.decorationsOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.bridgeV {
-  position: absolute;
-  width: 33px;
-  height: 55px;
-  display: block;
-}
-
-.bridgeH {
-  position: absolute;
-  width: 55px;
-  height: 31px;
-  display: block;
-}
-
-/* Position offsets for the 3 horizontal gaps in Row 1 */
-.bridgeV1_1 { left: 225px; top: 25px; }
-.bridgeV1_2 { left: 483px; top: 25px; }
-.bridgeV1_3 { left: 740px; top: 25px; }
-
-/* Position offsets for the 3 horizontal gaps in Row 2 */
-.bridgeV2_1 { left: 225px; top: 206px; }
-.bridgeV2_2 { left: 483px; top: 206px; }
-.bridgeV2_3 { left: 740px; top: 206px; }
-
-/* Position offsets for the vertical gaps between Row 1 and Row 2 */
-.bridgeH1 { left: 85px; top: 150px; }
-.bridgeH2 { left: 343px; top: 150px; }
-.bridgeH3 { left: 601px; top: 150px; }
-.bridgeH4 { left: 858px; top: 150px; }
-
-/* Responsive adjustments for tablet and mobile */
+/* Tablet view (screens <= 1024px): 2 columns, fluid card width, clean touch spacing */
 @media (max-width: 1024px) {
+  .gridWrapper {
+    max-width: 100%;
+  }
+
   .cardGrid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    justify-content: center;
   }
+}
 
-  .decorationsOverlay {
-    display: none; /* Hide intricate fixed cross-bridges on reflowing screens */
-  }
-
-  :global(.CategorySkillCard_card) {
-    width: 100%;
+/* Mobile view (screens <= 640px): 1 column stack, tactile touch targets */
+@media (max-width: 640px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }

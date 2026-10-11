@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { Button } from "../ui/Button";
 import { Copy, Download, Upload, Archive } from "lucide-react";
 import { Checkbox } from "../ui/Checkbox";
@@ -1025,6 +1024,33 @@ export const DesignSystemShowcase: React.FC = () => {
 
         <div style={{ width: "100%", borderRadius: "8px", overflow: "hidden" }}>
           <ConnectAgentBanner />
+        </div>
+      </section>
+      {/* 17. Category Skill Grid & Cards (Figma Node 751:4789) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            17. Category Skill Grid & Cards
+            <span className={styles.nodeBadge}>Node 751:4789</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Modular category skill navigation grid with responsive bridging connectors and interactive tactile cards.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", gap: "16px", marginBottom: "24px", flexWrap: "wrap" }}>
+          <CategorySkillCard
+            title={"Featured \nAgent Skills"}
+            href="/skills?category=featured"
+          />
+          <CategorySkillCard
+            title={"Trending \nAgent Skills"}
+            href="/skills?category=trending"
+          />
+        </div>
+
+        <div style={{ width: "100%", borderRadius: "8px", overflow: "hidden" }}>
+          <CategorySkillGrid />
         </div>
       </section>
     </div>

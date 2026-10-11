@@ -14,3 +14,5 @@ export * from "./CategoriesDropdown";
 export * from "./UserMenuPopover";
 export { RequestSkillModal } from "./RequestSkillModal";
 export type { RequestSkillModalProps, SkillRequestData } from "./RequestSkillModal";
+export * from "./CategorySkillCard";
+export * from "./CategorySkillGrid";
