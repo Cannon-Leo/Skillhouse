@@ -18,6 +18,9 @@ import { NavBar } from "../features/NavBar";
 import { CategoriesDropdown } from "../features/CategoriesDropdown";
 import { LoginModal } from "../features/LoginModal";
 import { UserMenuPopover } from "../features/UserMenuPopover";
+import { CategorySkillCard } from "../features/CategorySkillCard";
+import { CategorySkillGrid } from "../features/CategorySkillGrid";
+
 import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
 import styles from "./DesignSystemShowcase.module.css";
 

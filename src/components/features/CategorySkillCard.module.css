@@ -1,0 +1,88 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 225px;
+  height: 150px;
+  background-color: var(--card-bg, #FFEEDD);
+  padding: 16px 20px 20px 24px;
+  box-sizing: border-box;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.card:hover {
+  background-color: #FCE6CE;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(110, 63, 16, 0.08);
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-brand, #FB6320);
+  outline-offset: 2px;
+}
+
+/* Header container with action button */
+.headerRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 360px;
+  background-color: #FFECD8;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  color: #171717;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.card:hover .actionButton {
+  transform: translate(1px, -1px);
+  background-color: #FFE0C2;
+  border-color: rgba(166, 166, 166, 0.8);
+}
+
+.arrowIcon {
+  width: 14px;
+  height: 14px;
+  stroke: #171717;
+  stroke-width: 1.75;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .arrowIcon {
+  transform: translate(1px, -1px);
+}
+
+/* Card Title text matching Figma Node 751:4801 */
+.title {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -1.4px;
+  color: #464646;
+  white-space: pre-line;
+  max-width: 170px;
+}
