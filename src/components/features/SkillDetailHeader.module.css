@@ -93,6 +93,7 @@
   line-height: 1.5em;
   font-weight: 400;
   color: var(--color-text-muted); /* #7F776E */
+  white-space: nowrap;
 }
 
 /* Row C (State 1): Free Price Display (Node 752:11273) */
@@ -108,6 +109,7 @@
   font-weight: 400;
   line-height: var(--leading-none); /* 1em */
   color: var(--color-dark);
+  white-space: nowrap;
 }
 
 /* Row C (State 2): Subscription Orange Banner (Node 752:11137) */
@@ -188,7 +190,7 @@
 
 .copyPromptBtn {
   height: var(--dim-btn-action); /* 48px */
-  padding: var(--space-md) var(--space-xl); /* 12px 24px */
+  padding: var(--space-md) clamp(10px, 1.8vw, 16px); /* responsive padding prevents breaking */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -201,11 +203,17 @@
   font-size: var(--text-sm);
   font-weight: 500;
   line-height: 1.4em;
+  white-space: nowrap;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
-  flex: 1;
+  flex: 1.15;
+  min-width: 0;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
   user-select: none;
+}
+
+.copyPromptBtn span {
+  white-space: nowrap;
 }
 
 .copyPromptBtn:hover {
@@ -218,7 +226,7 @@
 
 .downloadZipBtn {
   height: var(--dim-btn-action); /* 48px */
-  padding: var(--space-md) var(--space-xl); /* 12px 24px */
+  padding: var(--space-md) clamp(10px, 1.8vw, 16px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -231,11 +239,17 @@
   font-size: var(--text-sm);
   font-weight: 500;
   line-height: 1.4em;
+  white-space: nowrap;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
-  flex: 1;
+  flex: 0.85;
+  min-width: 0;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
   user-select: none;
+}
+
+.downloadZipBtn span {
+  white-space: nowrap;
 }
 
 .downloadZipBtn:hover {
@@ -333,5 +347,17 @@
   }
   .subscriptionBanner {
     padding: var(--space-md);
+  }
+}
+
+@media (max-width: 380px) {
+  .actionButtonsRow {
+    flex-direction: column;
+  }
+
+  .copyPromptBtn,
+  .downloadZipBtn {
+    width: 100%;
+    flex: none;
   }
 }

@@ -7,6 +7,8 @@
   padding: 24px 20px 48px 0;
   border-right: 1px solid var(--color-border);
   background-color: var(--color-bg-page);
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .topBar {
@@ -24,6 +26,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .activeCountBadge {
@@ -33,6 +36,7 @@
   font-weight: 600;
   padding: 1px 6px;
   border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .clearButton {
@@ -42,6 +46,7 @@
   cursor: pointer;
   padding: 2px 4px;
   border-radius: var(--radius-xs);
+  white-space: nowrap;
   transition: all var(--transition-fast);
 }
 

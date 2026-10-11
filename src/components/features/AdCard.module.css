@@ -112,6 +112,7 @@
   letter-spacing: 0.04em;
   pointer-events: auto;
   line-height: 1;
+  white-space: nowrap;
   box-sizing: border-box;
 }
 

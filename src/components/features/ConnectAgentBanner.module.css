@@ -1,5 +1,6 @@
-/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 (Desktop - 3) */
+/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 & IsangAI 4626:373993 / 4640:6028 */
 
+/* 1. Section: Outer background & vertical Auto Layout wrapper */
 .section {
   width: 100%;
   background: #FFEEDD;
@@ -12,7 +13,7 @@
   overflow-x: hidden;
 }
 
-/* Outer wrapper for card + bottom accents flush underneath */
+/* 2. Card Wrapper: Centers the card and docks the bottom decorative accents */
 .cardWrapper {
   width: 100%;
   max-width: 1360px;
@@ -22,7 +23,7 @@
   position: relative;
 }
 
-/* Figma Frame 1618871300: 1360px wide, 516px height, white background, no outer border, soft shadow */
+/* 3. Card: Figma Auto Layout Frame 1618871300 — White background, 8px radius, soft shadow */
 .card {
   width: 100%;
   max-width: 1360px;
@@ -40,23 +41,23 @@
   z-index: 1;
 }
 
-/* Left Column: fluid up to 536px, 24px vertical itemSpacing (Figma 759:12090) */
+/* 4. Left Column: Auto Layout vertical stack (Figma 759:12090) */
 .leftColumn {
   flex: 1 1 420px;
   max-width: 536px;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .headingGroup {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* Figma 759:12091: Geist Pixel Square 48px, line-height 48px, letter-spacing -1.92px (-0.04em), #000000 */
+/* Figma: Geist Pixel Square 48px, line-height 48px, letter-spacing -1.92px, #000000 */
 .title {
   font-family: var(--font-pixel), var(--font-geist-pixel), monospace, sans-serif;
   font-size: 48px;
@@ -67,7 +68,7 @@
   font-weight: 400;
 }
 
-/* Figma 759:12092: Geist 16px, line-height 24px, color #7F776E */
+/* Figma: Geist 16px, line-height 24px, color #7F776E */
 .subtitle {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 16px;
@@ -76,7 +77,7 @@
   margin: 0;
 }
 
-/* Figma 759:12093: Geist 16px, line-height 24px, underlined, color #7F776E */
+/* Figma: Geist 16px, line-height 24px, underlined, color #7F776E */
 .guideLink {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 16px;
@@ -93,7 +94,7 @@
   color: #FB6320;
 }
 
-/* Agents Grid: 2 rows of 3 items hugging content with refined proportions (Figma 759:12094) */
+/* 5. Agents Grid: Auto Layout grid for supported agents (Figma 759:12094) */
 .agentsGrid {
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -145,7 +146,7 @@
   object-fit: contain;
 }
 
-/* Geist 14px, line-height 18px, crisp black #000000 matching reference proportion */
+/* Geist 14px, line-height 18px, crisp black #000000 */
 .agentName {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 14px;
@@ -155,7 +156,7 @@
   white-space: nowrap;
 }
 
-/* Right Column: exactly 548px max-width, fluid down to fit container, 24px vertical gap (Figma 759:12131) */
+/* 6. Right Column: Auto Layout vertical stack for Terminal Box + CTA Button (Figma 759:12131) */
 .rightColumn {
   flex: 0 1 548px;
   width: 100%;
@@ -166,27 +167,27 @@
   gap: 24px;
 }
 
-/* Figma 759:12132: 548x265px, fill #54392D, border 1px solid rgba(166, 166, 166, 0.5), no border-radius */
+/* Terminal Box: Auto Layout vertical stack with header, prompt, and steps footer (Figma 759:12132) */
 .terminalBox {
   width: 100%;
-  height: 265px;
   background: #54392D;
   border: 1px solid rgba(166, 166, 166, 0.5);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: auto;
+  min-height: 265px;
 }
 
-/* Figma 759:12147: padding 20px, border-bottom 1px solid rgba(166, 166, 166, 0.5) */
+/* Terminal Header (Figma 759:12147) */
 .terminalHeader {
-  padding: 20px;
-  height: 64px;
+  padding: 18px 20px;
   border-bottom: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .terminalHeaderLeft {
@@ -214,7 +215,7 @@
   object-fit: contain;
 }
 
-/* Figma 759:12154: Geist 500 16px, line-height 23.2px, #FFFFFF */
+/* Geist 500 16px, line-height 23.2px, #FFFFFF */
 .terminalTitle {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 16px;
@@ -223,12 +224,13 @@
   color: #FFFFFF;
 }
 
-/* Figma 759:12158: padding 16px 20px 24px 20px */
+/* Prompt Area (Figma 759:12158) */
 .promptArea {
   padding: 16px 20px 24px 20px;
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+  flex: 1;
 }
 
 .promptText {
@@ -239,7 +241,7 @@
   color: #FFFFFF;
 }
 
-/* Exact Figma colors: Read is #EA8900, URL is #03A400 */
+/* Keyword & URL Syntax Colors */
 .keyword {
   color: #EA8900;
 }
@@ -262,10 +264,9 @@
   font-weight: 500;
 }
 
-/* Figma 759:12159: padding 16px 20px, height 70px, border-top 1px solid rgba(166, 166, 166, 0.5) */
+/* Terminal Steps Footer: Auto Layout row on desktop (Figma 759:12159) */
 .stepsFooter {
   padding: 16px 20px;
-  height: 70px;
   border-top: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
@@ -273,6 +274,7 @@
   gap: 8px;
   box-sizing: border-box;
   flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 
 .stepBadge {
@@ -283,7 +285,6 @@
   white-space: nowrap;
 }
 
-/* Figma step prefix: Geist 13px, opacity 0.5 white */
 .stepNum {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 13px;
@@ -291,7 +292,6 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Figma step text: Geist 13px, pure white #FFFFFF */
 .stepText {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
   font-size: 13px;
@@ -300,7 +300,7 @@
   white-space: nowrap;
 }
 
-/* Figma 759:12163: 548x48px, background #FB6320, centered, no border-radius, white text 14px Geist 500 */
+/* Primary CTA Button (Figma 759:12163) */
 .connectButton {
   width: 100%;
   height: 48px;
@@ -318,6 +318,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  white-space: nowrap;
 }
 
 .connectButton:hover {
@@ -328,7 +329,7 @@
   transform: scale(0.96);
 }
 
-/* Figma 759:12167: bottom decorative bracket container, width 746.1px, space-between layout */
+/* Bottom Decorative Bracket Accents (Figma 759:12167) */
 .bracketContainer {
   width: 100%;
   max-width: 746px;
@@ -349,68 +350,177 @@
   display: block;
 }
 
-/* Responsive Breakpoints */
+/* ==========================================================================
+   Responsive Auto Layout Breakpoints
+   ========================================================================== */
+
+/* Tablet Breakpoint (769px – 1220px): Switch to stacked column Auto Layout */
 @media (max-width: 1220px) {
   .card {
     flex-direction: column;
     align-items: stretch;
     padding: 48px 32px;
     gap: 40px;
+    min-height: auto;
   }
+
   .leftColumn {
     max-width: 100%;
     flex: 1 1 auto;
+    gap: 28px;
   }
+
   .rightColumn {
     max-width: 100%;
     flex: 1 1 auto;
   }
+
   .terminalBox {
     height: auto;
-    min-height: 265px;
+    min-height: auto;
   }
+
   .title {
     font-size: 40px;
     line-height: 40px;
   }
 }
 
+/* Mobile Breakpoint (<= 768px): Refined Auto Layout for mobile devices */
 @media (max-width: 768px) {
   .section {
-    padding: 40px 16px 60px 16px;
+    padding: 32px 16px 56px 16px;
   }
+
   .card {
-    padding: 28px 20px;
+    padding: 24px 18px;
+    gap: 28px;
+    min-height: auto;
   }
+
+  .leftColumn {
+    gap: 20px;
+  }
+
+  .headingGroup {
+    gap: 12px;
+  }
+
   .title {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 34px;
+    letter-spacing: -1.2px;
   }
+
+  .subtitle {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  /* 2-column balanced Auto Layout grid for agents */
   .agentsGrid {
-    grid-template-columns: repeat(2, auto);
-    column-gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
     row-gap: 12px;
+    width: 100%;
   }
+
+  .agentItem {
+    width: 100%;
+    padding: 4px 6px;
+    gap: 8px;
+  }
+
+  .agentName {
+    font-size: 13px;
+    line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rightColumn {
+    gap: 16px;
+  }
+
+  .terminalBox {
+    min-height: auto;
+  }
+
+  .terminalHeader {
+    padding: 14px 16px;
+  }
+
+  .promptArea {
+    padding: 14px 16px;
+  }
+
   .stepsFooter {
+    padding: 14px 16px;
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
-    gap: 10px;
-    padding: 16px;
+    gap: 8px;
   }
+
+  .stepBadge {
+    font-size: 12px;
+  }
+
   .bracketContainer {
     max-width: 100%;
-    padding: 0 12px;
+    padding: 0 8px;
+  }
+
+  .bracketSvg {
+    width: 44px;
+    height: 26px;
   }
 }
 
+/* Small Mobile Breakpoint (<= 480px): Natural wrapping & tight padding */
 @media (max-width: 480px) {
+  .section {
+    padding: 24px 12px 48px 12px;
+  }
+
+  .card {
+    padding: 20px 14px;
+    gap: 22px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 30px;
+    letter-spacing: -1px;
+  }
+
   .titleBreak,
   .subtitleBreak {
     display: none;
   }
+
   .agentsGrid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 8px;
+    row-gap: 10px;
+  }
+
+  .agentItem {
+    padding: 2px 4px;
+    gap: 6px;
+  }
+
+  .agentName {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .agentLogoWrapper {
+    width: 26px;
+    height: 26px;
+  }
+
+  .agentLogo {
+    width: 16px;
+    height: 16px;
   }
 }

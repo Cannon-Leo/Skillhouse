@@ -325,3 +325,16 @@ The spacing design system is derived directly from empirical measurements concat
   - Rows: Gap `48px` (`--space-4xl`) between fixed 97px label and logomarks.
   - Logomark avatars: `28x28px` (`--dim-avatar-spec`), gap `4px` (`--space-3xs`), hover zoom effect.
   - Guide pills: Gap `12px` (`--space-md`).
+
+### D. Responsive Layout Divider Junctions & Action Button Fixes (Figma File IsangAI Node 4577-221479)
+1. **Vertical Column Divider Lines Touch Horizontal Hero Divider (0px Junction Gap)**:
+   - Previously, `.layoutContainer` had `padding: 16px 40px`, which caused an artificial 16px vertical gap between the top horizontal divider (`.heroBar`'s `border-bottom`) and the column divider lines.
+   - Refined `.layoutContainer` to `padding: 0 40px 48px 40px` so its top boundary is flush (Y = 0) against the horizontal divider line.
+   - Added `padding-top: 24px` to both `.feedSection` and `.detailSection`, matching `.sidebar`'s `padding: 24px 20px 48px 0`.
+   - Result: Left divider (`border-right` on sidebar) and right divider (`border-left` on detail section) touch the top horizontal divider with **0px gap**, while all three column headers ("Filters", "Trending Skills", "Web Development Pro") align at exactly Y = 24px.
+
+2. **Copy Install Prompt Responsive Sentence Wrap Prevention**:
+   - Added `white-space: nowrap` to `.copyPromptBtn`, `.copyPromptBtn span`, and `.downloadZipBtn`.
+   - Adjusted padding from static `12px 24px` to responsive `12px clamp(10px, 1.8vw, 16px)`.
+   - Rebalanced flex ratios to `flex: 1.15` (copy button) and `flex: 0.85` (download ZIP button) with `min-width: 0`.
+   - Added mobile fallback `@media (max-width: 380px)` stacking to column layout, preventing text breaking across all responsive viewports.

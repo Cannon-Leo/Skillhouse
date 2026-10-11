@@ -108,6 +108,7 @@
   cursor: pointer;
   transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
   user-select: none;
+  white-space: nowrap;
   box-sizing: border-box;
 }
 
@@ -148,6 +149,7 @@
   font-weight: 500;
   line-height: 1.4em;
   color: #000000;
+  white-space: nowrap;
 }
 
 .spinner {

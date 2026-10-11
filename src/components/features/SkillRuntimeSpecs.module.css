@@ -28,6 +28,7 @@
   font-size: var(--text-sm); /* 14px */
   line-height: var(--leading-normal); /* 1.45em */
   color: var(--color-text-muted);
+  white-space: nowrap;
   margin: 0;
 }
 
@@ -72,6 +73,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-md); /* 12px pill gap from Figma */
+  white-space: nowrap;
 }
 
 .divider {
