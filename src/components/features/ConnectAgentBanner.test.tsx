@@ -37,7 +37,7 @@ describe("Features ConnectAgentBanner Component (Figma 759:12088)", () => {
     expect(screen.getByText("02")).toBeInTheDocument();
     expect(screen.getByText("Authorize in your browser")).toBeInTheDocument();
     expect(screen.getByText("03")).toBeInTheDocument();
-    expect(screen.getByText(/Install and/i)).toBeInTheDocument();
+    expect(screen.getByText("Install and verify")).toBeInTheDocument();
   });
 
   it("toggles agent selection on click and keyboard press", () => {
@@ -108,10 +108,18 @@ describe("Features ConnectAgentBanner Component (Figma 759:12088)", () => {
     expect(screen.getByText("Custom Subtitle")).toBeInTheDocument();
   });
 
-  it("renders decorative bottom bracket accents (Figma 759:12167) with aria-hidden", () => {
+  it("renders decorative bottom bracket accents (Figma 759:12167) with aria-hidden and 2 cloud SVGs", () => {
     render(<ConnectAgentBanner />);
     const bracket = screen.getByTestId("bracket-container");
     expect(bracket).toBeInTheDocument();
     expect(bracket).toHaveAttribute("aria-hidden", "true");
+    const bracketImages = bracket.querySelectorAll("img");
+    expect(bracketImages).toHaveLength(2);
+  });
+
+  it("does not render intrusive native title tooltip on prompt area", () => {
+    render(<ConnectAgentBanner />);
+    const promptBtn = screen.getByRole("button", { name: "Copy agent instruction prompt" });
+    expect(promptBtn).not.toHaveAttribute("title");
   });
 });

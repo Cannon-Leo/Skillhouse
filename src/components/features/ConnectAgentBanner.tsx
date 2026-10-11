@@ -165,7 +165,6 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
                 role="button"
                 tabIndex={0}
                 aria-label="Copy agent instruction prompt"
-                title="Click prompt to copy"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
@@ -193,11 +192,9 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
                   <span className={styles.stepNum}>02</span>
                   <span className={styles.stepText}>Authorize in your browser</span>
                 </div>
-                <div className={styles.stepBadgeInstall}>
+                <div className={styles.stepBadge}>
                   <span className={styles.stepNum}>03</span>
-                  <span className={styles.stepTextWrap}>
-                    Install and<br />verify
-                  </span>
+                  <span className={styles.stepText}>Install and verify</span>
                 </div>
               </div>
             </div>
@@ -221,9 +218,17 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
           data-testid="bracket-container"
         >
           <Image
-            src="/figma/agent-bottom-brackets.svg"
+            src="/figma/agent-cloud-accent.svg"
             alt=""
-            width={747}
+            width={55}
+            height={33}
+            className={styles.bracketSvg}
+            unoptimized
+          />
+          <Image
+            src="/figma/agent-cloud-accent.svg"
+            alt=""
+            width={55}
             height={33}
             className={styles.bracketSvg}
             unoptimized

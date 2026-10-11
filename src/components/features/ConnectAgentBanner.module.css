@@ -3,7 +3,7 @@
 .section {
   width: 100%;
   background: #FFEEDD;
-  padding: 60px 40px;
+  padding: 60px 40px 80px 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -33,18 +33,18 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 40px;
-  padding: 92px 64px 92px 64px;
+  gap: clamp(24px, 3.5vw, 48px);
+  padding: clamp(48px, 6vw, 92px) clamp(32px, 4.5vw, 64px);
   box-sizing: border-box;
   position: relative;
   z-index: 1;
 }
 
-/* Left Column: exactly 536px wide, 24px vertical itemSpacing (Figma 759:12090) */
+/* Left Column: fluid up to 536px, 24px vertical itemSpacing (Figma 759:12090) */
 .leftColumn {
-  width: 536px;
-  max-width: 100%;
-  flex-shrink: 0;
+  flex: 1 1 420px;
+  max-width: 536px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -93,11 +93,11 @@
   color: #FB6320;
 }
 
-/* Agents Grid: exactly 536px wide, 2 rows of 3 items (Figma 759:12094) */
+/* Agents Grid: 2 rows of 3 items (Figma 759:12094) */
 .agentsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 24px;
+  column-gap: clamp(12px, 1.8vw, 24px);
   row-gap: 20px;
   margin-top: 0;
   width: 100%;
@@ -152,21 +152,22 @@
   white-space: nowrap;
 }
 
-/* Right Column: exactly 548px wide, 24px vertical gap (Figma 759:12131) */
+/* Right Column: exactly 548px max-width, fluid down to fit container, 24px vertical gap (Figma 759:12131) */
 .rightColumn {
-  width: 548px;
-  max-width: 100%;
-  flex-shrink: 0;
+  flex: 0 1 548px;
+  width: 100%;
+  max-width: 548px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-/* Figma 759:12132: 548x265px, fill #54382C, border 1px solid rgba(166, 166, 166, 0.5), no border-radius */
+/* Figma 759:12132: 548x265px, fill #54392D, border 1px solid rgba(166, 166, 166, 0.5), no border-radius */
 .terminalBox {
   width: 100%;
   height: 265px;
-  background: #54382C;
+  background: #54392D;
   border: 1px solid rgba(166, 166, 166, 0.5);
   box-sizing: border-box;
   display: flex;
@@ -219,7 +220,7 @@
   color: #FFFFFF;
 }
 
-/* Figma 759:12158: padding 16px 20px 48px 20px */
+/* Figma 759:12158: padding 16px 20px 24px 20px */
 .promptArea {
   padding: 16px 20px 24px 20px;
   box-sizing: border-box;
@@ -258,7 +259,7 @@
   font-weight: 500;
 }
 
-/* Figma 759:12159: padding 16px 20px 16px 20px, height 70px, border-top 1px solid rgba(166, 166, 166, 0.5) */
+/* Figma 759:12159: padding 16px 20px, height 70px, border-top 1px solid rgba(166, 166, 166, 0.5) */
 .stepsFooter {
   padding: 16px 20px;
   height: 70px;
@@ -266,22 +267,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
 .stepBadge {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
-}
-
-.stepBadgeInstall {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Figma step prefix: Geist 13px, opacity 0.5 white */
@@ -298,15 +294,7 @@
   font-size: 13px;
   line-height: 18.85px;
   color: #FFFFFF;
-}
-
-/* Figma node 759:12162: 'Install and verify' wrapped into two lines */
-.stepTextWrap {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 13px;
-  line-height: 18.85px;
-  color: #FFFFFF;
-  text-align: left;
+  white-space: nowrap;
 }
 
 /* Figma 759:12163: 548x48px, background #FB6320, centered, no border-radius, white text 14px Geist 500 */
@@ -337,33 +325,29 @@
   transform: scale(0.96);
 }
 
-/* Figma 759:12167: bottom decorative bracket svg, width 746.1px, height 32.2px, flush to bottom of card */
+/* Figma 759:12167: bottom decorative bracket container, width 746.1px, space-between layout */
 .bracketContainer {
-  margin-top: -1px;
   width: 100%;
   max-width: 746px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 0;
+  margin-top: 0;
+  padding: 0 4px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
 }
 
 .bracketSvg {
-  width: 100%;
-  max-width: 746px;
-  height: auto;
+  width: 55px;
+  height: 33px;
+  flex-shrink: 0;
   display: block;
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 1380px) {
-  .card {
-    padding: 64px 40px;
-    gap: 32px;
-  }
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1140px) {
   .card {
     flex-direction: column;
     align-items: stretch;
@@ -371,10 +355,12 @@
     gap: 40px;
   }
   .leftColumn {
-    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
   }
   .rightColumn {
-    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
   }
   .terminalBox {
     height: auto;
@@ -388,7 +374,7 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 40px 16px;
+    padding: 40px 16px 60px 16px;
   }
   .card {
     padding: 28px 20px;
@@ -405,10 +391,12 @@
     flex-direction: column;
     align-items: flex-start;
     height: auto;
-    gap: 8px;
+    gap: 10px;
+    padding: 16px;
   }
   .bracketContainer {
     max-width: 100%;
+    padding: 0 12px;
   }
 }
 
