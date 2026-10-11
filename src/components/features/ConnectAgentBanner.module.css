@@ -386,141 +386,254 @@
   }
 }
 
-/* Mobile Breakpoint (<= 768px): Refined Auto Layout for mobile devices */
+/* Mobile Breakpoint (<= 768px): Refined tactile mobile experience */
 @media (max-width: 768px) {
   .section {
-    padding: 32px 16px 56px 16px;
+    padding: 24px 16px 48px 16px;
   }
 
   .card {
     padding: 24px 18px;
-    gap: 28px;
+    gap: 24px;
     min-height: auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px 0px rgba(241, 217, 207, 0.7);
+    overflow: hidden;
   }
 
   .leftColumn {
     gap: 20px;
+    max-width: 100%;
+    width: 100%;
   }
 
   .headingGroup {
-    gap: 12px;
+    gap: 10px;
   }
 
   .title {
-    font-size: 32px;
+    font-size: 30px;
     line-height: 34px;
-    letter-spacing: -1.2px;
+    letter-spacing: -1px;
+  }
+
+  .titleBreak {
+    display: none;
   }
 
   .subtitle {
-    font-size: 15px;
-    line-height: 22px;
+    font-size: 14.5px;
+    line-height: 21px;
+    color: #665E55;
   }
 
-  /* 2-column balanced Auto Layout grid for agents */
+  .guideLink {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Tactile Interactive Agent Pills Grid */
   .agentsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 14px;
-    row-gap: 12px;
+    gap: 8px;
     width: 100%;
+    margin-top: 4px;
   }
 
   .agentItem {
     width: 100%;
-    padding: 4px 6px;
+    display: flex;
+    align-items: center;
     gap: 8px;
+    padding: 8px 10px;
+    min-height: 42px;
+    box-sizing: border-box;
+    background: #FAF8F5;
+    border: 1px solid #ECE7E1;
+    border-radius: 8px;
+    transition: all 150ms ease;
+  }
+
+  .agentItem:hover {
+    background: #F3EFEA;
+    border-color: #DFD7CC;
+  }
+
+  .agentItem:active {
+    transform: scale(0.96);
+  }
+
+  .agentItem.agentSelected {
+    background: #FFF5EE;
+    border-color: #FB6320;
+    box-shadow: 0 1px 4px rgba(251, 99, 32, 0.15);
+  }
+
+  .agentLogoWrapper {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .agentLogo {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
   }
 
   .agentName {
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #1A1A1A;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
+  /* Right Column & Terminal Box */
   .rightColumn {
     gap: 16px;
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
   }
 
   .terminalBox {
     min-height: auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #3E2B22;
+    background: #462F24;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   .terminalHeader {
-    padding: 14px 16px;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .terminalTitle {
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .promptArea {
-    padding: 14px 16px;
+    padding: 14px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
 
+  .promptText {
+    font-size: 12.5px;
+    line-height: 18px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .url {
+    color: #05C900;
+    word-break: break-all;
+  }
+
+  /* Compact Horizontal Flow Steps Footer */
   .stepsFooter {
-    padding: 14px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    padding: 10px 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    background: rgba(0, 0, 0, 0.12);
   }
 
   .stepBadge {
-    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
   }
 
+  .stepNum {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FB6320;
+    line-height: 14px;
+  }
+
+  .stepText {
+    font-size: 11.5px;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .connectButton {
+    height: 46px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(251, 99, 32, 0.25);
+  }
+
+  /* Clean up bottom on mobile: eliminate dangling bracket artifacts */
   .bracketContainer {
-    max-width: 100%;
-    padding: 0 8px;
-  }
-
-  .bracketSvg {
-    width: 44px;
-    height: 26px;
+    display: none;
   }
 }
 
-/* Small Mobile Breakpoint (<= 480px): Natural wrapping & tight padding */
-@media (max-width: 480px) {
+/* Small Mobile Breakpoint (<= 380px, e.g. iPhone SE) */
+@media (max-width: 380px) {
   .section {
-    padding: 24px 12px 48px 12px;
+    padding: 20px 12px 36px 12px;
   }
 
   .card {
-    padding: 20px 14px;
-    gap: 22px;
+    padding: 18px 12px;
+    gap: 20px;
   }
 
   .title {
-    font-size: 28px;
-    line-height: 30px;
-    letter-spacing: -1px;
-  }
-
-  .titleBreak,
-  .subtitleBreak {
-    display: none;
+    font-size: 25px;
+    line-height: 29px;
   }
 
   .agentsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 8px;
-    row-gap: 10px;
+    gap: 6px;
   }
 
   .agentItem {
-    padding: 2px 4px;
+    padding: 6px 8px;
+    min-height: 38px;
     gap: 6px;
   }
 
   .agentName {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 11.5px;
   }
 
   .agentLogoWrapper {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
   }
 
   .agentLogo {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .stepsFooter {
+    gap: 6px 10px;
+    padding: 8px 12px;
   }
 }
