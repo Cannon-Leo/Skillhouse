@@ -231,7 +231,8 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
           </button>
         </div>
 
-        {/* Optional Section 3: Switch to (Present only in extended variant 753:11852) */}
+        {/* Section 3: Switch to (Commented out until creators / host mode are introduced to the platform) */}
+        {/*
         {variant === "extended" && (
           <>
             <hr className={styles.divider} aria-hidden="true" />
@@ -273,6 +274,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             </div>
           </>
         )}
+        */}
 
         {/* Divider 2 (Figma Node 760:13003) */}
         <hr className={styles.divider} aria-hidden="true" />

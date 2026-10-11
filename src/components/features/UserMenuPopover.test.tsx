@@ -17,17 +17,18 @@ describe("UserMenuPopover Component (Node 760:12903)", () => {
     expect(screen.queryByText("Switch to")).not.toBeInTheDocument();
   });
 
-  it("renders extended items when variant is extended (Node 753:11852)", () => {
+  it("renders extended items when variant is extended (Node 753:11852), with Switch to disabled until creators launch", () => {
     render(<UserMenuPopover variant="extended" onDirectoryHistory={() => {}} />);
 
     expect(screen.getByText("Directory history")).toBeInTheDocument();
     expect(screen.getByText("Profile")).toBeInTheDocument();
     expect(screen.getByText("Account settings")).toBeInTheDocument();
     expect(screen.getByText("Help center")).toBeInTheDocument();
-    expect(screen.getByText("Switch to")).toBeInTheDocument();
-    expect(screen.getByText("Host")).toBeInTheDocument();
-    expect(screen.getByText("Service Provider")).toBeInTheDocument();
-    expect(screen.getByText("My Listings & Services")).toBeInTheDocument();
+    // Switch to section is commented out until creators are introduced
+    expect(screen.queryByText("Switch to")).not.toBeInTheDocument();
+    expect(screen.queryByText("Host")).not.toBeInTheDocument();
+    expect(screen.queryByText("Service Provider")).not.toBeInTheDocument();
+    expect(screen.queryByText("My Listings & Services")).not.toBeInTheDocument();
     expect(screen.getByText("Logout")).toBeInTheDocument();
   });
 
