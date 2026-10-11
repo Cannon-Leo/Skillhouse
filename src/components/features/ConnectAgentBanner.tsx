@@ -125,8 +125,7 @@ export const ConnectAgentBanner: React.FC<ConnectAgentBannerProps> = ({
                       <Image
                         src={agent.logo}
                         alt={`${agent.name} logo`}
-                        width={22}
-                        height={22}
+                        width={18} height={18}
                         className={styles.agentLogo}
                         unoptimized
                       />

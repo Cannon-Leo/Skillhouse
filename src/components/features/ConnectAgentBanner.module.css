@@ -93,25 +93,27 @@
   color: #FB6320;
 }
 
-/* Agents Grid: 2 rows of 3 items (Figma 759:12094) */
+/* Agents Grid: 2 rows of 3 items hugging content with refined proportions (Figma 759:12094) */
 .agentsGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(12px, 1.8vw, 24px);
-  row-gap: 20px;
+  grid-template-columns: repeat(3, auto);
+  column-gap: clamp(20px, 2.5vw, 36px);
+  row-gap: 14px;
   margin-top: 0;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .agentItem {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 3px 6px;
   border-radius: 6px;
   transition: all var(--transition-fast);
   user-select: none;
+  width: fit-content;
 }
 
 .agentItem:hover {
@@ -123,31 +125,32 @@
   outline: 1px solid #FB6320;
 }
 
-/* Figma: 36x36 circular icon container on rgba(251, 225, 199, 0.26) with drop shadow and border */
+/* 28x28 circular icon container proportional to 14px typography */
 .agentLogoWrapper {
-  width: 36px;
-  height: 36px;
-  border-radius: 54px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background: rgba(251, 225, 199, 0.26);
-  border: 0.3px solid rgba(166, 166, 166, 0.1);
+  border: 0.3px solid rgba(166, 166, 166, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0px 1.5px 3px 0px rgba(16, 24, 40, 0.06);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06);
 }
 
 .agentLogo {
-  width: 22.5px;
-  height: 22.5px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
-/* Figma 759:12100: Geist 16px, line-height 20px, #000000 */
+/* Geist 14px, line-height 18px, crisp black #000000 matching reference proportion */
 .agentName {
   font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
   color: #000000;
   white-space: nowrap;
 }
@@ -384,8 +387,9 @@
     line-height: 32px;
   }
   .agentsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 16px;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 20px;
+    row-gap: 12px;
   }
   .stepsFooter {
     flex-direction: column;
