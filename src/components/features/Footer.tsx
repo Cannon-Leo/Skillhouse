@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -72,10 +74,16 @@ const LinkedInSocialIcon = () => (
 );
 
 export interface FooterProps {
+  onSelectCategory?: (category: string) => void;
+  onNavigateMarketplace?: () => void;
   className?: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ className }) => {
+export const Footer: React.FC<FooterProps> = ({
+  onSelectCategory,
+  onNavigateMarketplace,
+  className,
+}) => {
   return (
     <footer
       className={`${styles.footer} ${className || ""}`}
@@ -146,7 +154,16 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className={styles.columnTitle}>Explore</h3>
             <ul className={styles.linkList}>
               <li>
-                <Link href="/skills" className={styles.link}>
+                <Link
+                  href="/skills"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onNavigateMarketplace) {
+                      e.preventDefault();
+                      onNavigateMarketplace();
+                    }
+                  }}
+                >
                   Skills
                 </Link>
               </li>
@@ -163,32 +180,86 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className={styles.columnTitle}>Categories</h3>
             <ul className={styles.linkList}>
               <li>
-                <Link href="/categories/web-design" className={styles.link}>
+                <Link
+                  href="/skills?category=web-design"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("web-design");
+                    }
+                  }}
+                >
                   Web design
                 </Link>
               </li>
               <li>
-                <Link href="/categories/product-launch" className={styles.link}>
+                <Link
+                  href="/skills?category=product-launch"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("product-launch");
+                    }
+                  }}
+                >
                   Product launch
                 </Link>
               </li>
               <li>
-                <Link href="/categories/brand-identity" className={styles.link}>
+                <Link
+                  href="/skills?category=brand-identity"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("brand-identity");
+                    }
+                  }}
+                >
                   Brand identity
                 </Link>
               </li>
               <li>
-                <Link href="/categories/client-reporting" className={styles.link}>
+                <Link
+                  href="/skills?category=client-reporting"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("client-reporting");
+                    }
+                  }}
+                >
                   Client reporting
                 </Link>
               </li>
               <li>
-                <Link href="/categories/social-media" className={styles.link}>
+                <Link
+                  href="/skills?category=social-media"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("social-media");
+                    }
+                  }}
+                >
                   Social media
                 </Link>
               </li>
               <li>
-                <Link href="/categories/research-communication" className={styles.link}>
+                <Link
+                  href="/skills?category=research-communication"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("research-communication");
+                    }
+                  }}
+                >
                   Research communication
                 </Link>
               </li>
@@ -200,22 +271,58 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className={styles.columnTitle}>By output</h3>
             <ul className={styles.linkList}>
               <li>
-                <Link href="/output/images" className={styles.link}>
+                <Link
+                  href="/skills?category=image"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("image");
+                    }
+                  }}
+                >
                   Images
                 </Link>
               </li>
               <li>
-                <Link href="/output/video" className={styles.link}>
+                <Link
+                  href="/skills?category=video"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("video");
+                    }
+                  }}
+                >
                   Video
                 </Link>
               </li>
               <li>
-                <Link href="/output/presentations" className={styles.link}>
+                <Link
+                  href="/skills?category=slides"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("slides");
+                    }
+                  }}
+                >
                   Presentations
                 </Link>
               </li>
               <li>
-                <Link href="/output/web-html" className={styles.link}>
+                <Link
+                  href="/skills?category=web"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("web");
+                    }
+                  }}
+                >
                   Web &amp; HTML
                 </Link>
               </li>
@@ -227,32 +334,86 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className={styles.columnTitle}>By agent</h3>
             <ul className={styles.linkList}>
               <li>
-                <Link href="/agents/claude-code" className={styles.link}>
+                <Link
+                  href="/skills?search=claude"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("claude");
+                    }
+                  }}
+                >
                   Claude Code Skills
                 </Link>
               </li>
               <li>
-                <Link href="/agents/codex" className={styles.link}>
+                <Link
+                  href="/skills?search=codex"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("codex");
+                    }
+                  }}
+                >
                   Codex Skills
                 </Link>
               </li>
               <li>
-                <Link href="/agents/cursor" className={styles.link}>
+                <Link
+                  href="/skills?search=cursor"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("cursor");
+                    }
+                  }}
+                >
                   Cursor Skills
                 </Link>
               </li>
               <li>
-                <Link href="/agents/gemini-cli" className={styles.link}>
+                <Link
+                  href="/skills?search=gemini"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("gemini");
+                    }
+                  }}
+                >
                   Gemini CLI Skills
                 </Link>
               </li>
               <li>
-                <Link href="/agents/opencode" className={styles.link}>
+                <Link
+                  href="/skills?search=opencode"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("opencode");
+                    }
+                  }}
+                >
                   OpenCode Skills
                 </Link>
               </li>
               <li>
-                <Link href="/agents/antigravity" className={styles.link}>
+                <Link
+                  href="/skills?search=antigravity"
+                  className={styles.link}
+                  onClick={(e) => {
+                    if (onSelectCategory) {
+                      e.preventDefault();
+                      onSelectCategory("antigravity");
+                    }
+                  }}
+                >
                   Antigravity Skills
                 </Link>
               </li>

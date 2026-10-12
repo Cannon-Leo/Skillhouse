@@ -1,7 +1,8 @@
+/* CategorySkillGrid.module.css — Figma Node 751:4789 */
 .gridWrapper {
   position: relative;
-  width: 100%;
-  max-width: 997px;
+  width: 996px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -18,7 +19,7 @@
   grid-template-columns: repeat(4, 225px);
   column-gap: 32px;
   row-gap: 31px;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
   z-index: 1;
 }
@@ -36,7 +37,7 @@
 
 .bridgeV {
   position: absolute;
-  width: 33px;
+  width: 34px;
   height: 55px;
   display: block;
 }
@@ -44,25 +45,31 @@
 .bridgeH {
   position: absolute;
   width: 55px;
-  height: 31px;
+  height: 33px;
+  display: block;
+}
+
+.bridgeImg {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
 /* Desktop horizontal bridge positions between cards */
 /* Row 1: 3 bridges between 4 cards */
-.dBridgeV1_1 { left: 225px; top: 25px; }
-.dBridgeV1_2 { left: 482px; top: 25px; }
-.dBridgeV1_3 { left: 739px; top: 25px; }
+.dBridgeV1_1 { left: 224px; top: 25px; }
+.dBridgeV1_2 { left: 481px; top: 25px; }
+.dBridgeV1_3 { left: 738px; top: 25px; }
 
 /* Row 2: 2 bridges between 3 cards (Card 5 - Card 6 - Card 7; slot 8 is empty so no bridge to empty space) */
-.dBridgeV2_1 { left: 225px; top: 206px; }
-.dBridgeV2_2 { left: 482px; top: 206px; }
+.dBridgeV2_1 { left: 224px; top: 206px; }
+.dBridgeV2_2 { left: 481px; top: 206px; }
 
 /* Desktop vertical bridges between Row 1 and Row 2 */
 /* Under Card 1, Card 2, Card 3 (connecting to Card 5, Card 6, Card 7) */
-.dBridgeH1 { left: 85px; top: 150px; }
-.dBridgeH2 { left: 342px; top: 150px; }
-.dBridgeH3 { left: 599px; top: 150px; }
+.dBridgeH1 { left: 85px; top: 149px; }
+.dBridgeH2 { left: 342px; top: 149px; }
+.dBridgeH3 { left: 599px; top: 149px; }
 
 /* Tablet & Mobile containers hidden on desktop */
 .tabletDecorations {
@@ -81,6 +88,7 @@
 @media (max-width: 1024px) and (min-width: 641px) {
   .gridWrapper {
     max-width: 600px;
+    width: 100%;
   }
 
   .cardGrid {
@@ -99,7 +107,7 @@
 
   /* Tablet horizontal bridge centered between col 1 and col 2 */
   .tBridgeV {
-    left: calc(50% - 16px);
+    left: calc(50% - 17px);
   }
   .tBridgeV1 { top: 48px; }
   .tBridgeV2 { top: 229px; }
@@ -109,19 +117,19 @@
   .tBridgeH_Col1 { left: calc(25% - 27px); }
   .tBridgeH_Col2 { left: calc(75% - 27px); }
 
-  .tBridgeH_Row1_1 { top: 150px; }
-  .tBridgeH_Row1_2 { top: 150px; }
-  .tBridgeH_Row2_1 { top: 331px; }
-  .tBridgeH_Row2_2 { top: 331px; }
+  .tBridgeH_Row1_1 { top: 149px; }
+  .tBridgeH_Row1_2 { top: 149px; }
+  .tBridgeH_Row2_1 { top: 330px; }
+  .tBridgeH_Row2_2 { top: 330px; }
   /* Under Card 5 connecting to Card 7 */
-  .tBridgeH_Row3_1 { top: 512px; }
+  .tBridgeH_Row3_1 { top: 511px; }
 }
 
 /* ==========================================================================
    Mobile View (<= 640px)
    1 column stack: Card 1 -> Card 2 -> ... -> Card 7
    Joined vertically with the cross-bridges between each stacked card!
-   ========================================================================== */
+   ========================================================================= */
 @media (max-width: 640px) {
   .cardGrid {
     grid-template-columns: 1fr;

@@ -11,17 +11,19 @@ import {
   LogOut,
 } from "lucide-react";
 import { Button } from "../ui/Button";
+import Link from "next/link";
 import { SearchInput } from "../ui/SearchInput";
-import { CategoriesDropdown } from "./CategoriesDropdown";
+import { CategoriesDropdown, CategoryTab } from "./CategoriesDropdown";
 import { UserMenuPopover } from "./UserMenuPopover";
 import styles from "./NavBar.module.css";
 
 export interface NavBarProps {
-  currentView?: "marketplace" | "design-system";
-  onViewChange?: (view: "marketplace" | "design-system") => void;
+  currentView?: "home" | "marketplace" | "design-system";
+  onViewChange?: (view: "home" | "marketplace" | "design-system") => void;
   searchValue?: string;
   onSearchChange?: (value: string) => void;
-  onSelectCategory?: (category: string) => void;
+  onSearchSubmit?: (value: string) => void;
+  onSelectCategory?: (category: string, tab?: CategoryTab) => void;
   onRequestSkill?: () => void;
   onGetStarted?: () => void;
   onOpenLoginModal?: () => void;
@@ -37,10 +39,11 @@ export interface NavBarProps {
 }
 
 export const NavBar: React.FC<NavBarProps> = ({
-  currentView = "marketplace",
+  currentView = "home",
   onViewChange,
   searchValue = "",
   onSearchChange,
+  onSearchSubmit,
   onSelectCategory,
   onRequestSkill,
   onGetStarted,
@@ -108,19 +111,17 @@ export const NavBar: React.FC<NavBarProps> = ({
     <header className={`${styles.header} ${responsiveMode === "tablet" ? styles.modeTablet : ""} ${responsiveMode === "mobile" ? styles.modeMobile : ""} ${className}`}>
       <div className={styles.container}>
         {/* Brand Logo (Node 744:1064) */}
-        <div
-          className={styles.brand}
-          onClick={() => {
-            onViewChange?.("marketplace");
-            setMobileMenuOpen(false);
-          }}
-          role="button"
+        <Link
+          href="/"
           tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              onViewChange?.("marketplace");
-              setMobileMenuOpen(false);
+          className={styles.brand}
+          role="button"
+          onClick={(e) => {
+            if (onViewChange) {
+              e.preventDefault();
+              onViewChange("home");
             }
+            setMobileMenuOpen(false);
           }}
           aria-label="Skillhouse Home"
         >
@@ -133,7 +134,7 @@ export const NavBar: React.FC<NavBarProps> = ({
               unoptimized
             />
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Navigation Links (Node 744:1077) */}
         <nav className={styles.navLinks} aria-label="Main Navigation">
@@ -220,6 +221,11 @@ export const NavBar: React.FC<NavBarProps> = ({
               value={searchValue}
               onChange={(e) => onSearchChange?.(e.target.value)}
               onClear={() => onSearchChange?.("")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  onSearchSubmit?.(searchValue);
+                }
+              }}
               placeholder="Search skills / outputs"
             />
           </div>

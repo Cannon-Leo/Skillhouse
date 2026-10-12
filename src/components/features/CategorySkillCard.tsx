@@ -22,7 +22,7 @@ export interface CategorySkillCardProps {
   onClick?: () => void;
 
   /**
-   * Optional custom background color override (defaults to #FFEEDD).
+   * Optional custom background color override (defaults to authentic Figma #EBD5C0).
    */
   backgroundColor?: string;
 
@@ -46,7 +46,7 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
   title,
   href,
   onClick,
-  backgroundColor = "#FFEEDD",
+  backgroundColor = "#EBD5C0",
   ariaLabel,
   className = "",
   style,

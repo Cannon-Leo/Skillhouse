@@ -22,7 +22,7 @@ describe("Features NavBar Component", () => {
     render(<NavBar onViewChange={handleViewChange} />);
     const brand = screen.getByRole("button", { name: /skillhouse home/i });
     fireEvent.click(brand);
-    expect(handleViewChange).toHaveBeenCalledWith("marketplace");
+    expect(handleViewChange).toHaveBeenCalledWith("home");
 
     const skillsBtn = screen.getByRole("button", { name: "Skills" });
     fireEvent.click(skillsBtn);

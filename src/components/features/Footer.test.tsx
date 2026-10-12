@@ -84,4 +84,26 @@ describe("Footer Component (Figma Node 751:4917)", () => {
     expect(screen.getByRole("link", { name: "Third-Party Notices" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Help & Support" })).toBeInTheDocument();
   });
+
+  it("handles navigation and category selection callbacks on link clicks", () => {
+    const handleNavigate = vi.fn();
+    const handleCategory = vi.fn();
+    render(<Footer onNavigateMarketplace={handleNavigate} onSelectCategory={handleCategory} />);
+    
+    const skillsLink = screen.getByRole("link", { name: "Skills" });
+    skillsLink.click();
+    expect(handleNavigate).toHaveBeenCalled();
+
+    const webDesignLink = screen.getByRole("link", { name: "Web design" });
+    webDesignLink.click();
+    expect(handleCategory).toHaveBeenCalledWith("web-design");
+
+    const imagesLink = screen.getByRole("link", { name: "Images" });
+    imagesLink.click();
+    expect(handleCategory).toHaveBeenCalledWith("image");
+
+    const claudeLink = screen.getByRole("link", { name: "Claude Code Skills" });
+    claudeLink.click();
+    expect(handleCategory).toHaveBeenCalledWith("claude");
+  });
 });

@@ -328,12 +328,156 @@ export const MARKETPLACE_SKILLS: SkillItem[] = [
 
 export interface MarketplaceViewProps {
   initialCategory?: string;
+  initialSearch?: string;
   onNavigateHome?: () => void;
   className?: string;
 }
 
+
+export function resolveCategoryToFilters(categoryName?: string, tab?: string): FilterState {
+  const norm = (categoryName || "").toLowerCase().trim().replace(/[\r\n]+/g, " ");
+  const defaultState: FilterState = {
+    recommendations: ["all"],
+    outputs: [],
+    roles: [],
+    useCases: [],
+  };
+
+  if (!norm || norm === "all" || norm === "see all" || norm === "skills") {
+    return defaultState;
+  }
+
+  // 1. Curated / Recommendations
+  if (norm.includes("free")) {
+    return { ...defaultState, recommendations: ["free"] };
+  }
+  if (norm.includes("featured") || norm.includes("trending") || norm.includes("top-rated") || norm.includes("top rated")) {
+    return { ...defaultState, recommendations: ["featured"] };
+  }
+
+  // 2. Tab-specific resolution if tab is provided
+  if (tab === "output") {
+    if (norm.includes("image")) return { recommendations: [], outputs: ["image"], roles: [], useCases: [] };
+    if (norm.includes("slide") || norm.includes("presentation")) return { recommendations: [], outputs: ["slides"], roles: [], useCases: [] };
+    if (norm.includes("video")) return { recommendations: [], outputs: ["video"], roles: [], useCases: [] };
+    if (norm.includes("web") || norm.includes("html")) return { recommendations: [], outputs: ["web"], roles: [], useCases: [] };
+  }
+
+  if (tab === "role") {
+    if (norm.includes("content creator") || norm === "content-creator") return { recommendations: [], outputs: [], roles: ["content-creator"], useCases: [] };
+    if (norm.includes("commerce") || norm === "ecommerce") return { recommendations: [], outputs: [], roles: ["ecommerce"], useCases: [] };
+    if (norm.includes("consultant")) return { recommendations: [], outputs: [], roles: ["consultant"], useCases: [] };
+    if (norm.includes("marketer")) return { recommendations: [], outputs: [], roles: ["marketer"], useCases: [] };
+    if (norm.includes("software") || norm.includes("engineer") || norm === "swe") return { recommendations: [], outputs: [], roles: ["swe"], useCases: [] };
+    if (norm.includes("founder")) return { recommendations: [], outputs: [], roles: ["founder"], useCases: [] };
+    if (norm.includes("designer")) return { recommendations: [], outputs: [], roles: ["designer"], useCases: [] };
+    if (norm.includes("teacher")) return { recommendations: [], outputs: [], roles: ["teacher"], useCases: [] };
+    if (norm.includes("researcher")) return { recommendations: [], outputs: [], roles: ["researcher"], useCases: [] };
+  }
+
+  if (tab === "use-case") {
+    if (norm.includes("web design") || norm === "web-design") return { recommendations: [], outputs: [], roles: [], useCases: ["web-design"] };
+    if (norm.includes("brand") || norm.includes("identity") || norm === "brand-identity") return { recommendations: [], outputs: [], roles: [], useCases: ["brand-identity"] };
+    if (norm.includes("social") || norm === "social-media") return { recommendations: [], outputs: [], roles: [], useCases: ["social-media"] };
+    if (norm.includes("education") || norm.includes("explainer") || norm === "education") return { recommendations: [], outputs: [], roles: [], useCases: ["education"] };
+    if (norm.includes("product launch") || norm === "product-launch") return { recommendations: [], outputs: [], roles: [], useCases: ["product-launch"] };
+    if (norm.includes("reporting") || norm.includes("client reporting") || norm === "client-reporting") return { recommendations: [], outputs: [], roles: [], useCases: ["client-reporting"] };
+    if (norm.includes("research communication") || norm === "research-communication") return { recommendations: [], outputs: [], roles: [], useCases: ["research-communication"] };
+    if (norm.includes("publishing") || norm.includes("content publishing") || norm === "publishing") return { recommendations: [], outputs: [], roles: [], useCases: ["publishing"] };
+  }
+
+  // 3. Direct Outputs matching
+  if (norm === "image" || norm === "images" || norm.includes("image")) {
+    return { recommendations: [], outputs: ["image"], roles: [], useCases: [] };
+  }
+  if (norm === "slides" || norm === "presentations" || norm.includes("presentation") || norm.includes("slide")) {
+    return { recommendations: [], outputs: ["slides"], roles: [], useCases: [] };
+  }
+  if (norm === "video" || norm.includes("video")) {
+    return { recommendations: [], outputs: ["video"], roles: [], useCases: [] };
+  }
+  if (norm === "web" || norm === "web & html" || norm === "web-html" || norm === "html" || norm.includes("html")) {
+    return { recommendations: [], outputs: ["web"], roles: [], useCases: [] };
+  }
+
+  // 4. Direct Roles matching
+  if (norm.includes("content creator") || norm === "content-creator") {
+    return { recommendations: [], outputs: [], roles: ["content-creator"], useCases: [] };
+  }
+  if (norm.includes("commerce") || norm === "ecommerce") {
+    return { recommendations: [], outputs: [], roles: ["ecommerce"], useCases: [] };
+  }
+  if (norm.includes("consultant")) {
+    return { recommendations: [], outputs: [], roles: ["consultant"], useCases: [] };
+  }
+  if (norm.includes("marketer")) {
+    return { recommendations: [], outputs: [], roles: ["marketer"], useCases: [] };
+  }
+  if (norm.includes("software") || norm.includes("engineer") || norm === "swe") {
+    return { recommendations: [], outputs: [], roles: ["swe"], useCases: [] };
+  }
+  if (norm.includes("founder")) {
+    return { recommendations: [], outputs: [], roles: ["founder"], useCases: [] };
+  }
+  if (norm.includes("designer")) {
+    return { recommendations: [], outputs: [], roles: ["designer"], useCases: [] };
+  }
+  if (norm.includes("teacher")) {
+    return { recommendations: [], outputs: [], roles: ["teacher"], useCases: [] };
+  }
+  if (norm.includes("researcher")) {
+    return { recommendations: [], outputs: [], roles: ["researcher"], useCases: [] };
+  }
+
+  // 5. Direct Use Cases matching
+  if (norm.includes("web design") || norm === "web-design") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["web-design"] };
+  }
+  if (norm.includes("brand") || norm.includes("identity") || norm === "brand-identity") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["brand-identity"] };
+  }
+  if (norm.includes("social") || norm === "social-media") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["social-media"] };
+  }
+  if (norm.includes("education") || norm.includes("explainer") || norm === "education") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["education"] };
+  }
+  if (norm.includes("product launch") || norm === "product-launch") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["product-launch"] };
+  }
+  if (norm.includes("reporting") || norm.includes("client reporting") || norm === "client-reporting") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["client-reporting"] };
+  }
+  if (norm.includes("research communication") || norm === "research-communication") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["research-communication"] };
+  }
+  if (norm.includes("publishing") || norm.includes("content publishing") || norm === "publishing") {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["publishing"] };
+  }
+  if (norm.includes("previsualization") || norm.includes("previs")) {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["creative-previsualization"] };
+  }
+  if (norm.includes("fundraising") || norm.includes("sales")) {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["sales-fundraising"] };
+  }
+
+  // 6. Home screen grid cards fallbacks
+  if (norm === "output" || norm.includes("skills by output") || norm.includes("output")) {
+    return { recommendations: [], outputs: ["web", "slides", "video", "image"], roles: [], useCases: [] };
+  }
+  if (norm === "roles" || norm === "role" || norm.includes("skills by roles") || norm.includes("role")) {
+    return { recommendations: [], outputs: [], roles: ["content-creator", "founder", "designer", "swe", "marketer"], useCases: [] };
+  }
+  if (norm === "use-case" || norm.includes("skills by use-case") || norm.includes("use case")) {
+    return { recommendations: [], outputs: [], roles: [], useCases: ["web-design", "brand-identity", "product-launch", "social-media", "education", "publishing", "client-reporting"] };
+  }
+
+  return defaultState;
+}
+
 export function MarketplaceView({
   initialCategory,
+  initialSearch,
   onNavigateHome,
   className = "",
 }: MarketplaceViewProps) {
@@ -342,7 +486,7 @@ export function MarketplaceView({
   const [skills] = useState<SkillItem[]>(MARKETPLACE_SKILLS);
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
   const [bookmarkedSkills, setBookmarkedSkills] = useState<Record<string, boolean>>({});
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(initialSearch || "");
   const [sortBy, setSortBy] = useState<"newest" | "popular" | "alphabetical">("newest");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
@@ -354,32 +498,28 @@ export function MarketplaceView({
 
   // Initialize filters based on optional initialCategory
   const [filters, setFilters] = useState<FilterState>(() => {
-    const defaultState: FilterState = {
+    return initialCategory ? resolveCategoryToFilters(initialCategory) : {
       recommendations: ["all"],
       outputs: [],
       roles: [],
       useCases: [],
     };
-
-    if (!initialCategory) return defaultState;
-
-    const cat = initialCategory.toLowerCase();
-    if (cat === "free") return { ...defaultState, recommendations: ["free"] };
-    if (cat === "featured" || cat === "trending" || cat === "top-rated") return { ...defaultState, recommendations: ["featured"] };
-    if (cat === "web" || cat === "slides" || cat === "video" || cat === "image") return { ...defaultState, recommendations: [], outputs: [cat] };
-    if (cat === "output") return { ...defaultState, recommendations: [], outputs: ["video"] };
-    if (cat === "roles") return { ...defaultState, recommendations: [], roles: ["content-creator"] };
-    if (cat === "use-case") return { ...defaultState, recommendations: [], useCases: ["product-launch"] };
-
-    // Check if category matches any role or useCase
-    const matchedRole = ["content-creator", "founder", "ecommerce", "swe", "designer", "consultant", "teacher", "marketer", "researcher"].find(r => r.includes(cat) || cat.includes(r));
-    if (matchedRole) return { ...defaultState, recommendations: [], roles: [matchedRole] };
-
-    const matchedUseCase = ["publishing", "education", "brand-identity", "social-media", "product-launch", "ecommerce-conversion", "client-reporting", "sales-fundraising", "research-communication", "creative-previsualization", "web-design"].find(u => u.includes(cat) || cat.includes(u));
-    if (matchedUseCase) return { ...defaultState, recommendations: [], useCases: [matchedUseCase] };
-
-    return defaultState;
   });
+
+  // Keep filters synchronized if initialCategory changes
+  useEffect(() => {
+    if (initialCategory) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setFilters(resolveCategoryToFilters(initialCategory));
+    }
+  }, [initialCategory]);
+
+  useEffect(() => {
+    if (initialSearch !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchValue(initialSearch);
+    }
+  }, [initialSearch]);
 
   // Close sort dropdown when clicking outside
   useEffect(() => {
@@ -401,14 +541,15 @@ export function MarketplaceView({
     }));
   };
 
-  const handleSelectCategoryFromNav = (cat: string) => {
-    const c = cat.toLowerCase();
-    setFilters((prev) => ({
-      ...prev,
-      recommendations: [],
-      outputs: ["web", "slides", "video", "image"].filter(o => o.includes(c) || c.includes(o)),
-      useCases: ["publishing", "education", "brand-identity", "social-media", "product-launch", "ecommerce-conversion", "client-reporting", "sales-fundraising", "research-communication", "creative-previsualization", "web-design"].filter(u => u.includes(c) || c.includes(u)),
-    }));
+  const handleSelectCategoryFromNav = (cat: string, tab?: string) => {
+    setSelectedSkill(null);
+    setFilters(resolveCategoryToFilters(cat, tab));
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      params.set("view", "marketplace");
+      params.set("category", cat);
+      window.history.pushState(null, "", `${window.location.pathname}?${params.toString()}`);
+    }
   };
 
   const filteredSkills = useMemo(() => {
@@ -472,6 +613,7 @@ export function MarketplaceView({
   }, [skills, searchValue, filters, sortBy]);
 
   const handleResetFilters = () => {
+    setSelectedSkill(null);
     setFilters({
       recommendations: ["all"],
       outputs: [],
@@ -479,6 +621,13 @@ export function MarketplaceView({
       useCases: [],
     });
     setSearchValue("");
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      params.set("view", "marketplace");
+      params.delete("category");
+      params.delete("search");
+      window.history.pushState(null, "", `${window.location.pathname}?${params.toString()}`);
+    }
   };
 
   return (
@@ -489,12 +638,19 @@ export function MarketplaceView({
         onViewChange={(view) => {
           if (view === "design-system") {
             router.push("/design-system");
-          } else if (onNavigateHome) {
-            onNavigateHome();
+          } else if (view === "home") {
+            if (onNavigateHome) {
+              onNavigateHome();
+            } else {
+              router.push("/");
+            }
+          } else if (view === "marketplace") {
+            handleResetFilters();
           }
         }}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
+        onSearchSubmit={(val) => setSearchValue(val)}
         onSelectCategory={handleSelectCategoryFromNav}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         isSignedIn={isSignedIn}
@@ -692,6 +848,18 @@ export function MarketplaceView({
           </div>
         </div>
       )}
+
+      {/* 4. Global Dark Footer */}
+      <Footer
+        onSelectCategory={(cat) => {
+          handleSelectCategoryFromNav(cat);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        onNavigateMarketplace={() => {
+          handleResetFilters();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
 
       {/* Modals */}
       <LoginModal

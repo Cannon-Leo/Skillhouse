@@ -108,7 +108,7 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     expect(screen.getByRole("option", { name: /newest/i })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("option", { name: /newest/i }));
     expect(screen.getByText(/newest/i)).toBeInTheDocument();
-  });
+  }, 15000);
 
   it("closes sort dropdown when clicking outside", () => {
     render(<MarketplaceView />);

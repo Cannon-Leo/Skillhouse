@@ -1,3 +1,4 @@
+/* CategorySkillCard.module.css — Figma Node 751:4789 */
 .card {
   position: relative;
   display: flex;
@@ -5,26 +6,24 @@
   justify-content: space-between;
   width: 225px;
   height: 150px;
-  background-color: var(--card-bg, #FFEEDD);
+  background-color: var(--card-bg, #EBD5C0);
   padding: 16px 20px 20px 24px;
   box-sizing: border-box;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid rgba(84, 56, 44, 0.08);
+  border: none;
   border-radius: 0;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.2s ease,
-              border-color 0.2s ease,
               box-shadow 0.2s ease;
   user-select: none;
   text-align: left;
   outline: none;
 }
 
-/* Hover state: slight lift, subtle warm tint deepening, crisp shadow */
+/* Hover state: slight lift, subtle warm tint deepening */
 .card:hover {
-  background-color: #FCE6CE;
-  border-color: rgba(251, 99, 32, 0.25);
+  background-color: #E2C9B2;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px -4px rgba(110, 63, 16, 0.12);
 }
@@ -32,7 +31,7 @@
 /* Active / Pressed state: exact design system scale(0.96) */
 .card:active {
   transform: scale(0.96);
-  background-color: #F8DEC2;
+  background-color: #DABFA6;
   box-shadow: 0 2px 8px rgba(110, 63, 16, 0.08);
 }
 
@@ -61,7 +60,7 @@
   height: 28px;
   border-radius: 360px;
   background-color: #FFECD8;
-  border: 1px solid rgba(166, 166, 166, 0.6);
+  border: 1px solid rgba(166, 166, 166, 0.5);
   color: #171717;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.2s ease,
