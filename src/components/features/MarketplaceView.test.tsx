@@ -220,17 +220,17 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     expect(screen.getByTestId("skills-marketplace-page")).toBeInTheDocument();
   });
 
-  it("toggles expand and retract components on the filter sidebar and body", () => {
+  it("toggles expand and retract components on the filter sidebar matching skillry.dev pattern", () => {
     const { container } = render(<MarketplaceView />);
 
-    const toggleBtn = screen.getByTestId("toggle-filter-sidebar");
-    expect(toggleBtn).toBeInTheDocument();
-    expect(toggleBtn).toHaveAttribute("aria-expanded", "true");
-
     const sidebar = container.querySelector("#marketplace-sidebar");
+    expect(sidebar).toBeInTheDocument();
     expect(sidebar).not.toHaveClass(/collapsed/);
 
-    // 1. Retract from the sidebar header retract button
+    // 1. Initially, toggle-filter-sidebar is not shown in toolbar because sidebar is open
+    expect(screen.queryByTestId("toggle-filter-sidebar")).not.toBeInTheDocument();
+
+    // 2. Retract from the sidebar header retract button
     const retractBtn = screen.getByTestId("sidebar-retract-btn");
     expect(retractBtn).toBeInTheDocument();
     fireEvent.click(retractBtn);
@@ -238,27 +238,28 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     // Sidebar should be collapsed and inert
     expect(sidebar?.className).toContain("collapsed");
     expect(sidebar).toHaveAttribute("aria-hidden", "true");
-    expect(toggleBtn).toHaveAttribute("aria-expanded", "false");
 
-    // 2. Expand from the edge dock rail on the body
-    const edgeRail = screen.getByTestId("edge-expand-rail");
-    expect(edgeRail).toBeInTheDocument();
-    fireEvent.click(edgeRail);
+    // 3. Now the expand button appears in the toolbar next to sort
+    const expandBtn = screen.getByTestId("toggle-filter-sidebar");
+    expect(expandBtn).toBeInTheDocument();
+    expect(expandBtn).toHaveTextContent("Filters");
 
-    // Sidebar should be restored
+    // 4. Click expand button to restore sidebar
+    fireEvent.click(expandBtn);
     expect(sidebar?.className).not.toContain("collapsed");
     expect(sidebar).toHaveAttribute("aria-hidden", "false");
-    expect(toggleBtn).toHaveAttribute("aria-expanded", "true");
-
-    // 3. Toggle via the controls bar modern pill
-    fireEvent.click(toggleBtn);
-    expect(sidebar?.className).toContain("collapsed");
-    fireEvent.click(toggleBtn);
-    expect(sidebar?.className).not.toContain("collapsed");
+    expect(screen.queryByTestId("toggle-filter-sidebar")).not.toBeInTheDocument();
   });
 
-  it("displays active filter counter badge on the toggle pill when filters are applied", () => {
+  it("displays active filter counter badge on the toggle pill when filters are applied and sidebar is collapsed", () => {
     render(<MarketplaceView initialCategory="free" />);
+
+    // Active filter badge is visible in sidebar header
+    expect(screen.getByTestId("active-filter-count")).toHaveTextContent("1");
+
+    // Retract sidebar to see badge on expand button in controls toolbar
+    const retractBtn = screen.getByTestId("sidebar-retract-btn");
+    fireEvent.click(retractBtn);
 
     const badge = screen.getByTestId("active-filter-badge");
     expect(badge).toBeInTheDocument();

@@ -22,18 +22,19 @@
 }
 
 .marketplaceLayout {
-  max-width: 1440px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 40px;
   display: flex;
   align-items: flex-start;
   min-height: calc(100vh - 72px);
   box-sizing: border-box;
 }
 
-/* Sidebar Column - Exact Figma 751:4573 (w: 220px) */
+/* Sidebar Column (w: 240px) */
 .sidebarColumn {
-  width: 220px;
+  width: 240px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -61,14 +62,18 @@
 .mainContent {
   flex: 1;
   min-width: 0;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 36px;
+  padding-right: 0px;
   padding-top: 24px;
   padding-bottom: 64px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   box-sizing: border-box;
+}
+
+.mainContent.mainContentCollapsed {
+  padding-left: 0px;
 }
 
 /* Main Header - Exact Figma 751:4737 (h: 64px, gap: 12px) */
@@ -116,56 +121,51 @@
   gap: 16px;
 }
 
-.filterTogglePill {
-  height: 36px;
-  padding: 0 12px;
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expandFiltersBtn {
+  height: 38px;
+  padding: 0 16px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(255, 236, 217, 0.7);
-  border: 1px solid rgba(128, 67, 0, 0.2);
-  border-radius: 4px;
+  background-color: rgba(255, 236, 217, 0.85);
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 9999px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: #1C1C1E;
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition-fast);
+  box-sizing: border-box;
 }
 
-.filterTogglePill:hover {
-  background-color: rgba(255, 236, 217, 0.95);
+.expandFiltersBtn:hover {
+  background-color: rgba(255, 236, 217, 0.98);
   border-color: #FB6320;
   color: #FB6320;
 }
 
-.filterTogglePill:active {
+.expandFiltersBtn:active {
   transform: scale(0.96);
 }
 
-.filterTogglePill:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #FB6320;
+.expandFiltersBtn:focus-visible {
+  outline: 2px solid #FB6320;
 }
 
-.togglePillIcon {
-  color: rgba(0, 0, 0, 0.6);
-  transition: color var(--transition-fast);
+.expandFiltersIcon {
+  color: currentColor;
   flex-shrink: 0;
 }
 
-.filterTogglePill:hover .togglePillIcon {
-  color: #FB6320;
-}
-
-.togglePillText {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.togglePillBadge {
+.activeFilterBadge {
   background-color: #FB6320;
   color: #FFFFFF;
   font-size: 11px;
@@ -178,73 +178,6 @@
   justify-content: center;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-}
-
-/* Edge Retract/Expand Dock Rail on the body */
-.edgeDockContainer {
-  position: sticky;
-  top: 140px;
-  align-self: flex-start;
-  margin-right: -24px;
-  z-index: 30;
-}
-
-.edgeDockRail {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  background-color: rgba(255, 236, 217, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(128, 67, 0, 0.2);
-  border-radius: 4px;
-  color: #1C1C1E;
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-fast);
-}
-
-.edgeDockRail:hover {
-  background-color: rgba(255, 236, 217, 0.98);
-  border-color: #FB6320;
-  color: #FB6320;
-  box-shadow: 0 4px 12px rgba(251, 99, 32, 0.15);
-}
-
-.edgeDockRail:active {
-  transform: scale(0.96);
-}
-
-.edgeDockRail:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #FB6320;
-}
-
-.edgeDockIcon {
-  color: rgba(0, 0, 0, 0.6);
-  transition: color var(--transition-fast);
-}
-
-.edgeDockRail:hover .edgeDockIcon {
-  color: #FB6320;
-}
-
-.edgeDockBadge {
-  background-color: #FB6320;
-  color: #FFFFFF;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 0 5px;
-  height: 16px;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-variant-numeric: tabular-nums;
 }
 
 /* Left Count - Exact Figma 751:4742: 16px Medium, #484848 */
@@ -544,7 +477,7 @@
   .mobileFilterBar {
     display: flex;
   }
-  .filterTogglePill, .edgeDockContainer {
+  .expandFiltersBtn {
     display: none;
   }
   .mainContent {
@@ -555,6 +488,12 @@
   }
   .skillsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .marketplaceLayout {
+    padding: 0 16px;
   }
 }
 

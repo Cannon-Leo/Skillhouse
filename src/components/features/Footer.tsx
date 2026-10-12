@@ -256,11 +256,11 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={(e) => {
                     if (onSelectCategory) {
                       e.preventDefault();
-                      onSelectCategory("research-communication");
+                      onSelectCategory("research");
                     }
                   }}
                 >
-                  Research communication
+                  Research
                 </Link>
               </li>
             </ul>

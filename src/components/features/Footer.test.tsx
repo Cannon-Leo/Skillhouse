@@ -61,7 +61,7 @@ describe("Footer Component (Figma Node 751:4917)", () => {
     expect(screen.getByRole("link", { name: "Brand identity" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Client reporting" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Social media" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Research communication" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Research" })).toBeInTheDocument();
 
     // By output
     expect(screen.getByRole("link", { name: "Images" })).toBeInTheDocument();
