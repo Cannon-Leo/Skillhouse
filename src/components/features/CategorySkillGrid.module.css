@@ -49,94 +49,10 @@
   display: block;
 }
 
-.bridgeSvg {
+.bridgeImg {
   width: 100%;
   height: 100%;
   display: block;
-  overflow: visible;
-}
-
-.bridgePath {
-  fill: #EBD5C0;
-  stroke: rgba(84, 57, 45, 0);
-  stroke-width: 1.5px;
-  vector-effect: non-scaling-stroke;
-  transition: fill 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              stroke 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Dynamic Outline / Border state on hover */
-.bridgeActive .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-/* ==========================================================================
-   Pure CSS :has() bridge activation rules for instant GPU response
-   ========================================================================== */
-.gridWrapper:has([data-card-id="free"]:hover) .dBridgeV1_1 .bridgePath,
-.gridWrapper:has([data-card-id="featured"]:hover) .dBridgeV1_1 .bridgePath,
-.gridWrapper:has([data-card-id="free"]:focus-visible) .dBridgeV1_1 .bridgePath,
-.gridWrapper:has([data-card-id="featured"]:focus-visible) .dBridgeV1_1 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="featured"]:hover) .dBridgeV1_2 .bridgePath,
-.gridWrapper:has([data-card-id="trending"]:hover) .dBridgeV1_2 .bridgePath,
-.gridWrapper:has([data-card-id="featured"]:focus-visible) .dBridgeV1_2 .bridgePath,
-.gridWrapper:has([data-card-id="trending"]:focus-visible) .dBridgeV1_2 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="trending"]:hover) .dBridgeV1_3 .bridgePath,
-.gridWrapper:has([data-card-id="top-rated"]:hover) .dBridgeV1_3 .bridgePath,
-.gridWrapper:has([data-card-id="trending"]:focus-visible) .dBridgeV1_3 .bridgePath,
-.gridWrapper:has([data-card-id="top-rated"]:focus-visible) .dBridgeV1_3 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="use-case"]:hover) .dBridgeV2_1 .bridgePath,
-.gridWrapper:has([data-card-id="output"]:hover) .dBridgeV2_1 .bridgePath,
-.gridWrapper:has([data-card-id="use-case"]:focus-visible) .dBridgeV2_1 .bridgePath,
-.gridWrapper:has([data-card-id="output"]:focus-visible) .dBridgeV2_1 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="output"]:hover) .dBridgeV2_2 .bridgePath,
-.gridWrapper:has([data-card-id="roles"]:hover) .dBridgeV2_2 .bridgePath,
-.gridWrapper:has([data-card-id="output"]:focus-visible) .dBridgeV2_2 .bridgePath,
-.gridWrapper:has([data-card-id="roles"]:focus-visible) .dBridgeV2_2 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-/* Vertical bridges between Row 1 and Row 2 */
-.gridWrapper:has([data-card-id="free"]:hover) .dBridgeH1 .bridgePath,
-.gridWrapper:has([data-card-id="use-case"]:hover) .dBridgeH1 .bridgePath,
-.gridWrapper:has([data-card-id="free"]:focus-visible) .dBridgeH1 .bridgePath,
-.gridWrapper:has([data-card-id="use-case"]:focus-visible) .dBridgeH1 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="featured"]:hover) .dBridgeH2 .bridgePath,
-.gridWrapper:has([data-card-id="output"]:hover) .dBridgeH2 .bridgePath,
-.gridWrapper:has([data-card-id="featured"]:focus-visible) .dBridgeH2 .bridgePath,
-.gridWrapper:has([data-card-id="output"]:focus-visible) .dBridgeH2 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
-}
-
-.gridWrapper:has([data-card-id="trending"]:hover) .dBridgeH3 .bridgePath,
-.gridWrapper:has([data-card-id="roles"]:hover) .dBridgeH3 .bridgePath,
-.gridWrapper:has([data-card-id="trending"]:focus-visible) .dBridgeH3 .bridgePath,
-.gridWrapper:has([data-card-id="roles"]:focus-visible) .dBridgeH3 .bridgePath {
-  fill: transparent;
-  stroke: #54392D;
 }
 
 /* Desktop horizontal bridge positions between cards */
@@ -242,11 +158,4 @@
   .mBridgeH4 { top: 573px; }
   .mBridgeH5 { top: 724px; }
   .mBridgeH6 { top: 875px; }
-}
-
-/* Accessibility: Honor prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .bridgePath {
-    transition: none !important;
-  }
 }

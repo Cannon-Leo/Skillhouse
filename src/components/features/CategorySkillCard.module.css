@@ -13,37 +13,35 @@
   cursor: pointer;
   border: none;
   border-radius: 0;
-  /* Initialize transparent 1.5px inset border space with subtle catch-light */
-  box-shadow: inset 0 0 0 1.5px transparent,
-              inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+  /* Subtle top microscopic catch-light for tactile surface depth */
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
   /* Card outer frame stays strictly anchored — NO transforms that break bridge alignment */
-  transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   text-align: left;
   outline: none;
 }
 
-/* Hover state: Loses solid fill state to become transparent with crisp #54392D borders */
+/* Hover state: Warm Terracotta Sunbeam Lift — keeps card solidly anchored to bridges */
 @media (hover: hover) {
-  .card:hover,
-  .card.cardHovered {
-    background-color: transparent !important;
-    box-shadow: inset 0 0 0 1.5px #54392D;
+  .card:hover {
+    background-color: #E2C9B2;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+                inset 0 0 0 1px rgba(84, 57, 45, 0.12);
   }
 }
 
 /* Active / Pressed state: tactile response maintaining exact dimensions */
 .card:active {
-  background-color: rgba(84, 57, 45, 0.05) !important;
-  box-shadow: inset 0 0 0 2px #54392D,
+  background-color: #DABFA6;
+  box-shadow: inset 0 0 0 1px rgba(84, 57, 45, 0.25),
               inset 0 2px 4px rgba(84, 57, 45, 0.12);
 }
 
 /* Focus Visible: Inset focus ring in rich #54392D */
 .card:focus-visible {
   outline: none;
-  background-color: transparent !important;
   box-shadow: inset 0 0 0 2px #54392D;
 }
 
@@ -58,6 +56,7 @@
   z-index: 2;
 }
 
+/* Cute 28px circular action badge */
 .actionButton {
   display: inline-flex;
   align-items: center;
@@ -66,33 +65,32 @@
   height: 28px;
   border-radius: 360px;
   background-color: #FFECD8;
-  border: 1px solid rgba(84, 57, 45, 0.22);
+  border: 1px solid rgba(84, 57, 45, 0.18);
   color: #54392D;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
   box-shadow: 0 1px 2px rgba(84, 57, 45, 0.06);
+  /* Playful spring easing curve for a cute bouncy perk on hover */
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.24s ease;
 }
 
 @media (hover: hover) {
-  .card:hover .actionButton,
-  .card.cardHovered .actionButton {
-    /* Interactive micro-animation: gentle diagonal glide, stays #54392D */
-    transform: translate(1.5px, -1.5px);
-    background-color: #FFECD8;
-    border-color: #54392D;
-    color: #54392D;
-    box-shadow: 0 2px 6px rgba(84, 57, 45, 0.16);
+  .card:hover .actionButton {
+    /* Playful spring scale & gentle lift */
+    transform: scale(1.1) translate(1px, -1px);
+    background-color: #FFF2E3;
+    border-color: rgba(84, 57, 45, 0.35);
+    box-shadow: 0 3px 8px rgba(84, 57, 45, 0.14);
   }
 }
 
 .card:active .actionButton {
-  transform: translate(0.5px, -0.5px) scale(0.95);
+  transform: scale(0.94) translate(0.5px, -0.5px);
 }
 
+/* Arrow Glyph: strict #54392D fill and stroke */
 .arrowIcon {
   width: 15px;
   height: 15px;
@@ -100,15 +98,13 @@
   fill: #54392D;
   color: #54392D;
   transform: translate(0.5px, -0.5px); /* Optical center */
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @media (hover: hover) {
-  .card:hover .arrowIcon,
-  .card.cardHovered .arrowIcon {
-    stroke: #54392D;
-    fill: #54392D;
-    color: #54392D;
+  .card:hover .arrowIcon {
+    /* Cute diagonal glide in 45° direction */
+    transform: translate(2px, -2px);
   }
 }
 
@@ -124,13 +120,12 @@
   white-space: pre-line;
   max-width: 170px;
   font-feature-settings: "tnum" 1, "cv01" 1;
-  transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.18s ease;
 }
 
 @media (hover: hover) {
-  .card:hover .title,
-  .card.cardHovered .title {
-    color: #54392D;
+  .card:hover .title {
+    color: #171717;
   }
 }
 

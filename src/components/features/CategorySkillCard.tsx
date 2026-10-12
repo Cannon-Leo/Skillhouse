@@ -45,16 +45,6 @@ export interface CategorySkillCardProps {
    * Optional inline styles.
    */
   style?: React.CSSProperties;
-
-  /**
-   * Controlled hover state for matrix sync.
-   */
-  isHovered?: boolean;
-
-  /**
-   * Callback fired when card hover/focus state changes.
-   */
-  onHoverChange?: (isHovered: boolean) => void;
 }
 
 export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
@@ -66,8 +56,6 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
   ariaLabel,
   className = "",
   style,
-  isHovered = false,
-  onHoverChange,
 }) => {
   const inlineStyles: React.CSSProperties = {
     "--card-bg": backgroundColor,
@@ -91,6 +79,7 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
             <path
               d="M8.12483 6.6118L13.1831 6.09987L13.695 11.1581"
               stroke="#54392D"
+              fill="#54392D"
               strokeWidth="1.52294"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -99,6 +88,7 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
             <path
               d="M6.81655 13.8998L13.1192 6.17773"
               stroke="#54392D"
+              fill="#54392D"
               strokeWidth="1.52294"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -111,7 +101,7 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
     </>
   );
 
-  const cardClass = `${styles.card} ${isHovered ? styles.cardHovered : ""} ${className}`;
+  const cardClass = `${styles.card} ${className}`;
 
   if (href) {
     return (
@@ -121,10 +111,6 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
         style={inlineStyles}
         aria-label={accessibleName}
         data-card-id={cardId}
-        onMouseEnter={() => onHoverChange?.(true)}
-        onMouseLeave={() => onHoverChange?.(false)}
-        onFocus={() => onHoverChange?.(true)}
-        onBlur={() => onHoverChange?.(false)}
         onClick={(e) => {
           if (onClick) {
             e.preventDefault();
@@ -145,10 +131,6 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
       style={inlineStyles}
       aria-label={accessibleName}
       data-card-id={cardId}
-      onMouseEnter={() => onHoverChange?.(true)}
-      onMouseLeave={() => onHoverChange?.(false)}
-      onFocus={() => onHoverChange?.(true)}
-      onBlur={() => onHoverChange?.(false)}
       onClick={onClick}
       data-testid="category-skill-card"
     >
