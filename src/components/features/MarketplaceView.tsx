@@ -2,10 +2,11 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Filter as FilterIcon } from "lucide-react";
+import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
+import { AdCard } from "@/components/features/AdCard";
 import { SkillDetailHeader } from "@/components/features/SkillDetailHeader";
 import { SkillAudienceBox } from "@/components/features/SkillAudienceBox";
 import { SkillRuntimeSpecs } from "@/components/features/SkillRuntimeSpecs";
@@ -326,6 +327,42 @@ export const MARKETPLACE_SKILLS: SkillItem[] = [
   },
 ];
 
+
+export type GridItem =
+  | ({ type: "skill" } & SkillItem)
+  | {
+      type: "ad";
+      id: string;
+      sponsorName: string;
+      title: string;
+      description: string;
+      badgeLabel: string;
+      ctaText: string;
+      ctaUrl: string;
+      imageSrc?: string;
+    };
+
+export const MARKETPLACE_ADS: Array<Omit<Extract<GridItem, { type: "ad" }>, "type">> = [
+  {
+    id: "ad-claude-fleet",
+    sponsorName: "Claude Fleet",
+    title: "Scale Autonomous Agent Fleets",
+    description: "Deploy, orchestrate and evaluate multi-agent reasoning loops in production with enterprise guardrails.",
+    badgeLabel: "Sponsored",
+    ctaText: "Explore Fleet",
+    ctaUrl: "https://claude.ai",
+  },
+  {
+    id: "ad-creator-monetize",
+    sponsorName: "Skillhouse Pro",
+    title: "Monetize Custom Agent Skills",
+    description: "Publish verified SKILL.md packages to 50,000+ developers and earn 85% revenue share on every install.",
+    badgeLabel: "Creator Network",
+    ctaText: "Start Earning",
+    ctaUrl: "https://skillhouse.ai",
+  },
+];
+
 export interface MarketplaceViewProps {
   initialCategory?: string;
   initialSearch?: string;
@@ -490,6 +527,7 @@ export function MarketplaceView({
   const [sortBy, setSortBy] = useState<"newest" | "popular" | "alphabetical">("newest");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
@@ -612,6 +650,27 @@ export function MarketplaceView({
     return result;
   }, [skills, searchValue, filters, sortBy]);
 
+
+  const gridItems = useMemo<GridItem[]>(() => {
+    const items: GridItem[] = [];
+    let adIndex = 0;
+
+    filteredSkills.forEach((skill, index) => {
+      // Strategic insert 1: After first row of 4 skills (position 5)
+      if (index === 4 && adIndex < MARKETPLACE_ADS.length) {
+        items.push({ type: "ad", ...MARKETPLACE_ADS[adIndex++] });
+      }
+      // Strategic insert 2: After second block of skills (position 10)
+      if (index === 8 && adIndex < MARKETPLACE_ADS.length) {
+        items.push({ type: "ad", ...MARKETPLACE_ADS[adIndex++] });
+      }
+
+      items.push({ type: "skill", ...skill });
+    });
+
+    return items;
+  }, [filteredSkills]);
+
   const handleResetFilters = () => {
     setSelectedSkill(null);
     setFilters({
@@ -669,7 +728,11 @@ export function MarketplaceView({
       {/* 2. Main Marketplace Layout Container - Exact Figma Node 751:4572 Specs */}
       <div className={styles.marketplaceLayout}>
         {/* Left Filter Sidebar Column - Exact Figma 751:4573 (w: 220px, pad: 24px, gap: 24px) */}
-        <div className={`${styles.sidebarColumn} ${mobileFiltersVisible ? styles.mobileOpen : ""}`}>
+        <div
+          id="marketplace-sidebar"
+          className={`${styles.sidebarColumn} ${isSidebarCollapsed ? styles.collapsed : ""} ${mobileFiltersVisible ? styles.mobileOpen : ""}`}
+          aria-hidden={isSidebarCollapsed}
+        >
           <FilterSidebar filters={filters} onFilterChange={setFilters} />
         </div>
 
@@ -701,10 +764,25 @@ export function MarketplaceView({
 
           {/* Controls Bar - Exact Figma 751:4740 (h: 38px, space-between) */}
           <div className={styles.controlsBar}>
-            {/* Skills Count (Node 751:4742) */}
-            <span className={styles.skillsCount} data-testid="skills-count">
-              {filteredSkills.length} Skills
-            </span>
+            {/* Left Controls: Hide/Expand Filters and Count */}
+            <div className={styles.controlsLeft}>
+              <button
+                type="button"
+                className={styles.filterToggleButton}
+                onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+                aria-expanded={!isSidebarCollapsed}
+                aria-controls="marketplace-sidebar"
+                data-testid="toggle-filter-sidebar"
+                title={isSidebarCollapsed ? "Expand filters sidebar" : "Hide filters sidebar"}
+              >
+                <SlidersHorizontal size={14} className={styles.filterToggleIcon} />
+                <span>{isSidebarCollapsed ? "Show Filters" : "Hide Filters"}</span>
+              </button>
+
+              <span className={styles.skillsCount} data-testid="skills-count">
+                {filteredSkills.length} Skills
+              </span>
+            </div>
 
             {/* Sort Select Dropdown (Node 751:4744) */}
             <div ref={sortRef} className={styles.sortWrapper}>
@@ -773,20 +851,43 @@ export function MarketplaceView({
 
           {/* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */}
           {filteredSkills.length > 0 ? (
-            <div className={styles.skillsGrid} id="marketplace-grid" data-testid="marketplace-grid">
-              {filteredSkills.map((skill) => (
-                <SkillCard
-                  key={skill.id}
-                  id={`skill-${skill.id}`}
-                  title={skill.title}
-                  category={skill.category}
-                  previewImage={skill.previewImage}
-                  models={skill.models}
-                  isBookmarked={bookmarkedSkills[skill.id]}
-                  onBookmarkToggle={(isBookmarked) => handleToggleBookmark(skill.id, isBookmarked)}
-                  onClick={() => setSelectedSkill(skill)}
-                />
-              ))}
+            <div
+              className={`${styles.skillsGrid} ${isSidebarCollapsed ? styles.expandedGrid : ""}`}
+              id="marketplace-grid"
+              data-testid="marketplace-grid"
+            >
+              {gridItems.map((item) =>
+                item.type === "ad" ? (
+                  <AdCard
+                    key={item.id}
+                    id={item.id}
+                    sponsorName={item.sponsorName}
+                    title={item.title}
+                    description={item.description}
+                    badgeLabel={item.badgeLabel}
+                    ctaText={item.ctaText}
+                    ctaUrl={item.ctaUrl}
+                    imageSrc={item.imageSrc}
+                    onClick={() => {
+                      if (item.ctaUrl) {
+                        window.open(item.ctaUrl, "_blank", "noopener,noreferrer");
+                      }
+                    }}
+                  />
+                ) : (
+                  <SkillCard
+                    key={item.id}
+                    id={`skill-${item.id}`}
+                    title={item.title}
+                    category={item.category}
+                    previewImage={item.previewImage}
+                    models={item.models}
+                    isBookmarked={bookmarkedSkills[item.id]}
+                    onBookmarkToggle={(isBookmarked) => handleToggleBookmark(item.id, isBookmarked)}
+                    onClick={() => setSelectedSkill(item)}
+                  />
+                )
+              )}
             </div>
           ) : (
             <div className={styles.emptyState}>
@@ -805,9 +906,6 @@ export function MarketplaceView({
           )}
         </main>
       </div>
-
-      {/* Global Dark Footer */}
-      <Footer />
 
       {/* Skill Detail Modal Sheet when card is clicked */}
       {selectedSkill && (

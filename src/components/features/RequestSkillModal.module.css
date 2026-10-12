@@ -122,7 +122,7 @@
 .textarea {
   width: 100%;
   padding: 10px 14px;
-  background-color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.02); /* neat transparent tint */
   border: 1px solid rgba(128, 67, 0, 0.2);
   border-radius: 0px;
   font-family: var(--font-sans);
@@ -172,7 +172,7 @@
   color: #2E2E2E;
   cursor: pointer;
   padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(128, 67, 0, 0.15);
   border-radius: 0px;
   white-space: nowrap;
@@ -180,7 +180,7 @@
 }
 
 .radioLabel:hover {
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.25);
   border-color: rgba(128, 67, 0, 0.35);
 }
 

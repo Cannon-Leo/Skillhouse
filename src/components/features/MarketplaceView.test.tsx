@@ -218,4 +218,42 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     fireEvent.click(webDesignItem);
     expect(screen.getByTestId("skills-marketplace-page")).toBeInTheDocument();
   });
+
+  it("toggles hide/expand filters on sidebar button", () => {
+    const { container } = render(<MarketplaceView />);
+
+    const toggleBtn = screen.getByTestId("toggle-filter-sidebar");
+    expect(toggleBtn).toBeInTheDocument();
+    expect(screen.getByText("Hide Filters")).toBeInTheDocument();
+
+    const sidebar = container.querySelector("#marketplace-sidebar");
+    expect(sidebar).not.toHaveClass(/collapsed/);
+
+    // Click to hide filters
+    fireEvent.click(toggleBtn);
+    expect(screen.getByText("Show Filters")).toBeInTheDocument();
+    expect(sidebar?.className).toContain("collapsed");
+
+    // Click to expand filters back
+    fireEvent.click(toggleBtn);
+    expect(screen.getByText("Hide Filters")).toBeInTheDocument();
+    expect(sidebar?.className).not.toContain("collapsed");
+  });
+
+  it("renders strategic sponsored ad cards in the skills grid and handles ad clicks", () => {
+    const openSpy = vi.spyOn(window, "open").mockImplementation(() => null);
+    render(<MarketplaceView />);
+
+    // First strategic ad is inserted at position 5 (index 4)
+    expect(screen.getByText("Scale Autonomous Agent Fleets")).toBeInTheDocument();
+    expect(screen.getByText("Claude Fleet")).toBeInTheDocument();
+
+    // Click on sponsored card triggers window.open
+    const adCard = screen.getByRole("article", { name: /scale autonomous agent fleets/i });
+    fireEvent.click(adCard);
+    expect(openSpy).toHaveBeenCalledWith("https://claude.ai", "_blank", "noopener,noreferrer");
+
+    openSpy.mockRestore();
+  });
+
 });

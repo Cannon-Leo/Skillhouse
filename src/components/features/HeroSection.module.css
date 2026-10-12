@@ -52,6 +52,7 @@
 
 /* Subtitle description: Geist Regular 16px / 24px */
 .subtitle {
+  background: transparent;
   font-family: var(--font-sans, sans-serif);
   font-weight: 400;
   font-size: clamp(15px, 1.8vw, 18px);

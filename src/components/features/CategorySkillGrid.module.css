@@ -37,7 +37,7 @@
 
 .bridgeV {
   position: absolute;
-  width: 34px;
+  width: 33px;
   height: 55px;
   display: block;
 }
@@ -45,7 +45,7 @@
 .bridgeH {
   position: absolute;
   width: 55px;
-  height: 33px;
+  height: 31px;
   display: block;
 }
 
@@ -67,9 +67,9 @@
 
 /* Desktop vertical bridges between Row 1 and Row 2 */
 /* Under Card 1, Card 2, Card 3 (connecting to Card 5, Card 6, Card 7) */
-.dBridgeH1 { left: 85px; top: 149px; }
-.dBridgeH2 { left: 342px; top: 149px; }
-.dBridgeH3 { left: 599px; top: 149px; }
+.dBridgeH1 { left: 85px; top: 150px; }
+.dBridgeH2 { left: 342px; top: 150px; }
+.dBridgeH3 { left: 599px; top: 150px; }
 
 /* Tablet & Mobile containers hidden on desktop */
 .tabletDecorations {
@@ -117,8 +117,8 @@
   .tBridgeH_Col1 { left: calc(25% - 27px); }
   .tBridgeH_Col2 { left: calc(75% - 27px); }
 
-  .tBridgeH_Row1_1 { top: 149px; }
-  .tBridgeH_Row1_2 { top: 149px; }
+  .tBridgeH_Row1_1 { top: 150px; }
+  .tBridgeH_Row1_2 { top: 150px; }
   .tBridgeH_Row2_1 { top: 330px; }
   .tBridgeH_Row2_2 { top: 330px; }
   /* Under Card 5 connecting to Card 7 */

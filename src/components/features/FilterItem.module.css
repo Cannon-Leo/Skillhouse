@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0px;
-  border-radius: var(--radius-xs);
+  padding: 5px 6px;
+  border-radius: 4px;
   cursor: pointer;
   user-select: none;
   transition: background-color var(--transition-fast);
@@ -11,11 +11,11 @@
 }
 
 .item:hover {
-  background-color: rgba(251, 99, 32, 0.04);
+  background-color: rgba(251, 99, 32, 0.06);
 }
 
 .item.isSelected {
-  background-color: transparent;
+  background-color: rgba(251, 99, 32, 0.03);
 }
 
 .contentRow {
@@ -68,4 +68,5 @@
   line-height: 20px;
   color: var(--color-text-tertiary);
   flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
 }

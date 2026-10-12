@@ -33,7 +33,7 @@ export interface CategorySkillGridProps {
 
 export const CategorySkillGrid: React.FC<CategorySkillGridProps> = ({
   categories = DEFAULT_SKILL_CATEGORIES,
-  backgroundColor = "#EAD5C0",
+  backgroundColor = "#EBD5C0",
   onSelectCategory,
   className = "",
   style,

@@ -44,9 +44,9 @@
   --color-text-tertiary: #757575; /* improved contrast */
 
   /* Surfaces & Backgrounds */
-  --color-bg-page: #FFFFFF;
+  --color-bg-page: #FFEEDD;
   --color-bg-secondary: #FAFAFA;
-  --color-surface-card: #FFFFFF;
+  --color-surface-card: #FFECD8;
   --color-surface-hover: #F7F7F8;
 
   /* Borders */

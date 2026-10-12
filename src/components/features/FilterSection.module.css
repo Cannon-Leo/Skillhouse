@@ -51,7 +51,7 @@
 
 .divider {
   height: 1px;
-  background-color: var(--color-border);
+  background-color: rgba(128, 67, 0, 0.12);
   margin-top: 16px;
   width: 100%;
 }

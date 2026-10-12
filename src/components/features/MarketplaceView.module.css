@@ -53,6 +53,10 @@
   background: rgba(166, 166, 166, 0.4);
 }
 
+.sidebarColumn.collapsed {
+  display: none;
+}
+
 /* Main Content Area - Exact Figma 751:4736 (x: 5572, w: 1140, pad-left: 40, pad-right: 40, pad-top: 24) */
 .mainContent {
   flex: 1;
@@ -103,6 +107,54 @@
   height: 38px;
   box-sizing: border-box;
   gap: 16px;
+}
+
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filterToggleButton {
+  height: 38px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 236, 217, 0.7);
+  border: 1px solid rgba(128, 67, 0, 0.2);
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.filterToggleButton:hover {
+  background-color: rgba(255, 236, 217, 0.95);
+  border-color: #FB6320;
+  color: #FB6320;
+}
+
+.filterToggleButton:active {
+  transform: scale(0.96);
+}
+
+.filterToggleButton:focus-visible {
+  outline: 2px solid #FB6320;
+}
+
+.filterToggleIcon {
+  color: rgba(0, 0, 0, 0.6);
+  transition: color var(--transition-fast);
+}
+
+.filterToggleButton:hover .filterToggleIcon {
+  color: #FB6320;
 }
 
 /* Left Count - Exact Figma 751:4742: 16px Medium, #484848 */
@@ -208,6 +260,11 @@
   row-gap: 24px;
   width: 100%;
   box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.skillsGrid.expandedGrid {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 }
 
 /* Mobile Filter Bar (<992px) */
@@ -396,6 +453,9 @@
   }
   .mobileFilterBar {
     display: flex;
+  }
+  .filterToggleButton {
+    display: none;
   }
   .mainContent {
     padding-left: 0;

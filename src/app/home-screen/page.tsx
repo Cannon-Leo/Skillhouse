@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal, SkillRequestData } from "@/components/features/RequestSkillModal";
+import { Footer } from "@/components/features/Footer";
 import styles from "./page.module.css";
 
 export default function HomeScreenPage() {
@@ -14,7 +15,7 @@ export default function HomeScreenPage() {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSeeAllSkills = () => {
-    window.location.href = "/";
+    window.location.href = "/?view=marketplace";
   };
 
   const handleSubmitSkill = () => {
@@ -25,35 +26,58 @@ export default function HomeScreenPage() {
     window.location.href = `/?category=${encodeURIComponent(cat.id)}`;
   };
 
-  const handleRequestSubmitSuccess = (data: SkillRequestData) => {
-    // Successfully submitted skill request
+  const handleRequestSubmitSuccess = (_data: SkillRequestData) => {
     setIsRequestSkillOpen(false);
   };
 
   return (
     <div className={styles.pageContainer} data-testid="home-screen-page">
-      {/* 1. Header Nav (Figma Node 751:4914) */}
+      {/* 1. Header Nav */}
       <NavBar
+        currentView="home"
+        onViewChange={(view) => {
+          if (view === "marketplace") {
+            window.location.href = "/?view=marketplace";
+          } else if (view === "home") {
+            window.location.href = "/";
+          }
+        }}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
+        onSearchSubmit={(val) => {
+          window.location.href = `/?view=marketplace&search=${encodeURIComponent(val)}`;
+        }}
+        onSelectCategory={(cat) => {
+          window.location.href = `/?category=${encodeURIComponent(cat)}`;
+        }}
         onOpenLoginModal={() => setIsLoginOpen(true)}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         onGetStarted={() => setIsLoginOpen(true)}
       />
 
       <main className={styles.mainContent}>
-        {/* 2. Desktop - 1: Hero Section with Joined Discovery Matrix & Works With (Figma Node 751:4775) */}
+        {/* 2. Hero Section */}
         <HeroSection
           onSeeAllSkills={handleSeeAllSkills}
           onSubmitSkill={handleSubmitSkill}
           onSelectCategory={handleSelectCategory}
         />
 
-        {/* 3. Desktop - 3: Connect Your Agent Interactive Terminal & Cli Options (Figma Node 759:12087) */}
+        {/* 3. Connect Your Agent Section */}
         <section className={styles.bannerSection} aria-label="Connect Your Agent Section">
           <ConnectAgentBanner />
         </section>
       </main>
+
+      {/* 4. Footer */}
+      <Footer
+        onSelectCategory={(cat) => {
+          window.location.href = `/?category=${encodeURIComponent(cat)}`;
+        }}
+        onNavigateMarketplace={() => {
+          window.location.href = "/?view=marketplace";
+        }}
+      />
 
       {/* Modals */}
       <LoginModal

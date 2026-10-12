@@ -23,7 +23,7 @@
 
 .box {
   border-radius: 4px;
-  border: 1.5px solid #CFD9E8;
+  border: 1.5px solid rgba(128, 67, 0, 0.22);
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -45,10 +45,12 @@
 
 .wrapper:hover:not(.disabled) .box {
   border-color: #FB6320;
+  background-color: rgba(251, 99, 32, 0.05);
 }
 
 .nativeInput:focus-visible + .box {
-  box-shadow: 0 0 0 2px rgba(251, 99, 32, 0.25);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.25);
 }
 
 .box.checked {
