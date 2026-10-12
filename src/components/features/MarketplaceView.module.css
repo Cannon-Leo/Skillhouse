@@ -443,6 +443,12 @@
   .mobileFilterBar {
     display: flex;
   }
+  .controlsLeft {
+    display: none;
+  }
+  .controlsBar {
+    justify-content: flex-end;
+  }
   .expandFiltersBtn {
     display: none;
   }
