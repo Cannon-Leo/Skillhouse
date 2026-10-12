@@ -131,75 +131,6 @@
   white-space: nowrap;
 }
 
-/* Row C (State 2): Subscription Orange Banner (Node 752:11137) */
-.subscriptionBanner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-sm); /* 10px */
-  padding: var(--space-lg); /* 16px */
-  background-color: var(--color-brand); /* #FB6320 */
-  border-radius: var(--radius-none); /* 0px */
-  color: var(--color-white);
-  cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: var(--shadow-sm);
-  box-sizing: border-box;
-}
-
-.subscriptionBanner:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-brand);
-}
-
-.subscriptionBanner:active {
-  transform: scale(0.96);
-}
-
-.bannerContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3xs); /* 4px */
-  width: 100%;
-}
-
-.bannerTitle {
-  font-family: var(--font-pixel);
-  font-size: var(--text-base); /* 16px */
-  line-height: var(--leading-normal); /* 1.45em */
-  color: var(--color-white);
-  letter-spacing: -0.01em;
-  word-break: break-word;
-}
-
-.bannerSubtitle {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: var(--leading-normal); /* 1.45em */
-  color: var(--color-brand-light); /* #FFE3D7 */
-  word-break: break-word;
-}
-
-.bannerArrowRow {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.bannerArrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--dim-icon-md); /* 16px */
-  height: var(--dim-icon-md); /* 16px */
-  flex-shrink: 0;
-  transition: transform var(--transition-fast);
-}
-
-.subscriptionBanner:hover .bannerArrow {
-  transform: translateX(4px);
-}
-
 /* Row D: Action Buttons Row (Nodes 752:11275 / 752:11154: gap 10px) */
 .actionButtonsRow {
   display: flex;
@@ -365,16 +296,6 @@
   .actionButtonsRow {
     flex-direction: column;
     gap: var(--space-xs);
-  }
-  .subscriptionBanner {
-    flex-direction: column; /* Arrow only goes down on mobile view! */
-    align-items: flex-start;
-    gap: var(--space-md);
-    padding: var(--space-md);
-  }
-  .bannerArrowRow {
-    width: 100%;
-    justify-content: flex-start;
   }
 }
 

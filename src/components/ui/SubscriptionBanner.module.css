@@ -1,0 +1,95 @@
+/* ==========================================================================
+   SubscriptionBanner Module (Figma Node 751:5654 "add journey")
+   Exact Specs:
+   - solid background: #FB6320 (var(--color-brand))
+   - padding: 16px all sides (var(--space-lg))
+   - border-radius: 0px (sharp corners)
+   - horizontal row: text block on left, 16x16 arrow on right, vertically centered
+   - gap: 16px
+   - title: Geist Pixel Square 16px, 1.45em, #FFFFFF
+   - subtitle: Geist Regular 13px, 1.45em, #FFE3D7
+   ========================================================================== */
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg); /* 16px */
+  padding: var(--space-lg); /* 16px */
+  background-color: var(--color-brand); /* #FB6320 */
+  border-radius: var(--radius-none); /* 0px */
+  color: var(--color-white);
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  user-select: none;
+}
+
+.banner:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-brand);
+}
+
+.banner:focus-visible {
+  outline: 2px solid var(--color-dark);
+  outline-offset: 2px;
+}
+
+.banner:active {
+  transform: scale(0.96);
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs); /* 4px */
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-pixel);
+  font-size: var(--text-base); /* 16px */
+  font-weight: 400;
+  line-height: var(--leading-normal); /* 1.45em */
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: var(--leading-normal); /* 1.45em */
+  color: var(--color-brand-light); /* #FFE3D7 */
+  word-break: break-word;
+}
+
+.arrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dim-icon-md); /* 16px */
+  height: var(--dim-icon-md); /* 16px */
+  flex-shrink: 0;
+  color: var(--color-white);
+  transition: transform var(--transition-fast);
+}
+
+.banner:hover .arrowContainer {
+  transform: translateX(4px);
+}
+
+@media (max-width: 480px) {
+  .banner {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+}

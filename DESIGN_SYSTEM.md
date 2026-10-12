@@ -326,6 +326,21 @@ The spacing design system is derived directly from empirical measurements concat
   - Logomark avatars: `28x28px` (`--dim-avatar-spec`), gap `4px` (`--space-3xs`), hover zoom effect.
   - Guide pills: Gap `12px` (`--space-md`).
 
+### E. Subscription Banner Component (Figma Node 751:5654 "add journey")
+- **Component Identifier**: `SubscriptionBanner` (Node `751:5654`, file `cenkXrTeBinliSZvWjPDZX`)
+- **Container Geography**:
+  - Background: Solid `#FB6320` (`--color-brand`).
+  - Padding: `16px` on all sides (`--space-lg`).
+  - Border: None, Border-radius: `0px` (`--radius-none`).
+  - Layout: `display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px;`.
+  - Micro-interactions: `scale(0.96)` on press, `-1px translateY` on hover with `--shadow-brand`, `+4px translateX` on right arrow.
+- **Left Text Container**:
+  - Layout: Flex column, gap `4px` (`--space-3xs`), flex `1`.
+  - Title: `Geist Pixel Square` 16px, line-height `1.45em`, color `#FFFFFF`, copy: `"Subsribe - All Skills, one subscription"`.
+  - Subtitle: `Geist Sans` 13px, line-height `1.45em`, color `#FFE3D7`, copy: `"No exclusions. Access all curated, verified and continuously updated skills"`.
+- **Right Arrow**:
+  - Component: `Line arrow-right` (component `725:846`), dimension `16x16px`, color `#FFFFFF`, centered vertically.
+
 ### D. Responsive Layout Divider Junctions & Action Button Fixes (Figma File IsangAI Node 4577-221479)
 1. **Vertical Column Divider Lines Touch Horizontal Hero Divider (0px Junction Gap)**:
    - Previously, `.layoutContainer` had `padding: 16px 40px`, which caused an artificial 16px vertical gap between the top horizontal divider (`.heroBar`'s `border-bottom`) and the column divider lines.

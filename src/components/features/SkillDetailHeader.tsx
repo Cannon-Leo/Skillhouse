@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  ArrowRight,
   Bookmark,
   Share,
   Download,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { SkillAudienceBox } from "./SkillAudienceBox";
 import { SkillRuntimeSpecs } from "./SkillRuntimeSpecs";
+import { SubscriptionBanner } from "../ui/SubscriptionBanner";
 import styles from "./SkillDetailHeader.module.css";
 
 export interface SkillDetailHeaderProps {
@@ -171,29 +171,11 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
             <span className={styles.freePriceText}>Free</span>
           </div>
         ) : (
-          <div
-            className={styles.subscriptionBanner}
-            onClick={onSubscribe}
-            role="button"
-            tabIndex={0}
-            aria-label="Subscribe to All Skills"
-            data-testid="premium-subscription-banner"
-          >
-            <div className={styles.bannerContent}>
-              <span className={styles.bannerTitle}>
-                {isSubscribed ? "All-Access Subscription Active" : "Subsribe - All Skills, one subscription"}
-              </span>
-              <span className={styles.bannerSubtitle}>
-                No exclusions. Access all curated, verified and continuously updated skills
-              </span>
-            </div>
-
-            <div className={styles.bannerArrowRow}>
-              <span className={styles.bannerArrow}>
-                <ArrowRight size={16} aria-hidden="true" data-testid="subscription-banner-arrow" />
-              </span>
-            </div>
-          </div>
+          <SubscriptionBanner
+            isSubscribed={isSubscribed}
+            onSubscribe={onSubscribe}
+            testId="premium-subscription-banner"
+          />
         )}
 
         {/* Row D: Primary Action Buttons (Nodes 752:11275 / 752:11154) */}

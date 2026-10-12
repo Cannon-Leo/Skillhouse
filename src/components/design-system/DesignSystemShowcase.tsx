@@ -6,6 +6,7 @@ import { Copy, Download, Upload, Archive } from "lucide-react";
 import { Checkbox } from "../ui/Checkbox";
 import { SearchInput } from "../ui/SearchInput";
 import { Pill } from "../ui/Pill";
+import { SubscriptionBanner } from "../ui/SubscriptionBanner";
 import { FilterItem } from "../features/FilterItem";
 import { FilterSection } from "../features/FilterSection";
 import { SkillCard } from "../features/SkillCard";
@@ -31,6 +32,7 @@ export const DesignSystemShowcase: React.FC = () => {
   const [cb1, setCb1] = useState(false);
   const [cb2, setCb2] = useState(true);
   const [demoPillSelected, setDemoPillSelected] = useState<string>("Claude Code");
+  const [demoBannerClicked, setDemoBannerClicked] = useState(false);
   const [demoLoginModalOpen, setDemoLoginModalOpen] = useState(false);
   const [demoDropdownTab, setDemoDropdownTab] = useState<"use-case" | "role" | "output">("use-case");
   const [demoDropdownOverlayOpen, setDemoDropdownOverlayOpen] = useState(false);
@@ -629,6 +631,46 @@ export const DesignSystemShowcase: React.FC = () => {
               </Pill>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 11b. Subscription Banner Primitive (Figma Node 751:5654 "add journey") */}
+      <section className={styles.section} id="subscription-banner">
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            11b. Subscription Banner Component
+            <span className={styles.nodeBadge}>Figma Node 751:5654 (&quot;add journey&quot;)</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Dedicated monetization banner with signature solid <code>#FB6320</code> background, <code>16px</code> padding, sharp <code>0px</code> corners, horizontal flex layout with Geist Pixel Square title (16px), Geist subtitle (13px #FFE3D7), and centered 16x16px Line arrow-right with <code>scale(0.96)</code> active micro-interaction.
+          </p>
+        </div>
+
+        <div className={styles.sandboxCard} style={{ flexDirection: "column", gap: "20px" }}>
+          <div style={{ width: "100%", maxWidth: "480px" }}>
+            <span className={styles.stateLabel} style={{ marginBottom: "8px", display: "block" }}>
+              Standard State (Figma Node 751:5654)
+            </span>
+            <SubscriptionBanner
+              onSubscribe={() => setDemoBannerClicked((prev) => !prev)}
+            />
+          </div>
+
+          <div style={{ width: "100%", maxWidth: "480px" }}>
+            <span className={styles.stateLabel} style={{ marginBottom: "8px", display: "block" }}>
+              Subscribed State (Active Member)
+            </span>
+            <SubscriptionBanner
+              isSubscribed={true}
+              onSubscribe={() => alert("All-access pass is already active!")}
+            />
+          </div>
+
+          {demoBannerClicked && (
+            <p style={{ fontSize: "12px", color: "var(--color-brand)", margin: 0, fontWeight: 500 }}>
+              Subscription banner clicked — checkout sheet opened.
+            </p>
+          )}
         </div>
       </section>
 

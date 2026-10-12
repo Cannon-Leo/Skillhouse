@@ -4,4 +4,5 @@ export * from "./SearchInput";
 export * from "./FigmaIcon";
 export * from "./Pill";
 export * from "./Overlay";
+export * from "./SubscriptionBanner";
 export { CategorySkillCard, type CategorySkillCardProps } from "../features/CategorySkillCard";
