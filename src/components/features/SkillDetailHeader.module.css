@@ -5,7 +5,7 @@
   gap: var(--space-xl); /* 24px root gap across composite sections */
   background-color: transparent;
   width: 100%;
-  max-width: var(--dim-panel-width); /* 437px designed panel width */
+  max-width: 100%;
   box-sizing: border-box;
 }
 

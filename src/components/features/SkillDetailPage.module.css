@@ -1,7 +1,7 @@
 /* SkillDetailPage Component Styles
- * Exact Figma Node 751:5602 (skills detailed page - premium - signed in)
+ * Balanced Two-Column Layout (matching site container & benchmark)
  * Canvas Background: #FFEEDD
- * Main Column Width: 898px centered (437px left gallery + 24px gap + 437px right panel)
+ * Main Container: max-width 1400px with 40px padding (aligned with NavBar & Marketplace)
  */
 
 .pageContainer {
@@ -16,13 +16,13 @@
 .mainContent {
   flex: 1;
   width: 100%;
-  max-width: 898px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 24px 20px 80px 20px;
+  padding: 28px 40px 80px 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 36px;
 }
 
 /* 1. Breadcrumbs Navigation Row (Figma Node 751:5871) */
@@ -32,6 +32,7 @@
   gap: 12px;
   min-height: 28px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .backButton {
@@ -98,29 +99,33 @@
   font-weight: 500;
 }
 
-/* 2. Main Two-Column Layout (Figma Node 751:5604) */
+/* 2. Main Two-Column Layout (Balanced Proportions) */
 .twoColumnLayout {
   display: grid;
-  grid-template-columns: 437px 437px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
   align-items: start;
   width: 100%;
 }
 
-/* Left Column: Media Preview Gallery (Figma Node 751:5605) */
+/* Left Column: Media Preview Gallery + Runtime Specs */
 .galleryColumn {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 437px;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
 }
 
 .mainPreviewCanvas {
-  width: 437px;
-  height: 450px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 380px;
+  max-height: 520px;
   background-color: #FFECD8;
   border: 1px solid rgba(166, 166, 166, 0.5);
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -139,17 +144,19 @@
   transform: scale(1.02);
 }
 
-/* Thumbnails Selector Row (Figma Node 751:5607) */
+/* Thumbnails Selector Row */
 .thumbnailsRow {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .thumbnailCard {
-  width: 91px;
-  height: 80px;
+  width: 104px;
+  height: 72px;
   border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 8px;
   background-color: #FFECD8;
   padding: 0;
   margin: 0;
@@ -182,12 +189,19 @@
   height: 100%;
 }
 
-/* Right Column: Composite Header Panel */
-.panelColumn {
-  width: 437px;
+/* Left Specs Wrapper */
+.specsSection {
+  width: 100%;
+  margin-top: 8px;
 }
 
-/* 3. Similar Skills Section (Figma Node 751:5762) */
+/* Right Column: Composite Header Panel */
+.panelColumn {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 3. Similar Skills Section */
 .similarSection {
   margin-top: 32px;
   display: flex;
@@ -245,21 +259,27 @@
 
 .similarGrid {
   display: grid;
-  grid-template-columns: repeat(4, 212.5px);
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
   width: 100%;
 }
 
 /* Responsive Breakpoints */
+@media (max-width: 1080px) {
+  .similarGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 992px) {
   .mainContent {
     max-width: 100%;
-    padding: 16px 16px 64px 16px;
+    padding: 20px 20px 64px 20px;
   }
 
   .twoColumnLayout {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
   }
 
   .galleryColumn,
@@ -270,21 +290,23 @@
   .mainPreviewCanvas {
     width: 100%;
     height: auto;
-    aspect-ratio: 437 / 450;
-  }
-
-  .similarGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    aspect-ratio: 16 / 10;
+    min-height: auto;
   }
 }
 
 @media (max-width: 600px) {
+  .mainContent {
+    padding: 16px 16px 48px 16px;
+  }
+
   .similarGrid {
     grid-template-columns: 1fr;
   }
 
   .thumbnailsRow {
     overflow-x: auto;
+    flex-wrap: nowrap;
     padding-bottom: 4px;
   }
 

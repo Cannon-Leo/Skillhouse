@@ -29,6 +29,7 @@ export interface SkillDetailHeaderProps {
   onBuy?: () => void;
   isFree?: boolean;
   variant?: "free" | "premium";
+  showRuntimeSpecs?: boolean;
   className?: string;
 }
 
@@ -44,6 +45,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   onSubscribe,
   isFree: propIsFree,
   variant: propVariant,
+  showRuntimeSpecs = false,
   className = "",
 }) => {
   const [isBookmarked, setIsBookmarked] = useState(initialBookmarked);
@@ -257,11 +259,13 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
       />
 
       {/* 4. Runtime & Guide Specs (Nodes 752:11309 / 752:11188) */}
-      <SkillRuntimeSpecs
-        runsInModels={modelLogos}
-        installGuides={["Claude Code", "Cursor"]}
-        generatesWith={["Host Agent LLM"]}
-      />
+      {showRuntimeSpecs && (
+        <SkillRuntimeSpecs
+          runsInModels={modelLogos}
+          installGuides={["Claude Code", "Cursor"]}
+          generatesWith={["Host Agent LLM"]}
+        />
+      )}
 
       {/* Toast Feedback */}
       {toastMessage && (

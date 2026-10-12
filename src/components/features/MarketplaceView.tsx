@@ -212,7 +212,7 @@ export const MARKETPLACE_SKILLS: SkillItem[] = [
     isFeatured: true,
     description: "Generates visually compelling investor pitch presentations with built-in financial models and competitive landscape diagrams.",
     installPrompt: "npx create-agent-skill interactive-pitch-deck",
-    previewImage: "/figma/marketplace_sample_card.png",
+    previewImage: "/figma/node_751_5606.png",
     models: [
       "/figma/agent-claude.png",
       "/figma/agent-antigravity.png",

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NavBar } from "./NavBar";
 import { SkillDetailHeader } from "./SkillDetailHeader";
+import { SkillRuntimeSpecs } from "./SkillRuntimeSpecs";
 import { SkillCard } from "./SkillCard";
 import { Footer } from "./Footer";
 import { LoginModal } from "./LoginModal";
@@ -27,6 +28,15 @@ export interface SkillDetailData {
   models?: string[];
   roles?: string[];
 }
+
+export const MODEL_LOGOS = [
+  "/figma/logo-1.png",
+  "/figma/logo-2.png",
+  "/figma/logo-3.png",
+  "/figma/logo-4.png",
+  "/figma/logo-5.png",
+  "/figma/logo-6.png",
+];
 
 export const DEFAULT_DETAIL_SKILL: SkillDetailData = {
   id: "visual-canvas-deck",
@@ -214,8 +224,8 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
               <Image
                 src={activeImage}
                 alt={`${skill.title} preview canvas`}
-                width={437}
-                height={450}
+                fill
+                sizes="(max-width: 992px) 100vw, 55vw"
                 className={styles.mainPreviewImage}
                 priority
                 unoptimized
@@ -238,13 +248,22 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
                   <Image
                     src={thumbSrc}
                     alt={`Thumbnail ${idx + 1}`}
-                    width={91}
-                    height={80}
+                    width={104}
+                    height={72}
                     className={styles.thumbnailImage}
                     unoptimized
                   />
                 </button>
               ))}
+            </div>
+
+            {/* Runtime & Guide Specs on Left Column (Skillry.dev Balanced Layout) */}
+            <div className={styles.specsSection} data-testid="skill-detail-left-specs">
+              <SkillRuntimeSpecs
+                runsInModels={MODEL_LOGOS}
+                installGuides={["Claude Code", "Cursor"]}
+                generatesWith={["Host Agent LLM"]}
+              />
             </div>
           </div>
 
@@ -258,6 +277,7 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
               installPrompt={skill.installPrompt}
               isFree={skill.isFree}
               variant={skill.isFree ? "free" : "premium"}
+              showRuntimeSpecs={false}
             />
           </div>
         </section>
