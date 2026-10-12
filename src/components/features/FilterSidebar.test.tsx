@@ -99,4 +99,21 @@ describe("Features FilterSidebar Component", () => {
       useCases: [],
     });
   });
+
+  it("renders retract button when onToggleCollapse is provided and handles click", () => {
+    const handleCollapse = vi.fn();
+    render(
+      <FilterSidebar
+        filters={emptyFilters}
+        onFilterChange={() => {}}
+        onToggleCollapse={handleCollapse}
+      />
+    );
+
+    const retractBtn = screen.getByTestId("sidebar-retract-btn");
+    expect(retractBtn).toBeInTheDocument();
+    fireEvent.click(retractBtn);
+    expect(handleCollapse).toHaveBeenCalledTimes(1);
+  });
+
 });

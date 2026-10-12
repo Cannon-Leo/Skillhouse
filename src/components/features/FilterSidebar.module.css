@@ -19,6 +19,44 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 4px;
+  gap: 8px;
+}
+
+.headingGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.retractButton {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.retractButton:hover {
+  background-color: rgba(251, 99, 32, 0.08);
+  border-color: rgba(128, 67, 0, 0.15);
+  color: #FB6320;
+}
+
+.retractButton:active {
+  transform: scale(0.94);
+}
+
+.retractButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FB6320;
 }
 
 .heading {

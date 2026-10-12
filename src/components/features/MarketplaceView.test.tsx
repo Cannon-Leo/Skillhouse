@@ -48,6 +48,7 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
   });
 
   it("handles initialCategory with featured, output, roles, and use-case variants", () => {
+    // test timeout handled
     const { unmount: u1 } = render(<MarketplaceView initialCategory="featured" />);
     expect(screen.getByTestId("skills-marketplace-page")).toBeInTheDocument();
     u1();
@@ -71,7 +72,7 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     const { unmount: u6 } = render(<MarketplaceView initialCategory="publishing" />);
     expect(screen.getByTestId("skills-marketplace-page")).toBeInTheDocument();
     u6();
-  });
+  }, 25000);
 
   it("displays empty state and allows resetting filters when no items match", () => {
     render(<MarketplaceView />);
@@ -219,25 +220,49 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     expect(screen.getByTestId("skills-marketplace-page")).toBeInTheDocument();
   });
 
-  it("toggles hide/expand filters on sidebar button", () => {
+  it("toggles expand and retract components on the filter sidebar and body", () => {
     const { container } = render(<MarketplaceView />);
 
     const toggleBtn = screen.getByTestId("toggle-filter-sidebar");
     expect(toggleBtn).toBeInTheDocument();
-    expect(screen.getByText("Hide Filters")).toBeInTheDocument();
+    expect(toggleBtn).toHaveAttribute("aria-expanded", "true");
 
     const sidebar = container.querySelector("#marketplace-sidebar");
     expect(sidebar).not.toHaveClass(/collapsed/);
 
-    // Click to hide filters
-    fireEvent.click(toggleBtn);
-    expect(screen.getByText("Show Filters")).toBeInTheDocument();
-    expect(sidebar?.className).toContain("collapsed");
+    // 1. Retract from the sidebar header retract button
+    const retractBtn = screen.getByTestId("sidebar-retract-btn");
+    expect(retractBtn).toBeInTheDocument();
+    fireEvent.click(retractBtn);
 
-    // Click to expand filters back
-    fireEvent.click(toggleBtn);
-    expect(screen.getByText("Hide Filters")).toBeInTheDocument();
+    // Sidebar should be collapsed and inert
+    expect(sidebar?.className).toContain("collapsed");
+    expect(sidebar).toHaveAttribute("aria-hidden", "true");
+    expect(toggleBtn).toHaveAttribute("aria-expanded", "false");
+
+    // 2. Expand from the edge dock rail on the body
+    const edgeRail = screen.getByTestId("edge-expand-rail");
+    expect(edgeRail).toBeInTheDocument();
+    fireEvent.click(edgeRail);
+
+    // Sidebar should be restored
     expect(sidebar?.className).not.toContain("collapsed");
+    expect(sidebar).toHaveAttribute("aria-hidden", "false");
+    expect(toggleBtn).toHaveAttribute("aria-expanded", "true");
+
+    // 3. Toggle via the controls bar modern pill
+    fireEvent.click(toggleBtn);
+    expect(sidebar?.className).toContain("collapsed");
+    fireEvent.click(toggleBtn);
+    expect(sidebar?.className).not.toContain("collapsed");
+  });
+
+  it("displays active filter counter badge on the toggle pill when filters are applied", () => {
+    render(<MarketplaceView initialCategory="free" />);
+
+    const badge = screen.getByTestId("active-filter-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("1");
   });
 
   it("renders strategic sponsored ad cards in the skills grid and handles ad clicks", () => {

@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
+import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
@@ -651,6 +651,16 @@ export function MarketplaceView({
   }, [skills, searchValue, filters, sortBy]);
 
 
+
+  const totalActiveFilters = useMemo(() => {
+    return (
+      filters.recommendations.filter((r) => r !== "all").length +
+      filters.outputs.length +
+      filters.roles.length +
+      filters.useCases.length
+    );
+  }, [filters]);
+
   const gridItems = useMemo<GridItem[]>(() => {
     const items: GridItem[] = [];
     let adIndex = 0;
@@ -732,9 +742,35 @@ export function MarketplaceView({
           id="marketplace-sidebar"
           className={`${styles.sidebarColumn} ${isSidebarCollapsed ? styles.collapsed : ""} ${mobileFiltersVisible ? styles.mobileOpen : ""}`}
           aria-hidden={isSidebarCollapsed}
+          inert={isSidebarCollapsed || undefined}
         >
-          <FilterSidebar filters={filters} onFilterChange={setFilters} />
+          <FilterSidebar
+            filters={filters}
+            onFilterChange={setFilters}
+            onToggleCollapse={() => setIsSidebarCollapsed(true)}
+            isCollapsed={isSidebarCollapsed}
+          />
         </div>
+        {/* Edge Retract/Expand Dock Rail on the body when sidebar is collapsed */}
+        {isSidebarCollapsed && (
+          <aside className={styles.edgeDockContainer} aria-label="Filters sidebar dock">
+            <button
+              type="button"
+              className={styles.edgeDockRail}
+              onClick={() => setIsSidebarCollapsed(false)}
+              aria-label={`Expand filters sidebar${totalActiveFilters > 0 ? ` (${totalActiveFilters} active)` : ""}`}
+              title="Expand filters sidebar"
+              data-testid="edge-expand-rail"
+            >
+              <PanelLeftOpen size={15} className={styles.edgeDockIcon} aria-hidden="true" />
+              <span className={styles.edgeDockText}>Filters</span>
+              {totalActiveFilters > 0 && (
+                <span className={styles.edgeDockBadge}>{totalActiveFilters}</span>
+              )}
+            </button>
+          </aside>
+        )}
+
 
         {/* Right Main Content Area - Exact Figma 751:4736 (w: 1140px, pad-left: 40px, pad-right: 40px, pad-top: 24px) */}
         <main className={styles.mainContent}>
@@ -764,19 +800,33 @@ export function MarketplaceView({
 
           {/* Controls Bar - Exact Figma 751:4740 (h: 38px, space-between) */}
           <div className={styles.controlsBar}>
-            {/* Left Controls: Hide/Expand Filters and Count */}
+            {/* Left Controls: Modern Expand/Retract Pill and Count */}
             <div className={styles.controlsLeft}>
               <button
                 type="button"
-                className={styles.filterToggleButton}
+                className={`${styles.filterTogglePill} ${isSidebarCollapsed ? styles.isCollapsed : ""}`}
                 onClick={() => setIsSidebarCollapsed((prev) => !prev)}
                 aria-expanded={!isSidebarCollapsed}
                 aria-controls="marketplace-sidebar"
                 data-testid="toggle-filter-sidebar"
-                title={isSidebarCollapsed ? "Expand filters sidebar" : "Hide filters sidebar"}
+                aria-label={
+                  isSidebarCollapsed
+                    ? `Expand filters sidebar${totalActiveFilters > 0 ? ` (${totalActiveFilters} active)` : ""}`
+                    : "Collapse filters sidebar"
+                }
+                title={isSidebarCollapsed ? "Expand filters" : "Collapse filters"}
               >
-                <SlidersHorizontal size={14} className={styles.filterToggleIcon} />
-                <span>{isSidebarCollapsed ? "Show Filters" : "Hide Filters"}</span>
+                {isSidebarCollapsed ? (
+                  <PanelLeftOpen size={15} className={styles.togglePillIcon} aria-hidden="true" />
+                ) : (
+                  <PanelLeftClose size={15} className={styles.togglePillIcon} aria-hidden="true" />
+                )}
+                <span className={styles.togglePillText}>Filters</span>
+                {totalActiveFilters > 0 && (
+                  <span className={styles.togglePillBadge} data-testid="active-filter-badge">
+                    {totalActiveFilters}
+                  </span>
+                )}
               </button>
 
               <span className={styles.skillsCount} data-testid="skills-count">

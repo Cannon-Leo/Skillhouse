@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { PanelLeftClose } from "lucide-react";
 import { FilterSection } from "./FilterSection";
 import { FilterItem } from "./FilterItem";
 import styles from "./FilterSidebar.module.css";
@@ -15,6 +16,8 @@ export interface FilterState {
 export interface FilterSidebarProps {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
+  onToggleCollapse?: () => void;
+  isCollapsed?: boolean;
   className?: string;
 }
 
@@ -67,6 +70,7 @@ export const USE_CASES: FilterDef[] = [
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   filters,
   onFilterChange,
+  onToggleCollapse,
   className = "",
 }) => {
   const toggleItem = (category: keyof FilterState, id: string) => {
@@ -99,19 +103,34 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   return (
     <aside className={`${styles.sidebar} ${className}`} aria-label="Filter sidebar">
       <div className={styles.topBar}>
-        <div className={styles.heading}>
-          <span>Filters</span>
+        <div className={styles.headingGroup}>
+          <div className={styles.heading}>
+            <span>Filters</span>
+            {totalActive > 0 && (
+              <span className={styles.activeCountBadge} data-testid="active-filter-count">{totalActive}</span>
+            )}
+          </div>
           {totalActive > 0 && (
-            <span className={styles.activeCountBadge} data-testid="active-filter-count">{totalActive}</span>
+            <button
+              type="button"
+              className={styles.clearButton}
+              onClick={handleClearAll}
+            >
+              Clear all
+            </button>
           )}
         </div>
-        {totalActive > 0 && (
+
+        {onToggleCollapse && (
           <button
             type="button"
-            className={styles.clearButton}
-            onClick={handleClearAll}
+            className={styles.retractButton}
+            onClick={onToggleCollapse}
+            aria-label="Collapse filter sidebar"
+            title="Collapse filter sidebar"
+            data-testid="sidebar-retract-btn"
           >
-            Clear all
+            <PanelLeftClose size={16} aria-hidden="true" />
           </button>
         )}
       </div>

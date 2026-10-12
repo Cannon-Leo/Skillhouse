@@ -30,4 +30,22 @@ describe("CategorySkillGrid (Figma Node 751:4789)", () => {
       expect.objectContaining({ id: "featured" })
     );
   });
+
+  it("activates connected bridges when a card is hovered", () => {
+    const { container } = render(<CategorySkillGrid />);
+
+    const freeCard = screen.getByRole("link", { name: "Free Agent Skills" });
+
+    // Initially, no bridges have bridgeActive class
+    expect(container.querySelectorAll('[class*="bridgeActive"]')).toHaveLength(0);
+
+    // Hover over Free Agent Skills card (connects to dBridgeV1_1 and dBridgeH1)
+    fireEvent.mouseEnter(freeCard);
+    const activeBridges = container.querySelectorAll('[class*="bridgeActive"]');
+    expect(activeBridges.length).toBeGreaterThan(0);
+
+    // Leave hover
+    fireEvent.mouseLeave(freeCard);
+    expect(container.querySelectorAll('[class*="bridgeActive"]')).toHaveLength(0);
+  });
 });

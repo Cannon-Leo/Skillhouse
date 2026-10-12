@@ -6,6 +6,11 @@ import styles from "./CategorySkillCard.module.css";
 
 export interface CategorySkillCardProps {
   /**
+   * Unique category identifier (e.g. "free", "featured").
+   */
+  cardId?: string;
+
+  /**
    * Title text displayed on the card.
    * Newlines ("\n") will be respected as in the Figma mock.
    */
@@ -40,9 +45,20 @@ export interface CategorySkillCardProps {
    * Optional inline styles.
    */
   style?: React.CSSProperties;
+
+  /**
+   * Controlled hover state for matrix sync.
+   */
+  isHovered?: boolean;
+
+  /**
+   * Callback fired when card hover/focus state changes.
+   */
+  onHoverChange?: (isHovered: boolean) => void;
 }
 
 export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
+  cardId,
   title,
   href,
   onClick,
@@ -50,6 +66,8 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
   ariaLabel,
   className = "",
   style,
+  isHovered = false,
+  onHoverChange,
 }) => {
   const inlineStyles: React.CSSProperties = {
     "--card-bg": backgroundColor,
@@ -67,12 +85,22 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
-            {/* 45-degree up-right diagonal arrow based on Figma Node 751:4800 */}
+            {/* Authentic Figma Node 751:4800 Line arrow-right with exact color #54392D */}
             <path
-              d="M6 14L14 6M14 6H8M14 6V12"
-              stroke="currentColor"
-              strokeWidth="1.75"
+              d="M8.12483 6.6118L13.1831 6.09987L13.695 11.1581"
+              stroke="#54392D"
+              strokeWidth="1.52294"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6.81655 13.8998L13.1192 6.17773"
+              stroke="#54392D"
+              strokeWidth="1.52294"
+              strokeMiterlimit="10"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -83,13 +111,20 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
     </>
   );
 
+  const cardClass = `${styles.card} ${isHovered ? styles.cardHovered : ""} ${className}`;
+
   if (href) {
     return (
       <Link
         href={href}
-        className={`${styles.card} ${className}`}
+        className={cardClass}
         style={inlineStyles}
         aria-label={accessibleName}
+        data-card-id={cardId}
+        onMouseEnter={() => onHoverChange?.(true)}
+        onMouseLeave={() => onHoverChange?.(false)}
+        onFocus={() => onHoverChange?.(true)}
+        onBlur={() => onHoverChange?.(false)}
         onClick={(e) => {
           if (onClick) {
             e.preventDefault();
@@ -106,9 +141,14 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
   return (
     <button
       type="button"
-      className={`${styles.card} ${className}`}
+      className={cardClass}
       style={inlineStyles}
       aria-label={accessibleName}
+      data-card-id={cardId}
+      onMouseEnter={() => onHoverChange?.(true)}
+      onMouseLeave={() => onHoverChange?.(false)}
+      onFocus={() => onHoverChange?.(true)}
+      onBlur={() => onHoverChange?.(false)}
       onClick={onClick}
       data-testid="category-skill-card"
     >
