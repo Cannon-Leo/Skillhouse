@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
-import { createPortal } from "react-dom";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   ChevronDown,
@@ -15,7 +14,6 @@ import Link from "next/link";
 import { SearchInput } from "../ui/SearchInput";
 import { CategoriesDropdown, CategoryTab } from "./CategoriesDropdown";
 import { UserMenuPopover } from "./UserMenuPopover";
-import { useScrollLock } from "../../lib/useScrollLock";
 import styles from "./NavBar.module.css";
 
 export interface NavBarProps {
@@ -60,13 +58,6 @@ export const NavBar: React.FC<NavBarProps> = ({
   className = "",
 }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const isMounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
-
-  useScrollLock(categoriesOpen);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -185,32 +176,18 @@ export const NavBar: React.FC<NavBarProps> = ({
             </button>
 
             {categoriesOpen && (
-              <>
-                {/* Backdrop Overlay per Figma Node 750:4067 */}
-                {isMounted &&
-                  typeof document !== "undefined" &&
-                  createPortal(
-                    <div
-                      className={styles.dropdownBackdrop}
-                      onClick={() => setCategoriesOpen(false)}
-                      aria-hidden="true"
-                      data-testid="categories-backdrop"
-                    />,
-                    document.body
-                  )}
-                <div className={styles.dropdownPositioner}>
-                  <CategoriesDropdown
-                    onSelectCategory={(category: string) => {
-                      setCategoriesOpen(false);
-                      onSelectCategory?.(category);
-                    }}
-                    onSeeAllSkills={() => {
-                      setCategoriesOpen(false);
-                      onViewChange?.("marketplace");
-                    }}
-                  />
-                </div>
-              </>
+              <div className={styles.dropdownPositioner}>
+                <CategoriesDropdown
+                  onSelectCategory={(category: string) => {
+                    setCategoriesOpen(false);
+                    onSelectCategory?.(category);
+                  }}
+                  onSeeAllSkills={() => {
+                    setCategoriesOpen(false);
+                    onViewChange?.("marketplace");
+                  }}
+                />
+              </div>
             )}
           </div>
 

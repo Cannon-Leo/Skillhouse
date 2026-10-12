@@ -60,11 +60,12 @@ describe("Features NavBar Component", () => {
     expect(catBtn).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
-    // Open and click backdrop directly to close
+    // Open and verify no backdrop overlay is rendered (floating transparent glassmorphism)
     fireEvent.click(catBtn);
-    const backdrop = screen.getByTestId("categories-backdrop");
-    expect(backdrop).toBeInTheDocument();
-    fireEvent.click(backdrop);
+    expect(screen.queryByTestId("categories-backdrop")).not.toBeInTheDocument();
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+    // Close via Escape key
+    fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
