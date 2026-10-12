@@ -11,8 +11,7 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  padding-bottom: 8px;
-}
+  }
 
 .card:hover {
   transform: translateY(-2px);

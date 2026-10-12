@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { BookmarkIcon } from "./BookmarkIcon";
 import {
   ChevronDown,
   ArrowRight,
@@ -34,7 +35,8 @@ export type FigmaIconName =
   | "folder-open"
   | "shield-tick"
   | "copy"
-  | "info-circle";
+  | "info-circle"
+  | "bookmark";
 
 interface FigmaIconProps extends React.HTMLAttributes<HTMLSpanElement> {
   name: FigmaIconName;
@@ -62,6 +64,7 @@ const ICON_MAP: Record<
   "shield-tick": ShieldCheck,
   "copy": Copy,
   "info-circle": Info,
+  "bookmark": BookmarkIcon,
 };
 
 export const FigmaIcon: React.FC<FigmaIconProps> = ({

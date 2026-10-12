@@ -88,7 +88,6 @@ export const AdCard: React.FC<AdCardProps> = ({
             <ArrowUpRight size={12} className={styles.ctaArrow} />
           </span>
         </div>
-        <p className={styles.description}>{description}</p>
       </div>
     </div>
   );

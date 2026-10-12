@@ -11,10 +11,10 @@ describe("Features AdCard Component", () => {
     ctaText: "Explore Now",
   };
 
-  it("renders ad title, description, badge, and CTA text", () => {
+  it("renders ad title, badge, and CTA text without redundant subtitle", () => {
     render(<AdCard {...defaultProps} />);
     expect(screen.getByText("Promoted Agent Framework")).toBeInTheDocument();
-    expect(screen.getByText("Build robust autonomous agents with verified safety benchmarks.")).toBeInTheDocument();
+    expect(screen.queryByText("Build robust autonomous agents with verified safety benchmarks.")).not.toBeInTheDocument();
     expect(screen.getByText("Featured")).toBeInTheDocument();
     expect(screen.getByText("Explore Now")).toBeInTheDocument();
   });

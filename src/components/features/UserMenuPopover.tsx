@@ -2,12 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import {
-  Bookmark,
   User,
   Settings,
   HelpCircle,
   LogOut,
 } from "lucide-react";
+import { BookmarkIcon } from "../ui/BookmarkIcon";
 import styles from "./UserMenuPopover.module.css";
 
 export type UserMenuItemId =
@@ -171,7 +171,7 @@ export const UserMenuPopover: React.FC<UserMenuPopoverProps> = ({
             onClick={handleBookmarksClick}
             data-testid="user-menu-item-bookmarks"
           >
-            <Bookmark size={18} className={styles.itemIcon} aria-hidden="true" />
+            <BookmarkIcon size={18} className={styles.itemIcon} aria-hidden="true" />
             <span className={styles.itemLabel}>
               {variant === "extended" && onDirectoryHistory && !onBookmarks
                 ? "Directory history"
