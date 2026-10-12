@@ -25,7 +25,7 @@ describe("Features FilterSidebar Component", () => {
       useCases: [],
     };
     render(<FilterSidebar filters={activeFilters} onFilterChange={() => {}} />);
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByTestId("active-filter-count")).toHaveTextContent("3");
     expect(screen.getByRole("button", { name: /clear all/i })).toBeInTheDocument();
   });
 

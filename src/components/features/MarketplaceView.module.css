@@ -1,0 +1,433 @@
+/* Agent Skills Marketplace - Exact Figma Node 751:4572 Specifications
+ * Page background: #FFEEDD
+ * Total desktop width: 1440px
+ * Sticky Navbar: 72px height, padding 16px 40px, gap 32px
+ * Sidebar: 220px width, padding 24px, gap 24px, border-right 1px solid rgba(166, 166, 166, 0.5)
+ * Gap between sidebar and main content: 40px
+ * Main content: 1140px width, top padding 24px, right padding 40px
+ * Header: Title 28px Geist Pixel/Mono, gap 12px, Subtitle 16px #7F776E
+ * Controls: 38px height, 16px count, 14px sort dropdown
+ * Grid: 4 columns (273px card width at 1440px), col gap 16px, row gap 24px
+ */
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFEEDD;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.marketplaceLayout {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - 72px);
+  box-sizing: border-box;
+}
+
+/* Sidebar Column - Exact Figma 751:4573 (w: 220px) */
+.sidebarColumn {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 72px;
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(166, 166, 166, 0.4) transparent;
+}
+
+.sidebarColumn::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebarColumn::-webkit-scrollbar-thumb {
+  background: rgba(166, 166, 166, 0.4);
+}
+
+/* Main Content Area - Exact Figma 751:4736 (x: 5572, w: 1140, pad-left: 40, pad-right: 40, pad-top: 24) */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 24px;
+  padding-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* Main Header - Exact Figma 751:4737 (h: 64px, gap: 12px) */
+.mainHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.title {
+  font-family: var(--font-pixel, var(--font-mono, monospace));
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #000000;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #7F776E;
+  margin: 0;
+}
+
+/* Controls Bar - Exact Figma 751:4740 (h: 38px, space-between) */
+.controlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 38px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+/* Left Count - Exact Figma 751:4742: 16px Medium, #484848 */
+.skillsCount {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  color: #484848;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Right Sort Select - Exact Figma 751:4744: 105px x 38px, bg rgba(255, 236, 217, 0.7), border 1px rgba(166, 166, 166, 0.5) */
+.sortWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.sortButton {
+  height: 38px;
+  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 236, 217, 0.7);
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.sortButton:hover {
+  background-color: rgba(255, 236, 217, 0.95);
+  border-color: #FB6320;
+}
+
+.sortButton:focus-visible {
+  outline: 2px solid #FB6320;
+}
+
+.sortChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.5);
+  transition: transform var(--transition-fast);
+}
+
+.sortChevron.open {
+  transform: rotate(180deg);
+}
+
+.sortDropdownMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background-color: #FFEEDD;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 0px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+.sortOption {
+  padding: 10px 16px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #000000;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.sortOption:hover {
+  background-color: #FFECD8;
+  color: #FB6320;
+}
+
+.sortOption.selected {
+  font-weight: 600;
+  color: #FB6320;
+  background-color: rgba(251, 99, 32, 0.08);
+}
+
+/* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile Filter Bar (<992px) */
+.mobileFilterBar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.3);
+}
+
+.filterToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: rgba(255, 236, 217, 0.7);
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+}
+
+.filterToggleBtn:hover {
+  border-color: #FB6320;
+  color: #FB6320;
+}
+
+/* Mobile Drawer Overlay */
+.mobileFilterOverlay {
+  display: none;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  gap: 16px;
+  background-color: rgba(255, 236, 217, 0.4);
+  border: 1px dashed rgba(166, 166, 166, 0.5);
+  border-radius: 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.emptyTitle {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.emptyDesc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #7F776E;
+  margin: 0;
+  max-width: 400px;
+}
+
+.resetBtn {
+  margin-top: 8px;
+  padding: 8px 18px;
+  background-color: #000000;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.resetBtn:hover {
+  background-color: #FB6320;
+  transform: translateY(-1px);
+}
+
+.resetBtn:active {
+  transform: scale(0.96);
+}
+
+/* Detail Modal Backdrop & Sheet */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(66, 65, 69, 0.54);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalSheet {
+  background-color: #FFEEDD;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 32px;
+  box-sizing: border-box;
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7F776E;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.modalCloseBtn:hover {
+  color: #000000;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) and (min-width: 993px) {
+  .marketplaceLayout {
+    padding: 0 20px;
+  }
+  .mainContent {
+    padding-left: 24px;
+    padding-right: 0px;
+  }
+  .skillsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .marketplaceLayout {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  .sidebarColumn {
+    display: none;
+  }
+  .sidebarColumn.mobileOpen {
+    display: flex;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 72px);
+    background-color: #FFEEDD;
+    z-index: 200;
+    border-right: 1px solid rgba(166, 166, 166, 0.5);
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.1);
+  }
+  .mobileFilterOverlay.mobileOpen {
+    display: block;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(66, 65, 69, 0.4);
+    z-index: 199;
+  }
+  .mobileFilterBar {
+    display: flex;
+  }
+  .mainContent {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 16px;
+    width: 100%;
+  }
+  .skillsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 580px) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+  .title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .subtitle {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}

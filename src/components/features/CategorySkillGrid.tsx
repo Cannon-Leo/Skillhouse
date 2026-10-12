@@ -13,13 +13,13 @@ export interface SkillCategoryItem {
 }
 
 export const DEFAULT_SKILL_CATEGORIES: SkillCategoryItem[] = [
-  { id: "featured", title: "Featured \nAgent Skills", href: "/skills?category=featured" },
-  { id: "free", title: "Free Agent \nSkills", href: "/skills?category=free" },
-  { id: "trending", title: "Trending \nAgent Skills", href: "/skills?category=trending" },
-  { id: "top-rated", title: "Top-rated \nAgent Skills", href: "/skills?category=top-rated" },
-  { id: "use-case", title: "Skills by \nUse-case", href: "/skills?category=use-case" },
-  { id: "output", title: "Skills by \nOutput", href: "/skills?category=output" },
-  { id: "roles", title: "Skills by \nRoles", href: "/skills?category=roles" },
+  { id: "featured", title: "Featured \nAgent Skills", href: "/?category=featured" },
+  { id: "free", title: "Free Agent \nSkills", href: "/?category=free" },
+  { id: "trending", title: "Trending \nAgent Skills", href: "/?category=trending" },
+  { id: "top-rated", title: "Top-rated \nAgent Skills", href: "/?category=top-rated" },
+  { id: "use-case", title: "Skills by \nUse-case", href: "/?category=use-case" },
+  { id: "output", title: "Skills by \nOutput", href: "/?category=output" },
+  { id: "roles", title: "Skills by \nRoles", href: "/?category=roles" },
 ];
 
 export interface CategorySkillGridProps {

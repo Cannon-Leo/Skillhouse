@@ -39,6 +39,39 @@ Open [http://localhost:3000/design-system](http://localhost:3000/design-system) 
 
 ---
 
+## 📋 Teammate Onboarding Cheat Sheet (30-Second Guide)
+
+Share or review this quick checklist before creating any branch or writing code:
+
+| Step | Action | Command / Reference |
+| :--- | :--- | :--- |
+| **1. Setup** | Install dependencies & activate Husky pre-commit hooks | `npm install` |
+| **2. Dev Server** | Run Next.js 16 local environment (with Turbopack) | `npm run dev` (Port 3000) |
+| **3. Design System** | Explore tokens, primitives, and Figma nodes | [http://localhost:3000/design-system](http://localhost:3000/design-system) & [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) |
+| **4. Rule: Reuse First** | Never build a button, card, input, pill, or badge from scratch | Check `src/components/primitives/` & `src/components/ui/` |
+| **5. Rule: Strict Tokens** | Never invent hex colors or arbitrary margins/radii | `:root` in `src/app/globals.css` (4pt/8pt scale, `--color-brand`) |
+| **6. Rule: UI Polish** | Single-line buttons/pills must have `white-space: nowrap;` | Strict `scale(0.96)` active press, `0px` sharp container radius |
+| **7. Rule: Isolation** | Keep features isolated in `src/components/features/<name>/` | Must pass the deletion test; no circular imports |
+| **8. Pre-Commit Gate** | Run full test suite, linting, and typecheck before PR | **`npm run gauntlet`** (100% tests & coverage must pass) |
+
+### 🌿 Git Branching & Contribution Protocol
+- **`main` is the Single Source of Truth**: The complete design system, tokens, and verified baseline live on `main`. Always branch off latest `main`.
+- **Branch Naming**:
+  - `feat/<feature-name>` for new product domains (e.g., `feat/agent-checkout`, `feat/user-profile`).
+  - `fix/<bug-name>` for bug fixes or responsive polish (e.g., `fix/copy-prompt-wrap`).
+  - `ds/<component-name>` for design system additions or token refinements (e.g., `ds/toast-notifications`).
+- **PR Requirement**: Never bypass the gate. Every PR requires 100% pass on `npm run gauntlet`.
+
+### 🤖 AI Agent Setup (Zero-Hallucination Guardrails)
+If you or your teammates use AI coding assistants, the rules are pre-configured in the repository root:
+- **Cursor**: Automatically reads `.cursor/rules/design-system.mdc` (`alwaysApply: true`) and `.cursorrules`.
+- **Claude Code**: Automatically reads `CLAUDE.md`.
+- **Windsurf / Cascade**: Automatically reads `.windsurfrules`.
+- **GitHub Copilot**: Automatically reads `.github/copilot-instructions.md`.
+- **Universal Standard**: `AGENTS.md` and `.agents/rules/design-system-first.md`.
+
+---
+
 ## 📐 Project Architecture & Directory Layout
 
 We follow a feature-first, layered architecture. Dependency flow is strictly **unidirectional**:  

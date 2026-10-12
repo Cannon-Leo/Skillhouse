@@ -34,9 +34,13 @@ describe("Features SkillCard Component", () => {
 
     fireEvent.keyDown(card, { key: " " });
     expect(handleClick).toHaveBeenCalledTimes(2);
+
+    // Other keys do not trigger click
+    fireEvent.keyDown(card, { key: "ArrowDown" });
+    expect(handleClick).toHaveBeenCalledTimes(2);
   });
 
-  it("handles uncontrolled bookmark toggle and stops propagation to card", () => {
+  it("handles uncontrolled bookmark toggle, stopPropagation events, and stops propagation to card", () => {
     const handleCardClick = vi.fn();
     const handleToggle = vi.fn();
     render(
@@ -51,6 +55,11 @@ describe("Features SkillCard Component", () => {
       name: /save skill to bookmarks/i,
     });
     expect(bookmarkBtn).toHaveAttribute("aria-pressed", "false");
+
+    // Test pointerDown, mouseDown, touchStart propagation stopping
+    fireEvent.pointerDown(bookmarkBtn);
+    fireEvent.mouseDown(bookmarkBtn);
+    fireEvent.touchStart(bookmarkBtn);
 
     fireEvent.click(bookmarkBtn);
     expect(handleToggle).toHaveBeenCalledWith(true);
@@ -90,12 +99,12 @@ describe("Features SkillCard Component", () => {
     const models = ["/logo-1.png", "/logo-2.png", "/logo-3.png", "/logo-4.png", "/logo-5.png"];
     render(<SkillCard {...defaultProps} models={models} />);
     const modelRow = screen.getByLabelText("Supported models");
-    expect(modelRow.children.length).toBe(4); // 4 logos
+    expect(modelRow.children.length).toBe(4);
   });
-});
 
   it("renders without category pill when category is not provided", () => {
     const { container } = render(<SkillCard title="Minimal Card" category={undefined} />);
     expect(screen.getByText("Minimal Card")).toBeInTheDocument();
     expect(container.querySelector("._pill_246e7f")).not.toBeInTheDocument();
   });
+});

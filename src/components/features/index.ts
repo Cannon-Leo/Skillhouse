@@ -16,3 +16,4 @@ export { RequestSkillModal } from "./RequestSkillModal";
 export type { RequestSkillModalProps, SkillRequestData } from "./RequestSkillModal";
 export * from "./CategorySkillCard";
 export * from "./CategorySkillGrid";
+export * from "./HeroSection";

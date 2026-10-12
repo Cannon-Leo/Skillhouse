@@ -3,134 +3,300 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
-// Clean inline SVGs for social media (Lucide removed them in newer releases)
-const TwitterIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+// Exact authentic SVG from Figma Node I751:4917;751:7813
+const XSocialIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className={styles.socialSvg}
+  >
+    <path
+      d="M12.6148 15.5763L2.81486 2.97627C2.58496 2.68069 2.7956 2.25 3.17007 2.25H5.0299C5.16876 2.25 5.29985 2.31411 5.3851 2.42373L15.1851 15.0237C15.415 15.3194 15.2044 15.75 14.8299 15.75H12.9701C12.8312 15.75 12.7001 15.6859 12.6148 15.5763Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M15 2.25L3 15.75"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
-const InstagramIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+// Exact authentic SVG from Figma Node I751:4917;751:7816
+const LinkedInSocialIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className={styles.socialSvg}
+  >
+    <path
+      d="M15.75 6V12C15.75 14.071 14.071 15.75 12 15.75H6C3.92894 15.75 2.25 14.071 2.25 12V6C2.25 3.92894 3.92894 2.25 6 2.25H12C14.071 2.25 15.75 3.92894 15.75 6Z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5.25 12.75V10.125V7.5"
+      stroke="black"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8.25 12.75V10.3125M8.25 10.3125V7.5M8.25 10.3125C8.25 7.5 12.75 7.5 12.75 10.3125V12.75"
+      stroke="black"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5.25 5.25828L5.25833 5.24902"
+      stroke="black"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const LinkedinIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-    <rect width="4" height="12" x="2" y="9"/>
-    <circle cx="4" cy="4" r="2"/>
-  </svg>
-);
+export interface FooterProps {
+  className?: string;
+}
 
-const YoutubeIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/>
-    <polygon points="10 15 15 12 10 9 10 15"/>
-  </svg>
-);
-
-const FacebookIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  </svg>
-);
-
-export const Footer = () => {
+export const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <footer className={styles.footer}>
-      {/* Giant Background Text */}
-      <div className={styles.bgText} aria-hidden="true">
-        Skillhouse
-      </div>
+    <footer
+      className={`${styles.footer} ${className || ""}`}
+      role="contentinfo"
+      aria-label="Site footer"
+    >
+      {/* Background Gradient Lines - Exact Figma Node 751:7781 */}
+      <div className={styles.gradientLines} aria-hidden="true" />
 
       <div className={styles.container}>
-        {/* Left Section: Branding & Info */}
+        {/* Left Column: Branding, Tagline, Socials, Copyright - Figma Node 751:7797 */}
         <div className={styles.brandSection}>
-          <div className={styles.logoWrapper}>
-            <Image 
-              src="/figma/Logo white.svg" 
-              alt="Skillhouse" 
-              width={100} 
-              height={106} 
-              className={styles.logo}
+          {/* Logo Badge - Figma Node 751:7798 */}
+          <Link href="/" className={styles.logoBadge} aria-label="Skillhouse Home">
+            <Image
+              src="/figma/footer-logo-badge.svg"
+              alt="Skillhouse Logo"
+              width={100}
+              height={106}
+              priority
+              className={styles.logoImage}
             />
+          </Link>
+
+          {/* Tagline & Info Group - Figma Node 751:7810 */}
+          <div className={styles.taglineGroup}>
+            <p className={styles.tagline}>
+              Turn everyday tasks into simple,
+              <br />
+              repeatable workflows with skills
+              <br />
+              built for your agent.
+            </p>
+
+            {/* Social Links Row - Figma Node 751:7812 */}
+            <div className={styles.socialRow}>
+              <a
+                href="https://x.com/skillhouse"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Skillhouse on X (formerly Twitter)"
+                className={styles.socialLink}
+              >
+                <XSocialIcon />
+              </a>
+              <a
+                href="https://linkedin.com/company/skillhouse"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Skillhouse on LinkedIn"
+                className={styles.socialLink}
+              >
+                <LinkedInSocialIcon />
+              </a>
+            </div>
+
+            {/* Copyright Notice - Figma Node 751:7821 */}
+            <p className={styles.copyright}>
+              © 2026 Skillhouse. All rights reserved
+            </p>
           </div>
-          <p className={styles.description}>
-            Turn everyday tasks into simple, repeatable workflows with skills built for your agent.
-          </p>
-          <div className={styles.socials}>
-            <Link href="#" aria-label="Twitter" className={styles.socialLink}><TwitterIcon /></Link>
-            <Link href="#" aria-label="Instagram" className={styles.socialLink}><InstagramIcon /></Link>
-            <Link href="#" aria-label="LinkedIn" className={styles.socialLink}><LinkedinIcon /></Link>
-            <Link href="#" aria-label="YouTube" className={styles.socialLink}><YoutubeIcon /></Link>
-            <Link href="#" aria-label="Facebook" className={styles.socialLink}><FacebookIcon /></Link>
-          </div>
-          <p className={styles.copyright}>
-            © 2026 Skillhouse. All rights reserved
-          </p>
         </div>
 
-        {/* Right Section: Link Columns */}
-        <div className={styles.linksSection}>
-          {/* Column 1 */}
-          <div className={styles.column}>
+        {/* Right Navigation Columns (5 Columns) - Figma Node 751:7822 */}
+        <div className={styles.navColumns}>
+          {/* Column 1: Explore - Node 751:7823 */}
+          <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Explore</h3>
             <ul className={styles.linkList}>
-              <li><Link href="#">Skills</Link></li>
-              <li><Link href="#">Pricing</Link></li>
+              <li>
+                <Link href="/skills" className={styles.link}>
+                  Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className={styles.link}>
+                  Pricing
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 2 */}
-          <div className={styles.column}>
+          {/* Column 2: Categories - Node 751:7828 */}
+          <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Categories</h3>
             <ul className={styles.linkList}>
-              <li><Link href="#">Web design</Link></li>
-              <li><Link href="#">Product launch</Link></li>
-              <li><Link href="#">Brand identity</Link></li>
-              <li><Link href="#">Client reporting</Link></li>
-              <li><Link href="#">Social media</Link></li>
-              <li><Link href="#">Research communication</Link></li>
+              <li>
+                <Link href="/categories/web-design" className={styles.link}>
+                  Web design
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/product-launch" className={styles.link}>
+                  Product launch
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/brand-identity" className={styles.link}>
+                  Brand identity
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/client-reporting" className={styles.link}>
+                  Client reporting
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/social-media" className={styles.link}>
+                  Social media
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/research-communication" className={styles.link}>
+                  Research communication
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3 */}
-          <div className={styles.column}>
+          {/* Column 3: By output - Node 751:7837 */}
+          <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>By output</h3>
             <ul className={styles.linkList}>
-              <li><Link href="#">Images</Link></li>
-              <li><Link href="#">Video</Link></li>
-              <li><Link href="#">Presentations</Link></li>
-              <li><Link href="#">Web & HTML</Link></li>
+              <li>
+                <Link href="/output/images" className={styles.link}>
+                  Images
+                </Link>
+              </li>
+              <li>
+                <Link href="/output/video" className={styles.link}>
+                  Video
+                </Link>
+              </li>
+              <li>
+                <Link href="/output/presentations" className={styles.link}>
+                  Presentations
+                </Link>
+              </li>
+              <li>
+                <Link href="/output/web-html" className={styles.link}>
+                  Web &amp; HTML
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4 */}
-          <div className={styles.column}>
+          {/* Column 4: By agent - Node 751:7844 */}
+          <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>By agent</h3>
             <ul className={styles.linkList}>
-              <li><Link href="#">Claude Code Skills</Link></li>
-              <li><Link href="#">Cursor Skills</Link></li>
-              <li><Link href="#">ChatGPT Skills</Link></li>
-              <li><Link href="#">Zapier Skills</Link></li>
+              <li>
+                <Link href="/agents/claude-code" className={styles.link}>
+                  Claude Code Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents/codex" className={styles.link}>
+                  Codex Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents/cursor" className={styles.link}>
+                  Cursor Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents/gemini-cli" className={styles.link}>
+                  Gemini CLI Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents/opencode" className={styles.link}>
+                  OpenCode Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/agents/antigravity" className={styles.link}>
+                  Antigravity Skills
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 5 */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle}>Legal</h3>
+          {/* Column 5: Skillhouse - Node 751:7853 */}
+          <div className={styles.navColumn}>
+            <h3 className={styles.columnTitle}>Skillhouse</h3>
             <ul className={styles.linkList}>
-              <li><Link href="#">Terms of service</Link></li>
-              <li><Link href="#">Privacy policy</Link></li>
-              <li><Link href="#">Refund policy</Link></li>
+              <li>
+                <Link href="/privacy" className={styles.link}>
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className={styles.link}>
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookies" className={styles.link}>
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/notices" className={styles.link}>
+                  Third-Party Notices
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className={styles.link}>
+                  Help &amp; Support
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
+      </div>
+    
+      {/* Massive Bottom Watermark Text - Exact Figma Node 751:7795 */}
+      {/* Positioned strictly below the content (Node 751:7796) as designed in Node 751:7780 */}
+      <div className={styles.watermark} aria-hidden="true">
+        Skillhouse
       </div>
     </footer>
   );

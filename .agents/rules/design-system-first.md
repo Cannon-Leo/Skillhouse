@@ -1,105 +1,58 @@
-# SUPERIOR RULE: DESIGN SYSTEM FIRST
+# Skillhouse — Universal AI Agent Engineering & Design System Rules
 
-## Priority: Mandatory. Overrides default implementation behaviour.
+## CRITICAL PRIORITY: MANDATORY ZERO-HALLUCINATION ENFORCEMENT
+You are an autonomous AI software engineer contributing to Skillhouse. You MUST strictly adhere to the established design system, architectural boundaries, and constraints. You have ZERO latitude to invent competing styles, rogue components, or arbitrary magic numbers.
 
-Before creating, modifying, or implementing any UI, you MUST inspect the existing design system and reuse its established components, tokens, patterns, and conventions.
+---
 
-**Never create a new component, style, token, variant, or interaction pattern before verifying that an existing solution cannot meet the requirement.**
+### 🚨 ANTI-HALLUCINATION GUARDS (THINGS YOU MUST NEVER DO)
+1. **NEVER invent hex colors or Tailwind classes**:
+   - Skillhouse uses Vanilla CSS Modules driven by `:root` tokens in `src/app/globals.css`.
+   - Never write `#ff5500`, `#333`, or ad-hoc colors. Use `var(--color-brand)`, `var(--color-surface-peach)`, `var(--color-surface-cream)`, etc.
+2. **NEVER create duplicate primitives**:
+   - Never write raw `<button className="...">` when `src/components/primitives/Button/Button.tsx` or `src/components/ui/Button.tsx` exists.
+   - Never create duplicate Cards, Inputs, Checkboxes, or Pills.
+3. **NEVER use rounded corners on cards/buttons**:
+   - Containers, buttons, cards, dialogs, and inputs enforce a strict **0px border-radius** (`--radius-none`).
+   - Only checkboxes (`4px`), popovers (`4px`), and pills/avatars (`360px` / `--radius-full`) have rounded geometry.
+4. **NEVER omit `white-space: nowrap` on single-line action surfaces**:
+   - All buttons, badges, pills, and stats MUST have `white-space: nowrap;` to prevent text splitting across lines on mobile/tablet viewports.
+5. **NEVER invent ad-hoc margins or paddings**:
+   - All spacing must strictly derive from the empirical 4pt/8pt sub-grid scale (`--space-3xs` to `--space-4xl` in `globals.css`).
 
-This rule takes precedence over convenience, speed, personal preference, and the agent's default coding patterns.
+---
 
-### 1. Inspect Before Implementing
+### 🧱 COMPONENT BUILD LADDER
+When implementing any feature, build and compose strictly in this order:
+Tokens (globals.css) -> Primitives (src/components/primitives/) -> UI Components (src/components/ui/) -> Feature Components (src/components/features/) -> Pages (app/) -> Validation (npm run gauntlet)
 
-Before writing UI code:
+#### Available Component Map:
+- **Primitives**: `Button` (primary, secondary, outline, ghost, brand), `Card`, `Input`.
+- **UI Elements**: `Checkbox` (24x24px, 4px radius), `Pill` (interactive/static), `SearchInput` (with ⌘K shortcut), `Overlay` (fullscreen backdrop blur), `FigmaIcon`.
+- **Domain Features**: `NavBar`, `Footer`, `CategoriesDropdown`, `CategorySkillGrid`, `SkillCard`, `AdCard`, `FilterSidebar`, `SkillDetailHeader`, `SkillRuntimeSpecs`, `SkillAudienceBox`, `ConnectAgentBanner`, `LoginModal`, `RequestSkillModal`, `UserMenuPopover`.
 
-1. Identify the framework, styling approach, component library, design-system files, and relevant project instructions.
-2. Inspect the available components, their variants, props, composition patterns, and usage examples.
-3. Search the codebase for components that already solve the requested problem or a sufficiently similar one.
-4. Inspect existing design tokens for colour, typography, spacing, sizing, borders, radii, shadows, and other visual properties.
-5. Check whether the required layout or interaction can be composed from existing components.
+---
 
-Do not assume a component is unavailable simply because you have not encountered it yet.
+### 📐 ARCHITECTURAL RULES
+1. **Unidirectional Dependency Flow**:
+   `app/ (pages)` -> `features/` -> `primitives/` & `ui/` -> `globals.css (tokens)`.
+2. **Feature Isolation & The Deletion Test**:
+   - Each feature in `src/components/features/` owns its markup, styles (`.module.css`), and tests (`.test.tsx`).
+   - Deleting any feature directory must ONLY cause import errors at the page composition layer (`app/`). No cross-feature circular imports.
+3. **Icons**:
+   - Strictly use `lucide-react` for UI action, navigation, and state icons.
+   - For brand/model logomarks, use the authentic SVGs in `public/figma/`.
 
-### 2. Reuse Is the Default
+---
 
-When a suitable component exists:
+### 🛡️ QUALITY GATE (THE GAUNTLET)
+Before marking any task complete, you MUST execute:
+```bash
+npm run gauntlet
+```
+This automatically runs:
+- `npm run lint` (ESLint 9)
+- `npm run typecheck` (`tsc --noEmit`)
+- `npm run test -- --run --coverage` (Vitest with >=90% line coverage)
 
-* Use it instead of building a replacement.
-* Use its supported variants and props.
-* Compose existing components when a new arrangement is needed.
-* Use existing design tokens instead of hardcoded values.
-* Follow established naming, accessibility, responsive behaviour, and interaction conventions.
-* Preserve the component's intended behaviour unless the task explicitly requires a change.
-
-Do not create duplicate buttons, inputs, dialogs, cards, navigation elements, typography styles, or other components that overlap with existing functionality.
-
-Do not bypass the design system with arbitrary CSS, inline styles, raw HTML elements, or custom implementations when an established component or token is appropriate.
-
-### 3. Extend Before Creating
-
-If an existing component is close to the required solution but lacks a capability:
-
-1. Determine whether its existing props, variants, composition slots, or supported styles can satisfy the requirement.
-2. If not, assess whether extending the existing component is appropriate.
-3. Preserve backwards compatibility and existing usages.
-4. Avoid adding a variant or prop that introduces unnecessary complexity or duplicates existing functionality.
-
-Do not modify a shared component in a way that unintentionally changes unrelated screens.
-
-### 4. New Components Require Evidence
-
-You may create a new component only after verifying that:
-
-* No existing component adequately satisfies the requirement.
-* The requirement cannot reasonably be met by composing existing components.
-* Extending an existing component would be less appropriate than introducing a separate component.
-* The proposed component follows the project's architecture and design-system conventions.
-
-When a new reusable component is necessary, make it part of the established system where appropriate. Reuse existing tokens, document its purpose, and avoid duplicating existing functionality.
-
-For a one-off layout, prefer composing existing components over introducing a new shared abstraction.
-
-### 5. Tokens Are the Source of Truth
-
-Never invent design tokens or introduce arbitrary visual values without checking the existing system first.
-
-Prefer, in order:
-
-1. Existing semantic design tokens.
-2. Existing component variants and documented values.
-3. Existing project conventions for exceptional cases.
-4. A new token or value only when the requirement cannot be met otherwise.
-
-Do not introduce new colours, font sizes, spacing scales, border radii, shadows, or breakpoints simply to make a component look different.
-
-### 6. When the Design System Is Unclear
-
-If the relevant component, token, or usage pattern cannot be located:
-
-* Search the repository and relevant documentation again.
-* Inspect nearby implementations for established conventions.
-* Do not claim that a component or token is missing without sufficient evidence.
-* If access to the design system is unavailable, state that limitation instead of pretending to have inspected it.
-* If a consequential design decision remains ambiguous, ask for clarification before creating a competing implementation.
-
-### 7. Verification Before Completion
-
-Before finishing any UI task, verify that:
-
-* Existing components were reused wherever appropriate.
-* No unnecessary duplicate components were introduced.
-* Existing tokens were used instead of avoidable hardcoded values.
-* Shared components were not unintentionally broken.
-* The implementation follows existing responsive and accessibility conventions.
-* Any new component or token has a clear, justified purpose.
-
-### 8. Required Final Report
-
-Briefly report:
-
-* Which existing components and tokens were reused.
-* Whether any components or tokens were added or modified.
-* Why a new component was necessary, if one was created.
-* Any design-system limitations that remain unresolved.
-
-**Final enforcement rule:** Inspect first. Reuse by default. Compose before extending. Extend before creating. Verify before finishing. Never silently create a competing design system.
+Zero errors, zero warnings, and zero failing tests are tolerated.

@@ -1,181 +1,369 @@
+/* Exact Figma Master Node 751:7780 & Canvas Node 751:4917 — Global Footer */
 .footer {
   position: relative;
   width: 100%;
-  background-color: var(--color-text-primary, #000);
-  color: var(--color-white, #FFF);
+  max-width: 100vw;
+  background-color: #000000;
+  color: #FFFFFF;
   overflow: hidden;
-  padding: 80px 0;
   margin-top: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 750px;
 }
 
-.bgText {
+/* Background Texture - Figma Node 751:7781 */
+.gradientLines {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 280px;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.04);
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
+  min-height: 880px;
+  background-image: url("/figma/footer-gradient-lines.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
   pointer-events: none;
-  white-space: nowrap;
-  user-select: none;
+  opacity: 0.85;
   z-index: 0;
 }
 
-.container {
+/* Massive Watermark Wordmark - Exact Figma Node 751:7795 */
+/* Positioned strictly below the content (Node 751:7796), never behind it (Node 751:7780) */
+.watermark {
   position: relative;
-  padding: 0 40px;
-  box-sizing: border-box;
   z-index: 1;
-  max-width: 1600px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 80px;
+  width: 100%;
+  max-width: 100vw;
+  font-family: "IBM Plex Sans Thai Looped", var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(80px, 19.5vw, 300px);
+  line-height: 1.1em;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  opacity: 0.20;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  margin-top: auto;
+  padding-top: 40px;
+  margin-bottom: -35px;
 }
 
+/* Content Container - Exactly matches Header Nav margin & padding (1600px max-width, 40px left/right) */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 40px 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Left Brand Section - Figma Node 751:7797 */
 .brandSection {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  max-width: 320px;
+  gap: 50px;
+  width: 388px;
+  max-width: 100%;
+  flex-shrink: 0;
 }
 
-.logoWrapper {
-  width: 100px;
-  height: auto;
+/* Logo Badge - Figma Node 751:7798 */
+.logoBadge {
+  display: inline-block;
+  width: 99.5px;
+  height: 106px;
+  transition: transform var(--transition-fast);
+  outline: none;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
+.logoBadge:hover {
+  transform: scale(1.02);
+}
+
+.logoBadge:active {
+  transform: scale(0.96);
+}
+
+.logoBadge:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+.logoImage {
+  display: block;
+  width: 99.5px;
+  height: 106px;
   object-fit: contain;
 }
 
-.description {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
+/* Tagline Group - Figma Node 751:7810 */
+.taglineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.socials {
+/* Tagline text - Figma Node 751:7811 */
+.tagline {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.4em;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Social icons row - Figma Node 751:7812 */
+.socialRow {
   display: flex;
-  gap: 16px;
   align-items: center;
+  gap: 16px;
 }
 
 .socialLink {
-  color: rgba(255, 255, 255, 0.7);
-  transition: color var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  border-radius: 2px;
 }
 
 .socialLink:hover {
   color: var(--color-brand);
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
+.socialLink:active {
+  transform: scale(0.96);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.socialSvg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/* Copyright notice - Figma Node 751:7821 */
 .copyright {
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  line-height: 1.4em;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
   margin: 0;
-  margin-top: 16px;
+  font-weight: 400;
 }
 
-.linksSection {
+/* Right Nav Columns Wrapper - Figma Node 751:7822 */
+.navColumns {
   display: flex;
-  flex-wrap: wrap;
-  gap: 64px;
+  flex-direction: row;
   justify-content: flex-end;
+  gap: 40px;
   flex: 1;
+  min-width: 0;
 }
 
-.column {
+/* Single Nav Column */
+.navColumn {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 140px;
+  min-width: max-content;
 }
 
+.navColumn:first-child {
+  width: 100px;
+  min-width: 100px;
+}
+
+/* Column Header Title - Geist Pixel Square, #FB6320 */
 .columnTitle {
   font-family: var(--font-pixel);
   font-size: 16px;
-  color: var(--color-brand);
+  line-height: 1.4em;
+  font-weight: 400;
+  color: var(--color-brand, #FB6320);
   margin: 0;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
+/* Links List */
 .linkList {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
-.linkList a {
+.linkList li {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.link {
   font-family: var(--font-sans);
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #FFFFFF;
   text-decoration: none;
-  transition: color var(--transition-fast);
+  white-space: nowrap;
+  display: inline-block;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
-.linkList a:hover {
-  color: var(--color-white);
+.link:hover {
+  color: var(--color-brand, #FB6320);
 }
 
-@media (max-width: 1200px) {
-  .bgText {
-    font-size: 200px;
+.link:active {
+  transform: scale(0.96);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1280px) {
+  .container {
+    padding: 90px 40px 0 40px;
+    gap: 24px;
   }
+
+  .navColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+}
 }
 
 @media (max-width: 1024px) {
   .container {
     flex-direction: column;
-    gap: 64px;
+    padding: 80px 40px 0 40px;
+    gap: 60px;
   }
-  .linksSection {
-    justify-content: flex-start;
+
+  .brandSection {
+    width: 100%;
+    max-width: 480px;
+    gap: 40px;
+  }
+
+  .navColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+}
+
+  .watermark {
+    padding-top: 32px;
+    margin-bottom: -20px;
   }
 }
 
 @media (max-width: 768px) {
-  .footer {
-    padding: 48px 24px;
+  .container {
+    padding: 64px 20px 0 20px;
+    gap: 48px;
   }
-  .bgText {
-    font-size: 90px;
-    opacity: 0.06;
+
+  .brandSection {
+    gap: 32px;
   }
-  .linksSection {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px 16px;
+
+  .navColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+}
+
+  .watermark {
+    padding-top: 24px;
+    margin-bottom: -15px;
+    opacity: 0.15;
   }
 }
 
 @media (max-width: 480px) {
-  .linksSection {
-    grid-template-columns: 1fr;
-  }
-  .bgText {
-    display: none;
-  }
   .container {
-    gap: 48px;
+    padding: 48px 20px 0 20px;
+    gap: 40px;
   }
-  .brandSection {
-    align-items: center;
-    text-align: center;
+
+  .navColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+}
+
+  .tagline {
+    font-size: 14px;
   }
+
+  .copyright {
+    font-size: 13px;
+  }
+
+  .watermark {
+    padding-top: 20px;
+    margin-bottom: -10px;
+    opacity: 0.12;
+  }
+}
+
+@media (max-width: 340px) {
+  .navColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+}
 }

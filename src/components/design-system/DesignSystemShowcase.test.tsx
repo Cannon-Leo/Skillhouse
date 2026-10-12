@@ -12,7 +12,7 @@ describe("DesignSystemShowcase Component", { timeout: 15000 }, () => {
     render(<DesignSystemShowcase />);
     expect(screen.getByText("Skillhouse Design System")).toBeInTheDocument();
     expect(screen.getByText("Brand Orange (Core)")).toBeInTheDocument();
-    expect(screen.getByText("#FB6320")).toBeInTheDocument();
+    expect(screen.getAllByText("#FB6320").length).toBeGreaterThanOrEqual(1);
   });
 
   it("handles loading state toggle on button showcase", () => {

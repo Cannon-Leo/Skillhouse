@@ -90,7 +90,12 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
         className={`${styles.card} ${className}`}
         style={inlineStyles}
         aria-label={accessibleName}
-        onClick={onClick}
+        onClick={(e) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
         data-testid="category-skill-card"
       >
         {cardContent}

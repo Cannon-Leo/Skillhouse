@@ -25,24 +25,24 @@ interface FilterDef {
   iconName?: "monitor" | "presentation" | "video" | "image" | string;
 }
 
-const RECOMMENDATIONS: FilterDef[] = [
+export const RECOMMENDATIONS: FilterDef[] = [
   { id: "all", label: "All skills", count: 387 },
-  { id: "free", label: "Free" },
-  { id: "featured", label: "Featured" },
+  { id: "free", label: "Free", count: 42 },
+  { id: "featured", label: "Featured", count: 33 },
 ];
 
-const OUTPUTS: FilterDef[] = [
+export const OUTPUTS: FilterDef[] = [
   { id: "web", label: "Web", count: 113, iconName: "monitor" },
   { id: "slides", label: "Slides", count: 47, iconName: "presentation" },
   { id: "video", label: "Video", count: 144, iconName: "video" },
   { id: "image", label: "Image", count: 83, iconName: "image" },
 ];
 
-const ROLES: FilterDef[] = [
+export const ROLES: FilterDef[] = [
   { id: "content-creator", label: "Content creator", count: 194 },
   { id: "founder", label: "Founder", count: 124 },
-  { id: "ecommerce", label: "Ecommerce seller" },
-  { id: "swe", label: "Software Engineer" },
+  { id: "ecommerce", label: "Ecommerce seller", count: 28 },
+  { id: "swe", label: "Software Engineer", count: 28 },
   { id: "designer", label: "Designer", count: 183 },
   { id: "consultant", label: "Consultant", count: 10 },
   { id: "teacher", label: "Teacher", count: 54 },
@@ -50,9 +50,18 @@ const ROLES: FilterDef[] = [
   { id: "researcher", label: "Researcher", count: 22 },
 ];
 
-const USE_CASES: FilterDef[] = [
+export const USE_CASES: FilterDef[] = [
   { id: "publishing", label: "Content publishing", count: 148 },
   { id: "education", label: "Education explainers", count: 31 },
+  { id: "brand-identity", label: "Brand identity", count: 56 },
+  { id: "social-media", label: "Social media", count: 42 },
+  { id: "product-launch", label: "Product launch", count: 139 },
+  { id: "ecommerce-conversion", label: "Ecommerce conversion", count: 4 },
+  { id: "client-reporting", label: "Client reporting", count: 46 },
+  { id: "sales-fundraising", label: "Sales fundraising", count: 3 },
+  { id: "research-communication", label: "Research communication", count: 33 },
+  { id: "creative-previsualization", label: "Creative previsualization", count: 19 },
+  { id: "web-design", label: "Web design", count: 160 },
 ];
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
@@ -93,7 +102,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
         <div className={styles.heading}>
           <span>Filters</span>
           {totalActive > 0 && (
-            <span className={styles.activeCountBadge}>{totalActive}</span>
+            <span className={styles.activeCountBadge} data-testid="active-filter-count">{totalActive}</span>
           )}
         </div>
         {totalActive > 0 && (

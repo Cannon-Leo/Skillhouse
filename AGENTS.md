@@ -1,52 +1,61 @@
-# Skillhouse — Multi-Agent Engineering & Design System Rules
+# Skillhouse — Universal AI Agent Engineering & Design System Rules
 
-## Priority: Mandatory. Overrides default implementation behaviour.
-
-Before creating, modifying, or implementing any UI, you MUST inspect the existing design system and reuse its established components, tokens, patterns, and conventions.
-
-**Never create a new component, style, token, variant, or interaction pattern before verifying that an existing solution cannot meet the requirement.**
+## CRITICAL PRIORITY: MANDATORY ZERO-HALLUCINATION ENFORCEMENT
+You are an autonomous AI software engineer contributing to Skillhouse. You MUST strictly adhere to the established design system, architectural boundaries, and constraints. You have ZERO latitude to invent competing styles, rogue components, or arbitrary magic numbers.
 
 ---
 
-## 1. Inspect Before Implementing
-
-Before writing UI code:
-1. Review `DESIGN_SYSTEM.md` and `:root` tokens in `src/app/globals.css`.
-2. Inspect available primitives in `src/components/primitives/` (`Button`, `Card`, `Input`) and UI elements in `src/components/ui/` (`Checkbox`, `Pill`, `SearchInput`, `FigmaIcon`, `Overlay`).
-3. Inspect existing feature components in `src/components/features/` (`NavBar`, `Footer`, `CategoriesDropdown`, `ConnectAgentBanner`, `SkillCard`, `AdCard`, `FilterSidebar`, `FilterSection`, `FilterItem`, `SkillDetailHeader`, `SkillPlayground`, `SkillRuntimeSpecs`, `SkillAudienceBox`, `UserMenuPopover`, `LoginModal`, `RequestSkillModal`).
-4. Follow component build order:
-   `Design Tokens → Primitives → Reusable Components → Composite Components → Sections → Screens → Validation`
-
----
-
-## 2. Reuse Is the Default
-
-* Use existing components instead of building replacements.
-* Compose existing components when a new layout is needed.
-* Use existing design tokens instead of hardcoded values (`--color-brand: #FB6320`, `--font-pixel`, `--font-sans`, `--font-mono`).
-* Icons: Strictly enforce `lucide-react` for all UI, action, navigation, and indicator icons across the entire codebase.
-* Geometry: Strict `0px` radius on buttons, cards, containers, inputs; `4px` on checkboxes; concentric pill/circular on badges and avatars.
-* Container max-width: 1600px with 40px horizontal padding on desktop (`box-sizing: border-box`).
-* Do not bypass the design system with arbitrary CSS, inline styles, or rogue one-offs.
+### 🚨 ANTI-HALLUCINATION GUARDS (THINGS YOU MUST NEVER DO)
+1. **NEVER invent hex colors or Tailwind classes**:
+   - Skillhouse uses Vanilla CSS Modules driven by `:root` tokens in `src/app/globals.css`.
+   - Never write `#ff5500`, `#333`, or ad-hoc colors. Use `var(--color-brand)`, `var(--color-surface-peach)`, `var(--color-surface-cream)`, etc.
+2. **NEVER create duplicate primitives**:
+   - Never write raw `<button className="...">` when `src/components/primitives/Button/Button.tsx` or `src/components/ui/Button.tsx` exists.
+   - Never create duplicate Cards, Inputs, Checkboxes, or Pills.
+3. **NEVER use rounded corners on cards/buttons**:
+   - Containers, buttons, cards, dialogs, and inputs enforce a strict **0px border-radius** (`--radius-none`).
+   - Only checkboxes (`4px`), popovers (`4px`), and pills/avatars (`360px` / `--radius-full`) have rounded geometry.
+4. **NEVER omit `white-space: nowrap` on single-line action surfaces**:
+   - All buttons, badges, pills, and stats MUST have `white-space: nowrap;` to prevent text splitting across lines on mobile/tablet viewports.
+5. **NEVER invent ad-hoc margins or paddings**:
+   - All spacing must strictly derive from the empirical 4pt/8pt sub-grid scale (`--space-3xs` to `--space-4xl` in `globals.css`).
 
 ---
 
-## 3. Extend Before Creating
+### 🧱 COMPONENT BUILD LADDER
+When implementing any feature, build and compose strictly in this order:
+Tokens (globals.css) -> Primitives (src/components/primitives/) -> UI Components (src/components/ui/) -> Feature Components (src/components/features/) -> Pages (app/) -> Validation (npm run gauntlet)
 
-If an existing component is close to the required solution:
-* Assess whether extending existing props or variants is appropriate.
-* Preserve backwards compatibility and existing usages.
-* Do not modify a shared component in a way that breaks other screens.
+#### Available Component Map:
+- **Primitives**: `Button` (primary, secondary, outline, ghost, brand), `Card`, `Input`.
+- **UI Elements**: `Checkbox` (24x24px, 4px radius), `Pill` (interactive/static), `SearchInput` (with ⌘K shortcut), `Overlay` (fullscreen backdrop blur), `FigmaIcon`.
+- **Domain Features**: `NavBar`, `Footer`, `CategoriesDropdown`, `CategorySkillGrid`, `SkillCard`, `AdCard`, `FilterSidebar`, `SkillDetailHeader`, `SkillRuntimeSpecs`, `SkillAudienceBox`, `ConnectAgentBanner`, `LoginModal`, `RequestSkillModal`, `UserMenuPopover`.
 
 ---
 
-## 4. Verification & The Gauntlet
+### 📐 ARCHITECTURAL RULES
+1. **Unidirectional Dependency Flow**:
+   `app/ (pages)` -> `features/` -> `primitives/` & `ui/` -> `globals.css (tokens)`.
+2. **Feature Isolation & The Deletion Test**:
+   - Each feature in `src/components/features/` owns its markup, styles (`.module.css`), and tests (`.test.tsx`).
+   - Deleting any feature directory must ONLY cause import errors at the page composition layer (`app/`). No cross-feature circular imports.
+3. **Icons**:
+   - Strictly use `lucide-react` for UI action, navigation, and state icons.
+   - For brand/model logomarks, use the authentic SVGs in `public/figma/`.
 
-Run before completing any task:
+---
+
+### 🛡️ QUALITY GATE (THE GAUNTLET)
+Before marking any task complete, you MUST execute:
 ```bash
 npm run gauntlet
 ```
-All commits must satisfy `npm run gauntlet` (lint + typecheck + vitest tests with coverage).
+This automatically runs:
+- `npm run lint` (ESLint 9)
+- `npm run typecheck` (`tsc --noEmit`)
+- `npm run test -- --run --coverage` (Vitest with >=90% line coverage)
+
+Zero errors, zero warnings, and zero failing tests are tolerated.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

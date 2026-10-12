@@ -338,3 +338,48 @@ The spacing design system is derived directly from empirical measurements concat
    - Adjusted padding from static `12px 24px` to responsive `12px clamp(10px, 1.8vw, 16px)`.
    - Rebalanced flex ratios to `flex: 1.15` (copy button) and `flex: 0.85` (download ZIP button) with `min-width: 0`.
    - Added mobile fallback `@media (max-width: 380px)` stacking to column layout, preventing text breaking across all responsive viewports.
+
+## 7. Global Footer System (Figma Master Component Node `751:7780` & Instance Node `751:4917`)
+
+### A. Component Specifications & Spatial Geography
+- **Master Component**: Node `751:7780` (`footer`, File `cenkXrTeBinliSZvWjPDZX`)
+- **Canvas Instance**: Node `751:4917` (Dimensions: `1440px × 750px`)
+- **Background Color**: `#000000` (Pure solid dark neutral)
+- **Background Texture Layer**: Node `751:7781` (`Gradient Lines`, `1440px × 880px`, exported as authentic 2x asset `/figma/footer-gradient-lines.png`)
+- **Watermark Wordmark**: Node `751:7795`
+  - Text: `"Skillhouse"`
+  - Font: `IBM Plex Sans Thai Looped`, `Medium` (`fontWeight: 500`)
+  - Size: `300px` (Desktop) / `clamp(100px, 20.8vw, 300px)` (Responsive)
+  - Color: `#FFFFFF` at `20%` opacity (`rgba(255, 255, 255, 0.20)`)
+  - Positioning: Flush along bottom boundary (`bottom: -45px`, centered horizontally)
+  - Interactivity: `pointer-events: none; user-select: none;`
+
+### B. Left Column: Branding, Tagline, Authentic Socials, Copyright (Node `751:7797`)
+- **Width**: `388px` on desktop, `gap: 50px`
+- **Logo Badge (Node `751:7798`)**:
+  - Size: `99.5px × 106px`
+  - Asset: Authentic `/figma/footer-logo-badge.svg` (house silhouette, white fill, black eyes, pixel "Skill" "house")
+- **Tagline (Node `751:7811`)**:
+  - Text: `"Turn everyday tasks into simple,
+repeatable workflows with skills
+built for your agent."`
+  - Typography: `15px` Geist Sans, line-height `1.4em`, letter-spacing `-0.01em`, color `#FFFFFF`
+- **Social Media Links (Node `751:7812`)**:
+  - Row gap: `16px`, size `18px × 18px`
+  - **X (formerly Twitter)** (Node `751:7813`): Vector `/figma/footer-social-1.svg`
+  - **LinkedIn** (Node `751:7816`): Vector `/figma/footer-social-2.svg`
+- **Copyright (Node `751:7821`)**:
+  - Text: `"© 2026 Skillhouse. All rights reserved"`
+  - Typography: `15px` Geist Sans, color `#FFFFFF`
+
+### C. Right Column: 5 Nav Groups (Node `751:7822`)
+- **Layout**: Auto Layout row, `gap: 40px`, right-aligned
+- **Column Header Title**: `Geist Pixel Square` 16px, line-height `1.4em`, color `#FB6320` (`--color-brand`)
+- **Links Typography**: `15px` Geist Sans, line-height `1.4em`, color `#FFFFFF`, gap `20px` between items
+- **5 Column Breakdown**:
+  1. **Explore**: Skills, Pricing
+  2. **Categories**: Web design, Product launch, Brand identity, Client reporting, Social media, Research communication
+  3. **By output**: Images, Video, Presentations, Web & HTML
+  4. **By agent**: Claude Code Skills, Codex Skills, Cursor Skills, Gemini CLI Skills, OpenCode Skills, Antigravity Skills
+  5. **Skillhouse**: Privacy Policy, Terms of Service, Cookie Policy, Third-Party Notices, Help & Support
+

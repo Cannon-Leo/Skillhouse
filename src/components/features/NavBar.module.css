@@ -1,7 +1,7 @@
 .header {
   width: 100%;
   max-width: 100vw;
-  border-bottom: 1px solid rgba(231, 231, 231, 0.5);
+  border-bottom: 1px solid #CDB7AE;
   background-color: #FFEEDD;
   position: sticky;
   top: 0;
@@ -15,8 +15,9 @@
   max-width: 1600px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 40px;
+  padding: 0 40px;
   min-height: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,6 +68,8 @@
   display: flex;
   align-items: center;
   gap: clamp(12px, 1.6vw, 24px);
+  align-self: stretch;
+  height: 100%;
 }
 
 .navItem {
@@ -108,6 +111,10 @@
 /* Mega Menu Dropdown */
 .categoriesContainer {
   position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  height: 100%;
   z-index: 1000;
 }
 
@@ -118,7 +125,7 @@
   margin-top: 16px;
   width: 780px;
   background: #FFEEDD;
-  border: 1px solid rgba(166, 166, 166, 0.5);
+  border: 1px solid #CDB7AE;
   border-radius: 0px;
   box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -160,7 +167,7 @@
   color: #7F776E;
   letter-spacing: 0.05em;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(166, 166, 166, 0.3);
+  border-bottom: 1px solid #CDB7AE;
   margin: 0;
 }
 
@@ -219,7 +226,7 @@
 }
 
 .megaMenuFooterMinimal {
-  border-top: 1px solid rgba(166, 166, 166, 0.3);
+  border-top: 1px solid #CDB7AE;
   padding: 16px 32px;
   display: flex;
   justify-content: flex-end;
@@ -254,7 +261,7 @@
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 0px;
-  border: 1px solid rgba(166, 166, 166, 0.5);
+  border: 1px solid #CDB7AE;
   color: #7F776E;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -364,7 +371,7 @@
   margin-top: 12px;
   width: 220px;
   background: #FFEEDD;
-  border: 1px solid rgba(166, 166, 166, 0.5);
+  border: 1px solid #CDB7AE;
   box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
   z-index: 200;
   animation: dropDownEnter var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -398,7 +405,7 @@
 
 .userDropdownDivider {
   height: 1px;
-  background-color: rgba(166, 166, 166, 0.3);
+  background-color: #CDB7AE;
   margin: 6px 0;
 }
 
@@ -442,7 +449,7 @@
   justify-content: center;
   background: transparent;
   border-radius: 0px;
-  border: 1px solid rgba(166, 166, 166, 0.5);
+  border: 1px solid #CDB7AE;
   cursor: pointer;
   color: #000000;
 }
@@ -489,7 +496,7 @@
     gap: 16px;
     padding: 20px 24px;
     background-color: #FFEEDD;
-    border-bottom: 1px solid rgba(231, 231, 231, 0.5);
+    border-bottom: 1px solid #CDB7AE;
     animation: fadeIn var(--transition-fast) ease-out;
   }
   .mobileDrawerLinks {
@@ -506,7 +513,7 @@
     color: #000000;
     background: none;
     border: none;
-    border-bottom: 1px solid rgba(166, 166, 166, 0.3);
+    border-bottom: 1px solid #CDB7AE;
     cursor: pointer;
     text-align: left;
     width: 100%;
@@ -523,7 +530,7 @@
     gap: 12px;
     padding: 12px;
     background-color: #FFECD8;
-    border: 1px solid rgba(166, 166, 166, 0.4);
+    border: 1px solid #CDB7AE;
   }
   .mobileUserRow {
     display: flex;
@@ -587,7 +594,8 @@
 
 .dropdownPositioner {
   position: absolute;
-  top: calc(100% + 14px);
+  top: 100%;
+  margin-top: -1px;
   left: 0;
   z-index: 999;
   animation: slideDownFade 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -620,7 +628,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0px;
   overflow: hidden;
   transition: transform 0.15s ease, opacity 0.15s ease;
   flex-shrink: 0;
@@ -695,4 +703,12 @@
 .header:has([data-mode="mobile"]) .docBadge,
 .header:has([data-mode="mobile"]) .desktopCtaWrapper {
   display: none !important;
+}
+
+/* Search input border override to match nav border line color #CDB7AE */
+.searchWrapper :global([class*="inputWrapper"]) {
+  border-color: #CDB7AE;
+}
+.searchWrapper :global([class*="shortcutBadge"]) {
+  border-color: #CDB7AE;
 }

@@ -21,6 +21,7 @@ import { CategorySkillCard } from "../features/CategorySkillCard";
 import { CategorySkillGrid } from "../features/CategorySkillGrid";
 
 import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
+import { Footer } from "../features/Footer";
 import styles from "./DesignSystemShowcase.module.css";
 
 export const DesignSystemShowcase: React.FC = () => {
@@ -1051,6 +1052,44 @@ export const DesignSystemShowcase: React.FC = () => {
 
         <div style={{ width: "100%", borderRadius: "8px", overflow: "hidden" }}>
           <CategorySkillGrid />
+        </div>
+      </section>
+      {/* 18. Global Footer Architecture & Specifications (Figma Node 751:7780 / 751:4917) */}
+      <section className={styles.section} id="footer-component">
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            18. Global Footer Architecture & Specifications
+            <span className={styles.nodeBadge}>Node 751:7780 / 751:4917</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Empirical dark marketplace footer strictly aligned to the 1600px container width with 40px left/right margins matching the Header Nav. Features an absolute background watermark wordmark, authentic vector logo badge, social links (X and LinkedIn), and 5 structured navigation columns.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginBottom: "20px" }}>
+          <div style={{ padding: "16px", background: "var(--color-surface-peach)", border: "1px solid var(--color-border-subtle)", borderRadius: "4px" }}>
+            <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", fontFamily: "var(--font-pixel)", color: "var(--color-brand)" }}>Container & Margin Alignment</h4>
+            <p style={{ margin: 0, fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+              Matches Header Nav container exactly (<code>max-width: 1600px; padding: 0 40px;</code>). Logo badge begins flush at 40px, rightmost column ends flush at 40px.
+            </p>
+          </div>
+          <div style={{ padding: "16px", background: "var(--color-surface-cream)", border: "1px solid var(--color-border-subtle)", borderRadius: "4px" }}>
+            <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", fontFamily: "var(--font-pixel)", color: "var(--color-brand)" }}>Absolute Watermark Text</h4>
+            <p style={{ margin: 0, fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+              Positioned strictly <code>absolute; bottom: -40px; width: 100%; pointer-events: none;</code> behind content. Never offsets or expands container layout.
+            </p>
+          </div>
+          <div style={{ padding: "16px", background: "var(--color-surface-peach)", border: "1px solid var(--color-border-subtle)", borderRadius: "4px" }}>
+            <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", fontFamily: "var(--font-pixel)", color: "var(--color-brand)" }}>5 Structured Columns</h4>
+            <p style={{ margin: 0, fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+              Geist Pixel Square headers (16px, <code>#FB6320</code>) with 23 verified links across Explore, Categories, By output, By agent, and Skillhouse.
+            </p>
+          </div>
+        </div>
+
+        <div style={{ padding: "14px 20px", background: "#000000", color: "#FFFFFF", borderRadius: "4px", fontSize: "13px", display: "flex", justifyContent: "space-between", alignItems: "center", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
+          <span>👇 <strong>Live Global Implementation:</strong> Scroll down to the bottom of the page to inspect the live, full-screen responsive footer.</span>
+          <span style={{ color: "var(--color-brand)", fontFamily: "var(--font-pixel)", fontSize: "12px" }}>1600px ALIGNED</span>
         </div>
       </section>
     </div>

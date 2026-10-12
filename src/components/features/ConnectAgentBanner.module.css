@@ -1,16 +1,16 @@
-/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 & IsangAI 4626:373993 / 4640:6028 */
+/* ConnectAgentBanner.module.css — Figma Node 759:12088 / 759:12087 */
 
-/* 1. Section: Outer background & vertical Auto Layout wrapper */
+/* 1. Section: Outer transparent wrapper that sits on the section/footer junction */
 .section {
   width: 100%;
-  background: #FFEEDD;
-  padding: 60px 40px 80px 40px;
+  background: transparent;
+  padding: 0 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 /* 2. Card Wrapper: Centers the card and docks the bottom decorative accents */
@@ -30,7 +30,7 @@
   min-height: 516px;
   background: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0px 9px 26.1px 0px #F1D9CF;
+  box-shadow: 0px 9px 26.1px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -38,7 +38,7 @@
   padding: clamp(48px, 6vw, 92px) clamp(32px, 4.5vw, 64px);
   box-sizing: border-box;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* 4. Left Column: Auto Layout vertical stack (Figma 759:12090) */
@@ -59,107 +59,114 @@
 
 /* Figma: Geist Pixel Square 48px, line-height 48px, letter-spacing -1.92px, #000000 */
 .title {
-  font-family: var(--font-pixel), var(--font-geist-pixel), monospace, sans-serif;
-  font-size: 48px;
-  line-height: 48px;
-  letter-spacing: -1.92px;
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.04em;
   color: #000000;
   margin: 0;
   font-weight: 400;
 }
 
-/* Figma: Geist 16px, line-height 24px, color #7F776E */
-.subtitle {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  color: #7F776E;
-  margin: 0;
+.titleBreak {
+  display: block;
 }
 
-/* Figma: Geist 16px, line-height 24px, underlined, color #7F776E */
-.guideLink {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+/* Figma: Geist Regular 16px, line-height 24px, color #464646 */
+.subtitle {
+  font-family: var(--font-sans, sans-serif);
   font-size: 16px;
   line-height: 24px;
-  color: #7F776E;
+  color: #464646;
+  margin: 0;
+  font-weight: 400;
+  max-width: 360px;
+}
+
+.subtitleBreak {
+  display: block;
+}
+
+/* Figma: Geist Regular 16px, underline, color #464646 */
+.guideLink {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 16px;
+  line-height: 24px;
+  color: #464646;
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
   width: fit-content;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast, 0.15s ease);
 }
 
 .guideLink:hover {
-  color: #FB6320;
+  color: var(--color-brand, #FB6320);
 }
 
-/* 5. Agents Grid: Auto Layout grid for supported agents (Figma 759:12094) */
+/* 5. Supported Agent Platforms Grid (Figma 759:12094) */
 .agentsGrid {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  column-gap: clamp(14px, 2vw, 24px);
-  row-gap: 14px;
-  margin-top: 0;
-  width: fit-content;
-  max-width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 20px;
+  width: 100%;
 }
 
 .agentItem {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  padding: 3px 6px;
+  gap: 10px;
+  padding: 8px 10px;
   border-radius: 6px;
-  transition: all var(--transition-fast);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
   user-select: none;
-  width: fit-content;
+  border: 1px solid transparent;
 }
 
 .agentItem:hover {
-  background: rgba(251, 99, 32, 0.06);
+  background: #FDF9F5;
+  border-color: #F1D9CF;
+  transform: translateY(-1px);
 }
 
-.agentItem.agentSelected {
-  background: rgba(251, 99, 32, 0.12);
-  outline: 1px solid #FB6320;
+.agentItem:focus-visible {
+  outline: 2px solid var(--color-brand, #FB6320);
+  outline-offset: 2px;
 }
 
-/* 28x28 circular icon container proportional to 14px typography */
+.agentSelected {
+  background: #FFF5EE;
+  border-color: #FB6320;
+}
+
 .agentLogoWrapper {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(251, 225, 199, 0.26);
-  border: 0.3px solid rgba(166, 166, 166, 0.15);
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06);
 }
 
 .agentLogo {
-  width: 18px;
-  height: 18px;
   object-fit: contain;
 }
 
-/* Geist 14px, line-height 18px, crisp black #000000 */
 .agentName {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
+  font-family: var(--font-sans, sans-serif);
   font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
+  line-height: 20px;
   color: #000000;
+  font-weight: 500;
   white-space: nowrap;
 }
 
-/* 6. Right Column: Auto Layout vertical stack for Terminal Box + CTA Button (Figma 759:12131) */
+/* 6. Right Column: Terminal snippet and Connect CTA (Figma 759:12131) */
 .rightColumn {
-  flex: 0 1 548px;
-  width: 100%;
+  flex: 1 1 480px;
   max-width: 548px;
   min-width: 0;
   display: flex;
@@ -167,180 +174,193 @@
   gap: 24px;
 }
 
-/* Terminal Box: Auto Layout vertical stack with header, prompt, and steps footer (Figma 759:12132) */
+/* 7. Terminal Box: Figma Frame 759:12132 — Dark Coffee Brown #48342D */
 .terminalBox {
   width: 100%;
-  background: #54392D;
-  border: 1px solid rgba(166, 166, 166, 0.5);
+  background: #48342D;
+  border-radius: 4px;
+  padding: 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: auto;
-  min-height: 265px;
+  gap: 20px;
+  color: #FFFFFF;
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast, 0.15s ease);
 }
 
-/* Terminal Header (Figma 759:12147) */
+.terminalBox:hover {
+  box-shadow: 0 4px 16px rgba(72, 52, 45, 0.25);
+}
+
 .terminalHeader {
-  padding: 18px 20px;
-  border-bottom: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  flex-shrink: 0;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 16px;
 }
 
 .terminalHeaderLeft {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .terminalAvatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 36px;
-  background: rgba(251, 225, 199, 0.55);
-  border: 0.2px solid #7D706A;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
 
 .avatarIcon {
-  width: 15px;
-  height: 15px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-/* Geist 500 16px, line-height 23.2px, #FFFFFF */
 .terminalTitle {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 16px;
-  line-height: 23.2px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 14px;
   font-weight: 500;
   color: #FFFFFF;
 }
 
-/* Prompt Area (Figma 759:12158) */
+/* 8. Prompt Area (Figma 759:12158) */
 .promptArea {
-  padding: 16px 20px 24px 20px;
-  box-sizing: border-box;
-  cursor: pointer;
   position: relative;
-  flex: 1;
+  background: transparent;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  cursor: pointer;
 }
 
 .promptText {
   margin: 0;
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 13px;
-  line-height: 18.85px;
-  color: #FFFFFF;
+  word-break: break-word;
 }
 
-/* Keyword & URL Syntax Colors */
 .keyword {
-  color: #EA8900;
+  color: #FFA056; /* Orange emphasis on "Read" */
+  font-weight: 600;
 }
 
 .url {
-  color: #03A400;
+  color: #2ED573; /* Green active link */
   text-decoration: underline;
-  word-break: break-all;
+  text-underline-offset: 3px;
 }
 
 .copiedToast {
   position: absolute;
-  right: 20px;
-  top: 16px;
-  background: #03A400;
+  top: -8px;
+  right: 0;
+  background: var(--color-brand, #FB6320);
   color: #FFFFFF;
   font-size: 11px;
-  padding: 2px 8px;
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 600;
+  padding: 3px 8px;
   border-radius: 4px;
-  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.2s ease;
 }
 
-/* Terminal Steps Footer: Auto Layout row on desktop (Figma 759:12159) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 9. Steps Footer (Figma 759:12159) */
 .stepsFooter {
-  padding: 16px 20px;
-  border-top: 1px solid rgba(166, 166, 166, 0.5);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 16px;
   gap: 8px;
-  box-sizing: border-box;
-  flex-wrap: nowrap;
-  flex-shrink: 0;
 }
 
 .stepBadge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  flex-shrink: 0;
-  white-space: nowrap;
 }
 
 .stepNum {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 13px;
-  line-height: 18.85px;
-  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .stepText {
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 13px;
-  line-height: 18.85px;
-  color: #FFFFFF;
-  white-space: nowrap;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Primary CTA Button (Figma 759:12163) */
+/* 10. Primary CTA Button: Figma 759:12163 — #FB6320 Brand Orange */
 .connectButton {
   width: 100%;
   height: 48px;
-  background: #FB6320;
-  border: none;
-  border-radius: 0;
+  background: var(--color-brand, #FB6320);
   color: #FFFFFF;
-  font-family: var(--font-sans), var(--font-geist-sans), sans-serif;
-  font-size: 14px;
+  border: none;
+  border-radius: 0px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 15px;
   font-weight: 500;
-  line-height: 19.6px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 }
 
 .connectButton:hover {
-  background: #E05215;
+  background: #E04E0F;
+  box-shadow: 0 4px 12px rgba(251, 99, 32, 0.25);
+  transform: translateY(-1px);
 }
 
 .connectButton:active {
   transform: scale(0.96);
+  background: #C8430B;
 }
 
-/* Bottom Decorative Bracket Accents (Figma 759:12167) */
+.connectButton:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* 11. Decorative Bottom Accents (Figma 759:12167) */
 .bracketContainer {
   width: 100%;
   max-width: 746px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 0;
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0 4px;
   box-sizing: border-box;
-  position: relative;
-  z-index: 2;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .bracketSvg {
@@ -354,8 +374,12 @@
    Responsive Auto Layout Breakpoints
    ========================================================================== */
 
-/* Tablet Breakpoint (769px – 1220px): Switch to stacked column Auto Layout */
+/* Tablet Breakpoint (769px – 1220px) */
 @media (max-width: 1220px) {
+  .section {
+    padding: 0 24px;
+  }
+
   .card {
     flex-direction: column;
     align-items: stretch;
@@ -375,265 +399,107 @@
     flex: 1 1 auto;
   }
 
-  .terminalBox {
-    height: auto;
-    min-height: auto;
-  }
-
-  .title {
-    font-size: 40px;
-    line-height: 40px;
-  }
+  .bracketContainer {
+  width: 100%;
+  max-width: 746px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  box-sizing: border-box;
+  z-index: 3;
+  pointer-events: none;
+}
 }
 
-/* Mobile Breakpoint (<= 768px): Refined tactile mobile experience */
+/* Mobile Breakpoint (<= 768px) */
 @media (max-width: 768px) {
   .section {
-    padding: 24px 16px 48px 16px;
+    padding: 0 16px;
   }
 
   .card {
-    padding: 24px 18px;
-    gap: 24px;
-    min-height: auto;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px 0px rgba(241, 217, 207, 0.7);
-    overflow: hidden;
-  }
-
-  .leftColumn {
-    gap: 20px;
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .headingGroup {
-    gap: 10px;
+    padding: 28px 18px;
+    gap: 28px;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.08);
   }
 
   .title {
-    font-size: 30px;
-    line-height: 34px;
-    letter-spacing: -1px;
+    font-size: 28px;
+    line-height: 32px;
   }
 
   .titleBreak {
-    display: none;
+    display: inline;
   }
 
   .subtitle {
-    font-size: 14.5px;
-    line-height: 21px;
-    color: #665E55;
-  }
-
-  .guideLink {
     font-size: 14px;
     line-height: 20px;
   }
 
-  /* Tactile Interactive Agent Pills Grid */
+  .subtitleBreak {
+    display: inline;
+  }
+
+  .guideLink {
+    font-size: 14px;
+  }
+
   .agentsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    width: 100%;
-    margin-top: 4px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 12px;
   }
 
   .agentItem {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     padding: 8px 10px;
-    min-height: 42px;
-    box-sizing: border-box;
-    background: #FAF8F5;
-    border: 1px solid #ECE7E1;
-    border-radius: 8px;
-    transition: all 150ms ease;
+    background: #FAF8F6;
   }
 
-  .agentItem:hover {
-    background: #F3EFEA;
-    border-color: #DFD7CC;
-  }
-
-  .agentItem:active {
-    transform: scale(0.96);
-  }
-
-  .agentItem.agentSelected {
-    background: #FFF5EE;
-    border-color: #FB6320;
-    box-shadow: 0 1px 4px rgba(251, 99, 32, 0.15);
-  }
-
-  .agentLogoWrapper {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .agentLogo {
-    width: 15px;
-    height: 15px;
-    object-fit: contain;
-  }
-
-  .agentName {
-    font-size: 12.5px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #1A1A1A;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Right Column & Terminal Box */
-  .rightColumn {
-    gap: 16px;
-    max-width: 100%;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .terminalBox {
-    min-height: auto;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #3E2B22;
-    background: #462F24;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-
-  .terminalHeader {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .terminalTitle {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .promptArea {
-    padding: 14px;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .promptText {
-    font-size: 12.5px;
-    line-height: 18px;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .url {
-    color: #05C900;
-    word-break: break-all;
-  }
-
-  /* Compact Horizontal Flow Steps Footer */
   .stepsFooter {
-    padding: 10px 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 14px;
-    background: rgba(0, 0, 0, 0.12);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
-  .stepBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    flex-shrink: 0;
-  }
-
-  .stepNum {
-    font-size: 11px;
-    font-weight: 600;
-    color: #FB6320;
-    line-height: 14px;
-  }
-
-  .stepText {
-    font-size: 11.5px;
-    line-height: 14px;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .connectButton {
-    height: 46px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 2px 6px rgba(251, 99, 32, 0.25);
-  }
-
-  /* Clean up bottom on mobile: eliminate dangling bracket artifacts */
   .bracketContainer {
-    display: none;
-  }
+  width: 100%;
+  max-width: 746px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  box-sizing: border-box;
+  z-index: 3;
+  pointer-events: none;
+}
 }
 
-/* Small Mobile Breakpoint (<= 380px, e.g. iPhone SE) */
+/* Small Mobile Breakpoint (<= 380px) */
 @media (max-width: 380px) {
   .section {
-    padding: 20px 12px 36px 12px;
+    padding: 0 12px;
   }
 
   .card {
-    padding: 18px 12px;
+    padding: 20px 14px;
     gap: 20px;
   }
 
   .title {
-    font-size: 25px;
-    line-height: 29px;
+    font-size: 24px;
+    line-height: 28px;
   }
 
   .agentsGrid {
-    gap: 6px;
-  }
-
-  .agentItem {
-    padding: 6px 8px;
-    min-height: 38px;
-    gap: 6px;
-  }
-
-  .agentName {
-    font-size: 11.5px;
-  }
-
-  .agentLogoWrapper {
-    width: 22px;
-    height: 22px;
-  }
-
-  .agentLogo {
-    width: 14px;
-    height: 14px;
-  }
-
-  .stepsFooter {
-    gap: 6px 10px;
-    padding: 8px 12px;
+    grid-template-columns: 1fr;
   }
 }

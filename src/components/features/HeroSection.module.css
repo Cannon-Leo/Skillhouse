@@ -1,0 +1,245 @@
+/* HeroSection.module.css — Figma Node 751:4775 (Desktop - 1) & 751:4776 (Frame 1618871154) */
+
+.heroSection {
+  width: 100%;
+  background-color: #FFEEDD;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 24px 72px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Header Text Frame (Figma 751:4777: 900x228) */
+.headerGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Main Display Title: Geist Pixel 56px / 72px */
+.title {
+  font-family: var(--font-pixel, monospace);
+  font-weight: 400;
+  font-size: clamp(32px, 5.5vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.titleBreak {
+  display: block;
+}
+
+/* Subtitle description: Geist Regular 16px / 24px */
+.subtitle {
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 400;
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.5;
+  color: #464646;
+  max-width: 480px;
+  margin: 0;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+/* CTA Buttons Frame (Figma 751:4780: 286x48) */
+.ctaButtonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+
+/* Primary Button: Solid Brand Orange #FB6320, white text, 48px height, 8px radius */
+.primaryCta {
+  background-color: #FB6320;
+  color: #FFFFFF;
+  border: 1.5px solid transparent;
+  border-radius: 0px;
+  padding: 12px 24px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.primaryCta:hover {
+  background-color: #E04E0F;
+  box-shadow: 0 4px 12px rgba(251, 99, 32, 0.25);
+  transform: translateY(-1px);
+}
+
+.primaryCta:active {
+  transform: scale(0.96);
+  background-color: #C8430B;
+}
+
+/* Secondary Button: Transparent with #000000 1.5px border, 48px height, 8px radius */
+.secondaryCta {
+  background-color: transparent;
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: 0px;
+  padding: 12px 24px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.secondaryCta:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+
+.secondaryCta:active {
+  transform: scale(0.96);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Discovery Grid Container */
+.gridContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+/* Works With section (Figma 751:4840: 171x65) */
+.worksWithWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.worksWithBadges {
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+  transition: transform 0.2s ease;
+}
+
+.worksWithBadges:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   Responsive Breakpoints: Desktop (1200px+), Tablet (768-1199px), Mobile (<768px)
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 48px 20px 56px 20px;
+  }
+
+  .ctaButtonGroup {
+    margin-top: 28px;
+    margin-bottom: 44px;
+    gap: 12px;
+  }
+
+  .gridContainer {
+    margin-bottom: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 36px 16px 48px 16px;
+  }
+
+  .title {
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.15;
+  }
+
+  .titleBreak {
+    display: inline;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .ctaButtonGroup {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 36px;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    height: 46px;
+  }
+
+  .gridContainer {
+    margin-bottom: 36px;
+  }
+
+  .worksWithBadges {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 28px 12px 40px 12px;
+  }
+
+  .ctaButtonGroup {
+    max-width: 100%;
+  }
+}
