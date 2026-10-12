@@ -101,6 +101,21 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
     expect(onNavigateMarketplace).toHaveBeenCalledTimes(1);
   });
 
+  it("renders semantic accessible ordered list for breadcrumbs with current page", () => {
+    render(<SkillDetailPage />);
+    const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
+    expect(breadcrumbNav).toBeInTheDocument();
+
+    const list = within(breadcrumbNav).getByRole("list");
+    expect(list).toBeInTheDocument();
+
+    const items = within(list).getAllByRole("listitem");
+    expect(items.length).toBeGreaterThanOrEqual(4);
+
+    const currentPage = within(breadcrumbNav).getByText(DEFAULT_DETAIL_SKILL.title);
+    expect(currentPage).toHaveAttribute("aria-current", "page");
+  });
+
   it("falls back to router navigation when callbacks are omitted", () => {
     mockPush.mockClear();
     mockBack.mockClear();

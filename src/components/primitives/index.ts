@@ -3,3 +3,4 @@ export * from "./Card";
 export * from "./Input";
 export * from "./Dialog";
 export * from "./Popover";
+export * from "./Breadcrumb";

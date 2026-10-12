@@ -4,7 +4,15 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/primitives/Breadcrumb";
 import { NavBar } from "./NavBar";
 import { SkillDetailHeader } from "./SkillDetailHeader";
 import { SkillCard } from "./SkillCard";
@@ -159,7 +167,7 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
       {/* 2. Main Centered 898px Workspace */}
       <main className={styles.mainContent}>
         {/* Breadcrumb Navigation Trail (Figma Node 751:5871) */}
-        <nav aria-label="Breadcrumb" className={styles.breadcrumbRow}>
+        <div className={styles.breadcrumbRow}>
           <button
             type="button"
             className={styles.backButton}
@@ -177,40 +185,77 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
 
           <span className={styles.divider} aria-hidden="true" />
 
-          <div className={styles.breadcrumbTrail}>
-            <Link
-              href="/"
-              className={styles.breadcrumbItem}
-              onClick={(e) => {
-                if (onNavigateHome) {
-                  e.preventDefault();
-                  onNavigateHome();
-                }
-              }}
-            >
-              Dashboard
-            </Link>
-            <span className={styles.breadcrumbSeparator}>/</span>
-            <Link
-              href="/?view=marketplace"
-              className={styles.breadcrumbItem}
-              onClick={(e) => {
-                if (onNavigateMarketplace) {
-                  e.preventDefault();
-                  onNavigateMarketplace();
-                }
-              }}
-            >
-              Skills
-            </Link>
-            <span className={styles.breadcrumbSeparator}>/</span>
-            <span className={styles.breadcrumbItem}>{skill.category}</span>
-            <span className={styles.breadcrumbSeparator}>/</span>
-            <span className={styles.breadcrumbCurrent} aria-current="page">
-              {skill.title}
-            </span>
-          </div>
-        </nav>
+          <Breadcrumb className={styles.breadcrumbNav} aria-label="Breadcrumb">
+            <BreadcrumbList className={styles.breadcrumbTrail}>
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  asChild
+                  onClick={(e) => {
+                    if (onNavigateHome) {
+                      e.preventDefault();
+                      onNavigateHome();
+                    }
+                  }}
+                >
+                  <Link href="/" className={styles.breadcrumbItem}>
+                    <Home size={14} className={styles.homeIcon} aria-hidden="true" />
+                    <span>Dashboard</span>
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
+
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  asChild
+                  onClick={(e) => {
+                    if (onNavigateMarketplace) {
+                      e.preventDefault();
+                      onNavigateMarketplace();
+                    }
+                  }}
+                >
+                  <Link href="/skills" className={styles.breadcrumbItem}>
+                    Skills
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+
+              {skill.category && (
+                <>
+                  <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink
+                      asChild
+                      onClick={(e) => {
+                        if (onNavigateMarketplace) {
+                          e.preventDefault();
+                          onNavigateMarketplace();
+                        }
+                      }}
+                    >
+                      <Link
+                        href={`/skills?category=${encodeURIComponent(skill.category)}`}
+                        className={styles.breadcrumbItem}
+                      >
+                        {skill.category}
+                      </Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </>
+              )}
+
+              <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
+
+              <BreadcrumbItem>
+                <BreadcrumbPage className={styles.breadcrumbCurrent}>
+                  {skill.title}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
 
         {/* Two-Column Main Layout (Figma Node 751:5604) */}
         <section className={styles.twoColumnLayout}>
