@@ -15,6 +15,7 @@ import Link from "next/link";
 import { SearchInput } from "../ui/SearchInput";
 import { CategoriesDropdown, CategoryTab } from "./CategoriesDropdown";
 import { UserMenuPopover } from "./UserMenuPopover";
+import { useScrollLock } from "../../lib/useScrollLock";
 import styles from "./NavBar.module.css";
 
 export interface NavBarProps {
@@ -65,14 +66,7 @@ export const NavBar: React.FC<NavBarProps> = ({
     () => false
   );
 
-  useEffect(() => {
-    if (!categoriesOpen) return;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = originalOverflow;
-    };
-  }, [categoriesOpen]);
+  useScrollLock(categoriesOpen);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 

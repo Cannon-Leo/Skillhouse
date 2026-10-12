@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useScrollLock } from "../../lib/useScrollLock";
 import styles from "./Overlay.module.css";
 
 export interface OverlayProps {
@@ -18,6 +19,8 @@ export const Overlay: React.FC<OverlayProps> = ({
   className = "",
   closeOnClickOutside = true,
 }) => {
+  useScrollLock(isOpen);
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -28,12 +31,9 @@ export const Overlay: React.FC<OverlayProps> = ({
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = originalOverflow;
     };
   }, [isOpen, onClose]);
 
@@ -48,6 +48,7 @@ export const Overlay: React.FC<OverlayProps> = ({
         }
       }}
       data-testid="modal-overlay"
+      role="presentation"
     >
       {children}
     </div>

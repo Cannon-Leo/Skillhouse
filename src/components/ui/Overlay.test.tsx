@@ -34,6 +34,17 @@ describe("UI Overlay Component", () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
+  it("does not call onClose when child content is clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <Overlay isOpen={true} onClose={handleClose}>
+        <div data-testid="child-content">Modal Content</div>
+      </Overlay>
+    );
+    fireEvent.click(screen.getByTestId("child-content"));
+    expect(handleClose).not.toHaveBeenCalled();
+  });
+
   it("calls onClose when Escape key is pressed", () => {
     const handleClose = vi.fn();
     render(

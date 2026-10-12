@@ -22,6 +22,7 @@ import { CategorySkillGrid } from "../features/CategorySkillGrid";
 
 import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
 import { Footer } from "../features/Footer";
+import { useScrollLock } from "../../lib/useScrollLock";
 import styles from "./DesignSystemShowcase.module.css";
 
 export const DesignSystemShowcase: React.FC = () => {
@@ -33,6 +34,7 @@ export const DesignSystemShowcase: React.FC = () => {
   const [demoLoginModalOpen, setDemoLoginModalOpen] = useState(false);
   const [demoDropdownTab, setDemoDropdownTab] = useState<"use-case" | "role" | "output">("use-case");
   const [demoDropdownOverlayOpen, setDemoDropdownOverlayOpen] = useState(false);
+  useScrollLock(demoDropdownOverlayOpen);
   const [demoNavSignedIn, setDemoNavSignedIn] = useState(false);
   const [demoUserMenuVariant, setDemoUserMenuVariant] = useState<"attending" | "extended">("attending");
   const [demoUserMenuActiveItem, setDemoUserMenuActiveItem] = useState<string>("bookmarks");
@@ -802,7 +804,7 @@ export const DesignSystemShowcase: React.FC = () => {
             <span className={styles.nodeBadge}>Nodes 750:3470, 750:4067</span>
           </h2>
           <p className={styles.sectionDesc}>
-            Interactive dropdown menu featuring 3 active tab variants (By use-case, By role, By output), exact Figma vector icons (#000000 import icon, #7F776E arrow chevron), #FFECD8 cream surface, #CFD9E8 borders, and full backdrop overlay (rgba(66, 65, 69, 0.54) with 8px blur).
+            Interactive dropdown menu featuring 3 active tab variants (By use-case, By role, By output), exact Figma vector icons (#000000 import icon, #7F776E arrow chevron), #FFECD8 cream surface, #CFD9E8 borders, and full backdrop overlay (rich espresso-charcoal scrim rgba(18, 14, 12, 0.65) with 12px blur + saturation).
           </p>
         </div>
 
@@ -857,18 +859,29 @@ export const DesignSystemShowcase: React.FC = () => {
           <div
             style={{
               position: "fixed",
+              inset: 0,
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: "rgba(66, 65, 69, 0.54)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "rgba(18, 14, 12, 0.65)",
+              backdropFilter: "blur(12px) saturate(140%) brightness(0.92)",
+              WebkitBackdropFilter: "blur(12px) saturate(140%) brightness(0.92)",
               zIndex: 9999,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               paddingTop: "90px",
+              overscrollBehavior: "contain",
+              touchAction: "none",
+            }}
+            onWheel={(e) => {
+              if (e.target === e.currentTarget) e.preventDefault();
+            }}
+            onTouchMove={(e) => {
+              if (e.target === e.currentTarget) e.preventDefault();
             }}
             onClick={() => setDemoDropdownOverlayOpen(false)}
           >

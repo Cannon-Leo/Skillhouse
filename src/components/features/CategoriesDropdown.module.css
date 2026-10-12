@@ -16,7 +16,9 @@
     0px 0px 0px 1px rgba(16, 25, 40, 0.05),
     0px 0px 3px -1px rgba(16, 25, 40, 0.04),
     0px 16px 24px -6px rgba(16, 25, 40, 0.08);
-  overflow: hidden;
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   user-select: none;
   z-index: 1000;
   text-align: left;
@@ -152,7 +154,7 @@
 .itemRow:hover,
 .itemRow:focus-visible,
 .itemRow:focus {
-  background-color: #FCE7D1;
+  background-color: #F8D5B8;
 }
 
 .itemRow:focus-visible {

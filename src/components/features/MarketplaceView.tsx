@@ -14,6 +14,7 @@ import { ConnectAgentBanner } from "./ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
 import { Footer } from "@/components/features/Footer";
+import { useScrollLock } from "@/lib/useScrollLock";
 import styles from "./MarketplaceView.module.css";
 
 export interface SkillItem {
@@ -527,6 +528,19 @@ export function MarketplaceView({
   const [sortBy, setSortBy] = useState<"newest" | "popular" | "alphabetical">("newest");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
+
+  useScrollLock(Boolean(selectedSkill) || mobileFiltersVisible);
+
+  useEffect(() => {
+    if (!selectedSkill) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedSkill(null);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedSkill]);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);

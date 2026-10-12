@@ -121,7 +121,7 @@
   border-radius: 0px;
   background: transparent;
   cursor: pointer;
-  box-shadow: 0px 1.5px 3px rgba(16, 24, 40, 0.06);
+
   transition: box-shadow var(--transition-fast, 0.15s ease), background var(--transition-fast, 0.15s ease), border-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease);
   user-select: none;
   border: 1px solid transparent;

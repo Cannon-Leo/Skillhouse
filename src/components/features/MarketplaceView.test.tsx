@@ -142,11 +142,16 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     fireEvent.click(closeBtn);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
-    // Reopen and test backdrop click
+    // Reopen and test Escape key closes dialog
     fireEvent.click(firstCard);
-    const reopenedDialog = screen.getByRole("dialog");
-    expect(reopenedDialog).toBeInTheDocument();
-    fireEvent.click(reopenedDialog);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    // Reopen and click backdrop to close
+    fireEvent.click(firstCard);
+    const finalDialog = screen.getByRole("dialog");
+    fireEvent.click(finalDialog);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 

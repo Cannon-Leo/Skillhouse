@@ -58,6 +58,13 @@ describe("Features NavBar Component", () => {
     fireEvent.mouseDown(document.body);
     expect(catBtn).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+    // Open and click backdrop directly to close
+    fireEvent.click(catBtn);
+    const backdrop = screen.getByTestId("categories-backdrop");
+    expect(backdrop).toBeInTheDocument();
+    fireEvent.click(backdrop);
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
   it("toggles mobile menu drawer and navigates from mobile links", () => {

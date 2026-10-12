@@ -212,7 +212,7 @@
 }
 
 .megaMenuItem:hover {
-  background: #FCE7D1;
+  background: #F8D5B8;
   border-color: rgba(166, 166, 166, 0.3);
 }
 
@@ -578,6 +578,8 @@
  * fills: rgba(66, 65, 69, 0.54), backdrop-filter: blur(8px)
  */
 .dropdownBackdrop {
+  overscroll-behavior: none;
+  touch-action: none;
   position: fixed;
   inset: 0;
   top: 0;
