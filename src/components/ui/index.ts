@@ -6,3 +6,4 @@ export * from "./Pill";
 export * from "./Overlay";
 export * from "./SubscriptionBanner";
 export { CategorySkillCard, type CategorySkillCardProps } from "../features/CategorySkillCard";
+export * from "./BookmarkButton";

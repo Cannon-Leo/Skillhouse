@@ -1,5 +1,7 @@
 "use client";
 
+import { BookmarkButton } from "../ui/BookmarkButton";
+
 import React, { useState } from "react";
 import {
   Bookmark,
@@ -113,16 +115,12 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
           <h1 className={styles.title}>{title}</h1>
 
           <div className={styles.roundActionButtons}>
-            <button
-              type="button"
-              className={`${styles.roundButton} ${isBookmarked ? styles.bookmarkedActive : ""}`}
+            <BookmarkButton
+              variant="round"
+              isBookmarked={isBookmarked}
+              onToggle={handleBookmarkToggle}
               aria-label={isBookmarked ? "Remove from bookmarks" : "Bookmark skill"}
-              aria-pressed={isBookmarked}
-              title={isBookmarked ? "Saved in bookmarks" : "Bookmark skill"}
-              onClick={handleBookmarkToggle}
-            >
-              <Bookmark size={14} aria-hidden="true" fill={isBookmarked ? "currentColor" : "none"} />
-            </button>
+            />
 
             <button
               type="button"

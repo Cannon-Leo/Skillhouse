@@ -1,0 +1,79 @@
+/* BookmarkButton.module.css — Unified Skillhouse Bookmark Action Surface */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  color: var(--color-dark, #1A1A1A);
+  padding: 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  outline: none;
+  transition: transform var(--transition-fast, 0.15s ease),
+              background-color var(--transition-fast, 0.15s ease),
+              border-color var(--transition-fast, 0.15s ease),
+              color var(--transition-fast, 0.15s ease),
+              box-shadow var(--transition-fast, 0.15s ease);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-brand, #FB6320);
+  outline-offset: 2px;
+}
+
+.button:active {
+  transform: scale(0.96);
+}
+
+/* Variant A: Round (28x28px circular for SkillDetailHeader, Node 752:11251) */
+.round {
+  width: var(--dim-btn-round, 28px);
+  height: var(--dim-btn-round, 28px);
+  border-radius: var(--radius-full, 50%);
+  background-color: var(--color-surface-cream, #FFECD8);
+  border-color: var(--color-border, rgba(166, 166, 166, 0.5));
+}
+
+.round:hover {
+  background-color: var(--color-surface-peach, #FBE1C7);
+  transform: translateY(-1px);
+}
+
+/* Variant B: Square (26x26px sharp 0px for SkillCard, Node 673:3035) */
+.square {
+  width: 26px;
+  height: 26px;
+  border-radius: 0px;
+  background-color: var(--color-white, #FFFFFF);
+  border-color: var(--color-border, #E5E5E5);
+  box-shadow: var(--shadow-xs, 0px 1px 2px rgba(16, 24, 40, 0.05));
+}
+
+.square:hover {
+  background-color: var(--color-surface-hover, #F9F9F9);
+  border-color: var(--color-brand, #FB6320);
+  color: var(--color-brand, #FB6320);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Active Bookmarked State — Crisp Brand Orange with Pure White Icon */
+.bookmarked {
+  background-color: var(--color-brand, #FB6320) !important;
+  border-color: var(--color-brand, #FB6320) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(251, 99, 32, 0.35);
+}
+
+.bookmarked:hover {
+  background-color: var(--color-brand-hover, #E05215) !important;
+  border-color: var(--color-brand-hover, #E05215) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.icon {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast, 0.15s ease);
+}
