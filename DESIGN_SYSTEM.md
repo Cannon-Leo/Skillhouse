@@ -340,6 +340,10 @@ The spacing design system is derived directly from empirical measurements concat
   - Subtitle: `Geist Sans` 13px, line-height `1.45em`, color `#FFE3D7`, copy: `"No exclusions. Access all curated, verified and continuously updated skills"`.
 - **Right Arrow**:
   - Component: `Line arrow-right` (component `725:846`), dimension `16x16px`, color `#FFFFFF`, centered vertically.
+- **Responsive Adaptations**:
+  - Desktop (`> 480px`): Exact Figma Node `751:5654` horizontal row layout (`textContainer` flex: 1, centered `Line arrow-right` 16x16px on right).
+  - Mobile (`<= 480px`): Responsive column layout (`flex-direction: column; align-items: flex-start; gap: 12px; padding: clamp(12px, 3.5vw, 16px)`), placing the arrow cleanly below the subtitle text with 100% text width.
+  - Micro-Mobile (`<= 360px`): Fluid typography scaling (title 15px, subtitle 12px) preventing awkward sentence fragmentation.
 
 ### D. Responsive Layout Divider Junctions & Action Button Fixes (Figma File IsangAI Node 4577-221479)
 1. **Vertical Column Divider Lines Touch Horizontal Hero Divider (0px Junction Gap)**:

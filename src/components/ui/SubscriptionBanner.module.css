@@ -1,11 +1,12 @@
 /* ==========================================================================
    SubscriptionBanner Module (Figma Node 751:5654 "add journey")
-   Exact Specs:
+   Exact Specs & Responsive Architecture:
    - solid background: #FB6320 (var(--color-brand))
-   - padding: 16px all sides (var(--space-lg))
    - border-radius: 0px (sharp corners)
-   - horizontal row: text block on left, 16x16 arrow on right, vertically centered
-   - gap: 16px
+   - Desktop (>480px): horizontal row, text column on left, centered right arrow on right
+   - Mobile (<=480px): responsive column layout, placing the arrow below the subtitle
+   - gap: 16px (desktop) / 12px (mobile)
+   - padding: 16px (desktop) / clamp(12px, 3.5vw, 16px) (mobile)
    - title: Geist Pixel Square 16px, 1.45em, #FFFFFF
    - subtitle: Geist Regular 13px, 1.45em, #FFE3D7
    ========================================================================== */
@@ -51,6 +52,7 @@
   gap: var(--space-3xs); /* 4px */
   flex: 1;
   min-width: 0;
+  width: 100%;
 }
 
 .title {
@@ -87,9 +89,35 @@
   transform: translateX(4px);
 }
 
+/* ==========================================================================
+   Responsive Adaptations
+   - <= 480px: Switch to column layout so the arrow cleanly drops below the text
+   - <= 360px: Fluid typography scaling to prevent overflow on ultra-narrow devices
+   ========================================================================== */
+
 @media (max-width: 480px) {
   .banner {
-    padding: var(--space-md);
-    gap: var(--space-md);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md); /* 12px */
+    padding: clamp(12px, 3.5vw, 16px);
+  }
+
+  .textContainer {
+    width: 100%;
+  }
+
+  .arrowContainer {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 12px;
   }
 }
