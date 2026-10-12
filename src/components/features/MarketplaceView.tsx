@@ -2,14 +2,12 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
+import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal, ExternalLink } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
 import { AdCard } from "@/components/features/AdCard";
 import { SkillDetailHeader } from "@/components/features/SkillDetailHeader";
-import { SkillAudienceBox } from "@/components/features/SkillAudienceBox";
-import { SkillRuntimeSpecs } from "@/components/features/SkillRuntimeSpecs";
 import { ConnectAgentBanner } from "./ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
@@ -368,6 +366,7 @@ export interface MarketplaceViewProps {
   initialCategory?: string;
   initialSearch?: string;
   onNavigateHome?: () => void;
+  onSelectSkillDetail?: (skillId: string) => void;
   className?: string;
 }
 
@@ -517,6 +516,7 @@ export function MarketplaceView({
   initialCategory,
   initialSearch,
   onNavigateHome,
+  onSelectSkillDetail,
   className = "",
 }: MarketplaceViewProps) {
   const router = useRouter();
@@ -958,14 +958,33 @@ export function MarketplaceView({
             className={styles.modalSheet}
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              className={styles.modalCloseBtn}
-              onClick={() => setSelectedSkill(null)}
-              aria-label="Close skill details"
-            >
-              <X size={20} />
-            </button>
+            <div className={styles.modalHeaderActions}>
+              <button
+                type="button"
+                className={styles.viewFullPageBtn}
+                onClick={() => {
+                  if (onSelectSkillDetail) {
+                    onSelectSkillDetail(selectedSkill.id);
+                  } else {
+                    router.push(`/skills/${selectedSkill.id}`);
+                  }
+                }}
+                aria-label={`Open dedicated page for ${selectedSkill.title}`}
+                data-testid="modal-view-full-page-btn"
+              >
+                <span>View Full Page</span>
+                <ExternalLink size={14} aria-hidden="true" />
+              </button>
+
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setSelectedSkill(null)}
+                aria-label="Close skill details"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
             <SkillDetailHeader
               title={selectedSkill.title}
@@ -976,9 +995,7 @@ export function MarketplaceView({
               description={selectedSkill.description}
             />
 
-            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
-              <SkillAudienceBox />
-              <SkillRuntimeSpecs />
+            <div style={{ marginTop: 24 }}>
               <ConnectAgentBanner />
             </div>
           </div>

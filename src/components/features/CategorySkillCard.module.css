@@ -15,24 +15,24 @@
   border-radius: 0;
   box-shadow: none;
   /* Card outer frame stays strictly anchored — NO transforms that break bridge alignment */
-  transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   text-align: left;
   outline: none;
 }
 
-/* Hover state: Warm Terracotta Sunbeam Lift without shadows */
+/* Hover state: subtle shadow while tile maintains exact background color */
 @media (hover: hover) {
   .card:hover {
-    background-color: #E2C9B2;
-    box-shadow: none;
+    box-shadow: 0 4px 12px rgba(84, 57, 45, 0.08), 0 1px 3px rgba(84, 57, 45, 0.04);
+    z-index: 2;
   }
 }
 
-/* Active / Pressed state: tactile feedback without displacement */
+/* Active / Pressed state: subtle shadow feedback without displacement or color shift */
 .card:active {
-  background-color: #DABFA6;
-  box-shadow: none;
+  box-shadow: 0 2px 6px rgba(84, 57, 45, 0.06);
+  z-index: 2;
 }
 
 /* Focus Visible: accessible focus ring in rich #54392D without outer blur */
@@ -127,11 +127,7 @@
   transition: color 0.18s ease;
 }
 
-@media (hover: hover) {
-  .card:hover .title {
-    color: #171717;
-  }
-}
+/* Title retains clean constant tone — only the icon changes state */
 
 /* Tablet view (screens <= 1024px) */
 @media (max-width: 1024px) {

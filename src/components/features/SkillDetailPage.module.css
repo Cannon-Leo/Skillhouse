@@ -1,0 +1,294 @@
+/* SkillDetailPage Component Styles
+ * Exact Figma Node 751:5602 (skills detailed page - premium - signed in)
+ * Canvas Background: #FFEEDD
+ * Main Column Width: 898px centered (437px left gallery + 24px gap + 437px right panel)
+ */
+
+.pageContainer {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-bg-page, #FFEEDD);
+  color: var(--color-text-body, #242426);
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  max-width: 898px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 1. Breadcrumbs Navigation Row (Figma Node 751:5871) */
+.breadcrumbRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 28px;
+  flex-wrap: wrap;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  margin-left: -8px;
+  color: #54392D;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition-fast, 150ms ease), transform var(--transition-fast, 150ms ease);
+}
+
+.backButton:hover {
+  color: #FB6320;
+  transform: translateX(-2px);
+}
+
+.backButton:active {
+  transform: scale(0.96);
+}
+
+.divider {
+  width: 1px;
+  height: 16px;
+  background-color: #CDB7AE;
+  flex-shrink: 0;
+}
+
+.breadcrumbTrail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: #7F776E;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumbItem {
+  color: #7F776E;
+  text-decoration: none;
+  transition: color var(--transition-fast, 150ms ease);
+}
+
+.breadcrumbItem:hover {
+  color: #000000;
+}
+
+.breadcrumbSeparator {
+  color: #A6A6A6;
+  font-size: 12px;
+}
+
+.breadcrumbCurrent {
+  color: #000000;
+  font-weight: 500;
+}
+
+/* 2. Main Two-Column Layout (Figma Node 751:5604) */
+.twoColumnLayout {
+  display: grid;
+  grid-template-columns: 437px 437px;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Left Column: Media Preview Gallery (Figma Node 751:5605) */
+.galleryColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 437px;
+}
+
+.mainPreviewCanvas {
+  width: 437px;
+  height: 450px;
+  background-color: #FFECD8;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPreviewImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mainPreviewCanvas:hover .mainPreviewImage {
+  transform: scale(1.02);
+}
+
+/* Thumbnails Selector Row (Figma Node 751:5607) */
+.thumbnailsRow {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.thumbnailCard {
+  width: 91px;
+  height: 80px;
+  border: 1px solid rgba(166, 166, 166, 0.5);
+  background-color: #FFECD8;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast, 150ms ease),
+              transform var(--transition-fast, 150ms ease),
+              box-shadow var(--transition-fast, 150ms ease);
+}
+
+.thumbnailCard:hover {
+  border-color: #54392D;
+  transform: translateY(-2px);
+}
+
+.thumbnailCard:active {
+  transform: scale(0.96);
+}
+
+.thumbnailCard.active {
+  border: 2px solid #FB6320;
+  box-shadow: 0 0 0 1px #FB6320;
+}
+
+.thumbnailImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Right Column: Composite Header Panel */
+.panelColumn {
+  width: 437px;
+}
+
+/* 3. Similar Skills Section (Figma Node 751:5762) */
+.similarSection {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.similarHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #CDB7AE;
+  padding-bottom: 12px;
+}
+
+.similarTitle {
+  font-family: var(--font-pixel, var(--font-sans));
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.carouselControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carouselBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #CDB7AE;
+  background-color: #FFECD8;
+  color: #54392D;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color var(--transition-fast, 150ms ease),
+              color var(--transition-fast, 150ms ease),
+              transform var(--transition-fast, 150ms ease);
+}
+
+.carouselBtn:hover {
+  background-color: #54392D;
+  color: #FFFFFF;
+}
+
+.carouselBtn:active {
+  transform: scale(0.96);
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 212.5px);
+  gap: 16px;
+  width: 100%;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .mainContent {
+    max-width: 100%;
+    padding: 16px 16px 64px 16px;
+  }
+
+  .twoColumnLayout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .galleryColumn,
+  .panelColumn {
+    width: 100%;
+  }
+
+  .mainPreviewCanvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 437 / 450;
+  }
+
+  .similarGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .similarGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .thumbnailsRow {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .thumbnailCard {
+    flex-shrink: 0;
+  }
+}

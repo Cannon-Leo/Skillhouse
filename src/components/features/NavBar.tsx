@@ -210,13 +210,7 @@ export const NavBar: React.FC<NavBarProps> = ({
             Request a skill
           </button>
 
-          <button
-            type="button"
-            className={styles.navItem}
-            onClick={() => alert("Submit a skill modal")}
-          >
-            Submit a skill
-          </button>
+
 
           <button
             type="button"
@@ -391,17 +385,7 @@ export const NavBar: React.FC<NavBarProps> = ({
               <span>Request a skill</span>
               <ChevronRight size={16} />
             </button>
-            <button
-              type="button"
-              className={styles.mobileDrawerLink}
-              onClick={() => {
-                alert("Submit a skill modal");
-                setMobileMenuOpen(false);
-              }}
-            >
-              <span>Submit a skill</span>
-              <ChevronRight size={16} />
-            </button>
+
             <button
               type="button"
               className={styles.mobileDrawerLink}

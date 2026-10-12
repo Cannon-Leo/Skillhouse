@@ -287,4 +287,19 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     openSpy.mockRestore();
   });
 
+  it("triggers onSelectSkillDetail when View Full Page is clicked inside the detail modal", () => {
+    const onSelectSkillDetail = vi.fn();
+    render(<MarketplaceView onSelectSkillDetail={onSelectSkillDetail} />);
+
+    // Click on a skill card to open modal
+    const cards = screen.getAllByRole("article");
+    fireEvent.click(cards[0]);
+
+    // Check View Full Page button
+    const fullPageBtn = screen.getByTestId("modal-view-full-page-btn");
+    expect(fullPageBtn).toBeInTheDocument();
+    fireEvent.click(fullPageBtn);
+
+    expect(onSelectSkillDetail).toHaveBeenCalledTimes(1);
+  });
 });

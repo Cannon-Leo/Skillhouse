@@ -92,6 +92,7 @@ function MainContent() {
         initialCategory={selectedCategory}
         initialSearch={searchValue}
         onNavigateHome={navigateHome}
+        onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
       />
     );
   }
