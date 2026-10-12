@@ -45,7 +45,7 @@ export const AdCard: React.FC<AdCardProps> = ({
       onClick={handleClick}
       role="article"
       tabIndex={0}
-      aria-label={`Sponsored ad: ${title}`}
+      aria-label={`Sponsored ad: ${title}${description ? ` — ${description}` : ""}`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
