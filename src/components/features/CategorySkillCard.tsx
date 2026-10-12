@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./CategorySkillCard.module.css";
 
 export interface CategorySkillCardProps {
@@ -67,34 +68,13 @@ export const CategorySkillCard: React.FC<CategorySkillCardProps> = ({
   const cardContent = (
     <>
       <div className={styles.headerRow}>
-        <span className={styles.actionButton} aria-hidden="true">
-          <svg
+        <span className={styles.actionButton} aria-hidden="true" data-testid="card-action-button">
+          <ArrowUpRight
             className={styles.arrowIcon}
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            size={15}
+            strokeWidth={2}
             aria-hidden="true"
-          >
-            {/* Authentic Figma Node 751:4800 Line arrow-right with exact color #54392D */}
-            <path
-              d="M8.12483 6.6118L13.1831 6.09987L13.695 11.1581"
-              stroke="#54392D"
-              fill="#54392D"
-              strokeWidth="1.52294"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M6.81655 13.8998L13.1192 6.17773"
-              stroke="#54392D"
-              fill="#54392D"
-              strokeWidth="1.52294"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          />
         </span>
       </div>
       <h3 className={styles.title}>{title}</h3>

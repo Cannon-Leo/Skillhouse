@@ -13,33 +13,29 @@
   cursor: pointer;
   border: none;
   border-radius: 0;
-  /* Subtle top microscopic catch-light for tactile surface depth */
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+  box-shadow: none;
   /* Card outer frame stays strictly anchored — NO transforms that break bridge alignment */
-  transition: background-color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   text-align: left;
   outline: none;
 }
 
-/* Hover state: Warm Terracotta Sunbeam Lift — keeps card solidly anchored to bridges */
+/* Hover state: Warm Terracotta Sunbeam Lift without shadows */
 @media (hover: hover) {
   .card:hover {
     background-color: #E2C9B2;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
-                inset 0 0 0 1px rgba(84, 57, 45, 0.12);
+    box-shadow: none;
   }
 }
 
-/* Active / Pressed state: tactile response maintaining exact dimensions */
+/* Active / Pressed state: tactile feedback without displacement */
 .card:active {
   background-color: #DABFA6;
-  box-shadow: inset 0 0 0 1px rgba(84, 57, 45, 0.25),
-              inset 0 2px 4px rgba(84, 57, 45, 0.12);
+  box-shadow: none;
 }
 
-/* Focus Visible: Inset focus ring in rich #54392D */
+/* Focus Visible: accessible focus ring in rich #54392D without outer blur */
 .card:focus-visible {
   outline: none;
   box-shadow: inset 0 0 0 2px #54392D;
@@ -56,7 +52,7 @@
   z-index: 2;
 }
 
-/* Cute 28px circular action badge */
+/* 28px circular action badge */
 .actionButton {
   display: inline-flex;
   align-items: center;
@@ -68,43 +64,51 @@
   border: 1px solid rgba(84, 57, 45, 0.18);
   color: #54392D;
   flex-shrink: 0;
-  box-shadow: 0 1px 2px rgba(84, 57, 45, 0.06);
+  box-shadow: none; /* No shadow */
   /* Playful spring easing curve for a cute bouncy perk on hover */
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
-              background-color 0.2s ease,
-              border-color 0.2s ease,
-              box-shadow 0.24s ease;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) {
   .card:hover .actionButton {
-    /* Playful spring scale & gentle lift */
-    transform: scale(1.1) translate(1px, -1px);
-    background-color: #FFF2E3;
-    border-color: rgba(84, 57, 45, 0.35);
-    box-shadow: 0 3px 8px rgba(84, 57, 45, 0.14);
+    /* Fill #54392D with white icon, no shadow */
+    transform: scale(1.08) translate(1px, -1px);
+    background-color: #54392D;
+    border-color: #54392D;
+    color: #FFFFFF;
+    box-shadow: none;
   }
 }
 
 .card:active .actionButton {
-  transform: scale(0.94) translate(0.5px, -0.5px);
+  transform: scale(0.95);
+  background-color: #422C23;
+  border-color: #422C23;
+  color: #FFFFFF;
+  box-shadow: none;
 }
 
-/* Arrow Glyph: strict #54392D fill and stroke */
+/* Lucide ArrowUpRight icon: default #54392D, white on hover */
 .arrowIcon {
   width: 15px;
   height: 15px;
-  stroke: #54392D;
-  fill: #54392D;
-  color: #54392D;
-  transform: translate(0.5px, -0.5px); /* Optical center */
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  stroke: currentColor;
+  color: inherit;
+  flex-shrink: 0;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+              color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              stroke 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) {
   .card:hover .arrowIcon {
-    /* Cute diagonal glide in 45° direction */
-    transform: translate(2px, -2px);
+    /* Subtle cute diagonal micro-glide */
+    transform: translate(1px, -1px);
+    color: #FFFFFF;
+    stroke: #FFFFFF;
   }
 }
 

@@ -36,21 +36,19 @@ describe("CategorySkillCard (Figma Node 751:4797)", () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it("renders authentic arrow icon with #54392D color and fill", () => {
+  it("renders Lucide ArrowUpRight icon inside action button", () => {
     const { container } = render(
       <CategorySkillCard
         title="Free Agent Skills"
       />
     );
 
-    const arrowSvg = container.querySelector("svg");
-    expect(arrowSvg).toBeInTheDocument();
-    const paths = arrowSvg?.querySelectorAll("path");
-    expect(paths && paths.length > 0).toBe(true);
-    paths?.forEach((path) => {
-      expect(path).toHaveAttribute("stroke", "#54392D");
-      expect(path).toHaveAttribute("fill", "#54392D");
-    });
+    const actionButton = screen.getByTestId("card-action-button");
+    expect(actionButton).toBeInTheDocument();
+
+    const lucideSvg = actionButton.querySelector("svg");
+    expect(lucideSvg).toBeInTheDocument();
+    expect(lucideSvg).toHaveClass("lucide-arrow-up-right");
   });
 
   it("renders as an anchor link when href is provided", () => {
