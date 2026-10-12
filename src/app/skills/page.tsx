@@ -58,6 +58,8 @@ function SkillsPageContent() {
       initialCategory={categoryParam}
       initialSearch={searchParam}
       onNavigateHome={() => router.push("/")}
+      onNavigateMySkills={() => router.push("/?view=my-skills")}
+      onSelectSkillDetail={(id) => router.push(`/skills?id=${id}`)}
     />
   );
 }

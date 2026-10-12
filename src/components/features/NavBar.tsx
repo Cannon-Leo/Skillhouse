@@ -9,7 +9,6 @@ import {
   X,
   LogOut,
   Search,
-  Bookmark,
 } from "lucide-react";
 import { Button } from "../ui/Button";
 import Link from "next/link";

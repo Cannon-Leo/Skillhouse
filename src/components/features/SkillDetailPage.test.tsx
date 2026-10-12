@@ -116,6 +116,16 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
     expect(currentPage).toHaveAttribute("aria-current", "page");
   });
 
+  it("handles navbar view change for my-skills and design-system", () => {
+    mockPush.mockClear();
+    render(<SkillDetailPage />);
+
+    // Click My Skills in NavBar
+    const mySkillsLink = screen.getByText("My Skills");
+    fireEvent.click(mySkillsLink);
+    expect(mockPush).toHaveBeenCalledWith("/?view=my-skills");
+  });
+
   it("falls back to router navigation when callbacks are omitted", () => {
     mockPush.mockClear();
     mockBack.mockClear();

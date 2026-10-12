@@ -242,16 +242,14 @@
 
 .sortDropdownMenu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 4px);
   right: 0;
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 10px;
+  background-color: #FFECD8;
+  border: 1px solid #CDB7AE;
+  border-radius: 4px;
   box-shadow: 
-    0 0 0 1px rgba(18, 19, 22, 0.08),
-    0 12px 32px -4px rgba(16, 18, 24, 0.12);
+    0px 4px 6px -2px rgba(0, 0, 0, 0.06), 
+    0px 12px 16px -4px rgba(0, 0, 0, 0.1);
   z-index: 50;
   min-width: 140px;
   padding: 4px;
@@ -263,26 +261,26 @@
 
 .sortOption {
   padding: 8px 12px;
-  border-radius: 6px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  border-radius: 3px;
+  font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 13.5px;
   color: #121316;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background-color 0.12s ease;
+  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .sortOption:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #121316;
+  background-color: #F8D5B8;
+  color: #000000;
 }
 
 .sortOption.selected {
   font-weight: 500;
-  color: #FB6320;
-  background-color: rgba(251, 99, 32, 0.08);
+  color: var(--color-brand, #FB6320);
+  background-color: rgba(251, 99, 32, 0.1);
 }
 
 /* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */

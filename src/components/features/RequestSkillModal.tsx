@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Overlay } from "@/components/ui/Overlay";
-import { Check, X } from "lucide-react";
+import { Check, X, ChevronDown } from "lucide-react";
 import styles from "./RequestSkillModal.module.css";
 
 export interface SkillRequestData {
@@ -264,19 +264,26 @@ export const RequestSkillModal: React.FC<RequestSkillModalProps> = ({
                     <span className={styles.requiredBadge}>*</span>
                   </label>
                 </div>
-                <select
-                  id="req-category"
-                  className={styles.select}
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                >
-                  {CATEGORY_OPTIONS.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
+                <div className={styles.selectWrapper}>
+                  <select
+                    id="req-category"
+                    className={styles.select}
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    required
+                  >
+                    {CATEGORY_OPTIONS.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown
+                    size={16}
+                    className={styles.selectChevron}
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
 
               {/* Target Agent (Optional) */}
@@ -287,18 +294,25 @@ export const RequestSkillModal: React.FC<RequestSkillModalProps> = ({
                   </label>
                   <span className={styles.optionalBadge}>Optional</span>
                 </div>
-                <select
-                  id="req-agent"
-                  className={styles.select}
-                  value={targetAgent}
-                  onChange={(e) => setTargetAgent(e.target.value)}
-                >
-                  {AGENT_OPTIONS.map((agent) => (
-                    <option key={agent} value={agent}>
-                      {agent}
-                    </option>
-                  ))}
-                </select>
+                <div className={styles.selectWrapper}>
+                  <select
+                    id="req-agent"
+                    className={styles.select}
+                    value={targetAgent}
+                    onChange={(e) => setTargetAgent(e.target.value)}
+                  >
+                    {AGENT_OPTIONS.map((agent) => (
+                      <option key={agent} value={agent}>
+                        {agent}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown
+                    size={16}
+                    className={styles.selectChevron}
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
 
               {/* Access preference (Optional) */}
@@ -309,19 +323,31 @@ export const RequestSkillModal: React.FC<RequestSkillModalProps> = ({
                 </div>
                 <div className={styles.radioGroup}>
                   {(["Free", "Included in a subscription", "Either is fine"] as const).map(
-                    (pref) => (
-                      <label key={pref} className={styles.radioLabel}>
-                        <input
-                          type="radio"
-                          name="accessPreference"
-                          value={pref}
-                          checked={accessPreference === pref}
-                          onChange={() => setAccessPreference(pref)}
-                          className={styles.radioInput}
-                        />
-                        <span>{pref}</span>
-                      </label>
-                    )
+                    (pref) => {
+                      const isChecked = accessPreference === pref;
+                      return (
+                        <label
+                          key={pref}
+                          className={`${styles.radioLabel} ${isChecked ? styles.radioLabelActive : ""}`}
+                        >
+                          <input
+                            type="radio"
+                            name="accessPreference"
+                            value={pref}
+                            checked={isChecked}
+                            onChange={() => setAccessPreference(pref)}
+                            className={styles.radioInput}
+                          />
+                          <span
+                            className={`${styles.radioIndicator} ${isChecked ? styles.radioIndicatorChecked : ""}`}
+                            aria-hidden="true"
+                          >
+                            {isChecked && <span className={styles.radioDot} />}
+                          </span>
+                          <span className={styles.radioText}>{pref}</span>
+                        </label>
+                      );
+                    }
                   )}
                 </div>
               </div>

@@ -136,6 +136,7 @@
 
 html, body {
   min-height: 100%;
+  min-height: 100dvh;
   max-width: 100%;
   overflow-x: clip;
   background-color: var(--color-bg-page);
@@ -145,6 +146,7 @@ html, body {
   line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {

@@ -7,7 +7,6 @@ import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
 import { AdCard } from "@/components/features/AdCard";
-import { ConnectAgentBanner } from "./ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
 import { Footer } from "@/components/features/Footer";
@@ -389,6 +388,9 @@ export interface MarketplaceViewProps {
   initialCategory?: string;
   initialSearch?: string;
   onNavigateHome?: () => void;
+  onNavigateMySkills?: () => void;
+  onOpenCommandPalette?: () => void;
+  savedSkillsCount?: number;
   onSelectSkillDetail?: (skillId: string) => void;
   className?: string;
 }
@@ -539,6 +541,9 @@ export function MarketplaceView({
   initialCategory,
   initialSearch,
   onNavigateHome,
+  onNavigateMySkills,
+  onOpenCommandPalette,
+  savedSkillsCount,
   onSelectSkillDetail,
   className = "",
 }: MarketplaceViewProps) {
@@ -738,6 +743,12 @@ export function MarketplaceView({
             } else {
               router.push("/");
             }
+          } else if (view === "my-skills") {
+            if (onNavigateMySkills) {
+              onNavigateMySkills();
+            } else {
+              router.push("/?view=my-skills");
+            }
           } else if (view === "marketplace") {
             handleResetFilters();
           }
@@ -745,6 +756,8 @@ export function MarketplaceView({
         searchValue={searchValue}
         onSearchChange={setSearchValue}
         onSearchSubmit={(val) => setSearchValue(val)}
+        onOpenCommandPalette={onOpenCommandPalette}
+        savedSkillsCount={savedSkillsCount}
         onSelectCategory={handleSelectCategoryFromNav}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         isSignedIn={isSignedIn}

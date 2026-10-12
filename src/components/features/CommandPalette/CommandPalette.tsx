@@ -13,7 +13,7 @@ import {
   X,
   FileCode,
 } from "lucide-react";
-import { MARKETPLACE_SKILLS, SkillItem } from "@/components/features/MarketplaceView";
+import { MARKETPLACE_SKILLS } from "@/components/features/MarketplaceView";
 import styles from "./CommandPalette.module.css";
 
 import { type NavView } from "../NavBar";

@@ -186,7 +186,13 @@ export const MySkillsWorkspace: React.FC<MySkillsWorkspaceProps> = ({
                   previewImage={skill.previewImage}
                   models={skill.models}
                   isBookmarked={savedSkillIds.includes(skill.id)}
-                  onBookmarkToggle={() => onToggleBookmark(skill.id)}
+                  onBookmarkToggle={() => {
+                    if (activeTab === "saved") {
+                      onToggleBookmark(skill.id);
+                    } else if (onToggleInstall) {
+                      onToggleInstall(skill.id);
+                    }
+                  }}
                   onClick={() => onSelectSkillDetail?.(skill.id)}
                 />
               ))}

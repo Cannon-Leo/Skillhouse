@@ -15,11 +15,16 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("SkillsPage (/skills)", () => {
-  it("renders MarketplaceView when no id param is provided", () => {
+  it("renders MarketplaceView when no id param is provided and handles navigation", () => {
     mockSearchParams = new URLSearchParams();
     render(<SkillsPage />);
 
     expect(screen.getByText("Agent Skills Marketplace")).toBeInTheDocument();
+
+    // Click skill card navigates to skill with id
+    const skillCard = screen.getByText("Visual Canvas Deck");
+    fireEvent.click(skillCard);
+    expect(mockPush).toHaveBeenCalledWith("/skills?id=visual-canvas-deck");
   });
 
   it("renders SkillDetailPage and executes navigation callbacks when id param is present", () => {

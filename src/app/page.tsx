@@ -75,6 +75,18 @@ function MainContent() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  // Global ⌘K / Ctrl+K keyboard shortcut listener for webapp command palette
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const navigateToMarketplace = useCallback((category?: string, search?: string) => {
     const targetCategory = category !== undefined ? category : "";
     const targetSearch = search !== undefined ? search : "";
@@ -192,6 +204,9 @@ function MainContent() {
           initialCategory={selectedCategory}
           initialSearch={searchValue}
           onNavigateHome={navigateHome}
+          onNavigateMySkills={navigateToMySkills}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          savedSkillsCount={workspace.savedSkillIds.length}
           onSelectSkillDetail={(id) => setSelectedDrawerSkillId(id)}
         />
         {sharedDrawersAndModals}

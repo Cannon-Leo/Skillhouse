@@ -158,6 +158,10 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
           } else if (view === "marketplace") {
             if (onNavigateMarketplace) onNavigateMarketplace();
             else router.push("/skills");
+          } else if (view === "my-skills") {
+            router.push("/?view=my-skills");
+          } else if (view === "design-system") {
+            router.push("/design-system");
           }
         }}
         onOpenLoginModal={() => setIsLoginOpen(true)}
