@@ -978,6 +978,10 @@ export function MarketplaceView({
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
+        onLogin={() => {
+          setIsSignedIn(true);
+          setIsLoginModalOpen(false);
+        }}
       />
 
       <RequestSkillModal

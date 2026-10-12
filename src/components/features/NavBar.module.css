@@ -279,6 +279,8 @@
 /* Desktop CTA Button (Figma 744:1025) */
 .desktopCtaWrapper {
   display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .getStartedButton {

@@ -173,21 +173,22 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     fireEvent.click(dsBtn);
     expect(mockPush).toHaveBeenCalledWith("/design-system");
 
-    // Request skill modal
-    const requestBtn = screen.getByRole("button", { name: "Request a skill" });
+    // Request skill action button routes to create account/login when signed out
+    const requestBtn = screen.getByTestId("header-request-skill-action-btn");
     fireEvent.click(requestBtn);
+    expect(screen.getByText("Welcome to Skillhouse")).toBeInTheDocument();
+
+    // Log in to simulate user creating account / signing in
+    const googleLoginBtn = screen.getByTestId("login-google-btn");
+    fireEvent.click(googleLoginBtn);
+
+    // Now signed in: clicking request skill action button triggers the Request a skill form
+    const signedInRequestBtn = screen.getByTestId("header-request-skill-action-btn");
+    fireEvent.click(signedInRequestBtn);
     expect(screen.getByRole("heading", { name: /request a skill/i })).toBeInTheDocument();
 
     const cancelBtn = screen.getByRole("button", { name: "Cancel" });
     fireEvent.click(cancelBtn);
-
-    // Get Started opens login modal
-    const getStartedBtn = screen.getByTestId("header-get-started-btn");
-    fireEvent.click(getStartedBtn);
-    expect(screen.getByText("Welcome to Skillhouse")).toBeInTheDocument();
-
-    const closeLogin = screen.getByRole("button", { name: /close dialog/i });
-    fireEvent.click(closeLogin);
   });
 
   it("handles selecting category from nav mega menu", () => {

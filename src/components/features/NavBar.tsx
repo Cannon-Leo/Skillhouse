@@ -81,6 +81,18 @@ export const NavBar: React.FC<NavBarProps> = ({
     }
   };
 
+  const handleRequestSkillClick = () => {
+    if (isSignedIn) {
+      if (onRequestSkill) {
+        onRequestSkill();
+      } else {
+        alert("Request a skill");
+      }
+    } else {
+      handleCtaClick();
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -202,13 +214,7 @@ export const NavBar: React.FC<NavBarProps> = ({
             )}
           </div>
 
-          <button
-            type="button"
-            className={styles.navItem}
-            onClick={() => (onRequestSkill ? onRequestSkill() : alert("Request a skill"))}
-          >
-            Request a skill
-          </button>
+
 
 
 
@@ -255,17 +261,18 @@ export const NavBar: React.FC<NavBarProps> = ({
           {/* Signed In vs Logged Out Default CTA */}
           {isSignedIn ? (
             <div ref={userMenuRef} className={styles.userMenuContainer}>
-              {/* Orange Action Box (Figma Node 4621:371855) */}
+              {/* Orange Action Box (Figma Node 4621:371855 / 751:5943) */}
               <button
                 type="button"
                 className={styles.headerSquareActionButton}
-                aria-label="Create skill or workflow"
-                title="Create skill or workflow"
-                onClick={() => (onRequestSkill ? onRequestSkill() : alert("Create or publish skill"))}
+                aria-label="Request a skill"
+                title="Request a skill"
+                onClick={handleRequestSkillClick}
+                data-testid="header-request-skill-action-btn"
               >
                 <Image
                   src="/figma/node_4621_371856.svg"
-                  alt=""
+                  alt="Request a skill"
                   width={40}
                   height={40}
                   unoptimized
@@ -320,6 +327,24 @@ export const NavBar: React.FC<NavBarProps> = ({
             </div>
           ) : (
             <div className={styles.desktopCtaWrapper}>
+              {/* Orange Action Box (Figma Node 4621:371855 / 751:5943) - routes to create account when signed out */}
+              <button
+                type="button"
+                className={styles.headerSquareActionButton}
+                aria-label="Request a skill"
+                title="Request a skill"
+                onClick={handleRequestSkillClick}
+                data-testid="header-request-skill-action-btn"
+              >
+                <Image
+                  src="/figma/node_4621_371856.svg"
+                  alt="Request a skill"
+                  width={40}
+                  height={40}
+                  unoptimized
+                />
+              </button>
+
               <button
                 type="button"
                 className={styles.getStartedButton}
@@ -378,7 +403,7 @@ export const NavBar: React.FC<NavBarProps> = ({
               type="button"
               className={styles.mobileDrawerLink}
               onClick={() => {
-                onRequestSkill?.();
+                handleRequestSkillClick();
                 setMobileMenuOpen(false);
               }}
             >

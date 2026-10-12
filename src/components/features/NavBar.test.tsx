@@ -13,7 +13,8 @@ describe("Features NavBar Component", () => {
     expect(screen.getByAltText("Skillhouse Logo")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Skills" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /categories/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Request a skill" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Pricing" })).toBeInTheDocument();
+    expect(screen.getByTestId("header-request-skill-action-btn")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Search skills / outputs")).toBeInTheDocument();
   });
 
@@ -179,17 +180,41 @@ describe("Features NavBar Component", () => {
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 
     // Click square action button
-    const actionBtn = screen.getByLabelText("Create skill or workflow");
+    const actionBtn = screen.getByTestId("header-request-skill-action-btn");
     fireEvent.click(actionBtn);
   });
 
-  it("handles onRequestSkill callback from desktop and mobile drawer", () => {
-    const handleRequestSkill = vi.fn();
-    render(<NavBar onRequestSkill={handleRequestSkill} />);
+  it("routes to login/account creation when square action button or mobile drawer is clicked while signed out", () => {
+    const handleLoginModal = vi.fn();
+    render(<NavBar onOpenLoginModal={handleLoginModal} />);
 
-    // Click desktop nav link
-    const requestBtn = screen.getByRole("button", { name: "Request a skill" });
-    fireEvent.click(requestBtn);
+    // Click square action button when logged out -> routes to account creation / login modal
+    const actionBtn = screen.getByTestId("header-request-skill-action-btn");
+    fireEvent.click(actionBtn);
+    expect(handleLoginModal).toHaveBeenCalledTimes(1);
+
+    // Open mobile drawer and click Request a skill -> routes to account creation / login modal
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+    const drawer = screen.getByRole("dialog", { name: /mobile navigation/i });
+    const mobileRequest = within(drawer).getByRole("button", { name: /request a skill/i });
+    fireEvent.click(mobileRequest);
+    expect(handleLoginModal).toHaveBeenCalledTimes(2);
+  });
+
+  it("triggers onRequestSkill when square action button or mobile drawer is clicked while signed in", () => {
+    const handleRequestSkill = vi.fn();
+    render(
+      <NavBar
+        isSignedIn={true}
+        onRequestSkill={handleRequestSkill}
+        user={{ name: "Jane Doe", email: "jane@test.com" }}
+      />
+    );
+
+    // Click desktop square action button
+    const actionBtn = screen.getByTestId("header-request-skill-action-btn");
+    fireEvent.click(actionBtn);
     expect(handleRequestSkill).toHaveBeenCalledTimes(1);
 
     // Open mobile drawer and click
