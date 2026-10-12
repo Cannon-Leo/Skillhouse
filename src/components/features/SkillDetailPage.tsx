@@ -159,11 +159,11 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
               else if (onNavigateMarketplace) onNavigateMarketplace();
               else router.back();
             }}
-            aria-label="Back to skills marketplace"
+            aria-label="Go back to previous page"
             data-testid="skill-detail-back-btn"
           >
             <ChevronLeft size={16} aria-hidden="true" />
-            <span>Back to skills</span>
+            <span>Back</span>
           </button>
 
           <span className={styles.divider} aria-hidden="true" />

@@ -2,12 +2,11 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { X, ChevronDown, Filter as FilterIcon, SlidersHorizontal, ExternalLink } from "lucide-react";
+import { ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard } from "@/components/features/SkillCard";
 import { AdCard } from "@/components/features/AdCard";
-import { SkillDetailHeader } from "@/components/features/SkillDetailHeader";
 import { ConnectAgentBanner } from "./ConnectAgentBanner";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
@@ -36,6 +35,30 @@ export interface SkillItem {
 }
 
 export const MARKETPLACE_SKILLS: SkillItem[] = [
+  {
+    id: "visual-canvas-deck",
+    title: "Visual Canvas Deck",
+    version: "v1.0.1",
+    price: "$5",
+    isFree: false,
+    isFeatured: true,
+    description: "Create an exploratory presentation that turns a rough brief into editable spatial compositions and a coherent deck. It supports visual iteration through addressable canvases, clear outline approval, and a browser-ready presentation. Every deck can be edited in the browser and exported as an editable PowerPoint file.",
+    installPrompt: "npx skillhouse add visual-canvas-deck",
+    previewImage: "/figma/node_751_5606.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["founder", "consultant", "designer"],
+    output: "slides",
+    useCase: "sales-fundraising",
+    category: "Presentations",
+    installs: 295,
+    rating: 4.9,
+    createdAt: "2026-10-12",
+  },
   {
     id: "pixel-promo-video",
     title: "Pixel Promo Video",
@@ -522,25 +545,15 @@ export function MarketplaceView({
   const router = useRouter();
 
   const [skills] = useState<SkillItem[]>(MARKETPLACE_SKILLS);
-  const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
   const [bookmarkedSkills, setBookmarkedSkills] = useState<Record<string, boolean>>({});
   const [searchValue, setSearchValue] = useState(initialSearch || "");
   const [sortBy, setSortBy] = useState<"newest" | "popular" | "alphabetical">("newest");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
 
-  useScrollLock(Boolean(selectedSkill) || mobileFiltersVisible);
+  useScrollLock(mobileFiltersVisible);
 
-  useEffect(() => {
-    if (!selectedSkill) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedSkill(null);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [selectedSkill]);
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -594,8 +607,7 @@ export function MarketplaceView({
   };
 
   const handleSelectCategoryFromNav = (cat: string, tab?: string) => {
-    setSelectedSkill(null);
-    setFilters(resolveCategoryToFilters(cat, tab));
+        setFilters(resolveCategoryToFilters(cat, tab));
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       params.set("view", "marketplace");
@@ -696,8 +708,7 @@ export function MarketplaceView({
   }, [filteredSkills]);
 
   const handleResetFilters = () => {
-    setSelectedSkill(null);
-    setFilters({
+        setFilters({
       recommendations: ["all"],
       outputs: [],
       roles: [],
@@ -922,7 +933,13 @@ export function MarketplaceView({
                     models={item.models}
                     isBookmarked={bookmarkedSkills[item.id]}
                     onBookmarkToggle={(isBookmarked) => handleToggleBookmark(item.id, isBookmarked)}
-                    onClick={() => setSelectedSkill(item)}
+                    onClick={() => {
+                      if (onSelectSkillDetail) {
+                        onSelectSkillDetail(item.id);
+                      } else {
+                        router.push(`/skills/${item.id}`);
+                      }
+                    }}
                   />
                 )
               )}
@@ -944,63 +961,6 @@ export function MarketplaceView({
           )}
         </main>
       </div>
-
-      {/* Skill Detail Modal Sheet when card is clicked */}
-      {selectedSkill && (
-        <div
-          className={styles.modalBackdrop}
-          onClick={() => setSelectedSkill(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-skill-title"
-        >
-          <div
-            className={styles.modalSheet}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.modalHeaderActions}>
-              <button
-                type="button"
-                className={styles.viewFullPageBtn}
-                onClick={() => {
-                  if (onSelectSkillDetail) {
-                    onSelectSkillDetail(selectedSkill.id);
-                  } else {
-                    router.push(`/skills/${selectedSkill.id}`);
-                  }
-                }}
-                aria-label={`Open dedicated page for ${selectedSkill.title}`}
-                data-testid="modal-view-full-page-btn"
-              >
-                <span>View Full Page</span>
-                <ExternalLink size={14} aria-hidden="true" />
-              </button>
-
-              <button
-                type="button"
-                className={styles.modalCloseBtn}
-                onClick={() => setSelectedSkill(null)}
-                aria-label="Close skill details"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <SkillDetailHeader
-              title={selectedSkill.title}
-              version={selectedSkill.version}
-              price={selectedSkill.price}
-              isFree={selectedSkill.isFree}
-              installPrompt={selectedSkill.installPrompt}
-              description={selectedSkill.description}
-            />
-
-            <div style={{ marginTop: 24 }}>
-              <ConnectAgentBanner />
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 4. Global Dark Footer */}
       <Footer

@@ -122,37 +122,14 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
   });
 
-  it("opens detail modal when a skill card is clicked and closes on close button or backdrop", () => {
+  it("navigates to the full skill detail page when a skill card is clicked", () => {
+    mockPush.mockClear();
     render(<MarketplaceView />);
 
     const firstCard = screen.getByText("Pixel Promo Video");
     fireEvent.click(firstCard);
 
-    const dialog = screen.getByRole("dialog");
-    expect(dialog).toBeInTheDocument();
-
-    // Inner sheet click stops propagation
-    const innerSheet = dialog.querySelector("div");
-    if (innerSheet) {
-      fireEvent.click(innerSheet);
-      expect(screen.getByRole("dialog")).toBeInTheDocument();
-    }
-
-    const closeBtn = screen.getByRole("button", { name: /close skill details/i });
-    fireEvent.click(closeBtn);
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-
-    // Reopen and test Escape key closes dialog
-    fireEvent.click(firstCard);
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
-    fireEvent.keyDown(document, { key: "Escape" });
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-
-    // Reopen and click backdrop to close
-    fireEvent.click(firstCard);
-    const finalDialog = screen.getByRole("dialog");
-    fireEvent.click(finalDialog);
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(mockPush).toHaveBeenCalledWith("/skills/pixel-promo-video");
   });
 
   it("handles mobile filter drawer open, close, and backdrop click", () => {
@@ -287,19 +264,13 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     openSpy.mockRestore();
   });
 
-  it("triggers onSelectSkillDetail when View Full Page is clicked inside the detail modal", () => {
+  it("triggers onSelectSkillDetail callback when a skill card is clicked", () => {
     const onSelectSkillDetail = vi.fn();
     render(<MarketplaceView onSelectSkillDetail={onSelectSkillDetail} />);
 
-    // Click on a skill card to open modal
-    const cards = screen.getAllByRole("article");
-    fireEvent.click(cards[0]);
+    const firstCard = screen.getByText("Pixel Promo Video");
+    fireEvent.click(firstCard);
 
-    // Check View Full Page button
-    const fullPageBtn = screen.getByTestId("modal-view-full-page-btn");
-    expect(fullPageBtn).toBeInTheDocument();
-    fireEvent.click(fullPageBtn);
-
-    expect(onSelectSkillDetail).toHaveBeenCalledTimes(1);
+    expect(onSelectSkillDetail).toHaveBeenCalledWith("pixel-promo-video");
   });
 });
