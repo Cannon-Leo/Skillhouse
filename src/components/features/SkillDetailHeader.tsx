@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import {
   ArrowRight,
   Bookmark,
-  Share2,
+  Share,
   Download,
   Tag,
   ShieldCheck,
@@ -137,7 +137,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
                 setTimeout(() => setToastMessage(null), 2500);
               }}
             >
-              <Share2 size={14} aria-hidden="true" />
+              <Share size={14} aria-hidden="true" />
             </button>
           </div>
         </div>

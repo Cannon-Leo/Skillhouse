@@ -46,20 +46,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--dim-btn-round); /* 28px */
-  height: var(--dim-btn-round); /* 28px */
-  padding: var(--space-xs); /* 8px */
-  background-color: var(--color-surface-cream); /* #FFECD8 */
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full); /* 360px circular */
+  width: var(--dim-btn-round, 28px); /* 28px */
+  height: var(--dim-btn-round, 28px); /* 28px */
+  padding: 0;
+  background-color: var(--color-surface-cream, #FFECD8); /* #FFECD8 */
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  border-radius: var(--radius-full, 50%); /* 360px circular */
+  color: var(--color-dark, #1A1A1A);
   cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+  transition: transform var(--transition-fast),
+              background-color var(--transition-fast),
+              border-color var(--transition-fast),
+              color var(--transition-fast);
   flex-shrink: 0;
   box-sizing: border-box;
 }
 
+.roundButton svg {
+  color: currentColor;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
 .roundButton:hover {
-  background-color: var(--color-surface-peach);
+  background-color: var(--color-surface-peach, #FBE1C7);
   transform: translateY(-1px);
 }
 
@@ -68,12 +78,21 @@
 }
 
 .bookmarkedActive {
-  background-color: var(--color-brand);
-  border-color: var(--color-brand);
+  background-color: var(--color-brand, #FB6320);
+  border-color: var(--color-brand, #FB6320);
+  color: #FFFFFF;
 }
 
-.bookmarkedActive img {
-  filter: brightness(0) invert(1);
+.bookmarkedActive:hover {
+  background-color: var(--color-brand-hover, #E05215);
+  border-color: var(--color-brand-hover, #E05215);
+  color: #FFFFFF;
+}
+
+.bookmarkedActive svg {
+  color: #FFFFFF;
+  stroke: #FFFFFF;
+  fill: #FFFFFF;
 }
 
 /* Row B: Meta Stats Row (Node 752:11255): 16px gap, 6px item gap */
