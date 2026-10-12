@@ -41,7 +41,7 @@
 
 @media (max-width: 1024px) {
   .pageContainer {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
