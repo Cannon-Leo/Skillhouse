@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
-  Plus,
   ChevronDown,
   ChevronRight,
   Menu,
@@ -59,6 +59,20 @@ export const NavBar: React.FC<NavBarProps> = ({
   className = "",
 }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  useEffect(() => {
+    if (!categoriesOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [categoriesOpen]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -167,12 +181,17 @@ export const NavBar: React.FC<NavBarProps> = ({
             {categoriesOpen && (
               <>
                 {/* Backdrop Overlay per Figma Node 750:4067 */}
-                <div
-                  className={styles.dropdownBackdrop}
-                  onClick={() => setCategoriesOpen(false)}
-                  aria-hidden="true"
-                  data-testid="categories-backdrop"
-                />
+                {isMounted &&
+                  typeof document !== "undefined" &&
+                  createPortal(
+                    <div
+                      className={styles.dropdownBackdrop}
+                      onClick={() => setCategoriesOpen(false)}
+                      aria-hidden="true"
+                      data-testid="categories-backdrop"
+                    />,
+                    document.body
+                  )}
                 <div className={styles.dropdownPositioner}>
                   <CategoriesDropdown
                     onSelectCategory={(category: string) => {

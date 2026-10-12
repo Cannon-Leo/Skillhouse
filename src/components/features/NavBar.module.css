@@ -5,7 +5,7 @@
   background-color: #FFEEDD;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
@@ -212,12 +212,12 @@
 }
 
 .megaMenuItem:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: #FCE7D1;
   border-color: rgba(166, 166, 166, 0.3);
 }
 
 .megaMenuItem:hover .itemIcon {
-  color: #FB6320;
+  color: #54392D;
 }
 
 .megaMenuItem:hover .itemName {
@@ -579,12 +579,13 @@
  */
 .dropdownBackdrop {
   position: fixed;
-  top: 72px; /* starts right under the 72px navbar */
+  inset: 0;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: calc(100vh - 72px);
+  height: 100vh;
   background-color: rgba(66, 65, 69, 0.54);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -597,7 +598,7 @@
   top: 100%;
   margin-top: -1px;
   left: 0;
-  z-index: 999;
+  z-index: 1002;
   animation: slideDownFade 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

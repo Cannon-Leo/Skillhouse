@@ -149,12 +149,14 @@
   box-sizing: border-box;
 }
 
-.itemRow:hover {
-  background-color: rgba(251, 99, 32, 0.08);
+.itemRow:hover,
+.itemRow:focus-visible,
+.itemRow:focus {
+  background-color: #FCE7D1;
 }
 
 .itemRow:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid #54392D;
   outline-offset: 1px;
 }
 
@@ -166,8 +168,10 @@
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.itemRow:hover .itemIcon {
-  color: var(--color-brand, #FB6320);
+.itemRow:hover .itemIcon,
+.itemRow:focus-visible .itemIcon,
+.itemRow:focus .itemIcon {
+  color: #54392D;
   transform: scale(1.1);
 }
 

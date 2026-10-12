@@ -29,7 +29,7 @@
   max-width: 1360px;
   min-height: 516px;
   background: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 0px;
   box-shadow: 0px 9px 26.1px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: flex-start;
@@ -107,20 +107,22 @@
 /* 5. Supported Agent Platforms Grid (Figma 759:12094) */
 .agentsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px 20px;
-  width: 100%;
+  grid-template-columns: repeat(3, fit-content(100%));
+  gap: 20px 64px;
+  width: fit-content;
 }
 
 .agentItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 6px;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 0px;
   background: transparent;
   cursor: pointer;
-  transition: all var(--transition-fast, 0.15s ease);
+  box-shadow: 0px 1.5px 3px rgba(16, 24, 40, 0.06);
+  transition: box-shadow var(--transition-fast, 0.15s ease), background var(--transition-fast, 0.15s ease), border-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease);
   user-select: none;
   border: 1px solid transparent;
 }
@@ -142,25 +144,31 @@
 }
 
 .agentLogoWrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(251, 225, 199, 0.26);
+  border: 0.3px solid rgba(166, 166, 166, 0.1);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .agentLogo {
-  object-fit: contain;
+  position: absolute;
+  top: 6.75px;
+  left: 7.75px;
+  width: 22.5px;
+  height: 22.5px;
+  object-fit: cover;
 }
 
 .agentName {
   font-family: var(--font-sans, sans-serif);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   color: #000000;
-  font-weight: 500;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -178,7 +186,7 @@
 .terminalBox {
   width: 100%;
   background: #48342D;
-  border-radius: 4px;
+  border-radius: 0px;
   padding: 24px;
   box-sizing: border-box;
   display: flex;
@@ -269,7 +277,7 @@
   font-family: var(--font-sans, sans-serif);
   font-weight: 600;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 0px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.2s ease;
 }
