@@ -595,21 +595,7 @@
  * fills: rgba(66, 65, 69, 0.54), backdrop-filter: blur(8px)
  */
 .dropdownBackdrop {
-  overscroll-behavior: none;
-  touch-action: none;
-  position: fixed;
-  inset: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(66, 65, 69, 0.54);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 998;
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
 }
 
 .dropdownPositioner {
@@ -731,4 +717,55 @@
 }
 .searchWrapper :global([class*="shortcutBadge"]) {
   border-color: #CDB7AE;
+}
+
+/* Web App Navigation & Workspace Enhancements */
+.navCounterBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: #FB6320;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+
+.mobileSearchButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid #CDB7AE;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 0px;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.mobileSearchButton:hover {
+  background-color: #FFFDF8;
+}
+
+.mobileSearchButton:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 768px) {
+  .mobileSearchButton {
+    display: flex;
+  }
+}
+
+.modeMobile .mobileSearchButton,
+.header:has([data-mode="mobile"]) .mobileSearchButton {
+  display: flex !important;
 }

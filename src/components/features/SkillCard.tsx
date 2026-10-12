@@ -1,6 +1,6 @@
 "use client";
 
-import { BookmarkIcon } from "../ui/BookmarkIcon";
+import { BookmarkButton } from "../ui/BookmarkButton";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -37,10 +37,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({
   const [internalBookmarked, setInternalBookmarked] = useState(false);
   const isBookmarked = controlledBookmarked !== undefined ? controlledBookmarked : internalBookmarked;
 
-  const handleBookmarkClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const nextState = !isBookmarked;
+  const handleBookmarkToggle = (nextState: boolean) => {
     if (controlledBookmarked === undefined) {
       setInternalBookmarked(nextState);
     }
@@ -75,23 +72,16 @@ export const SkillCard: React.FC<SkillCardProps> = ({
           {category ? (
             <span className={styles.pill}>{category}</span>
           ) : <span />}
-          <button 
-            type="button"
-            onPointerDown={(e) => e.stopPropagation()}
-            onMouseDown={(e) => e.stopPropagation()}
-            onTouchStart={(e) => e.stopPropagation()}
-            className={`${styles.bookmarkBtn} ${isBookmarked ? styles.bookmarked : ""}`} 
-            onClick={handleBookmarkClick}
+          <BookmarkButton
+            size="sm"
+            variant="white"
+            isBookmarked={isBookmarked}
+            onToggle={handleBookmarkToggle}
+            stopPropagation={true}
+            className={styles.bookmarkBtn}
             aria-label={isBookmarked ? "Remove from saved skills" : "Save skill to bookmarks"}
-            aria-pressed={isBookmarked}
             title={isBookmarked ? "Saved" : "Bookmark skill"}
-          >
-            <BookmarkIcon
-              size={14}
-              filled={isBookmarked}
-              className={styles.bookmarkIcon}
-            />
-          </button>
+          />
         </div>
       </div>
 

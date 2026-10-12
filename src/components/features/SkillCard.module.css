@@ -92,7 +92,7 @@
   background-color: var(--color-white, #FFFFFF);
   border: 1px solid var(--color-border, #E5E5E5);
   color: var(--color-dark, #1A1A1A);
-  border-radius: 0px; /* Sharp 0px matching square tag & detail panel */
+  border-radius: var(--radius-full, 50%); /* Fully rounded circular everywhere */
   width: 26px;
   height: 26px;
   display: flex;

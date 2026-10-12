@@ -1,13 +1,14 @@
 /* CategoriesDropdown Component Styles
- * Exact Figma specs: Node 750:3470 (variants: Component 215, 216, 217)
- * Background: #FFECD8, Border: #CFD9E8, Shadow: 0px 16px 24px -6px rgba(16,25,40,0.08)
+ * Transparent Frosted Glassmorphism matching usefinds.com aesthetic
+ * Width: 700px, Background: rgba(255, 255, 255, 0.72), blur(24px) saturate(180%)
+ * Border: 1px solid rgba(255, 255, 255, 0.75), Radius: 12px
  */
 
 .dropdownContainer {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 620px;
+  width: 700px;
   max-width: 95vw;
   background: rgba(255, 255, 255, 0.72);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
@@ -42,7 +43,7 @@
   flex-direction: column;
   width: 150px;
   flex-shrink: 0;
-  gap: 6px;
+  gap: 4px;
   padding-right: 20px;
   border-right: 1px solid rgba(18, 19, 22, 0.08);
 }
@@ -53,78 +54,80 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 6px 0px;
+  padding: 8px 10px;
   background: transparent;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   outline: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: background-color 0.12s ease, opacity 0.15s ease;
   text-align: left;
 }
 
 .tabButton:hover {
-  opacity: 0.9;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .tabButton:focus-visible {
   outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
 .tabLabel {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
-  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  font-size: 13.5px;
   line-height: 20px;
   white-space: nowrap;
 }
 
 .activeTab {
-  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .activeTab .tabLabel {
-  font-weight: 500;
-  color: #000000;
+  font-weight: 600;
+  color: #121316;
 }
 
 .inactiveTab {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .inactiveTab:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .inactiveTab .tabLabel {
-  font-weight: 400;
-  color: #7F776E;
+  font-weight: 450;
+  color: #5B606B;
 }
 
 .tabArrowWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .tabArrow {
-  opacity: 0.5;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: #5B606B;
+  opacity: 0.6;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .activeArrow {
+  color: #121316;
   opacity: 1;
-  transform: translateX(2px);
+  transform: translateX(1px);
 }
 
-/* Content Columns (2 flex columns) */
+/* Content Columns (2 flex columns with ample measure) */
 .contentColumns {
   display: flex;
   flex-direction: row;
   flex: 1;
-  gap: 24px;
+  gap: 20px;
   align-items: flex-start;
 }
 
@@ -132,15 +135,16 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 16px;
+  gap: 4px;
+  min-width: 0;
 }
 
 .itemRow {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
+  gap: 10px;
+  padding: 7px 10px;
   border-radius: 8px;
   background: transparent;
   border: none;
@@ -159,35 +163,37 @@
 }
 
 .itemRow:focus-visible {
-  outline: 2px solid #54392D;
+  outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 1px;
 }
 
 .itemIcon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
-  color: #7F776E;
+  color: #5B606B;
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.itemRow:hover .itemIcon,
-.itemRow:focus-visible .itemIcon,
-.itemRow:focus .itemIcon {
-  color: #54392D;
-  transform: scale(1.1);
+.itemRow:hover .itemIcon {
+  color: #121316;
+  transform: translateY(1px);
 }
 
 .itemText {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
-  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  font-size: 13.5px;
   line-height: 1.4em;
-  font-weight: 400;
-  color: #000000;
+  font-weight: 450;
+  color: #121316;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+}
+
+.itemRow:hover .itemText {
+  color: #000000;
 }
 
 /* Bottom Footer (See all Skills) */
@@ -196,18 +202,18 @@
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 16px 24px 20px;
+  padding: 16px 24px;
 }
 
 .seeAllButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 16px;
+  gap: 6px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(18, 19, 22, 0.12);
+  padding: 0 18px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(18, 19, 22, 0.14);
   border-radius: 8px;
   color: #121316;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
@@ -216,14 +222,14 @@
   line-height: 1.4em;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(16, 18, 24, 0.05);
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 1px 2px rgba(16, 18, 24, 0.04);
 }
 
 .seeAllButton:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-  border-color: rgba(18, 19, 22, 0.2);
-  color: #121316;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(18, 19, 22, 0.22);
+  color: #000000;
 }
 
 .seeAllButton:active {
@@ -231,7 +237,7 @@
 }
 
 .seeAllButton:focus-visible {
-  outline: 2px solid #FB6320;
+  outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 2px;
 }
 
@@ -251,7 +257,7 @@
     width: 100%;
     flex-direction: row;
     border-right: none;
-    border-bottom: 1px solid #CDB7AE;
+    border-bottom: 1px solid rgba(18, 19, 22, 0.08);
     padding-right: 0;
     padding-bottom: 12px;
     overflow-x: auto;
@@ -261,12 +267,4 @@
     flex-direction: column;
     gap: 12px;
   }
-}
-
-.seeAllIcon {
-  transition: transform 0.15s ease;
-}
-
-.seeAllButton:hover .seeAllIcon {
-  transform: translateX(3px);
 }

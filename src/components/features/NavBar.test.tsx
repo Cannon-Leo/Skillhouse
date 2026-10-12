@@ -227,3 +227,38 @@ describe("Features NavBar Component", () => {
     expect(handleRequestSkill).toHaveBeenCalledTimes(2);
   });
 });
+
+  it("navigates to my-skills workspace when My Skills tab or mobile drawer link is clicked", () => {
+    const handleViewChange = vi.fn();
+    render(<NavBar onViewChange={handleViewChange} savedSkillsCount={3} />);
+
+    // Click My Skills desktop tab
+    const mySkillsBtn = screen.getByRole("button", { name: /my skills workspace/i });
+    expect(mySkillsBtn).toBeInTheDocument();
+    expect(screen.getByText("3")).toBeInTheDocument();
+    fireEvent.click(mySkillsBtn);
+    expect(handleViewChange).toHaveBeenCalledWith("my-skills");
+
+    // Click My Skills link in mobile drawer
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+    const drawer = screen.getByRole("dialog", { name: /mobile navigation/i });
+    const mobileMySkills = within(drawer).getByRole("button", { name: /my skills workspace/i });
+    fireEvent.click(mobileMySkills);
+    expect(handleViewChange).toHaveBeenCalledWith("my-skills");
+  });
+
+  it("triggers onOpenCommandPalette when mobile search button or shortcut key is pressed", () => {
+    const handleCommandPalette = vi.fn();
+    render(<NavBar onOpenCommandPalette={handleCommandPalette} />);
+
+    // Mobile search button
+    const mobileSearchBtn = screen.getByRole("button", { name: /open command palette search/i });
+    fireEvent.click(mobileSearchBtn);
+    expect(handleCommandPalette).toHaveBeenCalledTimes(1);
+
+    // ⌘K shortcut inside search input
+    const searchInput = screen.getByPlaceholderText("Search skills / outputs");
+    fireEvent.keyDown(searchInput, { key: "k", metaKey: true });
+    expect(handleCommandPalette).toHaveBeenCalledTimes(2);
+  });

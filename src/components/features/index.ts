@@ -18,3 +18,7 @@ export * from "./CategorySkillCard";
 export * from "./CategorySkillGrid";
 export * from "./HeroSection";
 export * from "./SkillDetailPage";
+
+export * from "./CommandPalette/CommandPalette";
+
+export * from "./MySkillsWorkspace/MySkillsWorkspace";

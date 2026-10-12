@@ -6,27 +6,36 @@ import { NavBar } from "@/components/features/NavBar";
 import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
 import { MarketplaceView } from "@/components/features/MarketplaceView";
+import { MySkillsWorkspace } from "@/components/features/MySkillsWorkspace/MySkillsWorkspace";
+import { CommandPalette } from "@/components/features/CommandPalette/CommandPalette";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
 import { Footer } from "@/components/features/Footer";
+import { useAppWorkspace } from "@/lib/useAppWorkspace";
 import styles from "./home-screen/page.module.css";
 
 function MainContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const workspace = useAppWorkspace();
 
   const categoryParam = searchParams.get("category") || "";
   const viewParam = searchParams.get("view") || "";
   const searchParam = searchParams.get("search") || searchParams.get("q") || "";
 
-  const [activeViewOverride, setActiveViewOverride] = useState<"home" | "marketplace" | null>(null);
+  const [activeViewOverride, setActiveViewOverride] = useState<
+    "home" | "marketplace" | "my-skills" | null
+  >(null);
   const [selectedCategoryOverride, setSelectedCategoryOverride] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState(searchParam);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   const activeView =
     activeViewOverride ??
     (viewParam === "marketplace" || Boolean(categoryParam) || Boolean(searchParam)
       ? "marketplace"
+      : viewParam === "my-skills"
+      ? "my-skills"
       : "home");
 
   const selectedCategory = selectedCategoryOverride ?? categoryParam;
@@ -46,6 +55,10 @@ function MainContent() {
         setActiveViewOverride("marketplace");
         setSelectedCategoryOverride(cat);
         setSearchValue(q);
+      } else if (view === "my-skills") {
+        setActiveViewOverride("my-skills");
+        setSelectedCategoryOverride("");
+        setSearchValue("");
       } else {
         setActiveViewOverride("home");
         setSelectedCategoryOverride("");
@@ -74,6 +87,19 @@ function MainContent() {
     }
   }, []);
 
+  const navigateToMySkills = useCallback(() => {
+    setActiveViewOverride("my-skills");
+    setSelectedCategoryOverride("");
+    setSearchValue("");
+
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams();
+      params.set("view", "my-skills");
+      window.history.pushState(null, "", `/?${params.toString()}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
+
   const navigateHome = useCallback(() => {
     setActiveViewOverride("home");
     setSelectedCategoryOverride("");
@@ -85,15 +111,66 @@ function MainContent() {
     }
   }, []);
 
+  // When activeView is my-skills, render the user's workspace
+  if (activeView === "my-skills") {
+    return (
+      <>
+        <MySkillsWorkspace
+          savedSkillIds={workspace.savedSkillIds}
+          installedSkillIds={workspace.installedSkillIds}
+          onToggleBookmark={workspace.toggleBookmark}
+          onToggleInstall={workspace.toggleInstall}
+          onNavigateHome={navigateHome}
+          onNavigateMarketplace={() => navigateToMarketplace()}
+          onNavigateDesignSystem={() => router.push("/design-system")}
+          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onRequestSkill={() => setIsRequestSkillOpen(true)}
+          onOpenLoginModal={() => setIsLoginOpen(true)}
+        />
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setIsCommandPaletteOpen(false)}
+          onNavigateView={(view) => {
+            if (view === "home") navigateHome();
+            else if (view === "marketplace") navigateToMarketplace();
+            else if (view === "my-skills") navigateToMySkills();
+            else if (view === "design-system") router.push("/design-system");
+          }}
+          onSelectSkill={(id) => router.push(`/skills/${id}`)}
+          onRequestSkill={() => setIsRequestSkillOpen(true)}
+          savedSkillIds={workspace.savedSkillIds}
+          installedSkillIds={workspace.installedSkillIds}
+        />
+      </>
+    );
+  }
+
   // When activeView is marketplace, render the full Agent Skills Marketplace (Figma Node 751:4572)
   if (activeView === "marketplace") {
     return (
-      <MarketplaceView
-        initialCategory={selectedCategory}
-        initialSearch={searchValue}
-        onNavigateHome={navigateHome}
-        onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
-      />
+      <>
+        <MarketplaceView
+          initialCategory={selectedCategory}
+          initialSearch={searchValue}
+          onNavigateHome={navigateHome}
+          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
+        />
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setIsCommandPaletteOpen(false)}
+          onNavigateView={(view) => {
+            if (view === "home") navigateHome();
+            else if (view === "marketplace") navigateToMarketplace();
+            else if (view === "my-skills") navigateToMySkills();
+            else if (view === "design-system") router.push("/design-system");
+          }}
+          onSelectSkill={(id) => router.push(`/skills/${id}`)}
+          onRequestSkill={() => setIsRequestSkillOpen(true)}
+          savedSkillIds={workspace.savedSkillIds}
+          installedSkillIds={workspace.installedSkillIds}
+        />
+      </>
     );
   }
 
@@ -106,6 +183,8 @@ function MainContent() {
         onViewChange={(view) => {
           if (view === "marketplace") {
             navigateToMarketplace();
+          } else if (view === "my-skills") {
+            navigateToMySkills();
           } else if (view === "design-system") {
             router.push("/design-system");
           } else {
@@ -119,12 +198,14 @@ function MainContent() {
             navigateToMarketplace(undefined, val.trim());
           }
         }}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         onSelectCategory={(category: string, _tab?: string) => {
           navigateToMarketplace(category);
         }}
         onOpenLoginModal={() => setIsLoginOpen(true)}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         onGetStarted={() => setIsLoginOpen(true)}
+        savedSkillsCount={workspace.savedSkillIds.length}
       />
 
       <main className={styles.mainContent}>
@@ -157,7 +238,22 @@ function MainContent() {
         }}
       />
 
-      {/* Modals */}
+      {/* Modals & Command Palette */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onNavigateView={(view) => {
+          if (view === "home") navigateHome();
+          else if (view === "marketplace") navigateToMarketplace();
+          else if (view === "my-skills") navigateToMySkills();
+          else if (view === "design-system") router.push("/design-system");
+        }}
+        onSelectSkill={(id) => router.push(`/skills/${id}`)}
+        onRequestSkill={() => setIsRequestSkillOpen(true)}
+        savedSkillIds={workspace.savedSkillIds}
+        installedSkillIds={workspace.installedSkillIds}
+      />
+
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}

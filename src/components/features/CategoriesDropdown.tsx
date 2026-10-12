@@ -1,30 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Layout,
-  Palette,
-  Share2,
-  BookOpen,
-  Rocket,
-  BarChart3,
-  Search,
-  FileText,
-  Video,
-  ShoppingBag,
-  Briefcase,
-  Megaphone,
-  Code2,
-  Compass,
-  PenTool,
-  GraduationCap,
-  Image as ImageIcon,
-  Presentation,
-  Monitor,
-  Sparkles,
-  ChevronRight,
-  ArrowRight,
-} from "lucide-react";
 import styles from "./CategoriesDropdown.module.css";
 
 export type CategoryTab = "use-case" | "role" | "output";
@@ -95,61 +71,70 @@ const TABS: { id: CategoryTab; label: string }[] = [
 ];
 
 /**
- * Returns the semantically accurate, contextual icon for each category item
+ * Authentic Figma download/import vector icon (Component 725:676 from public/figma/import.svg)
  */
-export const getCategoryIcon = (categoryName: string) => {
-  switch (categoryName) {
-    // By use-case
-    case "Web design":
-      return <Layout size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Brand identity":
-      return <Palette size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Social media":
-      return <Share2 size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Education explainers":
-      return <BookOpen size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Product launch":
-      return <Rocket size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Client reporting":
-      return <BarChart3 size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Research communication":
-      return <Search size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Content publishing":
-      return <FileText size={14} className={styles.itemIcon} strokeWidth={1.8} />;
+export const CategoryItemIcon: React.FC<{ className?: string }> = ({ className = styles.itemIcon }) => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M9.59036 5.19168C11.6904 5.37251 12.5479 6.45168 12.5479 8.81418V8.89001C12.5479 11.4975 11.5037 12.5417 8.89619 12.5417H5.09869C2.49119 12.5417 1.44702 11.4975 1.44702 8.89001V8.81418C1.44702 6.46918 2.29285 5.39001 4.35785 5.19751"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7 1.16667V8.68001"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8.95448 7.37918L7.00031 9.33335L5.04614 7.37918"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-    // By role
-    case "Content creator":
-      return <Video size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "e-Commerce seller":
-      return <ShoppingBag size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Consultant":
-      return <Briefcase size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Marketer":
-      return <Megaphone size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Software engineer":
-      return <Code2 size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Founder":
-      return <Compass size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Designer":
-      return <PenTool size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Teacher":
-      return <GraduationCap size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Researcher":
-      return <Search size={14} className={styles.itemIcon} strokeWidth={1.8} />;
+/**
+ * Authentic Figma chevron right vector icon (Component 750:3438)
+ */
+export const TabChevronIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M6 3.5L10.5 8L6 12.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-    // By output
-    case "Images":
-      return <ImageIcon size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Presentations":
-      return <Presentation size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Video":
-      return <Video size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-    case "Web & HTML":
-      return <Monitor size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-
-    default:
-      return <Sparkles size={14} className={styles.itemIcon} strokeWidth={1.8} />;
-  }
+/**
+ * Category item icon accessor maintaining backwards-compatibility
+ */
+export const getCategoryIcon = () => {
+  return <CategoryItemIcon />;
 };
 
 export const CategoriesDropdown: React.FC<CategoriesDropdownProps> = ({
@@ -196,10 +181,8 @@ export const CategoriesDropdown: React.FC<CategoriesDropdownProps> = ({
               >
                 <span className={styles.tabLabel}>{tab.label}</span>
                 <span className={styles.tabArrowWrapper} aria-hidden="true">
-                  <ChevronRight
-                    size={16}
+                  <TabChevronIcon
                     className={`${styles.tabArrow} ${isActive ? styles.activeArrow : ""}`}
-                    strokeWidth={isActive ? 2.2 : 1.8}
                   />
                 </span>
               </button>
@@ -218,7 +201,7 @@ export const CategoriesDropdown: React.FC<CategoriesDropdownProps> = ({
                 className={styles.itemRow}
                 onClick={() => onSelectCategory?.(item, currentTab)}
               >
-                {getCategoryIcon(item)}
+                <CategoryItemIcon />
                 <span className={styles.itemText}>{item}</span>
               </button>
             ))}
@@ -233,7 +216,7 @@ export const CategoriesDropdown: React.FC<CategoriesDropdownProps> = ({
                 className={styles.itemRow}
                 onClick={() => onSelectCategory?.(item, currentTab)}
               >
-                {getCategoryIcon(item)}
+                <CategoryItemIcon />
                 <span className={styles.itemText}>{item}</span>
               </button>
             ))}
@@ -241,15 +224,14 @@ export const CategoriesDropdown: React.FC<CategoriesDropdownProps> = ({
         </div>
       </div>
 
-      {/* Bottom Footer: See all Skills CTA */}
+      {/* Bottom Footer: See all Skills CTA (Figma Node 751:7947) */}
       <div className={styles.footerRow}>
         <button
           type="button"
           className={styles.seeAllButton}
           onClick={onSeeAllSkills}
         >
-          <span>See all Skills</span>
-          <ArrowRight size={14} className={styles.seeAllIcon} />
+          See all Skills
         </button>
       </div>
     </div>

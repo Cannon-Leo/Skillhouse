@@ -125,6 +125,17 @@ A cohesive, production-grade design system and component architecture extracted 
 
 ---
 
+### E. Reusable Primitive: BookmarkButton (Nodes 751:5617 & 673:3035)
+- **Component**: `BookmarkButton` (`src/components/ui/BookmarkButton.tsx`)
+- **Design Rule**: **Strictly fully rounded circular button (`border-radius: var(--radius-full, 50%)`) across all instantiations.**
+- **Variants & Sizes**:
+  - `size="md"` (`28x28px` circular): Used in `SkillDetailHeader` (Node `751:5617`, `#FFECD8` cream surface).
+  - `size="sm"` (`26x26px` circular): Used in `SkillCard` (Node `673:3035`, `#FFFFFF` white surface).
+  - Active Bookmarked state: Solid `#FB6320` brand orange with pure white `#FFFFFF` icon.
+  - Press feedback: `scale(0.96)`.
+
+---
+
 ## 5. Master Canvas Nodes Summary
 
 | Figma Node | Component | File Location | Specifications |

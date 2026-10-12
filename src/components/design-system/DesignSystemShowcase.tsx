@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "../ui/Button";
+import { BookmarkButton } from "../ui/BookmarkButton";
 import { Copy, Download, Upload, Archive } from "lucide-react";
 import { Checkbox } from "../ui/Checkbox";
 import { SearchInput } from "../ui/SearchInput";
@@ -22,12 +23,12 @@ import { CategorySkillCard } from "../features/CategorySkillCard";
 import { CategorySkillGrid } from "../features/CategorySkillGrid";
 
 import { ConnectAgentBanner } from "../features/ConnectAgentBanner";
-import { Footer } from "../features/Footer";
 import { useScrollLock } from "../../lib/useScrollLock";
 import styles from "./DesignSystemShowcase.module.css";
 
 export const DesignSystemShowcase: React.FC = () => {
   const [btnLoading, setBtnLoading] = useState(false);
+  const [demoShowcaseBookmarked, setDemoShowcaseBookmarked] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [cb1, setCb1] = useState(false);
   const [cb2, setCb2] = useState(true);
@@ -385,6 +386,36 @@ export const DesignSystemShowcase: React.FC = () => {
             <Button variant="icon-border" size="icon-sm" title="Archive action">
               <Archive size={14} />
             </Button>
+          </div>
+
+          {/* Fully Rounded Action Buttons */}
+          <div className={styles.sandboxRow}>
+            <span className={styles.stateLabel}>Fully Rounded Bookmark Buttons (Nodes 751:5617 & 673:3035)</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+              <BookmarkButton
+                size="md"
+                variant="cream"
+                isBookmarked={demoShowcaseBookmarked}
+                onToggle={setDemoShowcaseBookmarked}
+                title="Toggle bookmark (Cream / 28px circular)"
+              />
+              <BookmarkButton
+                size="sm"
+                variant="white"
+                isBookmarked={demoShowcaseBookmarked}
+                onToggle={setDemoShowcaseBookmarked}
+                title="Toggle bookmark (White / 26px circular)"
+              />
+              <BookmarkButton
+                size="md"
+                variant="cream"
+                isBookmarked={true}
+                title="Active Bookmarked State (Brand Orange)"
+              />
+              <span style={{ fontSize: "13px", color: "var(--color-text-muted)" }}>
+                Always 100% circular (border-radius: 50%) across all instantiations
+              </span>
+            </div>
           </div>
         </div>
       </section>

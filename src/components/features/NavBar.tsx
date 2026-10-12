@@ -8,6 +8,8 @@ import {
   Menu,
   X,
   LogOut,
+  Search,
+  Bookmark,
 } from "lucide-react";
 import { Button } from "../ui/Button";
 import Link from "next/link";
@@ -16,18 +18,22 @@ import { CategoriesDropdown, CategoryTab } from "./CategoriesDropdown";
 import { UserMenuPopover } from "./UserMenuPopover";
 import styles from "./NavBar.module.css";
 
+export type NavView = "home" | "marketplace" | "my-skills" | "design-system";
+
 export interface NavBarProps {
-  currentView?: "home" | "marketplace" | "design-system";
-  onViewChange?: (view: "home" | "marketplace" | "design-system") => void;
+  currentView?: NavView;
+  onViewChange?: (view: NavView) => void;
   searchValue?: string;
   onSearchChange?: (value: string) => void;
   onSearchSubmit?: (value: string) => void;
+  onOpenCommandPalette?: () => void;
   onSelectCategory?: (category: string, tab?: CategoryTab) => void;
   onRequestSkill?: () => void;
   onGetStarted?: () => void;
   onOpenLoginModal?: () => void;
   isSignedIn?: boolean;
   onSignOut?: () => void;
+  savedSkillsCount?: number;
   user?: {
     name: string;
     email?: string;
@@ -43,12 +49,14 @@ export const NavBar: React.FC<NavBarProps> = ({
   searchValue = "",
   onSearchChange,
   onSearchSubmit,
+  onOpenCommandPalette,
   onSelectCategory,
   onRequestSkill,
   onGetStarted,
   onOpenLoginModal,
   isSignedIn = false,
   onSignOut,
+  savedSkillsCount = 0,
   user = {
     name: "Alex Vance",
     email: "alex@skillhouse.ai",
@@ -76,14 +84,17 @@ export const NavBar: React.FC<NavBarProps> = ({
     if (isSignedIn) {
       if (onRequestSkill) {
         onRequestSkill();
-      } else {
-        alert("Request a skill");
       }
     } else {
-      handleCtaClick();
+      if (onOpenLoginModal) {
+        onOpenLoginModal();
+      } else if (onGetStarted) {
+        onGetStarted();
+      }
     }
   };
 
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -99,12 +110,14 @@ export const NavBar: React.FC<NavBarProps> = ({
         setUserMenuOpen(false);
       }
     };
-    if (categoriesOpen || userMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [categoriesOpen, userMenuOpen]);
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Keyboard navigation for dropdowns
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -191,14 +204,29 @@ export const NavBar: React.FC<NavBarProps> = ({
             )}
           </div>
 
-
-
-
+          {/* My Skills Workspace Tab */}
+          <button
+            type="button"
+            className={`${styles.navItem} ${currentView === "my-skills" ? styles.active : ""}`}
+            onClick={() => onViewChange?.("my-skills")}
+            aria-label="My Skills Workspace"
+          >
+            <span>My Skills</span>
+            {savedSkillsCount > 0 && (
+              <span className={styles.navCounterBadge}>{savedSkillsCount}</span>
+            )}
+          </button>
 
           <button
             type="button"
             className={styles.navItem}
-            onClick={() => alert("Pricing plans modal")}
+            onClick={() => {
+              if (onOpenLoginModal) {
+                onOpenLoginModal();
+              } else if (onGetStarted) {
+                onGetStarted();
+              }
+            }}
           >
             Pricing
           </button>
@@ -206,13 +234,26 @@ export const NavBar: React.FC<NavBarProps> = ({
 
         {/* Right Actions Container */}
         <div className={styles.rightActions}>
+          {/* Mobile Quick Search Button */}
+          <button
+            type="button"
+            className={styles.mobileSearchButton}
+            onClick={() => onOpenCommandPalette?.()}
+            aria-label="Open command palette search"
+          >
+            <Search size={18} />
+          </button>
+
           <div className={styles.searchWrapper}>
             <SearchInput
               value={searchValue}
               onChange={(e) => onSearchChange?.(e.target.value)}
               onClear={() => onSearchChange?.("")}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+                  e.preventDefault();
+                  onOpenCommandPalette?.();
+                } else if (e.key === "Enter") {
                   onSearchSubmit?.(searchValue);
                 }
               }}
@@ -289,8 +330,14 @@ export const NavBar: React.FC<NavBarProps> = ({
               {userMenuOpen && (
                 <UserMenuPopover
                   variant="attending"
-                  onBookmarks={() => setUserMenuOpen(false)}
-                  onDirectoryHistory={() => setUserMenuOpen(false)}
+                  onBookmarks={() => {
+                    setUserMenuOpen(false);
+                    onViewChange?.("my-skills");
+                  }}
+                  onDirectoryHistory={() => {
+                    setUserMenuOpen(false);
+                    onViewChange?.("my-skills");
+                  }}
                   onProfile={() => setUserMenuOpen(false)}
                   onAccountSettings={() => setUserMenuOpen(false)}
                   onHelpCenter={() => setUserMenuOpen(false)}
@@ -322,14 +369,16 @@ export const NavBar: React.FC<NavBarProps> = ({
                 />
               </button>
 
-              <button
-                type="button"
-                className={styles.getStartedButton}
+              {/* Get Started Button (Figma Node 4621:371857 / 751:5945) */}
+              <Button
+                variant="brand"
+                size="md"
                 onClick={handleCtaClick}
                 data-testid="header-get-started-btn"
+                className={styles.desktopCtaBtn}
               >
                 Get started
-              </button>
+              </Button>
             </div>
           )}
 
@@ -369,6 +418,17 @@ export const NavBar: React.FC<NavBarProps> = ({
               type="button"
               className={styles.mobileDrawerLink}
               onClick={() => {
+                onViewChange?.("my-skills");
+                setMobileMenuOpen(false);
+              }}
+            >
+              <span>My Skills Workspace</span>
+              <ChevronRight size={16} />
+            </button>
+            <button
+              type="button"
+              className={styles.mobileDrawerLink}
+              onClick={() => {
                 onViewChange?.("design-system");
                 setMobileMenuOpen(false);
               }}
@@ -392,7 +452,7 @@ export const NavBar: React.FC<NavBarProps> = ({
               type="button"
               className={styles.mobileDrawerLink}
               onClick={() => {
-                alert("Pricing plans modal");
+                handleCtaClick();
                 setMobileMenuOpen(false);
               }}
             >
