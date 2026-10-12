@@ -16,14 +16,25 @@ describe("CommandPalette Component", () => {
     expect(screen.queryByTestId("command-palette-dialog")).not.toBeInTheDocument();
   });
 
-  it("filters commands and skills based on search query", () => {
-    render(<CommandPalette isOpen={true} onClose={vi.fn()} />);
+  it("filters commands and skills based on search query and selects a skill", () => {
+    const handleSelectSkill = vi.fn();
+    render(
+      <CommandPalette
+        isOpen={true}
+        onClose={vi.fn()}
+        onSelectSkill={handleSelectSkill}
+      />
+    );
 
     const input = screen.getByTestId("command-palette-input");
     fireEvent.change(input, { target: { value: "Visual Canvas" } });
 
     expect(screen.getByText("Visual Canvas Deck")).toBeInTheDocument();
     expect(screen.queryByText("Design System Showcase")).not.toBeInTheDocument();
+
+    const skillItem = screen.getByText("Visual Canvas Deck");
+    fireEvent.click(skillItem);
+    expect(handleSelectSkill).toHaveBeenCalledWith("visual-canvas-deck");
   });
 
   it("shows empty state when no matching commands exist and triggers request skill", () => {
@@ -64,6 +75,21 @@ describe("CommandPalette Component", () => {
     fireEvent.keyDown(dialog, { key: "Enter" });
 
     expect(handleNavigate).toHaveBeenCalledWith("my-skills");
+  });
+
+  it("handles Connect AI Agent action click", () => {
+    const handleConnect = vi.fn();
+    render(
+      <CommandPalette
+        isOpen={true}
+        onClose={vi.fn()}
+        onConnectAgent={handleConnect}
+      />
+    );
+
+    const connectItem = screen.getByText("Connect AI Agent");
+    fireEvent.click(connectItem);
+    expect(handleConnect).toHaveBeenCalled();
   });
 
   it("closes when Escape key is pressed or backdrop is clicked", () => {

@@ -5,8 +5,9 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { NavBar } from "@/components/features/NavBar";
 import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
-import { MarketplaceView } from "@/components/features/MarketplaceView";
+import { MarketplaceView, MARKETPLACE_SKILLS } from "@/components/features/MarketplaceView";
 import { MySkillsWorkspace } from "@/components/features/MySkillsWorkspace/MySkillsWorkspace";
+import { SkillDetailDrawer } from "@/components/features/SkillDetailDrawer/SkillDetailDrawer";
 import { CommandPalette } from "@/components/features/CommandPalette/CommandPalette";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
@@ -29,6 +30,7 @@ function MainContent() {
   const [selectedCategoryOverride, setSelectedCategoryOverride] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState(searchParam);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [selectedDrawerSkillId, setSelectedDrawerSkillId] = useState<string | null>(null);
 
   const activeView =
     activeViewOverride ??
@@ -42,6 +44,9 @@ function MainContent() {
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
+
+  const selectedDrawerSkill =
+    MARKETPLACE_SKILLS.find((s) => s.id === selectedDrawerSkillId) || null;
 
   // Sync state if browser back/forward button is pressed
   useEffect(() => {
@@ -111,6 +116,52 @@ function MainContent() {
     }
   }, []);
 
+  // Shared Modals and Drawers
+  const sharedDrawersAndModals = (
+    <>
+      <SkillDetailDrawer
+        isOpen={Boolean(selectedDrawerSkill)}
+        skill={selectedDrawerSkill}
+        onClose={() => setSelectedDrawerSkillId(null)}
+        onExpandFullPage={(id) => router.push(`/skills/${id}`)}
+        isBookmarked={
+          selectedDrawerSkill ? workspace.isBookmarked(selectedDrawerSkill.id) : false
+        }
+        onToggleBookmark={workspace.toggleBookmark}
+        isInstalled={
+          selectedDrawerSkill ? workspace.isInstalled(selectedDrawerSkill.id) : false
+        }
+        onToggleInstall={workspace.toggleInstall}
+      />
+
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onNavigateView={(view) => {
+          if (view === "home") navigateHome();
+          else if (view === "marketplace") navigateToMarketplace();
+          else if (view === "my-skills") navigateToMySkills();
+          else if (view === "design-system") router.push("/design-system");
+        }}
+        onSelectSkill={(id) => setSelectedDrawerSkillId(id)}
+        onRequestSkill={() => setIsRequestSkillOpen(true)}
+        savedSkillIds={workspace.savedSkillIds}
+        installedSkillIds={workspace.installedSkillIds}
+      />
+
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+      />
+
+      <RequestSkillModal
+        isOpen={isRequestSkillOpen}
+        onClose={() => setIsRequestSkillOpen(false)}
+        onSubmitSuccess={() => setIsRequestSkillOpen(false)}
+      />
+    </>
+  );
+
   // When activeView is my-skills, render the user's workspace
   if (activeView === "my-skills") {
     return (
@@ -123,25 +174,12 @@ function MainContent() {
           onNavigateHome={navigateHome}
           onNavigateMarketplace={() => navigateToMarketplace()}
           onNavigateDesignSystem={() => router.push("/design-system")}
-          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
+          onSelectSkillDetail={(id) => setSelectedDrawerSkillId(id)}
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           onRequestSkill={() => setIsRequestSkillOpen(true)}
           onOpenLoginModal={() => setIsLoginOpen(true)}
         />
-        <CommandPalette
-          isOpen={isCommandPaletteOpen}
-          onClose={() => setIsCommandPaletteOpen(false)}
-          onNavigateView={(view) => {
-            if (view === "home") navigateHome();
-            else if (view === "marketplace") navigateToMarketplace();
-            else if (view === "my-skills") navigateToMySkills();
-            else if (view === "design-system") router.push("/design-system");
-          }}
-          onSelectSkill={(id) => router.push(`/skills/${id}`)}
-          onRequestSkill={() => setIsRequestSkillOpen(true)}
-          savedSkillIds={workspace.savedSkillIds}
-          installedSkillIds={workspace.installedSkillIds}
-        />
+        {sharedDrawersAndModals}
       </>
     );
   }
@@ -154,22 +192,9 @@ function MainContent() {
           initialCategory={selectedCategory}
           initialSearch={searchValue}
           onNavigateHome={navigateHome}
-          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
+          onSelectSkillDetail={(id) => setSelectedDrawerSkillId(id)}
         />
-        <CommandPalette
-          isOpen={isCommandPaletteOpen}
-          onClose={() => setIsCommandPaletteOpen(false)}
-          onNavigateView={(view) => {
-            if (view === "home") navigateHome();
-            else if (view === "marketplace") navigateToMarketplace();
-            else if (view === "my-skills") navigateToMySkills();
-            else if (view === "design-system") router.push("/design-system");
-          }}
-          onSelectSkill={(id) => router.push(`/skills/${id}`)}
-          onRequestSkill={() => setIsRequestSkillOpen(true)}
-          savedSkillIds={workspace.savedSkillIds}
-          installedSkillIds={workspace.installedSkillIds}
-        />
+        {sharedDrawersAndModals}
       </>
     );
   }
@@ -238,32 +263,7 @@ function MainContent() {
         }}
       />
 
-      {/* Modals & Command Palette */}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onNavigateView={(view) => {
-          if (view === "home") navigateHome();
-          else if (view === "marketplace") navigateToMarketplace();
-          else if (view === "my-skills") navigateToMySkills();
-          else if (view === "design-system") router.push("/design-system");
-        }}
-        onSelectSkill={(id) => router.push(`/skills/${id}`)}
-        onRequestSkill={() => setIsRequestSkillOpen(true)}
-        savedSkillIds={workspace.savedSkillIds}
-        installedSkillIds={workspace.installedSkillIds}
-      />
-
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
-      />
-
-      <RequestSkillModal
-        isOpen={isRequestSkillOpen}
-        onClose={() => setIsRequestSkillOpen(false)}
-        onSubmitSuccess={() => setIsRequestSkillOpen(false)}
-      />
+      {sharedDrawersAndModals}
     </div>
   );
 }

@@ -22,3 +22,5 @@ export * from "./SkillDetailPage";
 export * from "./CommandPalette/CommandPalette";
 
 export * from "./MySkillsWorkspace/MySkillsWorkspace";
+
+export * from "./SkillDetailDrawer/SkillDetailDrawer";

@@ -1,24 +1,23 @@
 /* CategoriesDropdown Component Styles
- * Transparent Frosted Glassmorphism matching usefinds.com aesthetic
- * Width: 700px, Background: rgba(255, 255, 255, 0.72), blur(24px) saturate(180%)
- * Border: 1px solid rgba(255, 255, 255, 0.75), Radius: 12px
+ * Exact Figma Node 751:7385 specs (Component 218 / 751:7883: "Property 1=use case")
+ * Surface: #FFECD8 (Skillhouse Surface Cream)
+ * Border: 1px solid #CDB7AE, Radius: 0 0 4px 4px
+ * Shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08)
  */
 
 .dropdownContainer {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 700px;
+  width: 630px;
   max-width: 95vw;
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: saturate(180%) blur(24px);
-  backdrop-filter: saturate(180%) blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 12px;
+  background-color: #FFECD8;
+  border: 1px solid #CDB7AE;
+  border-radius: 0 0 4px 4px;
   box-shadow: 
-    0 0 0 1px rgba(18, 19, 22, 0.08),
-    0 16px 36px -4px rgba(16, 18, 24, 0.12),
-    0 4px 12px rgba(16, 18, 24, 0.04);
+    0px 0px 0px 1px rgba(16, 25, 40, 0.05),
+    0px 0px 3px -1px rgba(16, 25, 40, 0.04),
+    0px 16px 24px -6px rgba(16, 25, 40, 0.08);
   max-height: calc(100vh - 84px);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -27,25 +26,25 @@
   text-align: left;
 }
 
-/* Top Section: Sidebar + Content Columns */
+/* Top Section: Sidebar + Content Columns (Figma Node I751:7385;751:7884) */
 .bodyWrapper {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  padding: 20px 24px 18px;
+  padding: 24px 24px 20px;
   gap: 24px;
-  border-bottom: 1px solid rgba(18, 19, 22, 0.08);
+  border-bottom: 1px solid #CDB7AE;
 }
 
-/* Left Sidebar Tabs (Fixed 150px) */
+/* Left Sidebar Tabs (Fixed 150px — Figma Node I751:7385;751:7894) */
 .sidebarTabs {
   display: flex;
   flex-direction: column;
   width: 150px;
   flex-shrink: 0;
-  gap: 4px;
-  padding-right: 20px;
-  border-right: 1px solid rgba(18, 19, 22, 0.08);
+  gap: 8px;
+  padding-right: 24px;
+  border-right: 1px solid rgba(166, 166, 166, 0.5);
 }
 
 .tabButton {
@@ -54,80 +53,80 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 8px 10px;
+  padding: 6px 0px;
   background: transparent;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
   outline: none;
-  transition: background-color 0.12s ease, opacity 0.15s ease;
+  transition: opacity 0.15s ease;
   text-align: left;
 }
 
 .tabButton:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  opacity: 0.9;
 }
 
 .tabButton:focus-visible {
   outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .tabLabel {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
-  font-size: 13.5px;
+  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-size: 14px;
   line-height: 20px;
   white-space: nowrap;
 }
 
 .activeTab {
-  background-color: rgba(0, 0, 0, 0.06);
-}
-
-.activeTab .tabLabel {
-  font-weight: 600;
-  color: #121316;
-}
-
-.inactiveTab {
-  opacity: 0.7;
-}
-
-.inactiveTab:hover {
   opacity: 1;
 }
 
+.activeTab .tabLabel {
+  font-weight: 500;
+  color: #000000;
+}
+
+.inactiveTab {
+  opacity: 0.5;
+}
+
+.inactiveTab:hover {
+  opacity: 0.8;
+}
+
 .inactiveTab .tabLabel {
-  font-weight: 450;
-  color: #5B606B;
+  font-weight: 400;
+  color: #7F776E;
 }
 
 .tabArrowWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .tabArrow {
-  color: #5B606B;
-  opacity: 0.6;
+  color: #7F776E;
+  opacity: 0.5;
   transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .activeArrow {
-  color: #121316;
+  color: #000000;
   opacity: 1;
   transform: translateX(1px);
 }
 
-/* Content Columns (2 flex columns with ample measure) */
+/* Content Columns (2 flex columns — Figma template EL-6cb81979) */
 .contentColumns {
   display: flex;
   flex-direction: row;
   flex: 1;
-  gap: 20px;
+  gap: 24px;
   align-items: flex-start;
 }
 
@@ -135,7 +134,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 4px;
+  gap: 20px;
   min-width: 0;
 }
 
@@ -143,15 +142,16 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  padding: 7px 10px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 4px;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
-  transition: background-color 0.12s ease;
-  width: 100%;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  width: calc(100% + 12px);
   min-width: 0;
   box-sizing: border-box;
 }
@@ -159,77 +159,68 @@
 .itemRow:hover,
 .itemRow:focus-visible,
 .itemRow:focus {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #F8D5B8;
 }
 
 .itemRow:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid #54392D;
   outline-offset: 1px;
 }
 
 .itemIcon {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
-  color: #5B606B;
-  transition: color 0.15s ease, transform 0.15s ease;
+  color: #000000;
+  transition: transform 0.15s ease;
 }
 
 .itemRow:hover .itemIcon {
-  color: #121316;
   transform: translateY(1px);
 }
 
 .itemText {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
-  font-size: 13.5px;
+  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-size: 14px;
   line-height: 1.4em;
-  font-weight: 450;
-  color: #121316;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-
-.itemRow:hover .itemText {
+  font-weight: 400;
   color: #000000;
+  white-space: nowrap;
 }
 
-/* Bottom Footer (See all Skills) */
+/* Bottom Footer (See all Skills — Figma Node I751:7385;751:7946) */
 .footerRow {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 16px 24px;
+  padding: 20px 24px 24px;
+  background-color: transparent;
 }
 
 .seeAllButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 18px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(18, 19, 22, 0.14);
-  border-radius: 8px;
-  color: #121316;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
-  font-size: 13.5px;
+  height: 40px;
+  padding: 0 24px;
+  background: transparent;
+  border: 1px solid #FB6320;
+  border-radius: 4px;
+  color: #FB6320;
+  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-  box-shadow: 0 1px 2px rgba(16, 18, 24, 0.04);
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
 .seeAllButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-color: rgba(18, 19, 22, 0.22);
-  color: #000000;
+  background-color: #FB6320;
+  color: #FFFFFF;
 }
 
 .seeAllButton:active {
@@ -237,7 +228,7 @@
 }
 
 .seeAllButton:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid #FB6320;
   outline-offset: 2px;
 }
 
@@ -257,7 +248,7 @@
     width: 100%;
     flex-direction: row;
     border-right: none;
-    border-bottom: 1px solid rgba(18, 19, 22, 0.08);
+    border-bottom: 1px solid #CDB7AE;
     padding-right: 0;
     padding-bottom: 12px;
     overflow-x: auto;
@@ -265,6 +256,6 @@
 
   .contentColumns {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 }
