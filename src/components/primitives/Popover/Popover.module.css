@@ -1,0 +1,45 @@
+/* Popover Primitive — Built on Radix UI Popover + Skillhouse Design Tokens */
+.content {
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E5);
+  border-radius: 0px; /* Strict 0px sharp corners */
+  padding: 16px;
+  box-shadow: var(--shadow-md, 0px 4px 8px -2px rgba(16, 24, 40, 0.1));
+  z-index: 1000;
+  min-width: 200px;
+  box-sizing: border-box;
+  outline: none;
+  animation: popoverFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arrow {
+  fill: var(--color-white, #FFFFFF);
+  stroke: var(--color-border, #E5E5E5);
+  stroke-width: 1px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted, #737373);
+  padding: 2px;
+}
+
+.closeButton:hover {
+  color: var(--color-dark, #1A1A1A);
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

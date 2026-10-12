@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NavBar } from "./NavBar";
 import { SkillDetailHeader } from "./SkillDetailHeader";
-import { SkillRuntimeSpecs } from "./SkillRuntimeSpecs";
 import { SkillCard } from "./SkillCard";
 import { Footer } from "./Footer";
 import { LoginModal } from "./LoginModal";

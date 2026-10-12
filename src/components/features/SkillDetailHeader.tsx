@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import {
-  ChevronRight,
+  ArrowRight,
   Bookmark,
   Share2,
   Download,
@@ -11,7 +11,6 @@ import {
   Copy,
   Info,
 } from "lucide-react";
-import Image from "next/image";
 import { SkillAudienceBox } from "./SkillAudienceBox";
 import { SkillRuntimeSpecs } from "./SkillRuntimeSpecs";
 import styles from "./SkillDetailHeader.module.css";
@@ -191,7 +190,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
 
             <div className={styles.bannerArrowRow}>
               <span className={styles.bannerArrow}>
-                <ChevronRight size={16} aria-hidden="true" data-testid="subscription-banner-arrow" />
+                <ArrowRight size={16} aria-hidden="true" data-testid="subscription-banner-arrow" />
               </span>
             </div>
           </div>

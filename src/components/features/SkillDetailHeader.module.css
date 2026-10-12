@@ -348,7 +348,14 @@
     gap: var(--space-xs);
   }
   .subscriptionBanner {
+    flex-direction: column; /* Arrow only goes down on mobile view! */
+    align-items: flex-start;
+    gap: var(--space-md);
     padding: var(--space-md);
+  }
+  .bannerArrowRow {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
