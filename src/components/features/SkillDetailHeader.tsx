@@ -1,10 +1,10 @@
 "use client";
 
 import { BookmarkButton } from "../ui/BookmarkButton";
+import { BookmarkIcon } from "../ui/BookmarkIcon";
 
 import React, { useState } from "react";
 import {
-  Bookmark,
   Share,
   Download,
   Tag,
@@ -148,7 +148,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
           </span>
 
           <span className={styles.statItem} title="Saved">
-            <Bookmark size={14} aria-hidden="true" />
+            <BookmarkIcon size={14} aria-hidden="true" />
             <span>295</span>
           </span>
 

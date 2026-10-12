@@ -1,5 +1,7 @@
 "use client";
 
+import { BookmarkIcon } from "../ui/BookmarkIcon";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./SkillCard.module.css";
@@ -84,19 +86,11 @@ export const SkillCard: React.FC<SkillCardProps> = ({
             aria-pressed={isBookmarked}
             title={isBookmarked ? "Saved" : "Bookmark skill"}
           >
-            <svg 
-              width="14" 
-              height="14" 
-              viewBox="0 0 24 24" 
-              fill={isBookmarked ? "currentColor" : "none"} 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
+            <BookmarkIcon
+              size={14}
+              filled={isBookmarked}
               className={styles.bookmarkIcon}
-            >
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-            </svg>
+            />
           </button>
         </div>
       </div>

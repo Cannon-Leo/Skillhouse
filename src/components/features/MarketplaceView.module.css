@@ -242,46 +242,47 @@
 
 .sortDropdownMenu {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   right: 0;
-  background: linear-gradient(135deg, rgba(255, 246, 238, 0.82) 0%, rgba(255, 236, 218, 0.7) 100%);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 0px;
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
   box-shadow: 
-    0px 0px 0px 1px rgba(205, 183, 174, 0.35),
-    0 8px 24px -4px rgba(0, 0, 0, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    0 0 0 1px rgba(18, 19, 22, 0.08),
+    0 12px 32px -4px rgba(16, 18, 24, 0.12);
   z-index: 50;
   min-width: 140px;
+  padding: 4px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: fadeIn var(--transition-fast) ease-out;
+  animation: fadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1) ease-out;
 }
 
 .sortOption {
-  padding: 10px 16px;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: #000000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  font-size: 13.5px;
+  color: #121316;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition: background-color 0.12s ease;
 }
 
 .sortOption:hover {
-  background-color: rgba(251, 99, 32, 0.1);
-  color: #FB6320;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #121316;
 }
 
 .sortOption.selected {
-  font-weight: 600;
+  font-weight: 500;
   color: #FB6320;
-  background-color: rgba(251, 99, 32, 0.14);
+  background-color: rgba(251, 99, 32, 0.08);
 }
 
 /* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */

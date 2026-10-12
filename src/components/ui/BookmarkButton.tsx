@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { Bookmark } from "lucide-react";
+import { BookmarkIcon } from "./BookmarkIcon";
 import styles from "./BookmarkButton.module.css";
 
 export interface BookmarkButtonProps
@@ -51,11 +51,9 @@ export const BookmarkButton = forwardRef<HTMLButtonElement, BookmarkButtonProps>
         title={title || defaultTitle}
         {...props}
       >
-        <Bookmark
+        <BookmarkIcon
           size={iconSize}
-          aria-hidden="true"
-          fill={isBookmarked ? "currentColor" : "none"}
-          stroke="currentColor"
+          filled={isBookmarked}
           className={styles.icon}
         />
       </button>
