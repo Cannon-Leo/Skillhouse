@@ -257,14 +257,7 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
               ))}
             </div>
 
-            {/* Runtime & Guide Specs on Left Column (Skillry.dev Balanced Layout) */}
-            <div className={styles.specsSection} data-testid="skill-detail-left-specs">
-              <SkillRuntimeSpecs
-                runsInModels={MODEL_LOGOS}
-                installGuides={["Claude Code", "Cursor"]}
-                generatesWith={["Host Agent LLM"]}
-              />
-            </div>
+
           </div>
 
           {/* Right Column: Composite Action Panel (Figma Node 751:5611) */}
@@ -277,7 +270,7 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
               installPrompt={skill.installPrompt}
               isFree={skill.isFree}
               variant={skill.isFree ? "free" : "premium"}
-              showRuntimeSpecs={false}
+              showRuntimeSpecs={true}
             />
           </div>
         </section>

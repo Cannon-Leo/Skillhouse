@@ -108,13 +108,17 @@
   width: 100%;
 }
 
-/* Left Column: Media Preview Gallery + Runtime Specs */
+/* Left Column: Sticky Media Preview Gallery */
 .galleryColumn {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
   min-width: 0;
+  position: sticky;
+  top: 96px; /* 72px sticky navbar + 24px breathing space */
+  align-self: start;
+  z-index: 10;
 }
 
 .mainPreviewCanvas {
@@ -282,7 +286,12 @@
     gap: 32px;
   }
 
-  .galleryColumn,
+  .galleryColumn {
+    position: static;
+    top: auto;
+    width: 100%;
+  }
+
   .panelColumn {
     width: 100%;
   }

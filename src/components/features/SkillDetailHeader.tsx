@@ -45,7 +45,7 @@ export const SkillDetailHeader: React.FC<SkillDetailHeaderProps> = ({
   onSubscribe,
   isFree: propIsFree,
   variant: propVariant,
-  showRuntimeSpecs = false,
+  showRuntimeSpecs = true,
   className = "",
 }) => {
   const [isBookmarked, setIsBookmarked] = useState(initialBookmarked);
