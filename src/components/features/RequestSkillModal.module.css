@@ -141,14 +141,14 @@
   width: 100%;
   height: 42px;
   padding: 0 14px;
-  background-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.45);
   border: 1px solid #CDB7AE;
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
   color: #121316;
   box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.04);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.03);
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
 
@@ -159,23 +159,25 @@
 
 .input:hover {
   border-color: #8C847A;
+  background-color: rgba(255, 255, 255, 0.68);
 }
 
 .input:focus {
   outline: none;
   border-color: var(--color-brand, #FB6320);
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
 }
 
 /* ==========================================================================
    Design System Textarea Specs
+   Warm translucent cream surface blending harmoniously into modal canvas
    ========================================================================== */
 .textarea {
   width: 100%;
   min-height: 105px;
   padding: 12px 14px;
-  background-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.45);
   border: 1px solid #CDB7AE;
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
@@ -183,7 +185,7 @@
   line-height: 1.5;
   color: #121316;
   box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.04);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.03);
   resize: vertical;
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
@@ -195,74 +197,17 @@
 
 .textarea:hover {
   border-color: #8C847A;
+  background-color: rgba(255, 255, 255, 0.68);
 }
 
 .textarea:focus {
   outline: none;
   border-color: var(--color-brand, #FB6320);
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
 }
 
-/* ==========================================================================
-   Design System Dropdown / Select Specs
-   ========================================================================== */
-.selectWrapper {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
 
-.select {
-  width: 100%;
-  height: 42px;
-  padding: 0 38px 0 14px;
-  background-color: #FFFFFF;
-  border: 1px solid #CDB7AE;
-  border-radius: 0px;
-  font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
-  font-size: 14px;
-  color: #121316;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.04);
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
-}
-
-.select:hover {
-  border-color: #8C847A;
-}
-
-.select:focus {
-  outline: none;
-  border-color: var(--color-brand, #FB6320);
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.2);
-}
-
-.select option {
-  background-color: #FFFFFF;
-  color: #121316;
-  padding: 8px 12px;
-}
-
-.selectChevron {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #7F776E;
-  transition: transform 150ms ease, color 150ms ease;
-}
-
-.selectWrapper:hover .selectChevron {
-  color: #121316;
-}
 
 .inputError {
   border-color: #D92D20 !important;
@@ -281,7 +226,7 @@
 }
 
 /* ==========================================================================
-   Design System Access Preference Pills / Radios
+   Design System Access Preference Pills / Radios (Figma Node 725:11328 specs)
    ========================================================================== */
 .radioGroup {
   display: flex;
@@ -295,7 +240,7 @@
   gap: 8px;
   height: 38px;
   padding: 0 14px;
-  background-color: #FFFFFF;
+  background-color: rgba(255, 236, 217, 0.6);
   border: 1px solid #CDB7AE;
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
@@ -311,12 +256,12 @@
 
 .radioLabel:hover {
   border-color: #8C847A;
-  background-color: #FFF9F3;
+  background-color: #F8D5B8;
 }
 
 .radioLabelActive {
   border-color: var(--color-brand, #FB6320);
-  background-color: rgba(251, 99, 32, 0.08);
+  background-color: rgba(251, 99, 32, 0.12);
   color: #000000;
   font-weight: 500;
 }

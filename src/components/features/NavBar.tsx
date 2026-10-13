@@ -55,7 +55,6 @@ export const NavBar: React.FC<NavBarProps> = ({
   onOpenLoginModal,
   isSignedIn = false,
   onSignOut,
-  savedSkillsCount = 0,
   user = {
     name: "Alex Vance",
     email: "alex@skillhouse.ai",
@@ -203,19 +202,6 @@ export const NavBar: React.FC<NavBarProps> = ({
             )}
           </div>
 
-          {/* My Skills Workspace Tab */}
-          <button
-            type="button"
-            className={`${styles.navItem} ${currentView === "my-skills" ? styles.active : ""}`}
-            onClick={() => onViewChange?.("my-skills")}
-            aria-label="My Skills Workspace"
-          >
-            <span>My Skills</span>
-            {savedSkillsCount > 0 && (
-              <span className={styles.navCounterBadge}>{savedSkillsCount}</span>
-            )}
-          </button>
-
           <button
             type="button"
             className={styles.navItem}
@@ -275,27 +261,27 @@ export const NavBar: React.FC<NavBarProps> = ({
             </button>
           )}
 
-          {/* Signed In vs Logged Out Default CTA */}
+          {/* Request a skill icon (Figma Node 751:7770) - always visible whether logged in or not */}
+          <button
+            type="button"
+            className={styles.headerSquareActionButton}
+            aria-label="Request a skill"
+            title="Request a skill"
+            onClick={handleRequestSkillClick}
+            data-testid="header-request-skill-action-btn"
+          >
+            <Image
+              src="/figma/node_4621_371856.svg"
+              alt="Request a skill"
+              width={40}
+              height={40}
+              unoptimized
+            />
+          </button>
+
+          {/* Signed In Avatar OR Logged Out Get Started Button */}
           {isSignedIn ? (
             <div ref={userMenuRef} className={styles.userMenuContainer}>
-              {/* Orange Action Box (Figma Node 4621:371855 / 751:5943) */}
-              <button
-                type="button"
-                className={styles.headerSquareActionButton}
-                aria-label="Request a skill"
-                title="Request a skill"
-                onClick={handleRequestSkillClick}
-                data-testid="header-request-skill-action-btn"
-              >
-                <Image
-                  src="/figma/node_4621_371856.svg"
-                  alt="Request a skill"
-                  width={40}
-                  height={40}
-                  unoptimized
-                />
-              </button>
-
               {/* User Avatar with Online Dot + Chevron (Figma Node 4621:371883) */}
               <button
                 type="button"
@@ -350,34 +336,15 @@ export const NavBar: React.FC<NavBarProps> = ({
             </div>
           ) : (
             <div className={styles.desktopCtaWrapper}>
-              {/* Orange Action Box (Figma Node 4621:371855 / 751:5943) - routes to create account when signed out */}
+              {/* Get Started Button (Figma Node 4621:371857 / 751:5945) */}
               <button
                 type="button"
-                className={styles.headerSquareActionButton}
-                aria-label="Request a skill"
-                title="Request a skill"
-                onClick={handleRequestSkillClick}
-                data-testid="header-request-skill-action-btn"
-              >
-                <Image
-                  src="/figma/node_4621_371856.svg"
-                  alt="Request a skill"
-                  width={40}
-                  height={40}
-                  unoptimized
-                />
-              </button>
-
-              {/* Get Started Button (Figma Node 4621:371857 / 751:5945) */}
-              <Button
-                variant="brand"
-                size="md"
+                className={styles.getStartedButton}
                 onClick={handleCtaClick}
                 data-testid="header-get-started-btn"
-                className={styles.desktopCtaBtn}
               >
                 Get started
-              </Button>
+              </button>
             </div>
           )}
 

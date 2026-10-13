@@ -120,8 +120,10 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
     mockPush.mockClear();
     render(<SkillDetailPage />);
 
-    // Click My Skills in NavBar
-    const mySkillsLink = screen.getByText("My Skills");
+    // Open mobile menu to click My Skills
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+    const mySkillsLink = screen.getByText("My Skills Workspace");
     fireEvent.click(mySkillsLink);
     expect(mockPush).toHaveBeenCalledWith("/?view=my-skills");
   });

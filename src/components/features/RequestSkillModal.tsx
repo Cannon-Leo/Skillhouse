@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { Overlay } from "@/components/ui/Overlay";
-import { Check, X, ChevronDown } from "lucide-react";
+import { Check, X } from "lucide-react";
+import { CustomSelect } from "../ui/CustomSelect";
 import styles from "./RequestSkillModal.module.css";
 
 export interface SkillRequestData {
@@ -264,26 +265,13 @@ export const RequestSkillModal: React.FC<RequestSkillModalProps> = ({
                     <span className={styles.requiredBadge}>*</span>
                   </label>
                 </div>
-                <div className={styles.selectWrapper}>
-                  <select
-                    id="req-category"
-                    className={styles.select}
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    required
-                  >
-                    {CATEGORY_OPTIONS.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown
-                    size={16}
-                    className={styles.selectChevron}
-                    aria-hidden="true"
-                  />
-                </div>
+                <CustomSelect
+                  id="req-category"
+                  value={category}
+                  options={CATEGORY_OPTIONS}
+                  onChange={setCategory}
+                  required
+                />
               </div>
 
               {/* Target Agent (Optional) */}
@@ -294,25 +282,12 @@ export const RequestSkillModal: React.FC<RequestSkillModalProps> = ({
                   </label>
                   <span className={styles.optionalBadge}>Optional</span>
                 </div>
-                <div className={styles.selectWrapper}>
-                  <select
-                    id="req-agent"
-                    className={styles.select}
-                    value={targetAgent}
-                    onChange={(e) => setTargetAgent(e.target.value)}
-                  >
-                    {AGENT_OPTIONS.map((agent) => (
-                      <option key={agent} value={agent}>
-                        {agent}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown
-                    size={16}
-                    className={styles.selectChevron}
-                    aria-hidden="true"
-                  />
-                </div>
+                <CustomSelect
+                  id="req-agent"
+                  value={targetAgent}
+                  options={AGENT_OPTIONS}
+                  onChange={setTargetAgent}
+                />
               </div>
 
               {/* Access preference (Optional) */}

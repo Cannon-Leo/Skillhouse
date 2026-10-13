@@ -8,3 +8,4 @@ export * from "./SubscriptionBanner";
 export { CategorySkillCard, type CategorySkillCardProps } from "../features/CategorySkillCard";
 export * from "./BookmarkButton";
 export * from "./BookmarkIcon";
+export * from "./CustomSelect";

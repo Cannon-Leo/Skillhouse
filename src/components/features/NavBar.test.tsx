@@ -228,16 +228,9 @@ describe("Features NavBar Component", () => {
   });
 });
 
-  it("navigates to my-skills workspace when My Skills tab or mobile drawer link is clicked", () => {
+  it("navigates to my-skills workspace when mobile drawer link is clicked", () => {
     const handleViewChange = vi.fn();
-    render(<NavBar onViewChange={handleViewChange} savedSkillsCount={3} />);
-
-    // Click My Skills desktop tab
-    const mySkillsBtn = screen.getByRole("button", { name: /my skills workspace/i });
-    expect(mySkillsBtn).toBeInTheDocument();
-    expect(screen.getByText("3")).toBeInTheDocument();
-    fireEvent.click(mySkillsBtn);
-    expect(handleViewChange).toHaveBeenCalledWith("my-skills");
+    render(<NavBar onViewChange={handleViewChange} />);
 
     // Click My Skills link in mobile drawer
     const mobileBtn = screen.getByRole("button", { name: /open menu/i });
@@ -246,6 +239,14 @@ describe("Features NavBar Component", () => {
     const mobileMySkills = within(drawer).getByRole("button", { name: /my skills workspace/i });
     fireEvent.click(mobileMySkills);
     expect(handleViewChange).toHaveBeenCalledWith("my-skills");
+  });
+
+  it("ensures request a skill icon is visible both when logged in and logged out", () => {
+    const { rerender } = render(<NavBar isSignedIn={false} />);
+    expect(screen.getByTestId("header-request-skill-action-btn")).toBeInTheDocument();
+
+    rerender(<NavBar isSignedIn={true} user={{ name: "Alex Vance" }} />);
+    expect(screen.getByTestId("header-request-skill-action-btn")).toBeInTheDocument();
   });
 
   it("triggers onOpenCommandPalette when mobile search button or shortcut key is pressed", () => {

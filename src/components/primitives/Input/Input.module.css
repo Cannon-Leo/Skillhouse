@@ -8,7 +8,7 @@
   display: inline-flex;
   align-items: center;
   position: relative;
-  background-color: var(--color-white, #FFFFFF);
+  background-color: var(--input-bg, rgba(255, 255, 255, 0.55));
   border: 1px solid #CDB7AE;
   border-radius: 0px;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.04);
@@ -24,13 +24,14 @@
 /* Hover State */
 .wrapper:hover:not(.disabled) {
   border-color: #8C847A;
+  background-color: var(--input-bg-hover, rgba(255, 255, 255, 0.75));
 }
 
 /* Focus State */
 .wrapper:focus-within:not(.disabled) {
   border-color: var(--color-brand, #FB6320);
   box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
-  background-color: var(--color-white, #FFFFFF);
+  background-color: var(--input-bg-focus, rgba(255, 255, 255, 0.95));
 }
 
 /* Error State */
