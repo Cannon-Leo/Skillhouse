@@ -51,3 +51,14 @@ public/preview-*.html
 .windsurfrules
 
 CLAUDE.md
+
+# Assistant & AI Tooling Rules
+.cursorrules
+AGENTS.md
+.github/copilot-instructions.md
+.agents/
+
+# Raw inspection & dump artifacts
+*.json.dump
+figma_*.json
+public/figma/*ground-truth*
