@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { Button } from "../ui/Button";
 import { BookmarkButton } from "../ui/BookmarkButton";
-import { Copy, Download, Upload, Archive } from "lucide-react";
+import { Copy, Download, Upload, Archive, Globe, Code2, Palette, Sparkles } from "lucide-react";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator } from "../primitives/Select";
 import { Checkbox } from "../ui/Checkbox";
 import { SearchInput } from "../ui/SearchInput";
 import { Pill } from "../ui/Pill";
@@ -30,6 +31,9 @@ export const DesignSystemShowcase: React.FC = () => {
   const [btnLoading, setBtnLoading] = useState(false);
   const [demoShowcaseBookmarked, setDemoShowcaseBookmarked] = useState(false);
   const [searchVal, setSearchVal] = useState("");
+  const [demoSelectVal, setDemoSelectVal] = useState("Development & coding");
+  const [demoSearchableSelectVal, setDemoSearchableSelectVal] = useState("Claude Code Agent");
+  const [demoRichSelectVal, setDemoRichSelectVal] = useState("web-surfer");
   const [cb1, setCb1] = useState(false);
   const [cb2, setCb2] = useState(true);
   const [demoPillSelected, setDemoPillSelected] = useState<string>("Claude Code");
@@ -452,6 +456,188 @@ export const DesignSystemShowcase: React.FC = () => {
               <SearchInput
                 variant="white"
                 placeholder="Search skills / outputs"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 06b. Select Primitive — Custom Dropdown, Rich Context & Edge Cases */}
+      <section className={styles.section} id="select-primitive">
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            06b. Select Primitive (Custom Dropdown & Edge Cases)
+            <span className={styles.nodeBadge}>Nodes 751:7385, 760:12903</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Reusable Design System Select primitive with rich context, collision-detection auto-flip, mobile bottom-sheet drawer, search filtering, typeahead, option groups, clearable action, and WCAG 2.5.5 touch compliance.
+          </p>
+        </div>
+
+        {/* Row 1: Interactive Standard & Searchable / Clearable */}
+        <div className={styles.sandboxCard} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+          <div>
+            <span className={styles.stateLabel}>Controlled Standard Select</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-controlled"
+                value={demoSelectVal}
+                onValueChange={setDemoSelectVal}
+                options={[
+                  "Development & coding",
+                  "Design & creative",
+                  "Writing & content",
+                  "Research & analysis",
+                  "Business & productivity",
+                ]}
+                placeholder="Choose category"
+              />
+            </div>
+            <div style={{ marginTop: "8px", fontSize: "12px", color: "#7F776E" }}>
+              Selected: <strong style={{ color: "#FB6320" }}>{demoSelectVal || "None"}</strong>
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Searchable & Clearable Select</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-searchable"
+                searchable
+                isClearable
+                value={demoSearchableSelectVal}
+                onValueChange={setDemoSearchableSelectVal}
+                options={[
+                  "Claude Code Agent",
+                  "Cursor Agent",
+                  "Windsurf Cascade",
+                  "Codex CLI",
+                  "OpenAI Operator",
+                  "Perplexity Computer",
+                ]}
+                placeholder="Search agent target..."
+              />
+            </div>
+            <div style={{ marginTop: "8px", fontSize: "12px", color: "#7F776E" }}>
+              Filter by name or clear with (X)
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Compound Groups, Icons & Subtitles</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-compound"
+                value={demoRichSelectVal}
+                onValueChange={setDemoRichSelectVal}
+                placeholder="Select specialized tool"
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select specialized tool" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Automation Agents</SelectLabel>
+                    <SelectItem
+                      value="web-surfer"
+                      icon={<Globe size={15} />}
+                      description="Automates headless web extraction"
+                    >
+                      Web Surfer
+                    </SelectItem>
+                    <SelectItem
+                      value="code-auditor"
+                      icon={<Code2 size={15} />}
+                      description="Validates type safety & accessibility"
+                    >
+                      Code Auditor
+                    </SelectItem>
+                  </SelectGroup>
+                  <SelectSeparator />
+                  <SelectGroup>
+                    <SelectLabel>Creative Engines</SelectLabel>
+                    <SelectItem
+                      value="canvas-artist"
+                      icon={<Palette size={15} />}
+                      description="Generates Figma tokens & design specs"
+                    >
+                      Canvas Artist
+                    </SelectItem>
+                    <SelectItem
+                      value="prompt-synth"
+                      icon={<Sparkles size={15} />}
+                      description="Synthesizes multi-shot agent prompts"
+                    >
+                      Prompt Synthesizer
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div style={{ marginTop: "8px", fontSize: "12px", color: "#7F776E" }}>
+              Selected: <strong style={{ color: "#FB6320" }}>{demoRichSelectVal || "None"}</strong>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: Edge Cases & Size Variants */}
+        <div className={styles.sandboxCard} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px", marginTop: "16px" }}>
+          <div>
+            <span className={styles.stateLabel}>Small Size (32px)</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-sm"
+                size="sm"
+                options={["Small Compact A", "Small Compact B", "Small Compact C"]}
+                defaultValue="Small Compact A"
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Large Size (48px)</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-lg"
+                size="lg"
+                options={["Large Prominent Option 1", "Large Prominent Option 2"]}
+                defaultValue="Large Prominent Option 1"
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Validation Error State</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-error"
+                error
+                options={["Option Requires Selection", "Valid Option"]}
+                placeholder="Invalid selection..."
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Disabled State & Disabled Items</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-disabled"
+                disabled
+                options={["Locked Option", "Cannot change"]}
+                defaultValue="Locked Option"
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className={styles.stateLabel}>Async Loading State</span>
+            <div style={{ marginTop: "8px" }}>
+              <Select
+                id="ds-select-loading"
+                isLoading
+                options={[]}
+                placeholder="Fetching remote models..."
               />
             </div>
           </div>
