@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Footer } from "./Footer";
 
 describe("Footer Component (Figma Node 751:4917)", () => {
@@ -85,25 +85,64 @@ describe("Footer Component (Figma Node 751:4917)", () => {
     expect(screen.getByRole("link", { name: "Help & Support" })).toBeInTheDocument();
   });
 
-  it("handles navigation and category selection callbacks on link clicks", () => {
+  it("handles navigation and category selection callbacks on all link clicks", () => {
     const handleNavigate = vi.fn();
     const handleCategory = vi.fn();
     render(<Footer onNavigateMarketplace={handleNavigate} onSelectCategory={handleCategory} />);
     
-    const skillsLink = screen.getByRole("link", { name: "Skills" });
-    skillsLink.click();
+    // Explore
+    screen.getByRole("link", { name: "Skills" }).click();
     expect(handleNavigate).toHaveBeenCalled();
 
-    const webDesignLink = screen.getByRole("link", { name: "Web design" });
-    webDesignLink.click();
+    // Categories
+    screen.getByRole("link", { name: "Web design" }).click();
     expect(handleCategory).toHaveBeenCalledWith("web-design");
 
-    const imagesLink = screen.getByRole("link", { name: "Images" });
-    imagesLink.click();
+    screen.getByRole("link", { name: "Product launch" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("product-launch");
+
+    screen.getByRole("link", { name: "Brand identity" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("brand-identity");
+
+    screen.getByRole("link", { name: "Client reporting" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("client-reporting");
+
+    screen.getByRole("link", { name: "Social media" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("social-media");
+
+    screen.getByRole("link", { name: "Research" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("research");
+
+    // By output
+    screen.getByRole("link", { name: "Images" }).click();
     expect(handleCategory).toHaveBeenCalledWith("image");
 
-    const claudeLink = screen.getByRole("link", { name: "Claude Code Skills" });
-    claudeLink.click();
+    screen.getByRole("link", { name: "Video" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("video");
+
+    screen.getByRole("link", { name: "Presentations" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("slides");
+
+    screen.getByRole("link", { name: "Web & HTML" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("web");
+
+    // By agent
+    screen.getByRole("link", { name: "Claude Code Skills" }).click();
     expect(handleCategory).toHaveBeenCalledWith("claude");
+
+    screen.getByRole("link", { name: "Codex Skills" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("codex");
+
+    screen.getByRole("link", { name: "Cursor Skills" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("cursor");
+
+    screen.getByRole("link", { name: "Gemini CLI Skills" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("gemini");
+
+    screen.getByRole("link", { name: "OpenCode Skills" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("opencode");
+
+    screen.getByRole("link", { name: "Antigravity Skills" }).click();
+    expect(handleCategory).toHaveBeenCalledWith("antigravity");
   });
 });

@@ -21,6 +21,17 @@ export interface MySkillsWorkspaceProps {
   onRequestSkill?: () => void;
   onOpenLoginModal?: () => void;
   isSignedIn?: boolean;
+  user?: {
+    name: string;
+    email?: string;
+    avatarUrl?: string;
+    role?: string;
+    provider?: "google" | "github";
+  } | null;
+  onSignOut?: () => void;
+  onOpenProfile?: () => void;
+  onOpenSettings?: () => void;
+  onOpenHelpCenter?: () => void;
 }
 
 export const MySkillsWorkspace: React.FC<MySkillsWorkspaceProps> = ({
@@ -36,6 +47,11 @@ export const MySkillsWorkspace: React.FC<MySkillsWorkspaceProps> = ({
   onRequestSkill,
   onOpenLoginModal,
   isSignedIn = false,
+  user,
+  onSignOut,
+  onOpenProfile,
+  onOpenSettings,
+  onOpenHelpCenter,
 }) => {
   const [activeTab, setActiveTab] = useState<"saved" | "installed">("saved");
 
@@ -62,7 +78,13 @@ export const MySkillsWorkspace: React.FC<MySkillsWorkspaceProps> = ({
         onOpenCommandPalette={onOpenCommandPalette}
         onRequestSkill={onRequestSkill}
         onOpenLoginModal={onOpenLoginModal}
+        onGetStarted={onOpenLoginModal}
         isSignedIn={isSignedIn}
+        user={user || undefined}
+        onSignOut={onSignOut}
+        onOpenProfile={onOpenProfile}
+        onOpenSettings={onOpenSettings}
+        onOpenHelpCenter={onOpenHelpCenter}
         savedSkillsCount={savedSkillIds.length}
       />
 
@@ -75,7 +97,9 @@ export const MySkillsWorkspace: React.FC<MySkillsWorkspaceProps> = ({
                 <Bot size={14} className={styles.categoryIcon} aria-hidden="true" />
                 <span>Agent Workspace</span>
               </div>
-              <h1 className={styles.heading}>My Skills &amp; Active Tools</h1>
+              <h1 className={styles.heading}>
+                {isSignedIn && user ? `${user.name}’s Workspace` : "My Skills & Active Tools"}
+              </h1>
               <p className={styles.subheading}>
                 Manage your saved workflows, active agent stacks, and local CLI integrations.
               </p>

@@ -30,6 +30,9 @@ export interface NavBarProps {
   onRequestSkill?: () => void;
   onGetStarted?: () => void;
   onOpenLoginModal?: () => void;
+  onOpenProfile?: () => void;
+  onOpenSettings?: () => void;
+  onOpenHelpCenter?: () => void;
   isSignedIn?: boolean;
   onSignOut?: () => void;
   savedSkillsCount?: number;
@@ -37,6 +40,8 @@ export interface NavBarProps {
     name: string;
     email?: string;
     avatarUrl?: string;
+    role?: string;
+    provider?: "google" | "github";
   };
   responsiveMode?: "desktop" | "tablet" | "mobile";
   className?: string;
@@ -53,6 +58,9 @@ export const NavBar: React.FC<NavBarProps> = ({
   onRequestSkill,
   onGetStarted,
   onOpenLoginModal,
+  onOpenProfile,
+  onOpenSettings,
+  onOpenHelpCenter,
   isSignedIn = false,
   onSignOut,
   user = {
@@ -323,9 +331,18 @@ export const NavBar: React.FC<NavBarProps> = ({
                     setUserMenuOpen(false);
                     onViewChange?.("my-skills");
                   }}
-                  onProfile={() => setUserMenuOpen(false)}
-                  onAccountSettings={() => setUserMenuOpen(false)}
-                  onHelpCenter={() => setUserMenuOpen(false)}
+                  onProfile={() => {
+                    setUserMenuOpen(false);
+                    onOpenProfile?.();
+                  }}
+                  onAccountSettings={() => {
+                    setUserMenuOpen(false);
+                    onOpenSettings?.();
+                  }}
+                  onHelpCenter={() => {
+                    setUserMenuOpen(false);
+                    onOpenHelpCenter?.();
+                  }}
                   onClose={() => setUserMenuOpen(false)}
                   onLogout={() => {
                     setUserMenuOpen(false);

@@ -274,4 +274,33 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
 
     expect(onSelectSkillDetail).toHaveBeenCalledWith("pixel-promo-video");
   });
+
+  it("supports infinite scroll pagination and loading more skills", async () => {
+    vi.useFakeTimers();
+    render(<MarketplaceView />);
+
+    // Sentinel and Load more button are present initially
+    const sentinel = screen.getByTestId("infinite-scroll-sentinel");
+    expect(sentinel).toBeInTheDocument();
+
+    const loadMoreBtn = screen.getByTestId("load-more-btn");
+    expect(loadMoreBtn).toBeInTheDocument();
+    expect(loadMoreBtn).toHaveTextContent("Load more skills");
+
+    // Click load more
+    fireEvent.click(loadMoreBtn);
+
+    // Fast-forward fake timer
+    vi.advanceTimersByTime(350);
+
+    // More cards are now rendered
+    expect(screen.getByTestId("marketplace-grid")).toBeInTheDocument();
+    vi.useRealTimers();
+  });
+
+  it("renders 8 smooth macOS skeleton cards when isLoading is true", () => {
+    render(<MarketplaceView isLoading={true} />);
+    const skeletons = screen.getAllByTestId("skill-card-skeleton");
+    expect(skeletons.length).toBe(8);
+  });
 });

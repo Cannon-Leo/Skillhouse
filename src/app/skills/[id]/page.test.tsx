@@ -29,14 +29,9 @@ describe("SkillDynamicPage Route Component (/skills/[id])", () => {
     expect(await screen.findByRole("heading", { level: 1, name: "Pixel Promo Video" })).toBeInTheDocument();
     expect(screen.getByTestId("skill-detail-main-preview")).toBeInTheDocument();
 
-    // 1. Back button
-    const backBtn = screen.getByTestId("skill-detail-back-btn");
-    fireEvent.click(backBtn);
-    expect(mockPush).toHaveBeenCalledWith("/skills");
-
-    // 2. Breadcrumbs links
+    // 1. Breadcrumbs links
     const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
-    fireEvent.click(within(breadcrumbNav).getByText("Dashboard"));
+    fireEvent.click(within(breadcrumbNav).getByText("Home"));
     expect(mockPush).toHaveBeenCalledWith("/");
 
     fireEvent.click(within(breadcrumbNav).getByText("Skills"));

@@ -222,3 +222,225 @@
     font-size: 14px;
   }
 }
+
+/* ==========================================================================
+   Smooth macOS Grey Skeleton Loader & Shimmer States
+   ========================================================================== */
+
+.skeletonImage,
+.gradientPlaceholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    #E5E5EA 25%,
+    #F2F2F7 50%,
+    #E5E5EA 75%
+  );
+  background-size: 200% 100%;
+}
+
+.skeletonShimmer,
+.placeholderShimmer {
+  animation: macOsSkeletonShimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes macOsSkeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes macOsShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonShimmer,
+  .placeholderShimmer,
+  .skeletonTitle,
+  .skeletonModelDot {
+    animation: none !important;
+  }
+}
+
+.previewImage {
+  object-fit: cover;
+  transition: transform var(--transition-normal), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.imageHidden {
+  opacity: 0;
+}
+
+.imageVisible {
+  opacity: 1;
+}
+
+/* Corner Icon / Badge on Gradient */
+.mediaTypeBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Bottom Metrics Pill (Active Card with Image) */
+.bottomMetricsPill {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+}
+
+.metricItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Skeleton Card States - Pure macOS Smooth Grey */
+.skeletonCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--color-surface-card);
+  border-radius: 0px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: none;
+  user-select: none;
+}
+
+.skeletonTitle {
+  height: 16px;
+  width: 68%;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    #E5E5EA 0%,
+    #F2F2F7 50%,
+    #E5E5EA 100%
+  );
+  background-size: 200% 100%;
+  animation: macOsShimmer 2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+.skeletonPill {
+  width: 54px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.skeletonBookmark {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  opacity: 0.9;
+}
+
+.skeletonBottomPill {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.skeletonMetric {
+  width: 36px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.skeletonLogomarks {
+  display: flex;
+  align-items: center;
+  margin-left: -5px;
+  flex-shrink: 0;
+}
+
+.skeletonModelDot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    #E5E5EA 0%,
+    #F2F2F7 50%,
+    #E5E5EA 100%
+  );
+  background-size: 200% 100%;
+  animation: macOsShimmer 2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  margin-left: -6px;
+}
+
+.skeletonModelDot:first-child {
+  margin-left: 0;
+}
+
+.skeletonModelDot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.skeletonModelDot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.skeletonModelDot:nth-child(4) {
+  animation-delay: 0.45s;
+}

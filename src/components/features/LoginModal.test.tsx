@@ -49,4 +49,16 @@ describe("Features LoginModal Component", () => {
     fireEvent.click(githubBtn);
     expect(handleLogin).toHaveBeenCalledWith("github");
   });
+  it("handles fallback timeout and calls onClose when onLogin is omitted", () => {
+    vi.useFakeTimers();
+    const handleClose = vi.fn();
+    render(<LoginModal isOpen={true} onClose={handleClose} />);
+
+    const googleBtn = screen.getByTestId("login-google-btn");
+    fireEvent.click(googleBtn);
+
+    vi.advanceTimersByTime(800);
+    expect(handleClose).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
 });

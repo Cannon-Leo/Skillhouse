@@ -34,21 +34,16 @@ describe("SkillsPage (/skills)", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Visual Canvas Deck" })).toBeInTheDocument();
     expect(screen.getByTestId("skill-detail-main-preview")).toBeInTheDocument();
 
-    // 1. Back button
-    const backBtn = screen.getByTestId("skill-detail-back-btn");
-    fireEvent.click(backBtn);
-    expect(mockPush).toHaveBeenCalledWith("/skills");
+    // 1. Breadcrumb navigation to Home
+    const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
+    fireEvent.click(within(breadcrumbNav).getByText("Home"));
+    expect(mockPush).toHaveBeenCalledWith("/");
 
     // 2. Similar skill navigation
     const similarGrid = screen.getByTestId("similar-skills-grid");
     const cards = within(similarGrid).getAllByRole("article");
     fireEvent.click(cards[0]);
     expect(mockPush).toHaveBeenCalled();
-
-    // 3. Breadcrumb navigation
-    const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
-    fireEvent.click(within(breadcrumbNav).getByText("Dashboard"));
-    expect(mockPush).toHaveBeenCalledWith("/");
   });
 
   it("handles matched custom skill when id corresponds to marketplace item", () => {

@@ -98,4 +98,19 @@ describe("MySkillsWorkspace Component", () => {
     fireEvent.click(installedTab);
     expect(screen.getByText("No installed tools configured")).toBeInTheDocument();
   });
+  it("renders personalized greeting when user is signed in", () => {
+    render(
+      <MySkillsWorkspace
+        savedSkillIds={[]}
+        installedSkillIds={[]}
+        isSignedIn={true}
+        user={{ name: "Alex Vance", email: "alex@skillhouse.ai" }}
+        onToggleBookmark={vi.fn()}
+        onToggleInstall={vi.fn()}
+        onNavigateHome={vi.fn()}
+        onNavigateMarketplace={vi.fn()}
+      />
+    );
+    expect(screen.getByText("Alex Vance’s Workspace")).toBeInTheDocument();
+  });
 });

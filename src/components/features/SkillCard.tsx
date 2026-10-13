@@ -1,10 +1,30 @@
 "use client";
 
-import { BookmarkButton } from "../ui/BookmarkButton";
-
 import React, { useState } from "react";
 import Image from "next/image";
+import { Download } from "lucide-react";
+import { BookmarkButton } from "../ui/BookmarkButton";
 import styles from "./SkillCard.module.css";
+
+export const CARD_GRADIENTS = [
+  "linear-gradient(135deg, #ECECF0 0%, #DFDFE5 100%)", // macOS Silver Slate
+  "linear-gradient(135deg, #EDEDF2 0%, #DFDFE6 100%)", // macOS System Gray
+  "linear-gradient(135deg, #E6E6EB 0%, #D8D8DF 100%)", // macOS Studio Aluminum
+  "linear-gradient(135deg, #E8E8ED 0%, #DBDBE2 100%)", // macOS Space Gray Tint
+  "linear-gradient(135deg, #EAEAEE 0%, #DDDDE3 100%)", // macOS Neutral Gray
+  "linear-gradient(135deg, #E4E4E9 0%, #D6D6DE 100%)", // macOS Cool Slate
+  "linear-gradient(135deg, #EFEFF3 0%, #E2E2E8 100%)", // macOS Platinum
+  "linear-gradient(135deg, #E5E5EA 0%, #D7D7DD 100%)", // macOS Liquid Retina Gray
+];
+
+export function getCardGradient(seed: string): string {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % CARD_GRADIENTS.length;
+  return CARD_GRADIENTS[index];
+}
 
 export interface SkillCardProps {
   id?: string;
@@ -16,7 +36,53 @@ export interface SkillCardProps {
   onBookmarkToggle?: (isBookmarked: boolean) => void;
   onClick?: () => void;
   className?: string;
+  isLoading?: boolean;
+  installs?: number;
+  accentGradient?: string;
 }
+
+const SKELETON_TITLE_WIDTHS = ["72%", "58%", "82%", "64%", "76%", "60%", "88%", "68%"];
+
+export interface SkillCardSkeletonProps {
+  className?: string;
+  gradientIndex?: number;
+  titleWidth?: string;
+}
+
+export const SkillCardSkeleton: React.FC<SkillCardSkeletonProps> = ({
+  className = "",
+  gradientIndex = 0,
+  titleWidth,
+}) => {
+  const width = titleWidth || SKELETON_TITLE_WIDTHS[gradientIndex % SKELETON_TITLE_WIDTHS.length];
+  return (
+    <div
+      className={`${styles.skeletonCard} ${className}`}
+      aria-busy="true"
+      aria-label="Loading skill..."
+      data-testid="skill-card-skeleton"
+    >
+      <div className={styles.imageContainer}>
+        <div
+          className={`${styles.skeletonImage} ${styles.skeletonShimmer}`}
+          data-testid="skill-card-skeleton-image"
+        />
+      </div>
+      <div className={styles.footer}>
+        <div
+          className={`${styles.skeletonTitle} ${styles.skeletonShimmer}`}
+          style={{ width }}
+        />
+        <div className={styles.logomarksRow} aria-hidden="true">
+          <div className={`${styles.skeletonModelDot} ${styles.skeletonShimmer}`} />
+          <div className={`${styles.skeletonModelDot} ${styles.skeletonShimmer}`} />
+          <div className={`${styles.skeletonModelDot} ${styles.skeletonShimmer}`} />
+          <div className={`${styles.skeletonModelDot} ${styles.skeletonShimmer}`} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const SkillCard: React.FC<SkillCardProps> = ({
   id,
@@ -33,8 +99,14 @@ export const SkillCard: React.FC<SkillCardProps> = ({
   onBookmarkToggle,
   onClick,
   className = "",
+  isLoading = false,
+  installs,
+  accentGradient,
 }) => {
   const [internalBookmarked, setInternalBookmarked] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   const isBookmarked = controlledBookmarked !== undefined ? controlledBookmarked : internalBookmarked;
 
   const handleBookmarkToggle = (nextState: boolean) => {
@@ -43,6 +115,12 @@ export const SkillCard: React.FC<SkillCardProps> = ({
     }
     onBookmarkToggle?.(nextState);
   };
+
+  const gradient = accentGradient || getCardGradient(id || title);
+
+  if (isLoading) {
+    return <SkillCardSkeleton className={className} />;
+  }
 
   return (
     <div
@@ -59,14 +137,24 @@ export const SkillCard: React.FC<SkillCardProps> = ({
       }}
     >
       <div className={styles.imageContainer}>
-        <Image
-          src={previewImage}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={styles.previewImage}
-          unoptimized
+        {/* Smooth grey skeleton placeholder behind image container */}
+        <div
+          className={`${styles.skeletonImage} ${!imageLoaded && !imageError ? styles.skeletonShimmer : ""}`}
+          data-testid="skill-card-gradient"
         />
+
+        {previewImage && !imageError && (
+          <Image
+            src={previewImage}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className={`${styles.previewImage} ${imageLoaded ? styles.imageVisible : styles.imageHidden}`}
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageError(true)}
+            unoptimized
+          />
+        )}
         
         <div className={styles.imageOverlays}>
           {category ? (
@@ -83,6 +171,15 @@ export const SkillCard: React.FC<SkillCardProps> = ({
             title={isBookmarked ? "Saved" : "Bookmark skill"}
           />
         </div>
+
+        {installs !== undefined && (
+          <div className={styles.bottomMetricsPill} aria-label={`${installs} downloads`}>
+            <span className={styles.metricItem}>
+              <Download size={11} strokeWidth={2.4} aria-hidden="true" />
+              <span>{installs}</span>
+            </span>
+          </div>
+        )}
       </div>
 
       <div className={styles.footer}>

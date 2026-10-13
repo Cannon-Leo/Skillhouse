@@ -25,7 +25,7 @@
   gap: 36px;
 }
 
-/* 1. Breadcrumbs Navigation Row (Figma Node 751:5871) */
+/* 1. Breadcrumbs Navigation Row */
 .breadcrumbRow {
   display: flex;
   align-items: center;
@@ -33,38 +33,6 @@
   min-height: 28px;
   flex-wrap: wrap;
   width: 100%;
-}
-
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  padding: 4px 8px;
-  margin-left: -8px;
-  color: #54392D;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color var(--transition-fast, 150ms ease), transform var(--transition-fast, 150ms ease);
-}
-
-.backButton:hover {
-  color: #FB6320;
-  transform: translateX(-2px);
-}
-
-.backButton:active {
-  transform: scale(0.96);
-}
-
-.divider {
-  width: 1px;
-  height: 16px;
-  background-color: #CDB7AE;
-  flex-shrink: 0;
 }
 
 .breadcrumbNav {
@@ -348,3 +316,4 @@
     flex-shrink: 0;
   }
 }
+

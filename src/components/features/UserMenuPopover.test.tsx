@@ -117,4 +117,29 @@ describe("UserMenuPopover Component (Node 760:12903)", () => {
     fireEvent.mouseDown(screen.getByTestId("outside"));
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
+  it("handles directory history click when onBookmarks is omitted", () => {
+    const handleHistory = vi.fn();
+    render(<UserMenuPopover variant="extended" onDirectoryHistory={handleHistory} />);
+
+    const dirItem = screen.getByTestId("user-menu-item-bookmarks");
+    fireEvent.click(dirItem);
+    expect(handleHistory).toHaveBeenCalledTimes(1);
+  });
+
+  it("handles ArrowUp and ArrowDown when no element is focused", () => {
+    render(<UserMenuPopover />);
+    const menu = screen.getByRole("menu");
+    const bookmarksBtn = screen.getByTestId("user-menu-item-bookmarks");
+    const logoutBtn = screen.getByTestId("user-menu-item-logout");
+
+    // Blur active element
+    (document.activeElement as HTMLElement)?.blur();
+
+    fireEvent.keyDown(menu, { key: "ArrowDown" });
+    expect(document.activeElement).toBe(bookmarksBtn);
+
+    (document.activeElement as HTMLElement)?.blur();
+    fireEvent.keyDown(menu, { key: "ArrowUp" });
+    expect(document.activeElement).toBe(logoutBtn);
+  });
 });

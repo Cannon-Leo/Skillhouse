@@ -107,4 +107,22 @@ describe("Features SkillCard Component", () => {
     expect(screen.getByText("Minimal Card")).toBeInTheDocument();
     expect(container.querySelector("._pill_246e7f")).not.toBeInTheDocument();
   });
+
+  it("renders SkillCardSkeleton loading state when isLoading is true", () => {
+    render(<SkillCard {...defaultProps} isLoading={true} />);
+    expect(screen.getByTestId("skill-card-skeleton")).toBeInTheDocument();
+    expect(screen.queryByRole("article")).not.toBeInTheDocument();
+  });
+
+  it("renders installs metric badge when installs prop is provided", () => {
+    render(<SkillCard {...defaultProps} installs={42} />);
+    expect(screen.getByLabelText("42 downloads")).toBeInTheDocument();
+    expect(screen.getByText("42")).toBeInTheDocument();
+  });
+
+  it("renders gradient placeholder behind image container", () => {
+    render(<SkillCard {...defaultProps} />);
+    expect(screen.getByTestId("skill-card-gradient")).toBeInTheDocument();
+  });
 });
+

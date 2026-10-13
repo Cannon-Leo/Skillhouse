@@ -331,6 +331,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         >
           {commands.length === 0 ? (
             <div className={styles.emptyState} data-testid="command-palette-empty">
+              <div className={styles.emptyIconBox}>
+                <Search size={20} aria-hidden="true" />
+              </div>
               <div className={styles.emptyTitle}>No matching skills or commands</div>
               <p className={styles.emptyDesc}>
                 We couldn&apos;t find anything matching &ldquo;{query}&rdquo;. Want to request a skill?
@@ -410,6 +413,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </span>
           </div>
           <div className={styles.statusIndicator}>
+            <span className={styles.statusDot} aria-hidden="true" />
             <span>Skillhouse Web App</span>
           </div>
         </footer>

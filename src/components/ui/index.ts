@@ -9,3 +9,4 @@ export { CategorySkillCard, type CategorySkillCardProps } from "../features/Cate
 export * from "./BookmarkButton";
 export * from "./BookmarkIcon";
 export * from "./CustomSelect";
+export * from "./Skeleton";

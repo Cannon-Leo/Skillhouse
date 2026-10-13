@@ -5,12 +5,13 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { NavBar } from "@/components/features/NavBar";
 import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
-import { MarketplaceView, MARKETPLACE_SKILLS } from "@/components/features/MarketplaceView";
+import { MarketplaceView } from "@/components/features/MarketplaceView";
 import { MySkillsWorkspace } from "@/components/features/MySkillsWorkspace/MySkillsWorkspace";
-import { SkillDetailDrawer } from "@/components/features/SkillDetailDrawer/SkillDetailDrawer";
 import { CommandPalette } from "@/components/features/CommandPalette/CommandPalette";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
+import { UserProfileModal, UserProfileData } from "@/components/features/UserProfileModal";
+import { HelpCenterModal } from "@/components/features/HelpCenterModal";
 import { Footer } from "@/components/features/Footer";
 import { useAppWorkspace } from "@/lib/useAppWorkspace";
 import styles from "./home-screen/page.module.css";
@@ -30,7 +31,6 @@ function MainContent() {
   const [selectedCategoryOverride, setSelectedCategoryOverride] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState(searchParam);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [selectedDrawerSkillId, setSelectedDrawerSkillId] = useState<string | null>(null);
 
   const activeView =
     activeViewOverride ??
@@ -44,9 +44,61 @@ function MainContent() {
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
+  const [requestSkillPrefill, setRequestSkillPrefill] = useState<string | undefined>(undefined);
+  const [user, setUser] = useState<UserProfileData | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const stored = localStorage.getItem("skillhouse_user");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [profileInitialTab, setProfileInitialTab] = useState<"profile" | "cli" | "settings">("profile");
+  const [isHelpCenterOpen, setIsHelpCenterOpen] = useState(false);
 
-  const selectedDrawerSkill =
-    MARKETPLACE_SKILLS.find((s) => s.id === selectedDrawerSkillId) || null;
+  const handleLogin = (provider: "google" | "github") => {
+    const loggedInUser: UserProfileData = {
+      name: "Alex Vance",
+      email: provider === "github" ? "alex.vance@github.com" : "alex.vance@skillhouse.ai",
+      avatarUrl: "/figma/header_avatar_figma.png",
+      provider,
+      role: "Verified Developer",
+      apiKey: "sk_live_9f82d1c47a38910b",
+    };
+    setUser(loggedInUser);
+    try {
+      localStorage.setItem("skillhouse_user", JSON.stringify(loggedInUser));
+    } catch {
+      // Storage unavailable
+    }
+    setIsLoginOpen(false);
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    try {
+      localStorage.removeItem("skillhouse_user");
+    } catch {
+      // Storage unavailable
+    }
+  };
+
+  const handleOpenProfile = () => {
+    setProfileInitialTab("profile");
+    setIsProfileOpen(true);
+  };
+
+  const handleOpenSettings = () => {
+    setProfileInitialTab("settings");
+    setIsProfileOpen(true);
+  };
+
+  const handleOpenHelpCenter = () => {
+    setIsHelpCenterOpen(true);
+  };
+
 
   // Sync state if browser back/forward button is pressed
   useEffect(() => {
@@ -128,24 +180,9 @@ function MainContent() {
     }
   }, []);
 
-  // Shared Modals and Drawers
+  // Shared Modals
   const sharedDrawersAndModals = (
     <>
-      <SkillDetailDrawer
-        isOpen={Boolean(selectedDrawerSkill)}
-        skill={selectedDrawerSkill}
-        onClose={() => setSelectedDrawerSkillId(null)}
-        onExpandFullPage={(id) => router.push(`/skills/${id}`)}
-        isBookmarked={
-          selectedDrawerSkill ? workspace.isBookmarked(selectedDrawerSkill.id) : false
-        }
-        onToggleBookmark={workspace.toggleBookmark}
-        isInstalled={
-          selectedDrawerSkill ? workspace.isInstalled(selectedDrawerSkill.id) : false
-        }
-        onToggleInstall={workspace.toggleInstall}
-      />
-
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         onClose={() => setIsCommandPaletteOpen(false)}
@@ -155,8 +192,20 @@ function MainContent() {
           else if (view === "my-skills") navigateToMySkills();
           else if (view === "design-system") router.push("/design-system");
         }}
-        onSelectSkill={(id) => setSelectedDrawerSkillId(id)}
-        onRequestSkill={() => setIsRequestSkillOpen(true)}
+        onConnectAgent={() => {
+          if (activeView !== "home") {
+            navigateHome();
+          }
+          setTimeout(() => {
+            const banner = document.getElementById("connect-agent-banner");
+            banner?.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 120);
+        }}
+        onSelectSkill={(id) => router.push(`/skills/${id}`)}
+        onRequestSkill={(prefill) => {
+          setRequestSkillPrefill(prefill);
+          setIsRequestSkillOpen(true);
+        }}
         savedSkillIds={workspace.savedSkillIds}
         installedSkillIds={workspace.installedSkillIds}
       />
@@ -164,12 +213,34 @@ function MainContent() {
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
+        onLogin={handleLogin}
+      />
+
+      <UserProfileModal
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+        onSignOut={handleSignOut}
+        initialTab={profileInitialTab}
+      />
+
+      <HelpCenterModal
+        isOpen={isHelpCenterOpen}
+        onClose={() => setIsHelpCenterOpen(false)}
+        onRequestSkill={() => setIsRequestSkillOpen(true)}
       />
 
       <RequestSkillModal
         isOpen={isRequestSkillOpen}
-        onClose={() => setIsRequestSkillOpen(false)}
-        onSubmitSuccess={() => setIsRequestSkillOpen(false)}
+        onClose={() => {
+          setIsRequestSkillOpen(false);
+          setRequestSkillPrefill(undefined);
+        }}
+        initialTitle={requestSkillPrefill}
+        onSubmitSuccess={() => {
+          setIsRequestSkillOpen(false);
+          setRequestSkillPrefill(undefined);
+        }}
       />
     </>
   );
@@ -186,10 +257,16 @@ function MainContent() {
           onNavigateHome={navigateHome}
           onNavigateMarketplace={() => navigateToMarketplace()}
           onNavigateDesignSystem={() => router.push("/design-system")}
-          onSelectSkillDetail={(id) => setSelectedDrawerSkillId(id)}
+          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           onRequestSkill={() => setIsRequestSkillOpen(true)}
           onOpenLoginModal={() => setIsLoginOpen(true)}
+          isSignedIn={Boolean(user)}
+          user={user}
+          onSignOut={handleSignOut}
+          onOpenProfile={handleOpenProfile}
+          onOpenSettings={handleOpenSettings}
+          onOpenHelpCenter={handleOpenHelpCenter}
         />
         {sharedDrawersAndModals}
       </>
@@ -207,7 +284,14 @@ function MainContent() {
           onNavigateMySkills={navigateToMySkills}
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           savedSkillsCount={workspace.savedSkillIds.length}
-          onSelectSkillDetail={(id) => setSelectedDrawerSkillId(id)}
+          onSelectSkillDetail={(id) => router.push(`/skills/${id}`)}
+          isSignedIn={Boolean(user)}
+          user={user}
+          onOpenLoginModal={() => setIsLoginOpen(true)}
+          onSignOut={handleSignOut}
+          onOpenProfile={handleOpenProfile}
+          onOpenSettings={handleOpenSettings}
+          onOpenHelpCenter={handleOpenHelpCenter}
         />
         {sharedDrawersAndModals}
       </>
@@ -239,12 +323,18 @@ function MainContent() {
           }
         }}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        onSelectCategory={(category: string, _tab?: string) => {
+        onSelectCategory={(category: string) => {
           navigateToMarketplace(category);
         }}
         onOpenLoginModal={() => setIsLoginOpen(true)}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         onGetStarted={() => setIsLoginOpen(true)}
+        isSignedIn={Boolean(user)}
+        user={user || undefined}
+        onSignOut={handleSignOut}
+        onOpenProfile={handleOpenProfile}
+        onOpenSettings={handleOpenSettings}
+        onOpenHelpCenter={handleOpenHelpCenter}
         savedSkillsCount={workspace.savedSkillIds.length}
       />
 
@@ -261,7 +351,7 @@ function MainContent() {
         />
 
         {/* 3. Connect Your Agent Interactive Terminal Banner */}
-        <section className={styles.bannerSection} aria-label="Connect Your Agent Section">
+        <section id="connect-agent-banner" className={styles.bannerSection} aria-label="Connect Your Agent Section">
           <ConnectAgentBanner />
         </section>
       </main>

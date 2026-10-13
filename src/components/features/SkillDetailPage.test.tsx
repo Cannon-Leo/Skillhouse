@@ -15,23 +15,16 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
-  it("renders breadcrumbs trail, back button, title, and default elements", () => {
-    const onBack = vi.fn();
-    render(<SkillDetailPage onBack={onBack} />);
+  it("renders breadcrumbs trail, title, and default elements", () => {
+    render(<SkillDetailPage />);
 
     // Breadcrumb bar
     const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
     expect(breadcrumbNav).toBeInTheDocument();
 
-    const backBtn = screen.getByTestId("skill-detail-back-btn");
-    expect(backBtn).toBeInTheDocument();
-    expect(within(breadcrumbNav).getByText("Dashboard")).toBeInTheDocument();
+    expect(within(breadcrumbNav).getByText("Home")).toBeInTheDocument();
     expect(within(breadcrumbNav).getByText("Skills")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: DEFAULT_DETAIL_SKILL.title })).toBeInTheDocument();
-
-    // Fire Back button
-    fireEvent.click(backBtn);
-    expect(onBack).toHaveBeenCalledTimes(1);
   });
 
   it("renders preview gallery and switches active image when thumbnail tab is clicked", () => {
@@ -94,7 +87,7 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
     );
 
     const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
-    fireEvent.click(within(breadcrumbNav).getByText("Dashboard"));
+    fireEvent.click(within(breadcrumbNav).getByText("Home"));
     expect(onNavigateHome).toHaveBeenCalledTimes(1);
 
     fireEvent.click(within(breadcrumbNav).getByText("Skills"));
@@ -134,15 +127,94 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
 
     render(<SkillDetailPage />);
 
-    // Click back button falls back to router.back
-    const backBtn = screen.getByTestId("skill-detail-back-btn");
-    fireEvent.click(backBtn);
-    expect(mockBack).toHaveBeenCalledTimes(1);
-
     // Click similar skill card falls back to router.push
     const similarGrid = screen.getByTestId("similar-skills-grid");
     const cards = within(similarGrid).getAllByRole("article");
     fireEvent.click(cards[0]);
     expect(mockPush).toHaveBeenCalledWith(expect.stringContaining("/skills/"));
+  });
+  it("does not render redundant back button and maintains pure breadcrumb navigation", () => {
+    render(<SkillDetailPage onBack={vi.fn()} />);
+    expect(screen.queryByTestId("skill-detail-back-btn")).not.toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: /breadcrumb/i })).toBeInTheDocument();
+  });
+
+  it("handles navbar view changes with custom callbacks", () => {
+    const onNavigateHome = vi.fn();
+    const onNavigateMarketplace = vi.fn();
+    render(
+      <SkillDetailPage
+        onNavigateHome={onNavigateHome}
+        onNavigateMarketplace={onNavigateMarketplace}
+      />
+    );
+
+    const brand = screen.getByRole("button", { name: /skillhouse home/i });
+    fireEvent.click(brand);
+    expect(onNavigateHome).toHaveBeenCalledTimes(1);
+
+    const skillsBtn = screen.getByRole("button", { name: /^skills$/i });
+    fireEvent.click(skillsBtn);
+    expect(onNavigateMarketplace).toHaveBeenCalledTimes(1);
+  });
+
+  it("handles navbar view change fallbacks to router", () => {
+    mockPush.mockClear();
+    render(<SkillDetailPage />);
+
+    const brand = screen.getByRole("button", { name: /skillhouse home/i });
+    fireEvent.click(brand);
+    expect(mockPush).toHaveBeenCalledWith("/");
+
+    const skillsBtn = screen.getByRole("button", { name: /^skills$/i });
+    fireEvent.click(skillsBtn);
+    expect(mockPush).toHaveBeenCalledWith("/skills");
+  });
+
+  it("opens login modal from navbar get started and signed-out request skill actions", () => {
+    render(<SkillDetailPage />);
+
+    const getStartedBtn = screen.getByTestId("header-get-started-btn");
+    fireEvent.click(getStartedBtn);
+    expect(screen.getByRole("dialog", { name: /welcome to skillhouse/i })).toBeInTheDocument();
+
+    // When signed out, request a skill button routes to login modal
+    const requestSkillBtn = screen.getByTestId("header-request-skill-action-btn");
+    fireEvent.click(requestSkillBtn);
+    expect(screen.getByRole("dialog", { name: /welcome to skillhouse/i })).toBeInTheDocument();
+  });
+
+  it("navigates to category when category breadcrumb item is clicked", () => {
+    const handleMarketplace = vi.fn();
+    render(<SkillDetailPage onNavigateMarketplace={handleMarketplace} />);
+
+    const breadcrumbNav = screen.getByRole("navigation", { name: /breadcrumb/i });
+    const catLink = within(breadcrumbNav).getByText(DEFAULT_DETAIL_SKILL.category);
+    fireEvent.click(catLink);
+    expect(handleMarketplace).toHaveBeenCalled();
+  });
+  it("navigates to design-system when navbar switches view", () => {
+    mockPush.mockClear();
+    render(<SkillDetailPage />);
+
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+    const mobileNav = screen.getByRole("dialog", { name: /mobile navigation/i });
+    const designSystemLink = within(mobileNav).getByText("Design System");
+    fireEvent.click(designSystemLink);
+    expect(mockPush).toHaveBeenCalledWith("/design-system");
+  });
+
+  it("closes login and request modals when onClose is called", () => {
+    render(<SkillDetailPage />);
+
+    const getStartedBtn = screen.getByTestId("header-get-started-btn");
+    fireEvent.click(getStartedBtn);
+    const loginModal = screen.getByRole("dialog", { name: /welcome to skillhouse/i });
+    expect(loginModal).toBeInTheDocument();
+
+    const closeLoginBtn = within(loginModal).getByRole("button", { name: /close dialog/i });
+    fireEvent.click(closeLoginBtn);
+    expect(screen.queryByRole("dialog", { name: /welcome to skillhouse/i })).not.toBeInTheDocument();
   });
 });

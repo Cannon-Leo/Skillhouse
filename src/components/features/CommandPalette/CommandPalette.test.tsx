@@ -104,4 +104,86 @@ describe("CommandPalette Component", () => {
     fireEvent.click(backdrop);
     expect(handleClose).toHaveBeenCalledTimes(2);
   });
+  it("navigates to all standard views coherently (Marketplace, Discovery Home, Design System)", () => {
+    const handleNavigate = vi.fn();
+    const handleClose = vi.fn();
+
+    const { rerender } = render(
+      <CommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onNavigateView={handleNavigate}
+      />
+    );
+
+    // Marketplace
+    const marketplaceItem = screen.getByText("Skills Marketplace");
+    fireEvent.click(marketplaceItem);
+    expect(handleNavigate).toHaveBeenCalledWith("marketplace");
+    expect(handleClose).toHaveBeenCalledTimes(1);
+
+    // Discovery Home
+    rerender(
+      <CommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onNavigateView={handleNavigate}
+      />
+    );
+    const homeItem = screen.getByText("Discovery Home");
+    fireEvent.click(homeItem);
+    expect(handleNavigate).toHaveBeenCalledWith("home");
+
+    // Design System
+    rerender(
+      <CommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onNavigateView={handleNavigate}
+      />
+    );
+    const designSystemItem = screen.getByText("Design System Showcase");
+    fireEvent.click(designSystemItem);
+    expect(handleNavigate).toHaveBeenCalledWith("design-system");
+  });
+
+  it("handles Connect AI Agent fallback when onConnectAgent is omitted", () => {
+    const handleNavigate = vi.fn();
+    const handleClose = vi.fn();
+
+    render(
+      <CommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onNavigateView={handleNavigate}
+      />
+    );
+
+    const connectItem = screen.getByText("Connect AI Agent");
+    fireEvent.click(connectItem);
+    expect(handleNavigate).toHaveBeenCalledWith("home");
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("triggers Request a New Skill when filtered by keyword", () => {
+    const handleRequestSkill = vi.fn();
+    const handleClose = vi.fn();
+
+    render(
+      <CommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onRequestSkill={handleRequestSkill}
+      />
+    );
+
+    const input = screen.getByTestId("command-palette-input");
+    fireEvent.change(input, { target: { value: "request" } });
+
+    const requestItem = screen.getByText("Request a New Skill");
+    fireEvent.click(requestItem);
+
+    expect(handleRequestSkill).toHaveBeenCalledWith("request");
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
 });

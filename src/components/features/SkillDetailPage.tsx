@@ -116,7 +116,6 @@ export interface SkillDetailPageProps {
 
 export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
   skill = DEFAULT_DETAIL_SKILL,
-  onBack,
   onNavigateSkill,
   onNavigateHome,
   onNavigateMarketplace,
@@ -170,25 +169,8 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
 
       {/* 2. Main Centered 898px Workspace */}
       <main className={styles.mainContent}>
-        {/* Breadcrumb Navigation Trail (Figma Node 751:5871) */}
+        {/* Breadcrumb Navigation Trail */}
         <div className={styles.breadcrumbRow}>
-          <button
-            type="button"
-            className={styles.backButton}
-            onClick={() => {
-              if (onBack) onBack();
-              else if (onNavigateMarketplace) onNavigateMarketplace();
-              else router.back();
-            }}
-            aria-label="Go back to previous page"
-            data-testid="skill-detail-back-btn"
-          >
-            <ChevronLeft size={16} aria-hidden="true" />
-            <span>Back</span>
-          </button>
-
-          <span className={styles.divider} aria-hidden="true" />
-
           <Breadcrumb className={styles.breadcrumbNav} aria-label="Breadcrumb">
             <BreadcrumbList className={styles.breadcrumbTrail}>
               <BreadcrumbItem>
@@ -203,7 +185,7 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
                 >
                   <Link href="/" className={styles.breadcrumbItem}>
                     <Home size={14} className={styles.homeIcon} aria-hidden="true" />
-                    <span>Dashboard</span>
+                    <span>Home</span>
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>

@@ -17,6 +17,7 @@
   box-shadow: var(--shadow-xs);
   transition: all var(--transition-fast);
   position: relative;
+  box-sizing: border-box;
 }
 
 .variant-white {

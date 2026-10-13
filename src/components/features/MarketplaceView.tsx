@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
-import { SkillCard } from "@/components/features/SkillCard";
+import { SkillCard, SkillCardSkeleton } from "@/components/features/SkillCard";
 import { AdCard } from "@/components/features/AdCard";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
@@ -346,6 +346,294 @@ export const MARKETPLACE_SKILLS: SkillItem[] = [
     rating: 4.9,
     createdAt: "2026-09-28",
   },
+  {
+    id: "primary-doodle-deck",
+    title: "Primary Doodle Deck",
+    version: "1.2.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: true,
+    description: "Hand-drawn expressive slide deck templates, custom vector annotations, and animated visual diagrams for product storytelling.",
+    installPrompt: "npx create-agent-skill primary-doodle-deck",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["founder", "designer", "content-creator"],
+    output: "slides",
+    useCase: "sales-fundraising",
+    category: "Presentations",
+    installs: 42,
+    rating: 4.9,
+    createdAt: "2026-10-12",
+  },
+  {
+    id: "citrus-loop-deck",
+    title: "Citrus Loop Deck",
+    version: "2.0.1",
+    price: "$12",
+    isFree: false,
+    isFeatured: true,
+    description: "Vibrant high-contrast keynote presentations featuring kinetic typography, metric callouts, and multi-device product mockups.",
+    installPrompt: "npx create-agent-skill citrus-loop-deck",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-kimi.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["marketer", "content-creator"],
+    output: "slides",
+    useCase: "product-launch",
+    category: "Presentations",
+    installs: 41,
+    rating: 4.8,
+    createdAt: "2026-10-11",
+  },
+  {
+    id: "sorbet-window-deck",
+    title: "Sorbet Window Deck",
+    version: "1.0.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: false,
+    description: "Pastel editorial layouts designed for brand books, design portfolios, and client proposals with strict typographic hierarchy.",
+    installPrompt: "npx create-agent-skill sorbet-window-deck",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["designer", "content-creator"],
+    output: "slides",
+    useCase: "brand-identity",
+    category: "Presentations",
+    installs: 39,
+    rating: 4.9,
+    createdAt: "2026-10-10",
+  },
+  {
+    id: "chromatic-futures-deck",
+    title: "Chromatic Futures Deck",
+    version: "3.1.0",
+    price: "$15",
+    isFree: false,
+    isFeatured: true,
+    description: "Dark-mode futuristic architecture and deep tech slides with glowing cyber gradients and animated data telemetry charts.",
+    installPrompt: "npx create-agent-skill chromatic-futures-deck",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["swe", "designer", "founder"],
+    output: "slides",
+    useCase: "web-design",
+    category: "Presentations",
+    installs: 40,
+    rating: 5.0,
+    createdAt: "2026-10-09",
+  },
+  {
+    id: "meta-style-og-image",
+    title: "Meta Style OG Image",
+    version: "1.1.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: true,
+    description: "Dynamic Open Graph and social share cards engineered with high-contrast type and auto-centering for Facebook, Threads, and Instagram.",
+    installPrompt: "npx create-agent-skill meta-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["content-creator", "marketer"],
+    output: "image",
+    useCase: "social-media",
+    category: "Design",
+    installs: 43,
+    rating: 4.9,
+    createdAt: "2026-10-08",
+  },
+  {
+    id: "airbnb-style-og-image",
+    title: "Airbnb Style OG Image",
+    version: "1.0.4",
+    price: "$9",
+    isFree: false,
+    isFeatured: false,
+    description: "Editorial photography layout frames, subtle warm scrim gradients, and crisp metadata pills inspired by modern hospitality apps.",
+    installPrompt: "npx create-agent-skill airbnb-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-kimi.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["designer", "marketer"],
+    output: "image",
+    useCase: "brand-identity",
+    category: "Design",
+    installs: 42,
+    rating: 4.8,
+    createdAt: "2026-10-07",
+  },
+  {
+    id: "nike-style-og-image",
+    title: "Nike Style OG Image",
+    version: "2.0.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: true,
+    description: "High-impact athletic imagery, ultra-condensed typography, and bold contrast overlays engineered for high-engagement product launches.",
+    installPrompt: "npx create-agent-skill nike-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["designer", "founder"],
+    output: "image",
+    useCase: "product-launch",
+    category: "Design",
+    installs: 40,
+    rating: 4.9,
+    createdAt: "2026-10-06",
+  },
+  {
+    id: "shopify-style-og-image",
+    title: "Shopify Style OG Image",
+    version: "1.3.0",
+    price: "$10",
+    isFree: false,
+    isFeatured: false,
+    description: "Clean commerce product cards with price badges, stock tags, and currency formatting for merchant catalogs.",
+    installPrompt: "npx create-agent-skill shopify-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["ecommerce-seller", "founder"],
+    output: "image",
+    useCase: "product-launch",
+    category: "Design",
+    installs: 40,
+    rating: 4.7,
+    createdAt: "2026-10-05",
+  },
+  {
+    id: "apple-style-og-image",
+    title: "Apple Style OG Image",
+    version: "2.1.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: true,
+    description: "Minimalist titanium metallic gradient surfaces, San Francisco typography balancing, and glassmorphic device highlights.",
+    installPrompt: "npx create-agent-skill apple-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["designer", "marketer"],
+    output: "image",
+    useCase: "brand-identity",
+    category: "Design",
+    installs: 49,
+    rating: 5.0,
+    createdAt: "2026-10-04",
+  },
+  {
+    id: "discord-style-og-image",
+    title: "Discord Style OG Image",
+    version: "1.0.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: false,
+    description: "Playful dark-mode community banner cards with chat bubble accents, online status dots, and developer badge integration.",
+    installPrompt: "npx create-agent-skill discord-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["swe", "founder"],
+    output: "image",
+    useCase: "social-media",
+    category: "Design",
+    installs: 39,
+    rating: 4.8,
+    createdAt: "2026-10-03",
+  },
+  {
+    id: "slack-style-og-image",
+    title: "Slack Style OG Image",
+    version: "1.2.0",
+    price: "Free",
+    isFree: true,
+    isFeatured: false,
+    description: "Enterprise collaboration announcement cards featuring channel hashtags, reaction emojis, and threaded card snippets.",
+    installPrompt: "npx create-agent-skill slack-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["founder", "consultant"],
+    output: "image",
+    useCase: "publishing",
+    category: "Design",
+    installs: 40,
+    rating: 4.8,
+    createdAt: "2026-10-02",
+  },
+  {
+    id: "duolingo-style-og-image",
+    title: "Duolingo Style OG Image",
+    version: "1.0.2",
+    price: "Free",
+    isFree: true,
+    isFeatured: false,
+    description: "Gamified streak banners, energetic badge illustrations, and progress milestone cards optimized for social brag sharing.",
+    installPrompt: "npx create-agent-skill duolingo-style-og-image",
+    previewImage: "/figma/marketplace_sample_card.png",
+    models: [
+      "/figma/agent-claude.png",
+      "/figma/agent-antigravity.png",
+      "/figma/agent-cursor.png",
+      "/figma/agent-codex.png",
+    ],
+    roles: ["teacher", "marketer"],
+    output: "image",
+    useCase: "education",
+    category: "Design",
+    installs: 40,
+    rating: 4.9,
+    createdAt: "2026-10-01",
+  },
 ];
 
 
@@ -393,6 +681,20 @@ export interface MarketplaceViewProps {
   savedSkillsCount?: number;
   onSelectSkillDetail?: (skillId: string) => void;
   className?: string;
+  isLoading?: boolean;
+  isSignedIn?: boolean;
+  user?: {
+    name: string;
+    email?: string;
+    avatarUrl?: string;
+    role?: string;
+    provider?: "google" | "github";
+  } | null;
+  onOpenLoginModal?: () => void;
+  onSignOut?: () => void;
+  onOpenProfile?: () => void;
+  onOpenSettings?: () => void;
+  onOpenHelpCenter?: () => void;
 }
 
 
@@ -546,6 +848,14 @@ export function MarketplaceView({
   savedSkillsCount,
   onSelectSkillDetail,
   className = "",
+  isLoading = false,
+  isSignedIn: propIsSignedIn,
+  user,
+  onOpenLoginModal: propOnOpenLoginModal,
+  onSignOut: propOnSignOut,
+  onOpenProfile,
+  onOpenSettings,
+  onOpenHelpCenter,
 }: MarketplaceViewProps) {
   const router = useRouter();
 
@@ -561,10 +871,17 @@ export function MarketplaceView({
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [internalIsSignedIn, setInternalIsSignedIn] = useState(false);
+  const effectiveIsSignedIn = propIsSignedIn !== undefined ? propIsSignedIn : internalIsSignedIn;
   const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
+
+  // Infinite Scroll Pagination
+  const PAGE_SIZE = 8;
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   // Initialize filters based on optional initialCategory
   const [filters, setFilters] = useState<FilterState>(() => {
@@ -583,6 +900,13 @@ export function MarketplaceView({
       setFilters(resolveCategoryToFilters(initialCategory));
     }
   }, [initialCategory]);
+
+  // Reset pagination when filters, search, or sort change
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setVisibleCount(PAGE_SIZE);
+    setIsLoadingMore(false);
+  }, [filters, searchValue, sortBy]);
 
   useEffect(() => {
     if (initialSearch !== undefined) {
@@ -712,6 +1036,45 @@ export function MarketplaceView({
     return items;
   }, [filteredSkills]);
 
+  const hasMore = visibleCount < gridItems.length;
+
+  useEffect(() => {
+    if (!hasMore || isLoadingMore) return;
+
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0];
+        if (first?.isIntersecting) {
+          setIsLoadingMore(true);
+          setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, gridItems.length));
+            setIsLoadingMore(false);
+          }, 350);
+        }
+      },
+      { rootMargin: "300px", threshold: 0.1 }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, isLoadingMore, gridItems.length]);
+
+  const handleManualLoadMore = () => {
+    if (!hasMore || isLoadingMore) return;
+    setIsLoadingMore(true);
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, gridItems.length));
+      setIsLoadingMore(false);
+    }, 250);
+  };
+
+  const displayedGridItems = gridItems.slice(0, visibleCount);
+
   const handleResetFilters = () => {
         setFilters({
       recommendations: ["all"],
@@ -760,10 +1123,23 @@ export function MarketplaceView({
         savedSkillsCount={savedSkillsCount}
         onSelectCategory={handleSelectCategoryFromNav}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
-        isSignedIn={isSignedIn}
-        onOpenLoginModal={() => setIsLoginModalOpen(true)}
-        onGetStarted={() => setIsLoginModalOpen(true)}
-        onSignOut={() => setIsSignedIn(false)}
+        isSignedIn={effectiveIsSignedIn}
+        user={user || undefined}
+        onOpenLoginModal={() => {
+          if (propOnOpenLoginModal) propOnOpenLoginModal();
+          else setIsLoginModalOpen(true);
+        }}
+        onGetStarted={() => {
+          if (propOnOpenLoginModal) propOnOpenLoginModal();
+          else setIsLoginModalOpen(true);
+        }}
+        onSignOut={() => {
+          if (propOnSignOut) propOnSignOut();
+          else setInternalIsSignedIn(false);
+        }}
+        onOpenProfile={onOpenProfile}
+        onOpenSettings={onOpenSettings}
+        onOpenHelpCenter={onOpenHelpCenter}
       />
 
       {/* Mobile Drawer Backdrop Overlay */}
@@ -912,51 +1288,104 @@ export function MarketplaceView({
           </div>
 
           {/* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */}
-          {filteredSkills.length > 0 ? (
+          {isLoading ? (
             <div
               className={`${styles.skillsGrid} ${isSidebarCollapsed ? styles.expandedGrid : ""}`}
               id="marketplace-grid"
               data-testid="marketplace-grid"
             >
-              {gridItems.map((item) =>
-                item.type === "ad" ? (
-                  <AdCard
-                    key={item.id}
-                    id={item.id}
-                    sponsorName={item.sponsorName}
-                    title={item.title}
-                    description={item.description}
-                    badgeLabel={item.badgeLabel}
-                    ctaText={item.ctaText}
-                    ctaUrl={item.ctaUrl}
-                    imageSrc={item.imageSrc}
-                    onClick={() => {
-                      if (item.ctaUrl) {
-                        window.open(item.ctaUrl, "_blank", "noopener,noreferrer");
-                      }
-                    }}
-                  />
-                ) : (
-                  <SkillCard
-                    key={item.id}
-                    id={`skill-${item.id}`}
-                    title={item.title}
-                    category={item.category}
-                    previewImage={item.previewImage}
-                    models={item.models}
-                    isBookmarked={bookmarkedSkills[item.id]}
-                    onBookmarkToggle={(isBookmarked) => handleToggleBookmark(item.id, isBookmarked)}
-                    onClick={() => {
-                      if (onSelectSkillDetail) {
-                        onSelectSkillDetail(item.id);
-                      } else {
-                        router.push(`/skills/${item.id}`);
-                      }
-                    }}
-                  />
-                )
-              )}
+              {Array.from({ length: 8 }).map((_, i) => (
+                <SkillCardSkeleton key={`skeleton-${i}`} gradientIndex={i} />
+              ))}
             </div>
+          ) : filteredSkills.length > 0 ? (
+            <>
+              <div
+                className={`${styles.skillsGrid} ${isSidebarCollapsed ? styles.expandedGrid : ""}`}
+                id="marketplace-grid"
+                data-testid="marketplace-grid"
+              >
+                {displayedGridItems.map((item) =>
+                  item.type === "ad" ? (
+                    <AdCard
+                      key={item.id}
+                      id={item.id}
+                      sponsorName={item.sponsorName}
+                      title={item.title}
+                      description={item.description}
+                      badgeLabel={item.badgeLabel}
+                      ctaText={item.ctaText}
+                      ctaUrl={item.ctaUrl}
+                      imageSrc={item.imageSrc}
+                      onClick={() => {
+                        if (item.ctaUrl) {
+                          window.open(item.ctaUrl, "_blank", "noopener,noreferrer");
+                        }
+                      }}
+                    />
+                  ) : (
+                    <SkillCard
+                      key={item.id}
+                      id={`skill-${item.id}`}
+                      title={item.title}
+                      category={item.category}
+                      previewImage={item.previewImage}
+                      models={item.models}
+                      installs={item.installs}
+                      isBookmarked={bookmarkedSkills[item.id]}
+                      onBookmarkToggle={(isBookmarked) => handleToggleBookmark(item.id, isBookmarked)}
+                      onClick={() => {
+                        if (onSelectSkillDetail) {
+                          onSelectSkillDetail(item.id);
+                        } else {
+                          router.push(`/skills/${item.id}`);
+                        }
+                      }}
+                    />
+                  )
+                )}
+
+                {/* Shimmering Skeleton Cards during Infinite Scroll Load */}
+                {isLoadingMore && (
+                  <>
+                    <SkillCardSkeleton gradientIndex={0} />
+                    <SkillCardSkeleton gradientIndex={1} />
+                    <SkillCardSkeleton gradientIndex={2} />
+                    <SkillCardSkeleton gradientIndex={3} />
+                  </>
+                )}
+              </div>
+
+              {/* Infinite Scroll Sentinel & Accessible Controls */}
+              {hasMore && (
+                <>
+                  <div
+                    ref={sentinelRef}
+                    className={styles.infiniteScrollSentinel}
+                    data-testid="infinite-scroll-sentinel"
+                    aria-hidden="true"
+                  />
+                  <div className={styles.loadMoreContainer}>
+                    <button
+                      type="button"
+                      className={styles.loadMoreButton}
+                      onClick={handleManualLoadMore}
+                      disabled={isLoadingMore}
+                      data-testid="load-more-btn"
+                    >
+                      {isLoadingMore ? "Loading more skills..." : "Load more skills"}
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {!hasMore && gridItems.length > PAGE_SIZE && (
+                <div className={styles.endOfCatalogIndicator} data-testid="end-of-catalog">
+                  <span className={styles.endOfCatalogDot} />
+                  <span>You’ve viewed all {gridItems.length} skills in the marketplace</span>
+                </div>
+              )}
+            </>
           ) : (
             <div className={styles.emptyState}>
               <h3 className={styles.emptyTitle}>No skills found matching your filters</h3>
@@ -992,7 +1421,7 @@ export function MarketplaceView({
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={() => {
-          setIsSignedIn(true);
+          setInternalIsSignedIn(true);
           setIsLoginModalOpen(false);
         }}
       />

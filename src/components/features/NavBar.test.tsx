@@ -226,7 +226,6 @@ describe("Features NavBar Component", () => {
     fireEvent.click(mobileRequest);
     expect(handleRequestSkill).toHaveBeenCalledTimes(2);
   });
-});
 
   it("navigates to my-skills workspace when mobile drawer link is clicked", () => {
     const handleViewChange = vi.fn();
@@ -263,3 +262,49 @@ describe("Features NavBar Component", () => {
     fireEvent.keyDown(searchInput, { key: "k", metaKey: true });
     expect(handleCommandPalette).toHaveBeenCalledTimes(2);
   });
+
+  it("wires up onOpenProfile, onOpenSettings, and onOpenHelpCenter from user menu", () => {
+    const handleProfile = vi.fn();
+    const handleSettings = vi.fn();
+    const handleHelp = vi.fn();
+
+    render(
+      <NavBar
+        isSignedIn={true}
+        user={{ name: "Alex Vance", email: "alex@skillhouse.ai" }}
+        onOpenProfile={handleProfile}
+        onOpenSettings={handleSettings}
+        onOpenHelpCenter={handleHelp}
+      />
+    );
+
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+
+    // Open and click Profile
+    fireEvent.click(avatarBtn);
+    fireEvent.click(screen.getByTestId("user-menu-item-profile"));
+    expect(handleProfile).toHaveBeenCalledTimes(1);
+
+    // Open and click Account settings
+    fireEvent.click(avatarBtn);
+    fireEvent.click(screen.getByTestId("user-menu-item-settings"));
+    expect(handleSettings).toHaveBeenCalledTimes(1);
+
+    // Open and click Help center
+    fireEvent.click(avatarBtn);
+    fireEvent.click(screen.getByTestId("user-menu-item-help"));
+    expect(handleHelp).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders search bar, request a skill button, and get started button with matched action items", () => {
+    render(<NavBar isSignedIn={false} />);
+
+    const searchInput = screen.getByPlaceholderText("Search skills / outputs");
+    const requestSkillBtn = screen.getByTestId("header-request-skill-action-btn");
+    const getStartedBtn = screen.getByTestId("header-get-started-btn");
+
+    expect(searchInput).toBeInTheDocument();
+    expect(requestSkillBtn).toBeInTheDocument();
+    expect(getStartedBtn).toBeInTheDocument();
+});
+});
