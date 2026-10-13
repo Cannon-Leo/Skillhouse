@@ -15,6 +15,7 @@ import Link from "next/link";
 import { SearchInput } from "../ui/SearchInput";
 import { CategoriesDropdown, CategoryTab } from "./CategoriesDropdown";
 import { UserMenuPopover } from "./UserMenuPopover";
+import { useAuthSafe } from "@/lib/AuthContext";
 import styles from "./NavBar.module.css";
 
 export type NavView = "home" | "marketplace" | "my-skills" | "design-system";
@@ -61,13 +62,9 @@ export const NavBar: React.FC<NavBarProps> = ({
   onOpenProfile,
   onOpenSettings,
   onOpenHelpCenter,
-  isSignedIn = false,
+  isSignedIn: propIsSignedIn,
   onSignOut,
-  user = {
-    name: "Alex Vance",
-    email: "alex@skillhouse.ai",
-    avatarUrl: "/figma/header_avatar_figma.png",
-  },
+  user: propUser,
   responsiveMode,
   className = "",
 }) => {
@@ -75,28 +72,29 @@ export const NavBar: React.FC<NavBarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
+  const auth = useAuthSafe();
+  const isSignedIn = propIsSignedIn !== undefined ? propIsSignedIn : (auth?.isSignedIn ?? false);
+  const user = propUser || auth?.user || {
+    name: "Alex Vance",
+    email: "alex@skillhouse.ai",
+    avatarUrl: "/figma/header_avatar_figma.png",
+  };
+
   const categoriesRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleCtaClick = () => {
-    if (onOpenLoginModal) {
-      onOpenLoginModal();
-    } else if (onGetStarted) {
-      onGetStarted();
-    }
+    const fn = onGetStarted || onOpenLoginModal || auth?.openLogin;
+    fn?.();
   };
 
   const handleRequestSkillClick = () => {
     if (isSignedIn) {
-      if (onRequestSkill) {
-        onRequestSkill();
-      }
+      const fn = onRequestSkill || auth?.openRequestSkill;
+      fn?.();
     } else {
-      if (onOpenLoginModal) {
-        onOpenLoginModal();
-      } else if (onGetStarted) {
-        onGetStarted();
-      }
+      const fn = onOpenLoginModal || onGetStarted || auth?.openLogin;
+      fn?.();
     }
   };
 
@@ -327,26 +325,26 @@ export const NavBar: React.FC<NavBarProps> = ({
                     setUserMenuOpen(false);
                     onViewChange?.("my-skills");
                   }}
-                  onDirectoryHistory={() => {
-                    setUserMenuOpen(false);
-                    onViewChange?.("my-skills");
-                  }}
                   onProfile={() => {
                     setUserMenuOpen(false);
-                    onOpenProfile?.();
+                    const fn = onOpenProfile || (() => auth?.openProfile("profile"));
+                    fn();
                   }}
                   onAccountSettings={() => {
                     setUserMenuOpen(false);
-                    onOpenSettings?.();
+                    const fn = onOpenSettings || (() => auth?.openProfile("cli"));
+                    fn();
                   }}
                   onHelpCenter={() => {
                     setUserMenuOpen(false);
-                    onOpenHelpCenter?.();
+                    const fn = onOpenHelpCenter || auth?.openHelpCenter;
+                    fn?.();
                   }}
                   onClose={() => setUserMenuOpen(false)}
                   onLogout={() => {
                     setUserMenuOpen(false);
-                    onSignOut?.();
+                    const fn = onSignOut || auth?.logout;
+                    fn?.();
                   }}
                 />
               )}
@@ -465,7 +463,7 @@ export const NavBar: React.FC<NavBarProps> = ({
                   type="button"
                   className={styles.mobileSignOutBtn}
                   onClick={() => {
-                    onSignOut?.();
+                    if (onSignOut) onSignOut(); else if (auth?.logout) auth.logout();
                     setMobileMenuOpen(false);
                   }}
                 >

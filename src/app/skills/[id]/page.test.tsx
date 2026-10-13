@@ -53,4 +53,22 @@ describe("SkillDynamicPage Route Component (/skills/[id])", () => {
 
     expect(await screen.findByRole("heading", { level: 1, name: "Visual Canvas Deck" })).toBeInTheDocument();
   });
+  it("authenticates user from the skill dynamic route and transitions header to logged in state", async () => {
+    localStorage.clear();
+    render(
+      <Suspense fallback={<div>Loading...</div>}>
+        <SkillDynamicPage params={{ id: "pixel-promo-video" }} />
+      </Suspense>
+    );
+
+    const getStartedBtn = screen.getByTestId("header-get-started-btn");
+    fireEvent.click(getStartedBtn);
+    expect(screen.getByRole("dialog", { name: /welcome to skillhouse/i })).toBeInTheDocument();
+
+    const googleBtn = screen.getByTestId("login-google-btn");
+    fireEvent.click(googleBtn);
+
+    expect(screen.queryByRole("dialog", { name: /welcome to skillhouse/i })).not.toBeInTheDocument();
+    expect(screen.getByTestId("header-avatar-button")).toBeInTheDocument();
+  });
 });

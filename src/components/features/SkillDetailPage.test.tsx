@@ -216,5 +216,58 @@ describe("SkillDetailPage Component (Figma Node 751:5602)", () => {
     const closeLoginBtn = within(loginModal).getByRole("button", { name: /close dialog/i });
     fireEvent.click(closeLoginBtn);
     expect(screen.queryByRole("dialog", { name: /welcome to skillhouse/i })).not.toBeInTheDocument();
+  });  it("completes full login flow directly from skill detail page, renders user avatar, and opens user profile and help center modals", async () => {
+    render(<SkillDetailPage />);
+
+    // 1. Initial State: "Get started" button is visible, avatar is not
+    const getStartedBtn = screen.getByTestId("header-get-started-btn");
+    expect(getStartedBtn).toBeInTheDocument();
+    expect(screen.queryByTestId("header-avatar-button")).not.toBeInTheDocument();
+
+    // 2. Click "Get started" -> LoginModal opens
+    fireEvent.click(getStartedBtn);
+    expect(screen.getByRole("dialog", { name: /welcome to skillhouse/i })).toBeInTheDocument();
+
+    // 3. Click "Continue with Google" -> Logs in
+    const googleLoginBtn = screen.getByTestId("login-google-btn");
+    fireEvent.click(googleLoginBtn);
+
+    // 4. Modal closes and Avatar button is now visible in the header
+    expect(screen.queryByRole("dialog", { name: /welcome to skillhouse/i })).not.toBeInTheDocument();
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+    expect(avatarBtn).toBeInTheDocument();
+    expect(screen.queryByTestId("header-get-started-btn")).not.toBeInTheDocument();
+
+    // 5. Click Avatar -> opens UserMenuPopover
+    fireEvent.click(avatarBtn);
+    expect(screen.getByTestId("user-menu-popover")).toBeInTheDocument();
+
+    // 6. Click Profile -> opens UserProfileModal
+    const profileItem = screen.getByTestId("user-menu-item-profile");
+    fireEvent.click(profileItem);
+    expect(screen.getByTestId("user-profile-modal")).toBeInTheDocument();
+    expect(screen.getByText("Alex Vance")).toBeInTheDocument();
+
+    // Close profile modal
+    const closeProfileBtn = screen.getByRole("button", { name: /close dialog/i });
+    fireEvent.click(closeProfileBtn);
+    expect(screen.queryByTestId("user-profile-modal")).not.toBeInTheDocument();
+
+    // 7. Click Avatar -> click Help center -> opens HelpCenterModal
+    fireEvent.click(avatarBtn);
+    const helpItem = screen.getByTestId("user-menu-item-help");
+    fireEvent.click(helpItem);
+    expect(screen.getByTestId("help-center-modal")).toBeInTheDocument();
+
+    const closeHelpBtn = screen.getByRole("button", { name: /^Close$/i });
+    fireEvent.click(closeHelpBtn);
+    expect(screen.queryByTestId("help-center-modal")).not.toBeInTheDocument();
+
+    // 8. Sign out from user menu
+    fireEvent.click(avatarBtn);
+    const logoutBtn = screen.getByTestId("user-menu-item-logout");
+    fireEvent.click(logoutBtn);
+    expect(screen.getByTestId("header-get-started-btn")).toBeInTheDocument();
+    expect(screen.queryByTestId("header-avatar-button")).not.toBeInTheDocument();
   });
 });

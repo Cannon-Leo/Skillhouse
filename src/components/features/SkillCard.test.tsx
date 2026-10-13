@@ -120,8 +120,11 @@ describe("Features SkillCard Component", () => {
     expect(screen.getByText("42")).toBeInTheDocument();
   });
 
-  it("renders gradient placeholder behind image container", () => {
-    render(<SkillCard {...defaultProps} />);
+  it("renders gradient placeholder behind image container and supports accentGradient", () => {
+    const { rerender } = render(<SkillCard {...defaultProps} />);
+    expect(screen.getByTestId("skill-card-gradient")).toBeInTheDocument();
+
+    rerender(<SkillCard {...defaultProps} accentGradient="linear-gradient(#111, #222)" />);
     expect(screen.getByTestId("skill-card-gradient")).toBeInTheDocument();
   });
 });

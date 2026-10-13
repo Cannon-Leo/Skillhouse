@@ -202,7 +202,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  height: 36px;
+  padding: 0 16px;
   background-color: #000000;
   color: #FFFFFF;
   border: 1px solid #000000;
@@ -212,6 +213,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-sizing: border-box;
 }
 
 .requestButton:hover {

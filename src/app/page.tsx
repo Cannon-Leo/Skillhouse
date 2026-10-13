@@ -5,12 +5,14 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { NavBar } from "@/components/features/NavBar";
 import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
+import { FaqSection } from "@/components/features/FaqSection";
 import { MarketplaceView } from "@/components/features/MarketplaceView";
 import { MySkillsWorkspace } from "@/components/features/MySkillsWorkspace/MySkillsWorkspace";
 import { CommandPalette } from "@/components/features/CommandPalette/CommandPalette";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal } from "@/components/features/RequestSkillModal";
 import { UserProfileModal, UserProfileData } from "@/components/features/UserProfileModal";
+import { useAuthSafe } from "@/lib/AuthContext";
 import { HelpCenterModal } from "@/components/features/HelpCenterModal";
 import { Footer } from "@/components/features/Footer";
 import { useAppWorkspace } from "@/lib/useAppWorkspace";
@@ -42,10 +44,32 @@ function MainContent() {
 
   const selectedCategory = selectedCategoryOverride ?? categoryParam;
 
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
+  const auth = useAuthSafe();
+  const [localLoginOpen, setLocalLoginOpen] = useState(false);
+  const isLoginOpen = auth ? auth.isLoginOpen : localLoginOpen;
+  const setIsLoginOpen = (val: boolean) => {
+    if (auth) {
+      if (val) auth.openLogin();
+      else auth.closeLogin();
+    } else {
+      setLocalLoginOpen(val);
+    }
+  };
+
+  const [localRequestSkillOpen, setLocalRequestSkillOpen] = useState(false);
+  const isRequestSkillOpen = auth ? auth.isRequestSkillOpen : localRequestSkillOpen;
+  const setIsRequestSkillOpen = (val: boolean) => {
+    if (auth) {
+      if (val) auth.openRequestSkill();
+      else auth.closeRequestSkill();
+    } else {
+      setLocalRequestSkillOpen(val);
+    }
+  };
+
   const [requestSkillPrefill, setRequestSkillPrefill] = useState<string | undefined>(undefined);
-  const [user, setUser] = useState<UserProfileData | null>(() => {
+
+  const [localUser, setLocalUser] = useState<UserProfileData | null>(() => {
     if (typeof window === "undefined") return null;
     try {
       const stored = localStorage.getItem("skillhouse_user");
@@ -54,11 +78,42 @@ function MainContent() {
       return null;
     }
   });
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [profileInitialTab, setProfileInitialTab] = useState<"profile" | "cli" | "settings">("profile");
-  const [isHelpCenterOpen, setIsHelpCenterOpen] = useState(false);
+  const user = auth ? auth.user : localUser;
+
+  const [localProfileOpen, setLocalProfileOpen] = useState(false);
+  const isProfileOpen = auth ? auth.isProfileOpen : localProfileOpen;
+  const setIsProfileOpen = (val: boolean) => {
+    if (auth) {
+      if (val) auth.openProfile();
+      else auth.closeProfile();
+    } else {
+      setLocalProfileOpen(val);
+    }
+  };
+
+  const [localProfileInitialTab, setLocalProfileInitialTab] = useState<"profile" | "cli" | "settings">("profile");
+  const profileInitialTab = auth ? (auth.profileTab as "profile" | "cli" | "settings") : localProfileInitialTab;
+  const setProfileInitialTab = (tab: "profile" | "cli" | "settings") => {
+    if (auth) auth.openProfile(tab);
+    else setLocalProfileInitialTab(tab);
+  };
+
+  const [localHelpCenterOpen, setLocalHelpCenterOpen] = useState(false);
+  const isHelpCenterOpen = auth ? auth.isHelpCenterOpen : localHelpCenterOpen;
+  const setIsHelpCenterOpen = (val: boolean) => {
+    if (auth) {
+      if (val) auth.openHelpCenter();
+      else auth.closeHelpCenter();
+    } else {
+      setLocalHelpCenterOpen(val);
+    }
+  };
 
   const handleLogin = (provider: "google" | "github") => {
+    if (auth) {
+      auth.login(provider);
+      return;
+    }
     const loggedInUser: UserProfileData = {
       name: "Alex Vance",
       email: provider === "github" ? "alex.vance@github.com" : "alex.vance@skillhouse.ai",
@@ -67,17 +122,21 @@ function MainContent() {
       role: "Verified Developer",
       apiKey: "sk_live_9f82d1c47a38910b",
     };
-    setUser(loggedInUser);
+    setLocalUser(loggedInUser);
     try {
       localStorage.setItem("skillhouse_user", JSON.stringify(loggedInUser));
     } catch {
       // Storage unavailable
     }
-    setIsLoginOpen(false);
+    setLocalLoginOpen(false);
   };
 
   const handleSignOut = () => {
-    setUser(null);
+    if (auth) {
+      auth.logout();
+      return;
+    }
+    setLocalUser(null);
     try {
       localStorage.removeItem("skillhouse_user");
     } catch {
@@ -354,6 +413,9 @@ function MainContent() {
         <section id="connect-agent-banner" className={styles.bannerSection} aria-label="Connect Your Agent Section">
           <ConnectAgentBanner />
         </section>
+
+        {/* 4. Frequently Asked Questions (Figma Node 851:3373) */}
+        <FaqSection />
       </main>
 
       {/* 4. Global Dark Footer */}

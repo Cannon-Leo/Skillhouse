@@ -298,9 +298,12 @@ describe("Features MarketplaceView Component (Figma Node 751:4572)", () => {
     vi.useRealTimers();
   });
 
-  it("renders 8 smooth macOS skeleton cards when isLoading is true", () => {
-    render(<MarketplaceView isLoading={true} />);
+  it("renders 8 smooth macOS skeleton cards when isLoading is true and renders content when false", () => {
+    const { rerender } = render(<MarketplaceView isLoading={true} />);
     const skeletons = screen.getAllByTestId("skill-card-skeleton");
     expect(skeletons.length).toBe(8);
+
+    rerender(<MarketplaceView isLoading={false} />);
+    expect(screen.queryByTestId("skill-card-skeleton")).not.toBeInTheDocument();
   });
 });

@@ -7,14 +7,12 @@ import { BookmarkButton } from "../ui/BookmarkButton";
 import styles from "./SkillCard.module.css";
 
 export const CARD_GRADIENTS = [
-  "linear-gradient(135deg, #ECECF0 0%, #DFDFE5 100%)", // macOS Silver Slate
-  "linear-gradient(135deg, #EDEDF2 0%, #DFDFE6 100%)", // macOS System Gray
-  "linear-gradient(135deg, #E6E6EB 0%, #D8D8DF 100%)", // macOS Studio Aluminum
-  "linear-gradient(135deg, #E8E8ED 0%, #DBDBE2 100%)", // macOS Space Gray Tint
-  "linear-gradient(135deg, #EAEAEE 0%, #DDDDE3 100%)", // macOS Neutral Gray
-  "linear-gradient(135deg, #E4E4E9 0%, #D6D6DE 100%)", // macOS Cool Slate
-  "linear-gradient(135deg, #EFEFF3 0%, #E2E2E8 100%)", // macOS Platinum
-  "linear-gradient(135deg, #E5E5EA 0%, #D7D7DD 100%)", // macOS Liquid Retina Gray
+  "linear-gradient(135deg, #DCDCDC 0%, #CACACA 100%)", // Neutral Greyscale 1
+  "linear-gradient(135deg, #E0E0E0 0%, #D0D0D0 100%)", // Neutral Greyscale 2
+  "linear-gradient(135deg, #D8D8D8 0%, #C6C6C6 100%)", // Neutral Greyscale 3
+  "linear-gradient(135deg, #E2E2E2 0%, #D2D2D2 100%)", // Neutral Greyscale 4
+  "linear-gradient(135deg, #DADADA 0%, #C8C8C8 100%)", // Neutral Greyscale 5
+  "linear-gradient(135deg, #E4E4E4 0%, #D4D4D4 100%)", // Neutral Greyscale 6
 ];
 
 export function getCardGradient(seed: string): string {
@@ -140,6 +138,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({
         {/* Smooth grey skeleton placeholder behind image container */}
         <div
           className={`${styles.skeletonImage} ${!imageLoaded && !imageError ? styles.skeletonShimmer : ""}`}
+          style={imageLoaded ? { background: gradient } : undefined}
           data-testid="skill-card-gradient"
         />
 

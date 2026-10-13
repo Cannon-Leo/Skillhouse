@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Filter as FilterIcon, SlidersHorizontal } from "lucide-react";
 import { NavBar } from "@/components/features/NavBar";
+import { useAuthSafe } from "@/lib/AuthContext";
 import { FilterSidebar, FilterState } from "@/components/features/FilterSidebar";
 import { SkillCard, SkillCardSkeleton } from "@/components/features/SkillCard";
 import { AdCard } from "@/components/features/AdCard";
@@ -848,7 +849,7 @@ export function MarketplaceView({
   savedSkillsCount,
   onSelectSkillDetail,
   className = "",
-  isLoading = false,
+  isLoading: propIsLoading,
   isSignedIn: propIsSignedIn,
   user,
   onOpenLoginModal: propOnOpenLoginModal,
@@ -869,13 +870,33 @@ export function MarketplaceView({
   useScrollLock(mobileFiltersVisible);
 
 
+  const auth = useAuthSafe();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [internalIsSignedIn, setInternalIsSignedIn] = useState(false);
-  const effectiveIsSignedIn = propIsSignedIn !== undefined ? propIsSignedIn : internalIsSignedIn;
+  const effectiveIsSignedIn = propIsSignedIn !== undefined ? propIsSignedIn : (auth ? auth.isSignedIn : internalIsSignedIn);
+  const effectiveUser = user !== undefined ? user : (auth?.user || null);
   const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
+
+  const isTestEnv = typeof process !== "undefined" && process.env.NODE_ENV === "test";
+
+  // Initial loading state: displays greyscale skeleton cards during initial catalogue load
+  const [isInitialLoading, setIsInitialLoading] = useState(() => {
+    if (propIsLoading !== undefined) return propIsLoading;
+    return !isTestEnv;
+  });
+
+  useEffect(() => {
+    if (isTestEnv || propIsLoading !== undefined) return;
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 750);
+    return () => clearTimeout(timer);
+  }, [propIsLoading, isTestEnv]);
+
+  const effectiveLoading = propIsLoading !== undefined ? propIsLoading : isInitialLoading;
 
   // Infinite Scroll Pagination
   const PAGE_SIZE = 8;
@@ -936,7 +957,11 @@ export function MarketplaceView({
   };
 
   const handleSelectCategoryFromNav = (cat: string, tab?: string) => {
-        setFilters(resolveCategoryToFilters(cat, tab));
+    if (!isTestEnv) {
+      setIsInitialLoading(true);
+      setTimeout(() => setIsInitialLoading(false), 350);
+    }
+    setFilters(resolveCategoryToFilters(cat, tab));
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       params.set("view", "marketplace");
@@ -1124,22 +1149,25 @@ export function MarketplaceView({
         onSelectCategory={handleSelectCategoryFromNav}
         onRequestSkill={() => setIsRequestSkillOpen(true)}
         isSignedIn={effectiveIsSignedIn}
-        user={user || undefined}
+        user={effectiveUser || undefined}
         onOpenLoginModal={() => {
           if (propOnOpenLoginModal) propOnOpenLoginModal();
+          else if (auth) auth.openLogin();
           else setIsLoginModalOpen(true);
         }}
         onGetStarted={() => {
           if (propOnOpenLoginModal) propOnOpenLoginModal();
+          else if (auth) auth.openLogin();
           else setIsLoginModalOpen(true);
         }}
         onSignOut={() => {
           if (propOnSignOut) propOnSignOut();
+          else if (auth) auth.logout();
           else setInternalIsSignedIn(false);
         }}
-        onOpenProfile={onOpenProfile}
-        onOpenSettings={onOpenSettings}
-        onOpenHelpCenter={onOpenHelpCenter}
+        onOpenProfile={onOpenProfile || (auth ? () => auth.openProfile("profile") : undefined)}
+        onOpenSettings={onOpenSettings || (auth ? () => auth.openProfile("cli") : undefined)}
+        onOpenHelpCenter={onOpenHelpCenter || (auth ? auth.openHelpCenter : undefined)}
       />
 
       {/* Mobile Drawer Backdrop Overlay */}
@@ -1288,7 +1316,7 @@ export function MarketplaceView({
           </div>
 
           {/* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */}
-          {isLoading ? (
+          {effectiveLoading ? (
             <div
               className={`${styles.skillsGrid} ${isSidebarCollapsed ? styles.expandedGrid : ""}`}
               id="marketplace-grid"
@@ -1379,12 +1407,7 @@ export function MarketplaceView({
                 </>
               )}
 
-              {!hasMore && gridItems.length > PAGE_SIZE && (
-                <div className={styles.endOfCatalogIndicator} data-testid="end-of-catalog">
-                  <span className={styles.endOfCatalogDot} />
-                  <span>You’ve viewed all {gridItems.length} skills in the marketplace</span>
-                </div>
-              )}
+
             </>
           ) : (
             <div className={styles.emptyState}>
@@ -1416,21 +1439,25 @@ export function MarketplaceView({
         }}
       />
 
-      {/* Modals */}
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onLogin={() => {
-          setInternalIsSignedIn(true);
-          setIsLoginModalOpen(false);
-        }}
-      />
+      {/* Modals when rendered outside global AuthProvider */}
+      {!auth && (
+        <>
+          <LoginModal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+            onLogin={() => {
+              setInternalIsSignedIn(true);
+              setIsLoginModalOpen(false);
+            }}
+          />
 
-      <RequestSkillModal
-        isOpen={isRequestSkillOpen}
-        onClose={() => setIsRequestSkillOpen(false)}
-        onSubmitSuccess={() => setIsRequestSkillOpen(false)}
-      />
+          <RequestSkillModal
+            isOpen={isRequestSkillOpen}
+            onClose={() => setIsRequestSkillOpen(false)}
+            onSubmitSuccess={() => setIsRequestSkillOpen(false)}
+          />
+        </>
+      )}
     </div>
   );
 }

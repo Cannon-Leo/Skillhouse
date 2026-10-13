@@ -33,7 +33,7 @@ describe("useAppWorkspace Hook", () => {
     expect(result.current.isBookmarked("visual-canvas-deck")).toBe(false);
   });
 
-  it("toggles skill install state with persistence", () => {
+  it("toggles skill install state with persistence and uninstalls when clicked again", () => {
     const { result } = renderHook(() => useAppWorkspace());
 
     expect(result.current.isInstalled("pixel-promo-video")).toBe(false);
@@ -44,5 +44,31 @@ describe("useAppWorkspace Hook", () => {
 
     expect(result.current.isInstalled("pixel-promo-video")).toBe(true);
     expect(result.current.installedSkillIds).toContain("pixel-promo-video");
+
+    act(() => {
+      result.current.toggleInstall("pixel-promo-video");
+    });
+    expect(result.current.isInstalled("pixel-promo-video")).toBe(false);
+  });
+
+  it("initializes with existing saved and installed skills from localStorage", () => {
+    window.localStorage.setItem("skillhouse_saved_skills", JSON.stringify(["saved-1"]));
+    window.localStorage.setItem("skillhouse_installed_skills", JSON.stringify(["inst-1"]));
+
+    const { result } = renderHook(() => useAppWorkspace());
+
+    expect(result.current.savedSkillIds).toEqual(["saved-1"]);
+    expect(result.current.installedSkillIds).toEqual(["inst-1"]);
+    expect(result.current.isBookmarked("saved-1")).toBe(true);
+    expect(result.current.isInstalled("inst-1")).toBe(true);
+  });
+
+  it("handles corrupted localStorage JSON gracefully without throwing", () => {
+    window.localStorage.setItem("skillhouse_saved_skills", "invalid-json");
+    window.localStorage.setItem("skillhouse_installed_skills", "invalid-json");
+
+    const { result } = renderHook(() => useAppWorkspace());
+    expect(result.current.savedSkillIds).toEqual([]);
+    expect(result.current.installedSkillIds).toEqual([]);
   });
 });

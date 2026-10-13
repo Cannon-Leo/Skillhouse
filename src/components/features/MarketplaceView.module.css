@@ -280,14 +280,14 @@
 }
 
 .sortOption:hover {
-  background-color: #F8D5B8;
+  background-color: rgba(0, 0, 0, 0.04);
   color: #000000;
 }
 
 .sortOption.selected {
   font-weight: 500;
-  color: var(--color-brand, #FB6320);
-  background-color: rgba(251, 99, 32, 0.1);
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 /* Skills Grid - Exact Figma 751:4748 (4 columns, col gap: 16px, row gap: 24px) */
@@ -559,4 +559,50 @@
 .loadMoreButton:disabled {
   opacity: 0.6;
   cursor: wait;
+}
+
+.simulateLoadingBtn {
+  height: 38px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background-color: rgba(255, 236, 217, 0.7);
+  border: 1px solid rgba(166, 166, 166, 0.4);
+  border-radius: 0px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #444444;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.simulateLoadingBtn:hover {
+  background-color: #FFFFFF;
+  border-color: #111111;
+  color: #111111;
+}
+
+.simulateLoadingBtn:active {
+  transform: scale(0.96);
+}
+
+.simulateLoadingBtn:focus-visible {
+  outline: 2px solid #FB6320;
+}
+
+.spinning {
+  animation: spinLoading 1s linear infinite;
+}
+
+@keyframes spinLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

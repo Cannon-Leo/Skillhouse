@@ -307,4 +307,75 @@ describe("Features NavBar Component", () => {
     expect(requestSkillBtn).toBeInTheDocument();
     expect(getStartedBtn).toBeInTheDocument();
 });
+  it("handles mobile drawer sign-out and user menu directory history callback", () => {
+    const handleSignOut = vi.fn();
+    const handleViewChange = vi.fn();
+
+    render(
+      <NavBar
+        isSignedIn={true}
+        onSignOut={handleSignOut}
+        onViewChange={handleViewChange}
+        user={{ name: "Alex Vance", email: "alex@acme.dev" }}
+      />
+    );
+
+    // 1. Open User Menu Popover and click Bookmarks
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+    fireEvent.click(avatarBtn);
+    const bookmarksItem = screen.getByRole("menuitem", { name: /bookmarks/i });
+    fireEvent.click(bookmarksItem);
+    expect(handleViewChange).toHaveBeenCalledWith("my-skills");
+
+    // 2. Open Mobile Menu while signed in
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+
+    // Verify user info is shown in mobile drawer
+    expect(screen.getByText("Alex Vance")).toBeInTheDocument();
+    expect(screen.getByText("alex@acme.dev")).toBeInTheDocument();
+
+    // Click Mobile Sign out
+    const mobileSignOut = screen.getByRole("button", { name: /sign out/i });
+    fireEvent.click(mobileSignOut);
+    expect(handleSignOut).toHaveBeenCalled();
+  });
+  it("handles clicking mobile pricing link and user menu items without onViewChange callback", () => {
+    const handleLogin = vi.fn();
+    render(<NavBar onOpenLoginModal={handleLogin} />);
+
+    // Open mobile menu
+    const mobileBtn = screen.getByRole("button", { name: /open menu/i });
+    fireEvent.click(mobileBtn);
+
+    // Click mobile pricing link
+    const drawer = screen.getByRole("dialog", { name: /mobile navigation/i });
+    const pricingBtn = within(drawer).getByRole("button", { name: /^pricing$/i });
+    fireEvent.click(pricingBtn);
+    expect(handleLogin).toHaveBeenCalledTimes(1);
+  });
+  it("handles logout when onSignOut callback is not passed", () => {
+    render(<NavBar isSignedIn={true} />);
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+    fireEvent.click(avatarBtn);
+    const logoutBtn = screen.getByRole("menuitem", { name: /logout/i });
+    fireEvent.click(logoutBtn);
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+  it("submits search on Enter key press and handles help center when callback is omitted", () => {
+    const handleSearchSubmit = vi.fn();
+    render(<NavBar onSearchSubmit={handleSearchSubmit} searchValue="Claude" isSignedIn={true} />);
+
+    // Press Enter in search input
+    const searchInput = screen.getByPlaceholderText("Search skills / outputs");
+    fireEvent.keyDown(searchInput, { key: "Enter" });
+    expect(handleSearchSubmit).toHaveBeenCalledWith("Claude");
+
+    // Open avatar menu and click Help center without onOpenHelpCenter callback
+    const avatarBtn = screen.getByTestId("header-avatar-button");
+    fireEvent.click(avatarBtn);
+    const helpBtn = screen.getByRole("menuitem", { name: /help center/i });
+    fireEvent.click(helpBtn);
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
 });

@@ -17,8 +17,8 @@ import { NavBar } from "./NavBar";
 import { SkillDetailHeader } from "./SkillDetailHeader";
 import { SkillCard } from "./SkillCard";
 import { Footer } from "./Footer";
-import { LoginModal } from "./LoginModal";
-import { RequestSkillModal } from "./RequestSkillModal";
+import { UserProfileData } from "./UserProfileModal";
+import { AuthProvider, useAuth, useAuthSafe } from "@/lib/AuthContext";
 import styles from "./SkillDetailPage.module.css";
 
 export interface SkillDetailData {
@@ -111,23 +111,39 @@ export interface SkillDetailPageProps {
   onNavigateSkill?: (id: string) => void;
   onNavigateHome?: () => void;
   onNavigateMarketplace?: () => void;
+  isSignedIn?: boolean;
+  user?: UserProfileData | null;
+  onOpenLoginModal?: () => void;
+  onOpenProfile?: () => void;
+  onOpenSettings?: () => void;
+  onOpenHelpCenter?: () => void;
+  onSignOut?: () => void;
   className?: string;
 }
 
-export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
+const SkillDetailPageInner: React.FC<SkillDetailPageProps> = ({
   skill = DEFAULT_DETAIL_SKILL,
   onNavigateSkill,
   onNavigateHome,
   onNavigateMarketplace,
+  isSignedIn: propIsSignedIn,
+  user: propUser,
+  onOpenLoginModal: propOnOpenLoginModal,
+  onOpenProfile: propOnOpenProfile,
+  onOpenSettings: propOnOpenSettings,
+  onOpenHelpCenter: propOnOpenHelpCenter,
+  onSignOut: propOnSignOut,
   className = "",
 }) => {
+  const auth = useAuth();
+  const isSignedIn = propIsSignedIn !== undefined ? propIsSignedIn : auth.isSignedIn;
+  const user = propUser !== undefined ? propUser : auth.user;
+
   const thumbnails = skill.thumbnails && skill.thumbnails.length > 0
     ? skill.thumbnails
     : [skill.previewImage];
 
   const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRequestSkillOpen, setIsRequestSkillOpen] = useState(false);
   const [similarSkillsOffset, setSimilarSkillsOffset] = useState(0);
 
   const router = useRouter();
@@ -163,8 +179,15 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
             router.push("/design-system");
           }
         }}
-        onOpenLoginModal={() => setIsLoginOpen(true)}
-        onRequestSkill={() => setIsRequestSkillOpen(true)}
+        isSignedIn={isSignedIn}
+        user={user || undefined}
+        onOpenLoginModal={propOnOpenLoginModal || auth.openLogin}
+        onGetStarted={propOnOpenLoginModal || auth.openLogin}
+        onRequestSkill={isSignedIn ? auth.openRequestSkill : auth.openLogin}
+        onOpenProfile={propOnOpenProfile || (() => auth.openProfile("profile"))}
+        onOpenSettings={propOnOpenSettings || (() => auth.openProfile("cli"))}
+        onOpenHelpCenter={propOnOpenHelpCenter || auth.openHelpCenter}
+        onSignOut={propOnSignOut || auth.logout}
       />
 
       {/* 2. Main Centered 898px Workspace */}
@@ -183,15 +206,13 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
                     }
                   }}
                 >
-                  <Link href="/" className={styles.breadcrumbItem}>
-                    <Home size={14} className={styles.homeIcon} aria-hidden="true" />
+                  <Link href="/" aria-label="Home page">
+                    <Home size={14} className={styles.breadcrumbHomeIcon} />
                     <span>Home</span>
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-
-              <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
-
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink
                   asChild
@@ -202,128 +223,133 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
                     }
                   }}
                 >
-                  <Link href="/skills" className={styles.breadcrumbItem}>
-                    Skills
+                  <Link href="/skills">Skills</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  asChild
+                  onClick={(e) => {
+                    if (onNavigateMarketplace) {
+                      e.preventDefault();
+                      onNavigateMarketplace();
+                    }
+                  }}
+                >
+                  <Link href={`/skills?category=${encodeURIComponent(skill.category)}`}>
+                    {skill.category}
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-
-              {skill.category && (
-                <>
-                  <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink
-                      asChild
-                      onClick={(e) => {
-                        if (onNavigateMarketplace) {
-                          e.preventDefault();
-                          onNavigateMarketplace();
-                        }
-                      }}
-                    >
-                      <Link
-                        href={`/skills?category=${encodeURIComponent(skill.category)}`}
-                        className={styles.breadcrumbItem}
-                      >
-                        {skill.category}
-                      </Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                </>
-              )}
-
-              <BreadcrumbSeparator className={styles.breadcrumbSeparator} />
-
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage className={styles.breadcrumbCurrent}>
-                  {skill.title}
-                </BreadcrumbPage>
+                <BreadcrumbPage aria-current="page">{skill.title}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
 
-        {/* Two-Column Main Layout (Figma Node 751:5604) */}
-        <section className={styles.twoColumnLayout}>
-          {/* Left Column: Media Preview Gallery (Figma Node 751:5605) */}
-          <div className={styles.galleryColumn}>
-            <div
-              className={styles.mainPreviewCanvas}
+        {/* Skill Detail Header */}
+        <SkillDetailHeader
+          title={skill.title}
+          version={skill.version}
+          price={skill.price}
+          isFree={skill.isFree}
+          description={skill.description}
+          installPrompt={skill.installPrompt}
+        />
+
+        {/* Preview Gallery Section */}
+        <section className={styles.gallerySection} aria-label="Skill preview media">
+          <div className={styles.mainPreviewFrame}>
+            <Image
+              src={activeImage}
+              alt={`${skill.title} preview`}
+              fill
+              className={styles.mainPreviewImage}
+              priority
+              sizes="(max-width: 960px) 100vw, 898px"
+              unoptimized
               data-testid="skill-detail-main-preview"
-            >
-              <Image
-                src={activeImage}
-                alt={`${skill.title} preview canvas`}
-                fill
-                sizes="(max-width: 992px) 100vw, 55vw"
-                className={styles.mainPreviewImage}
-                priority
-                unoptimized
-              />
-            </div>
-
-            {/* Thumbnail Selectors (Figma Node 751:5607) */}
-            <div className={styles.thumbnailsRow} role="tablist" aria-label="Preview gallery thumbnails">
-              {thumbnails.map((thumbSrc, idx) => (
-                <button
-                  key={`${thumbSrc}-${idx}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeThumbnailIndex === idx}
-                  aria-label={`View preview slide ${idx + 1}`}
-                  className={`${styles.thumbnailCard} ${activeThumbnailIndex === idx ? styles.active : ""}`}
-                  onClick={() => setActiveThumbnailIndex(idx)}
-                  data-testid={`thumbnail-tab-${idx}`}
-                >
-                  <Image
-                    src={thumbSrc}
-                    alt={`Thumbnail ${idx + 1}`}
-                    width={104}
-                    height={72}
-                    className={styles.thumbnailImage}
-                    unoptimized
-                  />
-                </button>
-              ))}
-            </div>
-
-
+            />
           </div>
 
-          {/* Right Column: Composite Action Panel (Figma Node 751:5611) */}
-          <div className={styles.panelColumn}>
-            <SkillDetailHeader
-              title={skill.title}
-              version={skill.version}
-              price={skill.price}
-              description={skill.description}
-              installPrompt={skill.installPrompt}
-              isFree={skill.isFree}
-              variant={skill.isFree ? "free" : "premium"}
-              showRuntimeSpecs={true}
-            />
+          {thumbnails.length > 1 && (
+            <div className={styles.thumbnailStrip} role="tablist" aria-label="Preview gallery thumbnails">
+              {thumbnails.map((thumb, index) => {
+                const isSelected = index === activeThumbnailIndex;
+                return (
+                  <button
+                    key={`thumb-${index}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    aria-label={`View preview slide ${index + 1}`}
+                    className={`${styles.thumbnailButton} ${isSelected ? styles.thumbnailActive : ""}`}
+                    onClick={() => setActiveThumbnailIndex(index)}
+                    data-testid={`thumbnail-tab-${index}`}
+                  >
+                    <Image
+                      src={thumb}
+                      alt={`Thumbnail ${index + 1}`}
+                      fill
+                      className={styles.thumbnailImg}
+                      unoptimized
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* Full Markdown Documentation Viewer (Figma Node 751:5654) */}
+        <section className={styles.docsSection} aria-label="Skill specifications and documentation">
+          <div className={styles.docsHeader}>
+            <span className={styles.docsBadge}>SPECIFICATION</span>
+            <h2 className={styles.docsTitle}>Overview &amp; Workflow Capabilities</h2>
+          </div>
+
+          <div className={styles.markdownBody}>
+            <p>
+              The <strong>{skill.title}</strong> equips AI coding assistants and automation agents with specialized domain knowledge, formatted input schemas, and robust verification loops to streamline autonomous tasks.
+            </p>
+            <h3>Core Functionality</h3>
+            <ul>
+              <li><strong>Zero Configuration Setup</strong>: Ingestible immediately via <code>{skill.installPrompt}</code>.</li>
+              <li><strong>Agent Tool Integration</strong>: Pre-configured tools and functions tailored for Claude Code, Cursor, Codex, and OpenAI agents.</li>
+              <li><strong>Deterministic Output</strong>: Structured artifact generation adhering strictly to professional production guidelines.</li>
+            </ul>
           </div>
         </section>
 
-        {/* 3. Similar Skills Row (Figma Node 751:5762) */}
+        {/* Similar Skills Carousel */}
         <section className={styles.similarSection} aria-labelledby="similar-skills-heading">
           <div className={styles.similarHeaderRow}>
-            <h2 id="similar-skills-heading" className={styles.similarTitle}>
-              Similar Skills
-            </h2>
+            <div className={styles.similarTitles}>
+              <h2 id="similar-skills-heading" className={styles.similarHeading}>
+                Similar Skills
+              </h2>
+              <p className={styles.similarSubtitle}>
+                Explore related agent skills verified for production workflows
+              </p>
+            </div>
             <div className={styles.carouselControls}>
               <button
                 type="button"
-                className={styles.carouselBtn}
+                className={styles.carouselArrowBtn}
                 onClick={handlePrevSimilar}
+                disabled={similarSkillsOffset === 0}
                 aria-label="Previous similar skills"
               >
                 <ChevronLeft size={16} />
               </button>
               <button
                 type="button"
-                className={styles.carouselBtn}
+                className={styles.carouselArrowBtn}
                 onClick={handleNextSimilar}
+                disabled={similarSkillsOffset >= SIMILAR_SKILLS.length - 4}
                 aria-label="Next similar skills"
               >
                 <ChevronRight size={16} />
@@ -335,9 +361,10 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
             {visibleSimilarSkills.map((simSkill) => (
               <SkillCard
                 key={simSkill.id}
+                id={simSkill.id}
                 title={simSkill.title}
                 category={simSkill.category}
-                                previewImage={simSkill.previewImage}
+                previewImage={simSkill.previewImage}
                 models={simSkill.models}
                 onClick={() => {
                   if (onNavigateSkill) {
@@ -352,15 +379,20 @@ export const SkillDetailPage: React.FC<SkillDetailPageProps> = ({
         </section>
       </main>
 
-      {/* 4. Global Modals */}
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
-      <RequestSkillModal
-        isOpen={isRequestSkillOpen}
-        onClose={() => setIsRequestSkillOpen(false)}
-      />
-
-      {/* 5. Skillhouse Footer (Figma Node 751:5944) */}
+      {/* 3. Skillhouse Footer (Figma Node 751:5944) */}
       <Footer />
     </div>
   );
+};
+
+export const SkillDetailPage: React.FC<SkillDetailPageProps> = (props) => {
+  const auth = useAuthSafe();
+  if (!auth) {
+    return (
+      <AuthProvider>
+        <SkillDetailPageInner {...props} />
+      </AuthProvider>
+    );
+  }
+  return <SkillDetailPageInner {...props} />;
 };

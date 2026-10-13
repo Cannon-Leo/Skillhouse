@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { NavBar } from "@/components/features/NavBar";
 import { HeroSection } from "@/components/features/HeroSection";
 import { ConnectAgentBanner } from "@/components/features/ConnectAgentBanner";
+import { FaqSection } from "@/components/features/FaqSection";
 import { LoginModal } from "@/components/features/LoginModal";
 import { RequestSkillModal, SkillRequestData } from "@/components/features/RequestSkillModal";
 import { Footer } from "@/components/features/Footer";
@@ -67,6 +68,9 @@ export default function HomeScreenPage() {
         <section className={styles.bannerSection} aria-label="Connect Your Agent Section">
           <ConnectAgentBanner />
         </section>
+
+        {/* 4. Frequently Asked Questions (Figma Node 851:3373) */}
+        <FaqSection />
       </main>
 
       {/* 4. Footer */}

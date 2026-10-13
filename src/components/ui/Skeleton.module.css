@@ -1,11 +1,14 @@
-/* DS — Skeleton (macOS Grey Shimmer & Pulse) */
+/* DS — Skeleton (Pure Greyscale Shimmer & Pulse) */
 
 .skeleton {
+  background-color: #D4D4D8;
   background: linear-gradient(
     90deg,
-    #E5E5EA 25%,
-    #F2F2F7 50%,
-    #E5E5EA 75%
+    #D4D4D8 0%,
+    #E4E4E7 25%,
+    #F4F4F5 50%,
+    #E4E4E7 75%,
+    #D4D4D8 100%
   );
   background-size: 200% 100%;
   display: block;
@@ -14,11 +17,11 @@
 }
 
 .shimmer {
-  animation: macOsSkeletonShimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: greyScaleSkeletonShimmer 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .pulse {
-  animation: macOsSkeletonPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: greyScaleSkeletonPulse 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .rectangular {
@@ -34,7 +37,7 @@
   border-radius: 4px;
 }
 
-@keyframes macOsSkeletonShimmer {
+@keyframes greyScaleSkeletonShimmer {
   0% {
     background-position: 200% 0;
   }
@@ -43,7 +46,7 @@
   }
 }
 
-@keyframes macOsSkeletonPulse {
+@keyframes greyScaleSkeletonPulse {
   0%, 100% {
     opacity: 1;
   }

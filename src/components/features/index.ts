@@ -26,3 +26,4 @@ export * from "./MySkillsWorkspace/MySkillsWorkspace";
 export * from "./SkillDetailDrawer/SkillDetailDrawer";
 export * from "./UserProfileModal";
 export * from "./HelpCenterModal";
+export * from "./FaqSection";

@@ -297,7 +297,8 @@
 .docBadge {
   font-family: var(--font-mono);
   font-size: 12px;
-  padding: 6px 10px;
+  height: 40px;
+  padding: 0 12px;
   border-radius: 0px;
   border: 1px solid #CDB7AE;
   color: #7F776E;
@@ -305,6 +306,10 @@
   transition: all var(--transition-fast);
   background: transparent;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .docBadge:hover,
@@ -661,6 +666,7 @@
   width: 40px;
   height: 40px;
   padding: 0;
+  margin: 0;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -669,6 +675,8 @@
   box-sizing: border-box;
   transition: transform 0.15s ease, opacity 0.15s ease;
   flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 0;
 }
 
 .headerSquareActionButton:hover {

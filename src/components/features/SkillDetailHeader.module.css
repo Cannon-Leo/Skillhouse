@@ -156,7 +156,7 @@
   white-space: nowrap;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
-  flex: 1.15;
+  flex: 1;
   min-width: 0;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
   user-select: none;
@@ -192,7 +192,7 @@
   white-space: nowrap;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
-  flex: 0.85;
+  flex: 1;
   min-width: 0;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
   user-select: none;
