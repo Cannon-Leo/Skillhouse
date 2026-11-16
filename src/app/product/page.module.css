@@ -1,0 +1,676 @@
+/* Product Page Layout & Styling (Skillhouse Design System) */
+
+.pageWrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-page, #FFEEDD);
+  color: var(--color-text-body, #242426);
+  position: relative;
+  overflow-x: clip;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4xl, 48px);
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   1. HERO SECTION & WAITLIST
+   ======================================================== */
+.heroSection {
+  padding: 64px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2xl, 32px);
+  position: relative;
+  border-bottom: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+}
+
+.eyebrowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-surface-peach, #FBE1C7);
+  border: 1px solid rgba(166, 166, 166, 0.4);
+  padding: 6px 14px;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-brand, #FB6320);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-brand, #FB6320);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.heroHeading {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: var(--color-dark, #000000);
+  max-width: 960px;
+  margin: 0 auto;
+  letter-spacing: -0.02em;
+}
+
+.highlightText {
+  color: var(--color-brand, #FB6320);
+  display: inline;
+}
+
+.heroSubtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-secondary, #464646);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.waitlistHeroContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Works With Agent Logos Ribbon */
+.agentsRibbon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.ribbonLabel {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted, #625E59);
+}
+
+.agentsPillsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.agentPillItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-dark, #000000);
+  font-weight: 500;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.agentPillItem:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand, #FB6320);
+}
+
+.agentIconSmall {
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* ========================================================
+   2. PROBLEM VS SOLUTION COMPARISON (MODULIFY PATTERN)
+   ======================================================== */
+.comparisonSection {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl, 32px);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTag {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--color-brand, #FB6320);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--color-dark, #000000);
+  line-height: 1.2;
+}
+
+.sectionDescription {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-text-secondary, #464646);
+  max-width: 680px;
+}
+
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.comparisonCardBad {
+  background-color: #FFF7F5;
+  border: 1px solid #FFCDD2;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comparisonCardGood {
+  background-color: var(--color-white, #FFFFFF);
+  border: 2px solid var(--color-brand, #FB6320);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  box-shadow: var(--shadow-brand);
+}
+
+.cardHeaderBad, .cardHeaderGood {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardTagBad {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: #D32F2F;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cardTagGood {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: var(--color-brand, #FB6320);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cardTitleBad, .cardTitleGood {
+  font-family: var(--font-pixel, monospace);
+  font-size: 22px;
+  color: var(--color-dark, #000000);
+}
+
+.comparisonList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.comparisonItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-body, #242426);
+}
+
+.iconBad {
+  color: #D32F2F;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.iconGood {
+  color: var(--color-brand, #FB6320);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ========================================================
+   3. BENTO GRID - 4 PRODUCT PILLARS
+   ======================================================== */
+.pillarsSection {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl, 32px);
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.bentoCard {
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.bentoCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand, #FB6320);
+}
+
+.bentoCol8 {
+  grid-column: span 8;
+}
+
+.bentoCol4 {
+  grid-column: span 4;
+}
+
+.bentoCol6 {
+  grid-column: span 6;
+}
+
+.bentoIconBox {
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-surface-peach, #FBE1C7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand, #FB6320);
+  border: 1px solid rgba(166, 166, 166, 0.3);
+}
+
+.bentoTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 20px;
+  color: var(--color-dark, #000000);
+}
+
+.bentoText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #464646);
+}
+
+/* Terminal Snippet inside Bento */
+.terminalBox {
+  background-color: #0E0E10;
+  color: #ECECED;
+  border: 1px solid #2B2C30;
+  padding: 16px;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.terminalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #242528;
+  padding-bottom: 8px;
+  color: #8E8F95;
+  font-size: 11px;
+}
+
+.terminalDots {
+  display: flex;
+  gap: 6px;
+}
+
+.dotRed { width: 8px; height: 8px; border-radius: 50%; background-color: #FF5F56; }
+.dotYellow { width: 8px; height: 8px; border-radius: 50%; background-color: #FFBD2E; }
+.dotGreen { width: 8px; height: 8px; border-radius: 50%; background-color: #27C93F; }
+
+.terminalCode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #34D399;
+}
+
+.terminalOutput {
+  color: #9CA3AF;
+  font-size: 12px;
+}
+
+/* Metrics Chip */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.metricTile {
+  background-color: var(--color-surface-card, #FFECD8);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid rgba(166, 166, 166, 0.3);
+}
+
+.metricVal {
+  font-family: var(--font-pixel, monospace);
+  font-size: 22px;
+  color: var(--color-brand, #FB6320);
+}
+
+.metricSub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-muted, #625E59);
+}
+
+/* ========================================================
+   4. HOW IT WORKS (3-STEP WORKFLOW)
+   ======================================================== */
+.workflowSection {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl, 32px);
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.stepCard {
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.stepNumber {
+  font-family: var(--font-pixel, monospace);
+  font-size: 28px;
+  color: var(--color-brand, #FB6320);
+  line-height: 1;
+}
+
+.stepTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 18px;
+  color: var(--color-dark, #000000);
+}
+
+.stepText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #464646);
+}
+
+/* ========================================================
+   5. AGENT RUNTIME MATRIX
+   ======================================================== */
+.matrixSection {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl, 32px);
+}
+
+.matrixGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.matrixCard {
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.matrixCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.matrixAgentName {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-dark, #000000);
+}
+
+.matrixStatusBadge {
+  margin-left: auto;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  padding: 2px 8px;
+  background-color: var(--color-brand-subtle, #FFF4EE);
+  color: var(--color-brand, #FB6320);
+  border: 1px solid var(--color-brand-light, #FFE3D7);
+}
+
+.matrixSpecsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba(166, 166, 166, 0.3);
+  padding-top: 12px;
+}
+
+.matrixSpecItem {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-text-secondary, #464646);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========================================================
+   6. FAQ ACCORDION SECTION
+   ======================================================== */
+.faqSection {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl, 32px);
+}
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.faqItem {
+  background-color: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.faqItem:hover {
+  border-color: var(--color-brand, #FB6320);
+}
+
+.faqTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+
+.faqQuestion {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-dark, #000000);
+}
+
+.faqIcon {
+  color: var(--color-brand, #FB6320);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.faqAnswer {
+  padding: 0 24px 20px 24px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-secondary, #464646);
+  border-top: 1px solid rgba(166, 166, 166, 0.2);
+  padding-top: 14px;
+}
+
+/* ========================================================
+   7. VIP BOTTOM CTA BANNER
+   ======================================================== */
+.ctaBanner {
+  background-color: var(--color-dark, #000000);
+  color: var(--color-white, #FFFFFF);
+  border: 1px solid #2B2C30;
+  padding: 56px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  margin-bottom: 64px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.ctaBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-brand, #FB6320);
+  background-color: rgba(251, 99, 32, 0.12);
+  padding: 4px 12px;
+  border: 1px solid rgba(251, 99, 32, 0.3);
+  text-transform: uppercase;
+}
+
+.ctaTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(26px, 3.5vw, 42px);
+  color: var(--color-white, #FFFFFF);
+  max-width: 720px;
+  line-height: 1.15;
+}
+
+.ctaSubtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: #A0A0A5;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.ctaFormWrapper {
+  width: 100%;
+  max-width: 580px;
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ======================================================== */
+@media (max-width: 1024px) {
+  .main {
+    padding: 0 24px;
+    gap: 36px;
+  }
+  .bentoCol8, .bentoCol4, .bentoCol6 {
+    grid-column: span 12;
+  }
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+  .matrixGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 0 16px;
+    gap: 28px;
+  }
+  .heroSection {
+    padding: 36px 0 28px;
+  }
+  .matrixGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaBanner {
+    padding: 36px 20px;
+  }
+}

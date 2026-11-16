@@ -18,7 +18,7 @@ import { UserMenuPopover } from "./UserMenuPopover";
 import { useAuthSafe } from "@/lib/AuthContext";
 import styles from "./NavBar.module.css";
 
-export type NavView = "home" | "marketplace" | "my-skills" | "design-system";
+export type NavView = "home" | "marketplace" | "my-skills" | "design-system" | "product";
 
 export interface NavBarProps {
   currentView?: NavView;
@@ -207,6 +207,16 @@ export const NavBar: React.FC<NavBarProps> = ({
               </div>
             )}
           </div>
+
+          <Link
+            href="/product"
+            className={`${styles.navItem} ${currentView === "product" ? styles.active : ""}`}
+            onClick={() => {
+              onViewChange?.("product");
+            }}
+          >
+            Product
+          </Link>
 
           <button
             type="button"
@@ -417,6 +427,17 @@ export const NavBar: React.FC<NavBarProps> = ({
               <span>Design System</span>
               <ChevronRight size={16} />
             </button>
+            <Link
+              href="/product"
+              className={styles.mobileDrawerLink}
+              onClick={() => {
+                onViewChange?.("product");
+                setMobileMenuOpen(false);
+              }}
+            >
+              <span>Product</span>
+              <ChevronRight size={16} />
+            </Link>
             <button
               type="button"
               className={styles.mobileDrawerLink}

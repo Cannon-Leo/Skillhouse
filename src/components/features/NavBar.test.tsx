@@ -13,6 +13,7 @@ describe("Features NavBar Component", () => {
     expect(screen.getByAltText("Skillhouse Logo")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Skills" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /categories/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Product" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Pricing" })).toBeInTheDocument();
     expect(screen.getByTestId("header-request-skill-action-btn")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Search skills / outputs")).toBeInTheDocument();
@@ -98,10 +99,17 @@ describe("Features NavBar Component", () => {
     fireEvent.click(dsLink);
     expect(handleViewChange).toHaveBeenCalledWith("design-system");
 
-    // Open again and click get started in mobile drawer
+    // Open again and click product in mobile drawer
     fireEvent.click(mobileBtn);
     const drawer3 = screen.getByRole("dialog", { name: /mobile navigation/i });
-    const getStartedMobile = within(drawer3).getByRole("button", { name: /get started/i });
+    const productMobileLink = within(drawer3).getByRole("link", { name: /product/i });
+    fireEvent.click(productMobileLink);
+    expect(handleViewChange).toHaveBeenCalledWith("product");
+
+    // Open again and click get started in mobile drawer
+    fireEvent.click(mobileBtn);
+    const drawer4 = screen.getByRole("dialog", { name: /mobile navigation/i });
+    const getStartedMobile = within(drawer4).getByRole("button", { name: /get started/i });
     fireEvent.click(getStartedMobile);
     expect(handleGetStarted).toHaveBeenCalledTimes(1);
   });
