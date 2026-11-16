@@ -18,14 +18,14 @@
   align-items: stretch;
   gap: 0;
   width: 100%;
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.2));
-  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-card);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .inputRow:focus-within {
-  border-color: var(--color-brand, #FB6320);
-  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(251, 99, 32, 0.35));
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-focus);
 }
 
 .inputWrapper {
@@ -41,14 +41,14 @@
   padding: 0 16px;
   font-family: var(--font-sans);
   font-size: 15px;
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary);
   background: transparent;
   border: none;
   outline: none;
 }
 
 .emailInput::placeholder {
-  color: var(--color-text-muted, #9EA8A2);
+  color: var(--color-text-muted);
 }
 
 .emailInput:disabled {
@@ -57,7 +57,7 @@
 }
 
 .inputError {
-  color: #FF6B6B;
+  color: var(--color-error-text);
 }
 
 .submitBtn {
@@ -86,9 +86,9 @@
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
-  background-color: rgba(220, 38, 38, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #FCA5A5;
+  background-color: var(--color-error-subtle);
+  border: 1px solid var(--color-error);
+  color: var(--color-error-text);
   font-family: var(--font-sans);
   font-size: 13px;
   border-radius: 0px;
@@ -96,7 +96,7 @@
 
 .errorIcon {
   flex-shrink: 0;
-  color: #EF4444;
+  color: var(--color-error);
 }
 
 /* Success Card */
@@ -104,13 +104,13 @@
   width: 100%;
   max-width: 640px;
   padding: 24px;
-  background-color: var(--color-surface-card, #161918);
-  border: 1px solid var(--color-brand, #FB6320);
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-strong);
   border-radius: 0px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-md);
   animation: fadeIn var(--transition-fast) ease-out;
 }
 
@@ -134,8 +134,8 @@
 .successIconBadge {
   width: 40px;
   height: 40px;
-  background-color: rgba(251, 99, 32, 0.15);
-  border: 1px solid rgba(251, 99, 32, 0.35);
+  background-color: var(--color-brand-subtle);
+  border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,7 +143,7 @@
 }
 
 .checkIcon {
-  color: var(--color-brand, #FB6320);
+  color: var(--color-brand);
 }
 
 .successTitleGroup {
@@ -155,24 +155,24 @@
 .successTitle {
   font-family: var(--font-pixel, monospace);
   font-size: 18px;
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .successSubtitle {
   font-family: var(--font-sans);
   font-size: 14px;
-  color: var(--color-text-muted, #9EA8A2);
+  color: var(--color-text-muted);
   margin: 0;
 }
 
 .boldEmail {
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary);
 }
 
 .positionBadgeBox {
-  background-color: var(--color-bg-page, #0C0E0D);
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.15));
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -213,8 +213,8 @@
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  background-color: var(--color-brand, #FB6320);
-  color: #FFFFFF;
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
@@ -226,7 +226,7 @@
 }
 
 .shareBtn:hover {
-  background-color: var(--color-brand-hover, #E05215);
+  background-color: var(--color-brand-hover);
 }
 
 .shareBtn:active {
@@ -236,7 +236,7 @@
 .resetBtn {
   background: transparent;
   border: none;
-  color: var(--color-text-muted, #9EA8A2);
+  color: var(--color-text-muted);
   font-family: var(--font-sans);
   font-size: 13px;
   cursor: pointer;
@@ -245,7 +245,7 @@
 }
 
 .resetBtn:hover {
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary);
 }
 
 /* Variant Compact (for bottom banners) */
@@ -269,8 +269,8 @@
 
   .inputWrapper {
     width: 100%;
-    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.2));
-    background-color: var(--color-surface-card, #161918);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-card);
   }
 
   .submitBtn {

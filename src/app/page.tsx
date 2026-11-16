@@ -437,7 +437,7 @@ function MainContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div style={{ minHeight: "100vh", backgroundColor: "var(--color-bg-page, #0C0E0D)" }} />}>
+    <Suspense fallback={<div style={{ minHeight: "100vh", backgroundColor: "var(--color-bg-page, #0d0f12)" }} />}>
       <MainContent />
     </Suspense>
   );

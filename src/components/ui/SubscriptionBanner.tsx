@@ -57,6 +57,7 @@ export const SubscriptionBanner: React.FC<SubscriptionBannerProps> = ({
       tabIndex={0}
       aria-label={ariaLabel}
       data-testid={testId}
+      data-subscribed={isSubscribed ? "true" : undefined}
     >
       <div className={styles.textContainer}>
         <span className={styles.title}>{displayTitle}</span>

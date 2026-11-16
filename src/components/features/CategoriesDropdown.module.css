@@ -1,6 +1,6 @@
 /* CategoriesDropdown Component Styles
  * Exact Figma Node 751:7385 specs (Component 218 / 751:7883: "Property 1=use case")
- * Dark Mode Surface: var(--color-surface-card, #161918)
+ * Dark Mode Surface: var(--color-surface-card, #16181f)
  * Border: 1px solid var(--color-border), Radius: 0 0 4px 4px
  */
 
@@ -10,13 +10,13 @@
   align-items: stretch;
   width: 630px;
   max-width: 95vw;
-  background-color: rgba(22, 25, 24, 0.96);
+  background-color: var(--color-surface-card, #16181f);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.16));
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0 0 6px 6px;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0px 20px 32px -6px rgba(0, 0, 0, 0.7);
   max-height: calc(100vh - 84px);
   overflow-y: auto;
@@ -46,7 +46,7 @@
   align-items: stretch;
   padding: 24px 24px 20px;
   gap: 24px;
-  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-bottom: 1px solid var(--color-border-subtle, #ffffff0f);
 }
 
 /* Left Sidebar Tabs (Fixed 150px — Figma Node I751:7385;751:7894) */
@@ -57,7 +57,7 @@
   flex-shrink: 0;
   gap: 8px;
   padding-right: 24px;
-  border-right: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-right: 1px solid var(--color-border-subtle, #ffffff0f);
 }
 
 .tabButton {
@@ -78,7 +78,7 @@
 }
 
 .tabButton:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--color-surface-hover, #ffffff0d);
   opacity: 1;
 }
 
@@ -87,7 +87,7 @@
 }
 
 .tabButton:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -105,7 +105,7 @@
 
 .activeTab .tabLabel {
   font-weight: 500;
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .inactiveTab {
@@ -118,7 +118,7 @@
 
 .inactiveTab .tabLabel {
   font-weight: 400;
-  color: var(--color-text-muted, #9CA6A0);
+  color: var(--color-text-muted, #94a3b8);
 }
 
 .tabArrowWrapper {
@@ -130,13 +130,13 @@
 }
 
 .tabArrow {
-  color: var(--color-text-muted, #9CA6A0);
+  color: var(--color-text-muted, #94a3b8);
   opacity: 0.6;
   transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .activeArrow {
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary, #f8fafc);
   opacity: 1;
   transform: translateX(1px);
 }
@@ -183,12 +183,12 @@
 .itemRow:hover,
 .itemRow:focus-visible,
 .itemRow:focus {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--color-text-primary, #FFFFFF);
+  background-color: var(--color-surface-hover, #ffffff0d);
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .itemRow:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid var(--color-brand);
   outline-offset: 1px;
 }
 
@@ -196,13 +196,13 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  color: var(--color-text-secondary, #D4DBD6);
+  color: var(--color-text-secondary, #cbd5e1);
   transition: transform 0.15s ease;
 }
 
 .itemRow:hover .itemIcon {
   transform: translateY(1px);
-  color: var(--color-brand, #FB6320);
+  color: var(--color-brand);
 }
 
 .itemText {
@@ -210,7 +210,7 @@
   font-size: 14px;
   line-height: 1.4em;
   font-weight: 400;
-  color: var(--color-text-body, #EDF2EE);
+  color: var(--color-text-body, #e2e8f0);
   white-space: nowrap;
 }
 
@@ -231,9 +231,9 @@
   height: 40px;
   padding: 0 24px;
   background: transparent;
-  border: 1px solid var(--color-brand, #FB6320);
+  border: 1px solid var(--color-brand);
   border-radius: 4px;
-  color: var(--color-brand, #FB6320);
+  color: var(--color-brand);
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
@@ -245,8 +245,8 @@
 }
 
 .seeAllButton:hover {
-  background-color: var(--color-brand, #FB6320);
-  color: #FFFFFF;
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
 }
 
 .seeAllButton:active {
@@ -254,7 +254,7 @@
 }
 
 .seeAllButton:focus-visible {
-  outline: 2px solid var(--color-brand, #FB6320);
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
 }
 

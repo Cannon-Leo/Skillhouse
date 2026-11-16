@@ -18,47 +18,206 @@
 
 :root {
   /* ========================================================
-     1. SIGNATURE ORANGE SYSTEM (#FB6320 SCALE)
+     1. BRAND & BONE SYSTEM (Matches https://skillhouse.dev/)
      ======================================================== */
-  --color-brand: #FB6320;
-  --color-brand-hover: #E05215;
-  --color-brand-active: #C9440D;
-  --color-brand-light: #FFECD8;
-  --color-brand-subtle: rgba(251, 99, 32, 0.12);
-  
-  /* Surfaces & Backgrounds - Authentic Dark Mode */
-  --color-bg-page: #0C0E0D;
-  --color-bg-secondary: #121514;
-  --color-surface-card: #161918;
-  --color-surface-hover: #1F2422;
-  --color-surface-cream: #1A1E1C;
-  --color-surface-peach: #222825;
-  --color-peach-pill: rgba(34, 40, 37, 0.85);
+  --color-brand: #efe6d2;
+  --color-brand-hover: #c8baa4;
+  --color-brand-active: #b8a892;
+  --color-brand-light: #efe6d273;
+  --color-brand-subtle: #efe6d214;
+  --color-brand-foreground: #0d0f12;
+  --color-brand-subtext: #453f35;
+  --color-brand-dark: #dfd4be;
 
-  /* Pitch Deck Brand Palette */
-  --color-deck-forest: #162E25;
-  --color-deck-forest-hover: #1D3B30;
-  --color-deck-mint: #BCE3C8;
-  --color-deck-sand: #DDD7C0;
+  --color-bone: #efe6d2;
+  --color-bone-hover: #c8baa4;
+  --color-bone-active: #dfd4be;
+  --color-bone-light: #efe6d273;
+  --color-bone-subtle: #efe6d214;
+  --color-bone-foreground: #0d0f12;
+  --color-bone-subtext: #453f35;
+
+  /* ========================================================
+     2. SIGNATURE ORANGE SYSTEM (#FB6320 SCALE)
+     ======================================================== */
+  --color-orange: #fb6320;
+  --color-orange-hover: #e05215;
+  --color-orange-active: #c9440d;
+
+  /* ========================================================
+     3. SAGE & NATURE PALETTE (Accents & Dark Surfaces)
+     ======================================================== */
+  --color-sage: #a2b79e;
+  --color-sage-hover: #b8ceb4;
+  --color-sage-active: #8ca188;
+  --color-sage-light: #a2b79e73;
+  --color-sage-subtle: #a2b79e14;
+  --color-sage-foreground: #0d0f12;
+  --color-sage-subtext: #223321;
+  --color-sage-bright: #c4d8c0;
+  --color-sage-bright-hover: #dcebd8;
+  --color-sage-bright-subtle: #c4d8c01f;
+  --color-sage-link: var(--color-sage-bright);
+  --color-sage-link-hover: var(--color-sage-bright-hover);
+  --color-link: var(--color-sage-bright);
+  --color-link-hover: var(--color-sage-bright-hover);
+  --color-hint: var(--color-sage-bright);
+  --color-hint-subtle: var(--color-sage-bright-subtle);
+
+  --color-surface-sage-dark: #20362c;
+  --color-surface-sage-darker: #14241d;
+  --color-surface-sage-dark-border: #a2b79e2e;
+
+  /* Pitch Deck Brand Palette Aliases */
+  --color-deck-forest: var(--color-surface-sage-dark);
+  --color-deck-forest-hover: #2b473a;
+  --color-deck-mint: var(--color-sage-bright);
+  --color-deck-sand: var(--color-bone);
+
+  /* Secondary & Active State Tokens */
+  --color-secondary: var(--color-bone);
+  --color-secondary-hover: var(--color-bone-hover);
+  --color-secondary-active: var(--color-bone-active);
+  --color-secondary-light: var(--color-bone-light);
+  --color-secondary-subtle: var(--color-bone-subtle);
+  --color-secondary-foreground: var(--color-bone);
+  --color-secondary-subtext: var(--color-bone-subtext);
+  --color-state-active: var(--color-sage);
+  --color-state-active-hover: var(--color-sage-hover);
+  --color-state-active-pressed: var(--color-sage-active);
+  --color-state-active-subtle: var(--color-sage-subtle);
+  --color-state-active-light: var(--color-sage-light);
+  --color-state-active-foreground: #0d0f12;
+  --color-state-active-subtext: #223321;
+  --row-active-bg: var(--color-state-active-subtle);
+  --tab-active-border: var(--color-state-active);
+
+  /* Accent Categories */
+  --color-accent-glacier: #a2b79e;
+  --color-accent-emerald: #34d399;
+  --color-accent-emerald-subtle: #34d39914;
+  --color-accent-emerald-light: #34d39959;
+  --color-accent-emerald-text: #6ee7b7;
+  --color-accent-emerald-glow: #34d39940;
+  --color-accent-amber: #f59e0b;
+  --color-accent-amber-subtle: #f59e0b14;
+  --color-accent-amber-light: #f59e0b59;
+  --color-accent-amber-text: #fcd34d;
+  --color-accent-amber-glow: #f59e0b40;
+  --color-accent-violet: #a78bfa;
+  --color-accent-violet-subtle: #a78bfa14;
+  --color-accent-violet-light: #a78bfa59;
+  --color-accent-violet-text: #c4b5fd;
+  --color-accent-violet-glow: #a78bfa40;
+  --color-accent-rose: #fb7185;
+  --color-accent-rose-subtle: #fb718514;
+  --color-accent-rose-light: #fb718559;
+  --color-accent-rose-text: #fda4af;
+  --color-accent-rose-glow: #fb718540;
+  --color-accent-sage: #a2b79e;
+  --color-accent-sage-subtle: #a2b79e14;
+  --color-accent-sage-light: #a2b79e59;
+  --color-accent-sage-text: #d2e3ce;
+  --color-accent-sage-glow: #a2b79e40;
+  --color-accent-indigo: #818cf8;
+  --color-accent-indigo-subtle: #818cf814;
+  --color-accent-indigo-light: #818cf859;
+  --color-accent-indigo-text: #a5b4fc;
+  --color-accent-indigo-glow: #818cf840;
+
+  /* ========================================================
+     4. SURFACES & BACKGROUNDS - AUTHENTIC OBSIDIAN DARK MODE
+     ======================================================== */
+  --color-bg-page: #0d0f12;
+  --color-bg-raised: #0f1117;
+  --color-surface-card: #16181f;
+  --color-surface-hover: #ffffff0d;
+  --color-surface-cream: #1c1f28;
+  --color-surface-peach: #22262f;
+  --color-surface-peach-selected: #2a2f3a;
+  --color-surface-disabled: #1a1d24;
+  --color-peach-pill: #efe6d21a;
+  --color-bg-off-white: #131720;
 
   /* Neutrals & Monochromes */
-  --color-white: #FFFFFF;
+  --color-white: #ffffff;
   --color-dark: #000000;
-  --color-dark-hover: #141716;
-  --color-dark-active: #1D211F;
+  --color-dark-hover: #1c1c1e;
+  --color-dark-active: #2c2c2e;
 
-  /* Text Colors - High Contrast WCAG AAA compliant */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #D4DBD6;
-  --color-text-body: #EDF2EE;
-  --color-text-muted: #9DA8A2;
-  --color-text-tertiary: #78827D;
+  /* ========================================================
+     5. HIGH CONTRAST TYPOGRAPHY (WCAG AAA)
+     ======================================================== */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-body: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-text-tertiary: #8191a6;
+  --color-text-strong: #ffffff;
+  --color-text-placeholder: var(--color-text-muted);
 
-  /* Borders */
-  --color-border: rgba(255, 255, 255, 0.14);
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-line: rgba(255, 255, 255, 0.10);
-  --color-border-hover: rgba(255, 255, 255, 0.28);
+  /* ========================================================
+     6. REFINED DARK BORDERS
+     ======================================================== */
+  --color-border: #ffffff1a;
+  --color-border-subtle: #ffffff0f;
+  --color-border-line: #ffffff14;
+  --color-border-hover: #ffffff26;
+  --color-border-strong: #ffffff33;
+  --color-border-warm: #ffffff1a;
+  --color-border-warm-hover: #ffffff33;
+  --color-border-subtle-warm: #ffffff12;
+  --color-border-subtle-warm-alt: #ffffff12;
+  --color-border-disabled: #ffffff14;
+  --color-neutral-border: #ffffff14;
+
+  /* Functional Status */
+  --color-error: #d92d20;
+  --color-error-hover: #b42318;
+  --color-error-subtle: #d92d201f;
+  --color-error-text: #f97066;
+  --color-error-text-hover: #fda29b;
+  --color-warning: var(--color-orange);
+  --color-warning-subtle: #fb63201f;
+  --color-warning-text: #ff8a57;
+  --color-success: #12b76a;
+  --color-success-text: #32d583;
+
+  /* Alphas & Interactive Overlays */
+  --row-hover-bg: #ffffff0d;
+  --input-bg: #ffffff0f;
+  --input-bg-hover: #ffffff17;
+  --input-bg-focus: #ffffff1f;
+  --text-action-color-hover: var(--color-brand-hover);
+  --text-action-underline-offset: 3px;
+
+  --alpha-black-10: #0000001a;
+  --alpha-black-15: #00000026;
+  --alpha-black-18: #0000002e;
+  --alpha-black-20: #00000033;
+  --alpha-black-25: #00000040;
+  --alpha-black-30: #0000004d;
+  --alpha-black-35: #00000059;
+  --alpha-black-40: #00000066;
+  --alpha-bone-10: #efe6d21a;
+  --alpha-bone-12: #efe6d21f;
+  --alpha-bone-14: #efe6d224;
+  --alpha-bone-16: #efe6d229;
+  --alpha-bone-18: #efe6d22e;
+  --alpha-bone-30: #efe6d24d;
+  --alpha-bone-35: #efe6d259;
+  --alpha-bone-65: #efe6d2a6;
+  --alpha-bone-75: #efe6d2bf;
+  --alpha-bone-80: #efe6d2cc;
+  --alpha-sage-18: #a2b79e2e;
+  --alpha-white-04: #ffffff0a;
+  --alpha-white-06: #ffffff0f;
+  --alpha-white-08: #ffffff14;
+  --alpha-white-12: #ffffff1f;
+  --alpha-white-22: #ffffff38;
+  --alpha-white-35: #ffffff59;
+  --alpha-white-45: #ffffff73;
+  --alpha-white-88: #ffffffe0;
 
   /* Radii - Sharp 0px corners strictly matching Figma */
   --radius-none: 0px;

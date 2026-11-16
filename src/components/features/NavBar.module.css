@@ -1,12 +1,12 @@
 .header {
   width: 100%;
   max-width: 100vw;
-  border-bottom: 1px solid var(--color-border-line, rgba(255, 255, 255, 0.12));
+  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 1000;
   box-sizing: border-box;
-  background-color: transparent;
+  background-color: var(--color-bg-page);
   transition: border-color var(--transition-fast);
 }
 
@@ -14,7 +14,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(12, 14, 13, 0.88);
+  background-color: var(--color-bg-page);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   z-index: -1;
@@ -73,7 +73,7 @@
 .brandDot {
   width: 8px;
   height: 8px;
-  background-color: #FB6320;
+  background-color: var(--color-brand);
   border-radius: var(--radius-full);
   display: inline-block;
 }
@@ -91,10 +91,10 @@
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 20px;
-  color: var(--color-text-secondary, #D4DBD6);
+  color: var(--color-text-secondary);
   cursor: pointer;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-none);
   transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
   display: inline-flex;
   align-items: center;
@@ -106,8 +106,8 @@
 }
 
 .navItem:hover {
-  color: var(--color-text-primary, #FFFFFF);
-  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-hover);
 }
 
 .navItem:active {
@@ -115,9 +115,9 @@
 }
 
 .navItem.active {
-  color: var(--color-brand, #FB6320);
+  color: var(--color-text-primary);
   font-weight: 500;
-  background-color: rgba(251, 99, 32, 0.12);
+  background-color: var(--color-surface-hover);
 }
 
 .dropdownArrow {
@@ -146,15 +146,15 @@
   left: -20px;
   margin-top: 16px;
   width: 780px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-surface-card);
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: 
-    0 0 0 1px rgba(18, 19, 22, 0.08),
-    0 16px 36px -4px rgba(16, 18, 24, 0.12),
-    0 4px 12px rgba(16, 18, 24, 0.04);
+    0 0 0 1px #ffffff0f,
+    0 16px 36px -4px #00000099,
+    0 4px 12px #0000004d;
   display: flex;
   flex-direction: column;
   z-index: 200;
@@ -191,10 +191,10 @@
   font-size: var(--text-xs);
   text-transform: uppercase;
   font-weight: 600;
-  color: #7F776E;
+  color: var(--color-text-muted);
   letter-spacing: 0.05em;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(18, 19, 22, 0.08);
+  border-bottom: 1px solid var(--color-border);
   margin: 0;
 }
 
@@ -227,7 +227,7 @@
 }
 
 .itemIcon {
-  color: #7F776E;
+  color: var(--color-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,31 +238,31 @@
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: #464646;
+  color: var(--color-text-secondary);
   transition: color var(--transition-fast) ease, transform var(--transition-fast) ease;
 }
 
 .megaMenuItem:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: transparent;
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-subtle);
   border-radius: 6px;
 }
 
 .megaMenuItem:hover .itemIcon {
-  color: #54392D;
+  color: var(--color-brand);
 }
 
 .megaMenuItem:hover .itemName {
-  color: #000000;
+  color: var(--color-text-primary);
   transform: translateX(4px);
 }
 
 .megaMenuFooterMinimal {
-  border-top: 1px solid rgba(18, 19, 22, 0.08);
+  border-top: 1px solid var(--color-border);
   padding: 16px 32px;
   display: flex;
   justify-content: flex-end;
-  background: rgba(255, 255, 255, 0.4);
+  background: #ffffff05;
   border-radius: 0 0 12px 12px;
 }
 
@@ -300,8 +300,8 @@
   height: 40px;
   padding: 0 12px;
   border-radius: 0px;
-  border: 1px solid #CDB7AE;
-  color: #7F776E;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   cursor: pointer;
   transition: all var(--transition-fast);
   background: transparent;
@@ -314,12 +314,12 @@
 
 .docBadge:hover,
 .docBadge.active {
-  border-color: #FB6320;
-  color: #FB6320;
-  background: rgba(251, 99, 32, 0.08);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+  background: var(--color-surface-hover);
 }
 
-/* Desktop CTA Button (Figma 744:1025) */
+/* Desktop CTA Button (Figma 744:1025, aligned with https://skillhouse.dev/) */
 .desktopCtaWrapper {
   display: inline-flex;
   align-items: center;
@@ -331,14 +331,14 @@
 .getStartedButton {
   height: 40px;
   padding: 0 20px;
-  background-color: var(--color-white, #FFFFFF);
-  color: var(--color-dark, #000000);
-  border: 1px solid var(--color-white, #FFFFFF);
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
+  border: 1px solid transparent;
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+  font-weight: 500;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -350,8 +350,8 @@
 }
 
 .getStartedButton:hover {
-  background-color: #E5E7EB;
-  border-color: #E5E7EB;
+  background-color: var(--color-brand-hover);
+  color: var(--color-brand-foreground);
 }
 
 .getStartedButton:active {
@@ -389,8 +389,8 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08);
+  border: 1.5px solid var(--color-border-strong);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -404,7 +404,7 @@
 }
 
 .avatarChevron {
-  color: #464646;
+  color: var(--color-text-muted);
   transition: transform var(--transition-fast);
 }
 
@@ -419,12 +419,12 @@
   right: 0;
   margin-top: 8px;
   width: 200px;
-  background-color: var(--color-surface-cream, #FFECD8);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   box-shadow: 
-    0px 4px 6px -2px rgba(0, 0, 0, 0.06), 
-    0px 12px 16px -4px rgba(0, 0, 0, 0.1);
+    0px 4px 6px -2px rgba(0, 0, 0, 0.5), 
+    0px 12px 16px -4px rgba(0, 0, 0, 0.6);
   z-index: 200;
   animation: dropDownEnter var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1) forwards;
   display: flex;
@@ -443,13 +443,13 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary);
 }
 
 .userDropdownEmail {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #7F776E;
+  color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -457,7 +457,7 @@
 
 .userDropdownDivider {
   height: 1px;
-  background-color: rgba(18, 19, 22, 0.08);
+  background-color: var(--color-border);
   margin: 4px 4px;
 }
 
@@ -469,7 +469,7 @@
   border-radius: 8px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
   font-size: 13.5px;
-  color: #121316;
+  color: var(--color-text-strong);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -480,17 +480,17 @@
 }
 
 .userDropdownItem:hover {
-  background-color: var(--color-surface-peach, #FBE1C7);
-  color: #121316;
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
 }
 
 .signOutItem {
-  color: #D32F2F;
+  color: var(--color-error-text);
 }
 
 .signOutItem:hover {
-  background-color: rgba(211, 47, 47, 0.08);
-  color: #D32F2F;
+  background-color: var(--color-error-subtle);
+  color: var(--color-error-text-hover);
 }
 
 /* Mobile Toggle & Drawer */
@@ -502,13 +502,13 @@
   justify-content: center;
   background: transparent;
   border-radius: 0px;
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  border: 1px solid var(--color-border);
   cursor: pointer;
-  color: var(--color-text-primary, #FFFFFF);
+  color: var(--color-text-primary);
 }
 
 .mobileMenuButton:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--color-surface-hover);
 }
 
 .mobileDrawer {
@@ -548,8 +548,8 @@
     flex-direction: column;
     gap: 16px;
     padding: 20px 24px;
-    background-color: var(--color-surface-card, #161918);
-    border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+    background-color: var(--color-bg-page);
+    border-bottom: 1px solid var(--color-border);
     animation: fadeIn var(--transition-fast) ease-out;
   }
   .mobileDrawerLinks {
@@ -563,10 +563,10 @@
     justify-content: space-between;
     padding: 10px 0;
     font-size: 15px;
-    color: var(--color-text-primary, #FFFFFF);
+    color: var(--color-text-primary);
     background: none;
     border: none;
-    border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+    border-bottom: 1px solid var(--color-border-subtle);
     cursor: pointer;
     text-align: left;
     width: 100%;
@@ -582,8 +582,8 @@
     flex-direction: column;
     gap: 12px;
     padding: 12px;
-    background-color: var(--color-bg-secondary, #121514);
-    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+    background-color: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
   }
   .mobileUserRow {
     display: flex;
@@ -593,18 +593,18 @@
   .mobileUserName {
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-text-primary, #FFFFFF);
+    color: var(--color-text-primary);
   }
   .mobileUserEmail {
     font-size: 12px;
-    color: var(--color-text-muted, #9CA6A0);
+    color: var(--color-text-muted);
   }
   .mobileSignOutBtn {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: #D32F2F;
+    color: var(--color-error-text);
     background: none;
     border: none;
     cursor: pointer;
