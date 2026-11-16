@@ -9,7 +9,7 @@ describe("Waitlist API (/api/waitlist)", () => {
     expect(res.status).toBe(200);
     expect(data.status).toBe("active");
     expect(typeof data.total).toBe("number");
-    expect(data.total).toBeGreaterThanOrEqual(1420);
+    expect(data.total).toBeGreaterThanOrEqual(0);
   });
 
   it("POST returns 400 when email is missing", async () => {
@@ -44,7 +44,7 @@ describe("Waitlist API (/api/waitlist)", () => {
     const uniqueEmail = `engineer_${Date.now()}@example.com`;
     const req = new Request("http://localhost:3000/api/waitlist", {
       method: "POST",
-      body: JSON.stringify({ email: uniqueEmail, agent: "Cursor" }),
+      body: JSON.stringify({ email: uniqueEmail }),
     });
 
     const res = await POST(req);
@@ -53,7 +53,7 @@ describe("Waitlist API (/api/waitlist)", () => {
     expect(res.status).toBe(201);
     expect(data.success).toBe(true);
     expect(data.alreadyJoined).toBe(false);
-    expect(data.position).toBeGreaterThanOrEqual(1421);
+    expect(data.position).toBeGreaterThanOrEqual(1);
     expect(data.email).toBe(uniqueEmail.toLowerCase());
 
     // Second registration of same email returns 200 with alreadyJoined: true
@@ -61,6 +61,7 @@ describe("Waitlist API (/api/waitlist)", () => {
       method: "POST",
       body: JSON.stringify({ email: uniqueEmail }),
     });
+
     const repeatRes = await POST(repeatReq);
     const repeatData = await repeatRes.json();
 

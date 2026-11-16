@@ -22,70 +22,107 @@ describe("ProductPage (/product)", () => {
     localStorage.clear();
   });
 
-  it("renders product hero heading, waitlist input, and agent ribbons", () => {
+  it("renders product hero heading, subtitle from pitch deck, and three foundational ideas", () => {
     render(<ProductPage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Skillhouse" })).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: /the app store & runtime for ai agent skills/i })
+      screen.getByText(/turn everyday tasks into simple, repeatable workflows with skills built for your agent/i)
     ).toBeInTheDocument();
 
-    const waitlistInputs = screen.getAllByPlaceholderText(/enter your work email/i);
+    // Three ideas from Slide 2
+    expect(screen.getByText("An AI agent")).toBeInTheDocument();
+    expect(screen.getByText("A skill")).toBeInTheDocument();
+    expect(screen.getAllByText("Skillhouse").length).toBeGreaterThanOrEqual(1);
+
+    // Clean waitlist input (no made-up numbers or agent pills)
+    const waitlistInputs = screen.getAllByPlaceholderText(/enter your email address/i);
     expect(waitlistInputs.length).toBeGreaterThanOrEqual(1);
-
-    expect(screen.getAllByText(/Claude Code/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/Cursor/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/Antigravity/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryByText(/1,420\+ engineers/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Primary Agent:/i)).not.toBeInTheDocument();
   });
 
-  it("renders all four core product pillars and comparison section", () => {
+  it("renders 'What changed' section with Anthropic standard and compatible tools", () => {
     render(<ProductPage />);
     expect(
-      screen.getByRole("heading", { name: /why raw prompts fail in production/i })
+      screen.getByRole("heading", { name: /one skill now works in many ai tools/i })
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: /one-command fleet synchronization/i })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /the gauntlet gate/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /universal mcp bridge/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: /creator royalties & payouts/i })
-    ).toBeInTheDocument();
+    expect(screen.getByText("client-update")).toBeInTheDocument();
+    expect(screen.getByText("Claude")).toBeInTheDocument();
+    expect(screen.getByText("Cursor")).toBeInTheDocument();
+    expect(screen.getByText("GitHub Copilot")).toBeInTheDocument();
+    expect(screen.getByText("Codex")).toBeInTheDocument();
+    expect(screen.getByText("Gemini")).toBeInTheDocument();
   });
 
-  it("toggles FAQ accordion questions and reveals/collapses answers", async () => {
+  it("renders 'The problem' section with three core questions", () => {
     render(<ProductPage />);
-    // By default first question is open
-    expect(screen.getByText(/what exactly is skillhouse\?/i)).toBeInTheDocument();
-
-    const firstQuestionBtn = screen.getByRole("button", {
-      name: /what exactly is skillhouse\?/i,
-    });
-    // Click to collapse
-    fireEvent.click(firstQuestionBtn);
-
-    // Open second question
-    const secondQuestionBtn = screen.getByRole("button", {
-      name: /how does 'npx skillhouse sync' work\?/i,
-    });
-    fireEvent.click(secondQuestionBtn);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(/our lightweight cli reads your local project setup/i)
-      ).toBeInTheDocument();
-    });
+    expect(
+      screen.getByRole("heading", { name: /anyone can write a skill\. nobody can tell which to trust\./i })
+    ).toBeInTheDocument();
+    expect(screen.getByText(/does it work\?/i)).toBeInTheDocument();
+    expect(screen.getByText(/is it safe\?/i)).toBeInTheDocument();
+    expect(screen.getByText(/who made it\?/i)).toBeInTheDocument();
   });
 
-  it("copies CLI command from terminal simulation block", async () => {
-    const mockClipboard = {
-      writeText: vi.fn().mockResolvedValue(undefined),
-    };
-    Object.assign(navigator, { clipboard: mockClipboard });
-
+  it("renders 'What we offer' section with Find, Install, and Ask", () => {
     render(<ProductPage />);
-    const copyCliBtn = screen.getByRole("button", { name: /copy cli command/i });
-    fireEvent.click(copyCliBtn);
+    expect(
+      screen.getByRole("heading", { name: /a trusted place to find, install and ask for skills/i })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Find" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Install" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Ask" })).toBeInTheDocument();
+  });
 
-    expect(mockClipboard.writeText).toHaveBeenCalledWith("npx skillhouse sync");
+  it("renders verified African developer ecosystem stats from BCG, OpenUK, and venture reports", () => {
+    render(<ProductPage />);
+    expect(
+      screen.getByRole("heading", { name: /africa's developer community is growing faster than any other continent/i })
+    ).toBeInTheDocument();
+    expect(screen.getByText("4.7M")).toBeInTheDocument();
+    expect(screen.getByText("21%")).toBeInTheDocument();
+    expect(screen.getByText("9.3M")).toBeInTheDocument();
+    expect(screen.getByText("$4.1bn")).toBeInTheDocument();
+    expect(screen.getByText("$1.64bn")).toBeInTheDocument();
+    expect(screen.getByText("$3.5bn")).toBeInTheDocument();
+  });
+
+  it("renders 'Why we win' trust flywheel and honest pricing cards from pitch deck", () => {
+    render(<ProductPage />);
+    expect(
+      screen.getByRole("heading", { name: /skillhouse gets better the more it is used/i })
+    ).toBeInTheDocument();
+    expect(screen.getByText(/a copycat can copy a skill/i)).toBeInTheDocument();
+
+    // Flywheel
+    expect(screen.getByRole("heading", { name: "Use" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Improve" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Earn trust" })).toBeInTheDocument();
+
+    // Pricing (Slide 9)
+    expect(
+      screen.getByRole("heading", { name: /free to start\. one plan for everything\./i })
+    ).toBeInTheDocument();
+    expect(screen.getByText("$0")).toBeInTheDocument();
+    expect(screen.getByText("$5.99")).toBeInTheDocument();
+    expect(screen.getAllByText("Makers").length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("renders 'Where we are' roadmap and 'The ask' with founder contacts", () => {
+    render(<ProductPage />);
+    expect(
+      screen.getByRole("heading", { name: /the product works\. the first season is next\./i })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Today")).toBeInTheDocument();
+    expect(screen.getByText("Next")).toBeInTheDocument();
+    expect(screen.getByText("First season")).toBeInTheDocument();
+
+    // The Ask & Founders
+    expect(
+      screen.getByRole("heading", { name: /help us build the first season of the house\./i })
+    ).toBeInTheDocument();
+    expect(screen.getByText(/khalid@skillhouse\.dev/i)).toBeInTheDocument();
+    expect(screen.getByText(/nsikan@skillhouse\.dev/i)).toBeInTheDocument();
   });
 
   it("handles navbar view changes for all routes and footer navigation links", () => {
@@ -115,7 +152,6 @@ describe("ProductPage (/product)", () => {
     const { unmount } = render(<ProductPage />);
     unmount();
 
-    // Verify all branches by calling directly with onViewChange simulation
     const pushMock = vi.fn();
     vi.mocked(mockPush).mockImplementation(pushMock);
 
@@ -160,6 +196,20 @@ describe("ProductPage (/product)", () => {
     const closeBtn = screen.getByRole("button", { name: /close dialog/i });
     fireEvent.click(closeBtn);
 
+    // Open avatar menu again, click Settings, then close
+    fireEvent.click(avatarBtn);
+    const settingsItem = screen.getByTestId("user-menu-item-settings");
+    fireEvent.click(settingsItem);
+    const closeSettingsBtn = screen.getByRole("button", { name: /close dialog/i });
+    fireEvent.click(closeSettingsBtn);
+
+    // Open avatar menu again, click Help Center, then close
+    fireEvent.click(avatarBtn);
+    const helpItem = screen.getByTestId("user-menu-item-help");
+    fireEvent.click(helpItem);
+    const closeHelpBtn = screen.getByRole("button", { name: /close dialog/i });
+    fireEvent.click(closeHelpBtn);
+
     // Open avatar menu again and click Logout
     fireEvent.click(avatarBtn);
     const logoutBtn = screen.getByTestId("user-menu-item-logout");
@@ -193,11 +243,25 @@ describe("ProductPage (/product)", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
-  it("renders the VIP early access CTA banner at the bottom", () => {
+  it("loads stored user profile from localStorage if present", () => {
+    localStorage.setItem(
+      "skillhouse_user",
+      JSON.stringify({
+        name: "Stored Maker",
+        email: "stored@skillhouse.dev",
+        avatarUrl: "/figma/header_avatar_figma.png",
+      })
+    );
+
+    render(<ProductPage />);
+    expect(screen.getByTestId("header-avatar-button")).toBeInTheDocument();
+  });
+
+  it("renders the early access CTA banner at the bottom", () => {
     render(<ProductPage />);
     expect(
       screen.getByRole("heading", {
-        name: /ready to unlock deterministic ai agent workflows\?/i,
+        name: /ready to teach your ai agent new skills\?/i,
       })
     ).toBeInTheDocument();
   });

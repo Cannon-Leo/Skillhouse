@@ -1,676 +1,819 @@
-/* Product Page Layout & Styling (Skillhouse Design System) */
-
 .pageWrapper {
   min-height: 100vh;
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-page, #FFEEDD);
-  color: var(--color-text-body, #242426);
-  position: relative;
+  background-color: var(--color-bg-page, #0C0E0D);
+  color: var(--color-text-body, #EDF2EE);
+  width: 100%;
   overflow-x: clip;
 }
 
 .main {
   flex: 1;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 40px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4xl, 48px);
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
   box-sizing: border-box;
 }
 
 /* ========================================================
-   1. HERO SECTION & WAITLIST
+   Common Section Headers
    ======================================================== */
-.heroSection {
-  padding: 64px 0 40px;
+.sectionHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-2xl, 32px);
+  margin-bottom: 48px;
+  gap: 12px;
+}
+
+.sectionTag {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--color-deck-mint, #BCE3C8);
+  background-color: var(--color-deck-forest, #162E25);
+  border: 1px solid rgba(188, 227, 200, 0.25);
+  padding: 4px 12px;
+  border-radius: 0px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.sectionTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(28px, 3.2vw, 42px);
+  color: var(--color-text-primary, #FFFFFF);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 820px;
+}
+
+.sectionDescription {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: var(--color-text-secondary, #D4DBD6);
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+/* ========================================================
+   1. Hero Section (Pitch Deck Slide 1 & 2)
+   ======================================================== */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 0 64px;
+  gap: 24px;
   position: relative;
-  border-bottom: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
 }
 
 .eyebrowBadge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--color-surface-peach, #FBE1C7);
-  border: 1px solid rgba(166, 166, 166, 0.4);
   padding: 6px 14px;
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
   font-family: var(--font-mono, monospace);
   font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--color-brand, #FB6320);
   font-weight: 600;
-  text-transform: uppercase;
+  color: var(--color-deck-mint, #BCE3C8);
+  letter-spacing: 0.06em;
 }
 
 .eyebrowDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 6px;
+  height: 6px;
   background-color: var(--color-brand, #FB6320);
-  animation: pulseDot 2s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+  border-radius: 50%;
 }
 
 .heroHeading {
   font-family: var(--font-pixel, monospace);
-  font-size: clamp(32px, 4.5vw, 56px);
-  line-height: 1.1;
-  color: var(--color-dark, #000000);
-  max-width: 960px;
-  margin: 0 auto;
+  font-size: clamp(38px, 5.5vw, 64px);
+  line-height: 1.05;
   letter-spacing: -0.02em;
-}
-
-.highlightText {
-  color: var(--color-brand, #FB6320);
-  display: inline;
+  color: var(--color-text-primary, #FFFFFF);
+  max-width: 960px;
+  margin: 0;
 }
 
 .heroSubtitle {
   font-family: var(--font-sans);
-  font-size: clamp(16px, 1.8vw, 19px);
+  font-size: clamp(16px, 1.8vw, 20px);
   line-height: 1.5;
-  color: var(--color-text-secondary, #464646);
+  color: var(--color-text-secondary, #D4DBD6);
   max-width: 720px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .waitlistHeroContainer {
   width: 100%;
+  max-width: 580px;
+  margin-top: 8px;
   display: flex;
   justify-content: center;
-  margin-top: 8px;
 }
 
-/* Works With Agent Logos Ribbon */
-.agentsRibbon {
+/* Three Foundational Ideas Grid (Slide 2) */
+.ideasGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.ideaCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding-top: 16px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 28px;
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  border-radius: 0px;
+  gap: 12px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.ribbonLabel {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted, #625E59);
+.ideaCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand, #FB6320);
 }
 
-.agentsPillsRow {
+.ideaCardHighlight {
+  background-color: var(--color-deck-forest, #162E25);
+  border-color: rgba(188, 227, 200, 0.3);
+}
+
+.ideaHeader {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
 }
 
-.agentPillItem {
+.triangleBadge {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid var(--color-deck-mint, #BCE3C8);
+  flex-shrink: 0;
+}
+
+.ideaTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 20px;
+  color: var(--color-text-primary, #FFFFFF);
+  margin: 0;
+}
+
+.ideaBody {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+  margin: 0;
+}
+
+/* ========================================================
+   2. What Changed Section (Slide 3)
+   ======================================================== */
+.standardSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.standardCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.standardDescription {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+  max-width: 860px;
+}
+
+.architectureFlow {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding: 24px;
+  background-color: var(--color-bg-page, #0C0E0D);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.oneSkillBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 24px;
+  background-color: var(--color-surface-hover, #1F2422);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.2));
+  min-width: 180px;
+}
+
+.skillLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: var(--color-deck-mint, #BCE3C8);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skillName {
+  font-family: var(--font-pixel, monospace);
+  font-size: 20px;
+  color: var(--color-text-primary, #FFFFFF);
+}
+
+.arrowRightIcon {
+  color: var(--color-deck-mint, #BCE3C8);
+  flex-shrink: 0;
+}
+
+.toolsMatrix {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.toolPill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  background-color: var(--color-white, #FFFFFF);
-  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
+  padding: 10px 18px;
+  background-color: var(--color-deck-forest, #162E25);
+  border: 1px solid rgba(188, 227, 200, 0.25);
+  color: var(--color-text-primary, #FFFFFF);
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--color-dark, #000000);
+  font-size: 14px;
   font-weight: 500;
+  border-radius: 0px;
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.agentPillItem:hover {
+.toolPill:hover {
   transform: translateY(-2px);
-  border-color: var(--color-brand, #FB6320);
-}
-
-.agentIconSmall {
-  border-radius: 50%;
-  object-fit: contain;
+  border-color: var(--color-deck-mint, #BCE3C8);
 }
 
 /* ========================================================
-   2. PROBLEM VS SOLUTION COMPARISON (MODULIFY PATTERN)
+   3. The Problem Section (Slide 4)
    ======================================================== */
-.comparisonSection {
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xl, 32px);
+.problemSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
 }
 
-.sectionHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.sectionTag {
-  font-family: var(--font-mono, monospace);
-  font-size: 12px;
-  color: var(--color-brand, #FB6320);
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.sectionTitle {
-  font-family: var(--font-pixel, monospace);
-  font-size: clamp(24px, 3vw, 36px);
-  color: var(--color-dark, #000000);
-  line-height: 1.2;
-}
-
-.sectionDescription {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  color: var(--color-text-secondary, #464646);
-  max-width: 680px;
-}
-
-.comparisonGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.comparisonCardBad {
-  background-color: #FFF7F5;
-  border: 1px solid #FFCDD2;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.comparisonCardGood {
-  background-color: var(--color-white, #FFFFFF);
-  border: 2px solid var(--color-brand, #FB6320);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-  box-shadow: var(--shadow-brand);
-}
-
-.cardHeaderBad, .cardHeaderGood {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.cardTagBad {
-  font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  color: #D32F2F;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.cardTagGood {
-  font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  color: var(--color-brand, #FB6320);
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.cardTitleBad, .cardTitleGood {
-  font-family: var(--font-pixel, monospace);
-  font-size: 22px;
-  color: var(--color-dark, #000000);
-}
-
-.comparisonList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.comparisonItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--color-text-body, #242426);
-}
-
-.iconBad {
-  color: #D32F2F;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.iconGood {
-  color: var(--color-brand, #FB6320);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ========================================================
-   3. BENTO GRID - 4 PRODUCT PILLARS
-   ======================================================== */
-.pillarsSection {
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xl, 32px);
-}
-
-.bentoGrid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
-}
-
-.bentoCard {
-  background-color: var(--color-white, #FFFFFF);
-  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  position: relative;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.bentoCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-brand, #FB6320);
-}
-
-.bentoCol8 {
-  grid-column: span 8;
-}
-
-.bentoCol4 {
-  grid-column: span 4;
-}
-
-.bentoCol6 {
-  grid-column: span 6;
-}
-
-.bentoIconBox {
-  width: 44px;
-  height: 44px;
-  background-color: var(--color-surface-peach, #FBE1C7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-brand, #FB6320);
-  border: 1px solid rgba(166, 166, 166, 0.3);
-}
-
-.bentoTitle {
-  font-family: var(--font-pixel, monospace);
-  font-size: 20px;
-  color: var(--color-dark, #000000);
-}
-
-.bentoText {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--color-text-secondary, #464646);
-}
-
-/* Terminal Snippet inside Bento */
-.terminalBox {
-  background-color: #0E0E10;
-  color: #ECECED;
-  border: 1px solid #2B2C30;
-  padding: 16px;
-  font-family: var(--font-mono, monospace);
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: auto;
-}
-
-.terminalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #242528;
-  padding-bottom: 8px;
-  color: #8E8F95;
-  font-size: 11px;
-}
-
-.terminalDots {
-  display: flex;
-  gap: 6px;
-}
-
-.dotRed { width: 8px; height: 8px; border-radius: 50%; background-color: #FF5F56; }
-.dotYellow { width: 8px; height: 8px; border-radius: 50%; background-color: #FFBD2E; }
-.dotGreen { width: 8px; height: 8px; border-radius: 50%; background-color: #27C93F; }
-
-.terminalCode {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #34D399;
-}
-
-.terminalOutput {
-  color: #9CA3AF;
-  font-size: 12px;
-}
-
-/* Metrics Chip */
-.metricsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: auto;
-}
-
-.metricTile {
-  background-color: var(--color-surface-card, #FFECD8);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border: 1px solid rgba(166, 166, 166, 0.3);
-}
-
-.metricVal {
-  font-family: var(--font-pixel, monospace);
-  font-size: 22px;
-  color: var(--color-brand, #FB6320);
-}
-
-.metricSub {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--color-text-muted, #625E59);
-}
-
-/* ========================================================
-   4. HOW IT WORKS (3-STEP WORKFLOW)
-   ======================================================== */
-.workflowSection {
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xl, 32px);
-}
-
-.stepsGrid {
+.problemGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  width: 100%;
 }
 
-.stepCard {
-  background-color: var(--color-white, #FFFFFF);
-  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
-  padding: 28px;
+.problemCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative;
+  text-align: left;
 }
 
-.stepNumber {
+.problemQuestion {
   font-family: var(--font-pixel, monospace);
-  font-size: 28px;
-  color: var(--color-brand, #FB6320);
+  font-size: 22px;
+  color: var(--color-text-primary, #FFFFFF);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.problemTriangle {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid #EF4444;
+  flex-shrink: 0;
+}
+
+.problemText {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+}
+
+/* ========================================================
+   4. What We Offer Section (Slide 5)
+   ======================================================== */
+.offerSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.offerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.offerCard {
+  background-color: var(--color-deck-forest, #162E25);
+  border: 1px solid rgba(188, 227, 200, 0.25);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.offerCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-deck-mint, #BCE3C8);
+}
+
+.offerHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offerTriangle {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid var(--color-deck-mint, #BCE3C8);
+  flex-shrink: 0;
+}
+
+.offerTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 24px;
+  color: var(--color-deck-mint, #BCE3C8);
+}
+
+.offerBody {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-body, #EDF2EE);
+}
+
+/* ========================================================
+   5. Market Data: Africa's Developer Community (Slides 6 & 7)
+   ======================================================== */
+.marketSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.statValue {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(38px, 4vw, 54px);
+  color: var(--color-deck-mint, #BCE3C8);
   line-height: 1;
 }
 
-.stepTitle {
-  font-family: var(--font-pixel, monospace);
-  font-size: 18px;
-  color: var(--color-dark, #000000);
-}
-
-.stepText {
+.statLabel {
   font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.5;
-  color: var(--color-text-secondary, #464646);
+  color: var(--color-text-secondary, #D4DBD6);
 }
 
-/* ========================================================
-   5. AGENT RUNTIME MATRIX
-   ======================================================== */
-.matrixSection {
-  padding: 40px 0;
+.fundingRow {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl, 32px);
+  gap: 20px;
 }
 
-.matrixGrid {
+.fundingTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 20px;
+  color: var(--color-text-primary, #FFFFFF);
+}
+
+.fundingGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-.matrixCard {
-  background-color: var(--color-white, #FFFFFF);
-  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
-  padding: 20px;
+.fundingItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background-color: var(--color-bg-page, #0C0E0D);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.fundingAmount {
+  font-family: var(--font-pixel, monospace);
+  font-size: 28px;
+  color: var(--color-brand, #FB6320);
+}
+
+.fundingMeta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-text-muted, #9DA8A2);
+}
+
+.citationsRow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-muted, #9DA8A2);
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ========================================================
+   6. Why We Win: Trust Flywheel (Slide 8)
+   ======================================================== */
+.flywheelSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.quoteBanner {
+  background-color: var(--color-deck-forest, #162E25);
+  border: 1px solid rgba(188, 227, 200, 0.25);
+  padding: 32px 40px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.quoteText {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(20px, 2.2vw, 28px);
+  color: var(--color-text-primary, #FFFFFF);
+  margin: 0;
+}
+
+.flywheelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.flywheelCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  text-align: left;
 }
 
-.matrixCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.matrixAgentName {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--color-dark, #000000);
-}
-
-.matrixStatusBadge {
-  margin-left: auto;
+.flywheelStep {
   font-family: var(--font-mono, monospace);
   font-size: 11px;
-  padding: 2px 8px;
-  background-color: var(--color-brand-subtle, #FFF4EE);
   color: var(--color-brand, #FB6320);
-  border: 1px solid var(--color-brand-light, #FFE3D7);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.matrixSpecsList {
-  list-style: none;
+.flywheelTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 22px;
+  color: var(--color-text-primary, #FFFFFF);
+  margin: 0;
+}
+
+.flywheelBody {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+  margin: 0;
+}
+
+/* ========================================================
+   7. Pricing Section (Slide 9)
+   ======================================================== */
+.pricingSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.pricingCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  text-align: left;
+}
+
+.pricingCardHighlight {
+  background-color: var(--color-deck-forest, #162E25);
+  border-color: var(--color-deck-mint, #BCE3C8);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.planTier {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-deck-mint, #BCE3C8);
+  font-weight: 600;
+}
+
+.planPrice {
+  font-family: var(--font-pixel, monospace);
+  font-size: clamp(32px, 3.5vw, 44px);
+  color: var(--color-text-primary, #FFFFFF);
+  line-height: 1.1;
+  margin: 8px 0;
+}
+
+.planDetails {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #D4DBD6);
+}
+
+/* ========================================================
+   8. Roadmap / Where We Are (Slide 10)
+   ======================================================== */
+.roadmapSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.roadmapGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.roadmapCard {
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.roadmapPhase {
+  font-family: var(--font-pixel, monospace);
+  font-size: 24px;
+  color: var(--color-text-primary, #FFFFFF);
+}
+
+.roadmapText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+}
+
+/* ========================================================
+   9. The Ask & Team Section (Slide 11)
+   ======================================================== */
+.teamSection {
+  padding: 80px 0;
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.teamCard {
+  background-color: var(--color-deck-forest, #162E25);
+  border: 1px solid rgba(188, 227, 200, 0.25);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.teamIntro {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-body, #EDF2EE);
+  max-width: 720px;
+}
+
+.askGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.askItem {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-top: 1px solid rgba(166, 166, 166, 0.3);
-  padding-top: 12px;
+  border-top: 1px solid rgba(188, 227, 200, 0.2);
+  padding-top: 16px;
 }
 
-.matrixSpecItem {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--color-text-secondary, #464646);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* ========================================================
-   6. FAQ ACCORDION SECTION
-   ======================================================== */
-.faqSection {
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xl, 32px);
-}
-
-.faqContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-}
-
-.faqItem {
-  background-color: var(--color-white, #FFFFFF);
-  border: 1px solid var(--color-border, rgba(166, 166, 166, 0.5));
-  overflow: hidden;
-  transition: border-color var(--transition-fast);
-}
-
-.faqItem:hover {
-  border-color: var(--color-brand, #FB6320);
-}
-
-.faqTrigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  gap: 16px;
-}
-
-.faqQuestion {
-  font-family: var(--font-sans);
-  font-size: 16px;
+.askNumber {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--color-deck-mint, #BCE3C8);
   font-weight: 600;
-  color: var(--color-dark, #000000);
 }
 
-.faqIcon {
-  color: var(--color-brand, #FB6320);
-  flex-shrink: 0;
-  transition: transform var(--transition-fast);
+.askTitle {
+  font-family: var(--font-pixel, monospace);
+  font-size: 20px;
+  color: var(--color-text-primary, #FFFFFF);
 }
 
-.faqAnswer {
-  padding: 0 24px 20px 24px;
+.askDescription {
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--color-text-secondary, #464646);
-  border-top: 1px solid rgba(166, 166, 166, 0.2);
-  padding-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+}
+
+.contactsRow {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(188, 227, 200, 0.2);
+}
+
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-body, #EDF2EE);
+}
+
+.contactItem a {
+  color: var(--color-deck-mint, #BCE3C8);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.contactItem a:hover {
+  color: var(--color-brand, #FB6320);
 }
 
 /* ========================================================
-   7. VIP BOTTOM CTA BANNER
+   10. Bottom CTA Banner
    ======================================================== */
 .ctaBanner {
-  background-color: var(--color-dark, #000000);
-  color: var(--color-white, #FFFFFF);
-  border: 1px solid #2B2C30;
-  padding: 56px 40px;
+  background-color: var(--color-surface-card, #161918);
+  border: 1px solid var(--color-brand, #FB6320);
+  padding: 64px 40px;
+  margin: 64px 0 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 24px;
-  margin-bottom: 64px;
-  position: relative;
-  box-shadow: var(--shadow-lg);
+  gap: 20px;
 }
 
 .ctaBadge {
   font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 12px;
   color: var(--color-brand, #FB6320);
-  background-color: rgba(251, 99, 32, 0.12);
-  padding: 4px 12px;
-  border: 1px solid rgba(251, 99, 32, 0.3);
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 .ctaTitle {
   font-family: var(--font-pixel, monospace);
-  font-size: clamp(26px, 3.5vw, 42px);
-  color: var(--color-white, #FFFFFF);
-  max-width: 720px;
+  font-size: clamp(28px, 3.4vw, 42px);
+  color: var(--color-text-primary, #FFFFFF);
   line-height: 1.15;
+  max-width: 780px;
+  margin: 0;
 }
 
 .ctaSubtitle {
   font-family: var(--font-sans);
   font-size: 16px;
-  color: #A0A0A5;
-  max-width: 600px;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #D4DBD6);
+  max-width: 640px;
+  margin: 0;
 }
 
 .ctaFormWrapper {
   width: 100%;
-  max-width: 580px;
+  max-width: 540px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 /* ========================================================
-   RESPONSIVE DESIGN BREAKPOINTS
+   Responsive Media Queries
    ======================================================== */
 @media (max-width: 1024px) {
+  .ideasGrid,
+  .problemGrid,
+  .offerGrid,
+  .statsGrid,
+  .flywheelGrid,
+  .pricingGrid,
+  .roadmapGrid,
+  .askGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .fundingGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .main {
     padding: 0 24px;
-    gap: 36px;
-  }
-  .bentoCol8, .bentoCol4, .bentoCol6 {
-    grid-column: span 12;
-  }
-  .comparisonGrid {
-    grid-template-columns: 1fr;
-  }
-  .stepsGrid {
-    grid-template-columns: 1fr;
-  }
-  .matrixGrid {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 640px) {
   .main {
     padding: 0 16px;
-    gap: 28px;
   }
+
   .heroSection {
-    padding: 36px 0 28px;
+    padding: 48px 0;
   }
-  .matrixGrid {
-    grid-template-columns: 1fr;
-  }
+
+  .standardCard,
+  .teamCard,
   .ctaBanner {
-    padding: 36px 20px;
+    padding: 24px 16px;
+  }
+
+  .contactsRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }

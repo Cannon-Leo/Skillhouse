@@ -4,8 +4,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FFEEDD;
-  color: #000000;
+  background-color: var(--color-bg-page, #0C0E0D);
+  color: var(--color-text-body, #EDF2EE);
   width: 100%;
   overflow-x: clip;
 }

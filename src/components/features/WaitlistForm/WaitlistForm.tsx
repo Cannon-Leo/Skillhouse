@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import { CheckCircle2, AlertCircle, ArrowRight, Sparkles, Copy, Check } from "lucide-react";
+import { CheckCircle2, AlertCircle, ArrowRight, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import styles from "./WaitlistForm.module.css";
 
@@ -12,22 +11,12 @@ export interface WaitlistFormProps {
   onSuccessCallback?: (position: number, email: string) => void;
 }
 
-const SUPPORTED_AGENTS = [
-  { id: "all", name: "All Agents" },
-  { id: "claude-code", name: "Claude Code" },
-  { id: "cursor", name: "Cursor" },
-  { id: "codex", name: "Codex" },
-  { id: "antigravity", name: "Antigravity" },
-  { id: "gemini-cli", name: "Gemini CLI" },
-];
-
 export const WaitlistForm: React.FC<WaitlistFormProps> = ({
   variant = "hero",
   className = "",
   onSuccessCallback,
 }) => {
   const [email, setEmail] = useState("");
-  const [selectedAgent, setSelectedAgent] = useState("all");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [successData, setSuccessData] = useState<{
@@ -63,7 +52,6 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: trimmed,
-          agent: selectedAgent,
           source: `product_page_${variant}`,
         }),
       });
@@ -86,7 +74,7 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
     } catch {
       // Offline / fallback simulated submission
       setStatus("success");
-      const fallbackPos = 1421;
+      const fallbackPos = 1;
       setSuccessData({
         position: fallbackPos,
         email: trimmed,
@@ -98,7 +86,7 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
 
   const handleCopyShare = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText("https://skillhouse.ai/product?ref=waitlist");
+      navigator.clipboard.writeText("https://skillhouse.dev/product?ref=waitlist");
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2000);
     }
@@ -139,7 +127,7 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
           <span className={styles.positionLabel}>YOUR WAITLIST NUMBER</span>
           <span className={styles.positionNumber}>#{successData.position.toLocaleString()}</span>
           <span className={styles.positionHint}>
-            Invitations are being released weekly in batches based on selected agent runtime.
+            Invitations are being sent out for the first season early access.
           </span>
         </div>
 
@@ -182,9 +170,9 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
                 setEmail(e.target.value);
                 if (status === "error") setStatus("idle");
               }}
-              placeholder="Enter your work email (e.g. dev@company.com)"
+              placeholder="Enter your email address"
               className={`${styles.emailInput} ${status === "error" ? styles.inputError : ""}`}
-              aria-label="Work email address"
+              aria-label="Email address"
               aria-invalid={status === "error"}
               disabled={status === "loading"}
               required
@@ -204,30 +192,6 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
           </Button>
         </div>
 
-        {/* Agent Selector Pills for Context */}
-        <div className={styles.agentSelectorRow}>
-          <span className={styles.agentSelectorLabel}>
-            <Sparkles size={13} className={styles.sparkleIcon} />
-            Primary Agent:
-          </span>
-          <div className={styles.pillsList}>
-            {SUPPORTED_AGENTS.map((item) => {
-              const isSelected = selectedAgent === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setSelectedAgent(item.id)}
-                  className={`${styles.agentPill} ${isSelected ? styles.agentPillActive : ""}`}
-                  aria-pressed={isSelected}
-                >
-                  {item.name}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Error Alert Box */}
         {status === "error" && errorMessage && (
           <div className={styles.errorAlert} role="alert">
@@ -236,47 +200,6 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
           </div>
         )}
       </form>
-
-      {/* Social Proof Counter */}
-      <div className={styles.proofRow}>
-        <div className={styles.avatarGroup}>
-          <Image
-            src="/figma/agent-claude.png"
-            alt="Claude Code"
-            width={20}
-            height={20}
-            className={styles.proofAvatar}
-            unoptimized
-          />
-          <Image
-            src="/figma/agent-cursor.png"
-            alt="Cursor"
-            width={20}
-            height={20}
-            className={styles.proofAvatar}
-            unoptimized
-          />
-          <Image
-            src="/figma/agent-antigravity.png"
-            alt="Antigravity"
-            width={20}
-            height={20}
-            className={styles.proofAvatar}
-            unoptimized
-          />
-          <Image
-            src="/figma/agent-codex.png"
-            alt="Codex"
-            width={20}
-            height={20}
-            className={styles.proofAvatar}
-            unoptimized
-          />
-        </div>
-        <p className={styles.proofText}>
-          <strong>1,420+ engineers</strong> already waiting for the private beta release.
-        </p>
-      </div>
     </div>
   );
 };

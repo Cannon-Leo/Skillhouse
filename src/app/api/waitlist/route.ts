@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 interface WaitlistEntry {
   email: string;
-  agent?: string;
   source?: string;
   createdAt: string;
   position: number;
@@ -10,12 +9,11 @@ interface WaitlistEntry {
 
 // In-memory store for waitlist entries (persisted in server runtime instance)
 const waitlistSubmissions = new Map<string, WaitlistEntry>();
-const basePositionCounter = 1420;
 
 export async function GET() {
   return NextResponse.json(
     {
-      total: basePositionCounter + waitlistSubmissions.size,
+      total: waitlistSubmissions.size,
       status: "active",
     },
     { status: 200 }
@@ -26,7 +24,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => ({}));
     const rawEmail = typeof body.email === "string" ? body.email.trim() : "";
-    const agent = typeof body.agent === "string" ? body.agent.trim() : "All Agents";
     const source = typeof body.source === "string" ? body.source.trim() : "product_page";
 
     if (!rawEmail) {
@@ -62,30 +59,31 @@ export async function POST(request: Request) {
       );
     }
 
-    // Increment and record entry
-    const newPosition = basePositionCounter + waitlistSubmissions.size + 1;
-    const newEntry: WaitlistEntry = {
+    // Assign dynamic position based on actual queue entries
+    const assignedPosition = waitlistSubmissions.size + 1;
+    const entry: WaitlistEntry = {
       email: normalizedEmail,
-      agent,
       source,
       createdAt: new Date().toISOString(),
-      position: newPosition,
+      position: assignedPosition,
     };
-    waitlistSubmissions.set(normalizedEmail, newEntry);
+
+    waitlistSubmissions.set(normalizedEmail, entry);
 
     return NextResponse.json(
       {
         success: true,
         alreadyJoined: false,
-        message: "You're officially on the waitlist! Early access invites will be sent in cohorts.",
-        position: newPosition,
+        message: "Successfully joined the early access waitlist!",
+        position: assignedPosition,
         email: normalizedEmail,
       },
       { status: 201 }
     );
-  } catch {
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Internal server error";
     return NextResponse.json(
-      { success: false, error: "Internal server error processing waitlist request." },
+      { success: false, error: message },
       { status: 500 }
     );
   }

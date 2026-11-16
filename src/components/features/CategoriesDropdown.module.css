@@ -1,8 +1,7 @@
 /* CategoriesDropdown Component Styles
  * Exact Figma Node 751:7385 specs (Component 218 / 751:7883: "Property 1=use case")
- * Surface: #FFECD8 (Skillhouse Surface Cream)
- * Border: 1px solid #CDB7AE, Radius: 0 0 4px 4px
- * Shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08)
+ * Dark Mode Surface: var(--color-surface-card, #161918)
+ * Border: 1px solid var(--color-border), Radius: 0 0 4px 4px
  */
 
 .dropdownContainer {
@@ -11,16 +10,14 @@
   align-items: stretch;
   width: 630px;
   max-width: 95vw;
-  background-color: rgba(255, 236, 216, 0.88);
+  background-color: rgba(22, 25, 24, 0.96);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid #CDB7AE;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.16));
   border-radius: 0 0 6px 6px;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0px 0px 0px 1px rgba(16, 25, 40, 0.05),
-    0px 0px 3px -1px rgba(16, 25, 40, 0.04),
-    0px 20px 32px -6px rgba(16, 25, 40, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0px 20px 32px -6px rgba(0, 0, 0, 0.7);
   max-height: calc(100vh - 84px);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -49,7 +46,7 @@
   align-items: stretch;
   padding: 24px 24px 20px;
   gap: 24px;
-  border-bottom: 1px solid #CDB7AE;
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
 }
 
 /* Left Sidebar Tabs (Fixed 150px — Figma Node I751:7385;751:7894) */
@@ -60,7 +57,7 @@
   flex-shrink: 0;
   gap: 8px;
   padding-right: 24px;
-  border-right: 1px solid rgba(166, 166, 166, 0.5);
+  border-right: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
 }
 
 .tabButton {
@@ -81,7 +78,7 @@
 }
 
 .tabButton:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(255, 255, 255, 0.06);
   opacity: 1;
 }
 
@@ -96,7 +93,7 @@
 }
 
 .tabLabel {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   line-height: 20px;
   white-space: nowrap;
@@ -108,20 +105,20 @@
 
 .activeTab .tabLabel {
   font-weight: 500;
-  color: #000000;
+  color: var(--color-text-primary, #FFFFFF);
 }
 
 .inactiveTab {
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .inactiveTab:hover {
-  opacity: 0.8;
+  opacity: 0.95;
 }
 
 .inactiveTab .tabLabel {
   font-weight: 400;
-  color: #7F776E;
+  color: var(--color-text-muted, #9CA6A0);
 }
 
 .tabArrowWrapper {
@@ -133,13 +130,13 @@
 }
 
 .tabArrow {
-  color: #7F776E;
-  opacity: 0.5;
+  color: var(--color-text-muted, #9CA6A0);
+  opacity: 0.6;
   transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .activeArrow {
-  color: #000000;
+  color: var(--color-text-primary, #FFFFFF);
   opacity: 1;
   transform: translateX(1px);
 }
@@ -186,12 +183,12 @@
 .itemRow:hover,
 .itemRow:focus-visible,
 .itemRow:focus {
-  background-color: rgba(0, 0, 0, 0.04);
-  color: #000000;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary, #FFFFFF);
 }
 
 .itemRow:focus-visible {
-  outline: 2px solid #54392D;
+  outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 1px;
 }
 
@@ -199,20 +196,21 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  color: #000000;
+  color: var(--color-text-secondary, #D4DBD6);
   transition: transform 0.15s ease;
 }
 
 .itemRow:hover .itemIcon {
   transform: translateY(1px);
+  color: var(--color-brand, #FB6320);
 }
 
 .itemText {
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.4em;
   font-weight: 400;
-  color: #000000;
+  color: var(--color-text-body, #EDF2EE);
   white-space: nowrap;
 }
 
@@ -233,21 +231,21 @@
   height: 40px;
   padding: 0 24px;
   background: transparent;
-  border: 1px solid #FB6320;
+  border: 1px solid var(--color-brand, #FB6320);
   border-radius: 4px;
-  color: #FB6320;
-  font-family: var(--font-geist-sans), "Geist", -apple-system, sans-serif;
+  color: var(--color-brand, #FB6320);
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  box-shadow: var(--shadow-xs);
 }
 
 .seeAllButton:hover {
-  background-color: #FB6320;
+  background-color: var(--color-brand, #FB6320);
   color: #FFFFFF;
 }
 
@@ -256,7 +254,7 @@
 }
 
 .seeAllButton:focus-visible {
-  outline: 2px solid #FB6320;
+  outline: 2px solid var(--color-brand, #FB6320);
   outline-offset: 2px;
 }
 
@@ -276,7 +274,7 @@
     width: 100%;
     flex-direction: row;
     border-right: none;
-    border-bottom: 1px solid #CDB7AE;
+    border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
     padding-right: 0;
     padding-bottom: 12px;
     overflow-x: auto;

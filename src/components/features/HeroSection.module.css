@@ -2,7 +2,7 @@
 
 .heroSection {
   width: 100%;
-  background-color: #FFEEDD;
+  background-color: var(--color-bg-page, #0C0E0D);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +40,7 @@
   font-size: clamp(32px, 5.5vw, 64px);
   line-height: 1.12;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: var(--color-text-primary, #FFFFFF);
   margin: 0;
   text-align: center;
   text-wrap: balance;
@@ -57,7 +57,7 @@
   font-weight: 400;
   font-size: clamp(15px, 1.8vw, 18px);
   line-height: 1.5;
-  color: #464646;
+  color: var(--color-text-secondary, #D4DBD6);
   max-width: 480px;
   margin: 0;
   text-align: center;
@@ -75,9 +75,9 @@
   flex-wrap: wrap;
 }
 
-/* Primary Button: Solid Brand Orange #FB6320, white text, 48px height, 8px radius */
+/* Primary Button: Solid Brand Orange #FB6320, white text, 48px height, 0px radius */
 .primaryCta {
-  background-color: #FB6320;
+  background-color: var(--color-brand, #FB6320);
   color: #FFFFFF;
   border: 1.5px solid transparent;
   border-radius: 0px;
@@ -99,21 +99,21 @@
 }
 
 .primaryCta:hover {
-  background-color: #E04E0F;
-  box-shadow: 0 4px 12px rgba(251, 99, 32, 0.25);
+  background-color: var(--color-brand-hover, #E04E0F);
+  box-shadow: 0 4px 12px rgba(251, 99, 32, 0.35);
   transform: translateY(-1px);
 }
 
 .primaryCta:active {
   transform: scale(0.96);
-  background-color: #C8430B;
+  background-color: var(--color-brand-active, #C8430B);
 }
 
-/* Secondary Button: Transparent with #000000 1.5px border, 48px height, 8px radius */
+/* Secondary Button: Transparent with light border, 48px height, 0px radius */
 .secondaryCta {
   background-color: transparent;
-  color: #000000;
-  border: 1.5px solid #000000;
+  color: var(--color-text-primary, #FFFFFF);
+  border: 1.5px solid var(--color-border, rgba(255, 255, 255, 0.25));
   border-radius: 0px;
   padding: 12px 24px;
   font-family: var(--font-sans, sans-serif);
@@ -124,7 +124,7 @@
   transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.2s ease,
               border-color 0.2s ease;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: var(--shadow-xs);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -133,13 +133,14 @@
 }
 
 .secondaryCta:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-text-primary, #FFFFFF);
   transform: translateY(-1px);
 }
 
 .secondaryCta:active {
   transform: scale(0.96);
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Discovery Grid Container */
@@ -164,7 +165,7 @@
   max-width: 220px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
   transition: transform 0.2s ease;
 }
 

@@ -155,7 +155,7 @@ export const NavBar: React.FC<NavBarProps> = ({
         >
           <div className={styles.brandBadge}>
             <Image
-              src="/figma/Logo black.svg"
+              src="/figma/Logo white.svg"
               alt="Skillhouse Logo"
               width={38}
               height={40}

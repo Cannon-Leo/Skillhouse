@@ -66,7 +66,7 @@ function SkillsPageContent() {
 
 export default function SkillsPage() {
   return (
-    <Suspense fallback={<div style={{ minHeight: "100vh", backgroundColor: "#FFEEDD" }} />}>
+    <Suspense fallback={<div style={{ minHeight: "100vh", backgroundColor: "var(--color-bg-page, #0C0E0D)" }} />}>
       <SkillsPageContent />
     </Suspense>
   );
