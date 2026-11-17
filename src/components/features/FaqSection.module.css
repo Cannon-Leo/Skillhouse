@@ -36,7 +36,7 @@
   font-weight: 400;
   font-size: 48px;
   line-height: 1.15;
-  color: #171815;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
   letter-spacing: -0.02em;
 }
@@ -46,7 +46,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.4;
-  color: #7F776E;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0;
   max-width: 600px;
 }
@@ -62,7 +62,7 @@
 /* Individual FAQ item */
 .faqItem {
   width: 100%;
-  border-top: 1px solid #F2F0E9;
+  border-top: 1px solid var(--color-border, #ffffff1a);
   padding-top: 24px;
   display: flex;
   flex-direction: column;
@@ -71,7 +71,7 @@
 }
 
 .faqItem:first-child {
-  border-top: 1px solid #F2F0E9;
+  border-top: 1px solid var(--color-border, #ffffff1a);
 }
 
 .questionButton {
@@ -100,7 +100,7 @@
   font-weight: 400;
   font-size: 24px;
   line-height: 1.45;
-  color: #222222;
+  color: var(--color-text-primary, #f8fafc);
   flex: 1;
   transition: color 150ms ease;
 }
@@ -117,7 +117,7 @@
   height: 24px;
   padding-top: 2px;
   flex-shrink: 0;
-  color: #222222;
+  color: var(--color-text-primary, #f8fafc);
   transition: transform 180ms ease, color 150ms ease;
 }
 
@@ -138,7 +138,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.4;
-  color: #7F776E;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0;
 }
 

@@ -1,13 +1,13 @@
-/* Help Center & FAQ Modal */
+/* Help Center & FAQ Modal (Dark Slate/Obsidian Theme matching skillhouse.dev) */
 
 .modal {
   width: 100%;
   max-width: 680px;
   max-height: 90vh;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4), 0px 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -39,7 +39,7 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   cursor: pointer;
   transition: all var(--transition-fast);
   z-index: 10;
@@ -47,9 +47,9 @@
 }
 
 .closeButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #000000;
-  border-color: #CDB7AE;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary, #f8fafc);
+  border-color: var(--color-border, #ffffff1a);
 }
 
 .closeButton:active {
@@ -58,22 +58,22 @@
 
 .header {
   padding: 24px 28px 16px;
-  border-bottom: 1px solid #CDB7AE;
-  background-color: #FFEEDD;
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-surface-card, #16181f);
 }
 
 .title {
   font-family: var(--font-sans);
   font-size: 20px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0 0 6px 0;
 }
 
 .subtitle {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: #7F776E;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0;
 }
 
@@ -94,8 +94,8 @@
 }
 
 .guideCard {
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   padding: 16px;
   display: flex;
@@ -107,8 +107,8 @@
 }
 
 .guideCard:hover {
-  background-color: #FFE5CC;
-  border-color: #FB6320;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-orange, #fb6320);
   transform: translateY(-1px);
 }
 
@@ -117,7 +117,7 @@
 }
 
 .guideIcon {
-  color: #FB6320;
+  color: var(--color-orange, #fb6320);
   margin-bottom: 4px;
 }
 
@@ -125,14 +125,14 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
 }
 
 .guideDesc {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   margin: 0;
   line-height: 1.4;
 }
@@ -148,15 +148,15 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin: 8px 0 4px 0;
 }
 
 .faqItem {
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   overflow: hidden;
 }
@@ -172,7 +172,7 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   text-align: left;
   cursor: pointer;
 }
@@ -181,9 +181,9 @@
   padding: 0 16px 14px 16px;
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
   line-height: 1.5;
-  border-top: 1px dashed rgba(205, 183, 174, 0.6);
+  border-top: 1px dashed var(--color-border, #ffffff1a);
   margin-top: 2px;
   padding-top: 10px;
 }
@@ -191,8 +191,8 @@
 /* CTA Footer */
 .footer {
   padding: 16px 28px;
-  border-top: 1px solid #CDB7AE;
-  background-color: #FFEEDD;
+  border-top: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-surface-card, #16181f);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -204,9 +204,9 @@
   gap: 6px;
   height: 36px;
   padding: 0 16px;
-  background-color: #000000;
-  color: #FFFFFF;
-  border: 1px solid #000000;
+  background-color: var(--color-bone, #efe6d2);
+  color: #0d0f12;
+  border: 1px solid var(--color-bone, #efe6d2);
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -217,7 +217,7 @@
 }
 
 .requestButton:hover {
-  background-color: #222222;
+  background-color: #c8baa4;
 }
 
 .requestButton:active {
@@ -228,8 +228,8 @@
   height: 36px;
   padding: 0 18px;
   background: transparent;
-  border: 1px solid #CDB7AE;
-  color: #464646;
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-secondary, #cbd5e1);
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -237,6 +237,6 @@
 }
 
 .closeFooterButton:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-  color: #000000;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary, #f8fafc);
 }

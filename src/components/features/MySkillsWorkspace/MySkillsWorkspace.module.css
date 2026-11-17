@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FFEEDD;
+  background-color: var(--color-bg-page, #0d0f12);
 }
 
 .mainContent {
@@ -16,8 +16,8 @@
 
 /* Header Banner */
 .headerBanner {
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   padding: 32px;
   margin-bottom: 24px;
@@ -43,26 +43,26 @@
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
+  background-color: rgba(251, 99, 32, 0.12);
+  border: 1px solid rgba(251, 99, 32, 0.4);
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: #FB6320;
+  color: var(--color-orange, #fb6320);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
 }
 
 .categoryIcon {
-  color: #FB6320;
+  color: var(--color-orange, #fb6320);
 }
 
 .heading {
   font-family: var(--font-sans);
   font-size: 28px;
   font-weight: 700;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0 0 8px 0;
   line-height: 1.2;
 }
@@ -70,7 +70,7 @@
 .subheading {
   font-family: var(--font-sans);
   font-size: 15px;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0;
   line-height: 1.5;
 }
@@ -86,9 +86,9 @@
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
-  color: #000000;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-primary, #f8fafc);
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
@@ -98,7 +98,7 @@
 }
 
 .secondaryBtn:hover {
-  background-color: #FFFDF8;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .secondaryBtn:active {
@@ -109,8 +109,9 @@
   font-family: var(--font-mono);
   font-size: 11px;
   padding: 2px 6px;
-  background-color: #FFFDF8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-secondary, #cbd5e1);
   border-radius: 0px;
 }
 
@@ -119,9 +120,9 @@
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  background-color: #FB6320;
-  border: 1px solid #FB6320;
-  color: #FFFFFF;
+  background-color: var(--color-bone, #efe6d2);
+  border: 1px solid var(--color-bone, #efe6d2);
+  color: #0d0f12;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
@@ -131,7 +132,8 @@
 }
 
 .primaryBtn:hover {
-  background-color: #E05215;
+  background-color: #c8baa4;
+  border-color: #c8baa4;
 }
 
 .primaryBtn:active {
@@ -144,11 +146,11 @@
   align-items: center;
   gap: 12px;
   padding: 10px 16px;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   font-family: var(--font-sans);
   font-size: 13px;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
   border-radius: 0px;
 }
 
@@ -165,14 +167,14 @@
 }
 
 .agentStatusText strong {
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .agentSyncBadge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #027A48;
+  color: #34d399;
   font-weight: 600;
   font-size: 12px;
 }
@@ -182,7 +184,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #CDB7AE;
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
   margin-bottom: 28px;
 }
 
@@ -197,19 +199,19 @@
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 500;
-  color: #625E59;
+  color: var(--color-text-muted, #94a3b8);
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .tabBtn:hover {
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .tabBtn.activeTab {
-  color: #FB6320;
-  border-bottom-color: #FB6320;
+  color: var(--color-orange, #fb6320);
+  border-bottom-color: var(--color-orange, #fb6320);
   font-weight: 600;
 }
 
@@ -218,14 +220,14 @@
   font-weight: 700;
   padding: 2px 7px;
   border-radius: var(--radius-full);
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
-  color: #000000;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-secondary, #cbd5e1);
 }
 
 .activeTab .tabBadge {
-  background-color: #FB6320;
-  border-color: #FB6320;
+  background-color: var(--color-orange, #fb6320);
+  border-color: var(--color-orange, #fb6320);
   color: #FFFFFF;
 }
 
@@ -243,8 +245,8 @@
 /* Empty State */
 .emptyContainer {
   padding: 72px 24px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   display: flex;
   flex-direction: column;
@@ -259,9 +261,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
-  color: #FB6320;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-orange, #fb6320);
   margin-bottom: 8px;
 }
 
@@ -269,14 +271,14 @@
   font-family: var(--font-sans);
   font-size: 20px;
   font-weight: 700;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
 }
 
 .emptyDescription {
   font-family: var(--font-sans);
   font-size: 14px;
-  color: #625E59;
+  color: var(--color-text-secondary, #cbd5e1);
   max-width: 440px;
   margin: 0;
   line-height: 1.5;
@@ -288,9 +290,9 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background-color: #FB6320;
-  color: #FFFFFF;
-  border: 1px solid #FB6320;
+  background-color: var(--color-bone, #efe6d2);
+  color: #0d0f12;
+  border: 1px solid var(--color-bone, #efe6d2);
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
@@ -300,7 +302,7 @@
 }
 
 .exploreMarketplaceBtn:hover {
-  background-color: #E05215;
+  background-color: #c8baa4;
 }
 
 .exploreMarketplaceBtn:active {

@@ -60,9 +60,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #FFECD8;
-  border: 1px solid rgba(84, 57, 45, 0.18);
-  color: #54392D;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-primary, #f8fafc);
   flex-shrink: 0;
   box-shadow: none; /* No shadow */
   /* Playful spring easing curve for a cute bouncy perk on hover */
@@ -74,20 +74,19 @@
 
 @media (hover: hover) {
   .card:hover .actionButton {
-    /* Fill #54392D with white icon, no shadow */
     transform: scale(1.08) translate(1px, -1px);
-    background-color: #54392D;
-    border-color: #54392D;
-    color: #FFFFFF;
+    background-color: var(--color-bone, #efe6d2);
+    border-color: var(--color-bone, #efe6d2);
+    color: #0d0f12;
     box-shadow: none;
   }
 }
 
 .card:active .actionButton {
   transform: scale(0.95);
-  background-color: #422C23;
-  border-color: #422C23;
-  color: #FFFFFF;
+  background-color: var(--color-brand-hover, #c8baa4);
+  border-color: var(--color-brand-hover, #c8baa4);
+  color: #0d0f12;
   box-shadow: none;
 }
 

@@ -1,6 +1,6 @@
 /* Input Primitive Styles
- * Design System Specifications
- * Surface: #FFFFFF, Border: 1px solid #CDB7AE, Radius: 0px (strict sharp geometry)
+ * Design System Specifications - Dark Obsidian Theme matching skillhouse.dev
+ * Surface: var(--color-bg-page, #0d0f12), Border: 1px solid var(--color-border, #ffffff1a), Radius: 0px (strict sharp geometry)
  * Focus Ring: #FB6320 (3px brand orange glow)
  */
 
@@ -8,12 +8,12 @@
   display: inline-flex;
   align-items: center;
   position: relative;
-  background-color: var(--input-bg, rgba(255, 255, 255, 0.55));
-  border: 1px solid #CDB7AE;
+  background-color: var(--input-bg, var(--color-bg-page, #0d0f12));
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.04);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
-  color: var(--color-text-primary, #000000);
+  color: var(--color-text-primary, #f8fafc);
   box-sizing: border-box;
 }
 
@@ -23,15 +23,15 @@
 
 /* Hover State */
 .wrapper:hover:not(.disabled) {
-  border-color: #8C847A;
-  background-color: var(--input-bg-hover, rgba(255, 255, 255, 0.75));
+  border-color: var(--color-border-strong, #ffffff33);
+  background-color: var(--input-bg-hover, var(--color-surface-cream, #1c1f28));
 }
 
 /* Focus State */
 .wrapper:focus-within:not(.disabled) {
-  border-color: var(--color-brand, #FB6320);
+  border-color: var(--color-orange, #fb6320);
   box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
-  background-color: var(--input-bg-focus, rgba(255, 255, 255, 0.95));
+  background-color: var(--input-bg-focus, var(--color-surface-card, #16181f));
 }
 
 /* Error State */
@@ -46,8 +46,8 @@
 /* Disabled State */
 .wrapper.disabled {
   opacity: 0.6;
-  background-color: #F5EFEB;
-  border-color: #D8CCC4;
+  background-color: var(--color-surface-card, #16181f);
+  border-color: var(--color-border, #ffffff1a);
   cursor: not-allowed;
 }
 
@@ -87,18 +87,18 @@
   outline: none;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
-  color: #121316;
+  color: var(--color-text-primary, #f8fafc);
   box-sizing: border-box;
 }
 
 .input::placeholder {
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   opacity: 0.85;
 }
 
 .input:disabled {
   cursor: not-allowed;
-  color: #8C847A;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 /* Icons */
@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   flex-shrink: 0;
 }
 
@@ -116,6 +116,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   flex-shrink: 0;
 }

@@ -1,13 +1,13 @@
-/* User Profile & Account Settings Modal (Figma & Skillhouse Design System) */
+/* User Profile & Account Settings Modal (Dark Slate/Obsidian Theme matching skillhouse.dev) */
 
 .modal {
   width: 100%;
   max-width: 680px;
   max-height: 90vh;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4), 0px 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -39,7 +39,7 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   cursor: pointer;
   transition: all var(--transition-fast);
   z-index: 10;
@@ -47,9 +47,9 @@
 }
 
 .closeButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #000000;
-  border-color: #CDB7AE;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary, #f8fafc);
+  border-color: var(--color-border, #ffffff1a);
 }
 
 .closeButton:active {
@@ -58,8 +58,8 @@
 
 .header {
   padding: 24px 28px 16px;
-  border-bottom: 1px solid #CDB7AE;
-  background-color: #FFEEDD;
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-surface-card, #16181f);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,7 +75,7 @@
   font-family: var(--font-sans);
   font-size: 20px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
   line-height: 28px;
 }
@@ -86,9 +86,9 @@
   gap: 5px;
   padding: 2px 8px;
   border-radius: 0px;
-  background: rgba(251, 99, 32, 0.1);
-  border: 1px solid rgba(251, 99, 32, 0.3);
-  color: #FB6320;
+  background: rgba(251, 99, 32, 0.12);
+  border: 1px solid rgba(251, 99, 32, 0.4);
+  color: var(--color-orange, #fb6320);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -102,8 +102,8 @@
   align-items: center;
   padding: 0 28px;
   gap: 4px;
-  border-bottom: 1px solid #CDB7AE;
-  background-color: rgba(255, 238, 221, 0.6);
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-bg-page, #0d0f12);
 }
 
 .tabButton {
@@ -114,7 +114,7 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
@@ -124,13 +124,13 @@
 }
 
 .tabButton:hover {
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .tabButton.activeTab {
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   font-weight: 600;
-  border-bottom-color: #000000;
+  border-bottom-color: var(--color-bone, #efe6d2);
 }
 
 /* Scrollable Content Body */
@@ -149,10 +149,10 @@
   align-items: center;
   gap: 20px;
   padding: 20px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .avatarWrapper {
@@ -167,8 +167,8 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #FFFFFF;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--color-border, #ffffff1a);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .onlineDot {
@@ -179,7 +179,7 @@
   height: 14px;
   border-radius: 50%;
   background-color: #12B76A;
-  border: 2.5px solid #FFECD8;
+  border: 2.5px solid var(--color-surface-cream, #1c1f28);
 }
 
 .profileInfo {
@@ -198,14 +198,14 @@
   font-family: var(--font-sans);
   font-size: 18px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
 }
 
 .userEmail {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: #7F776E;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0 0 8px 0;
 }
 
@@ -215,7 +215,7 @@
   gap: 16px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #464646;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 .statItem {
@@ -226,7 +226,7 @@
 
 .statValue {
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 /* Section Block */
@@ -246,7 +246,7 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin: 0;
@@ -255,7 +255,7 @@
 .sectionSubtitle {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   margin: 0;
 }
 
@@ -271,8 +271,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
 }
 
@@ -288,8 +288,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
 }
 
@@ -302,13 +302,13 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .serviceMeta {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 .connectedStatus {
@@ -317,21 +317,21 @@
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #027A48;
+  color: #34d399;
 }
 
 .statusIndicatorDot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #12B76A;
+  background-color: #34d399;
 }
 
 /* API Key & CLI Box */
 .terminalCard {
-  background-color: #1A1A1A;
+  background-color: var(--color-bg-page, #0d0f12);
   color: #F4F4F6;
-  border: 1px solid #333333;
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   padding: 16px;
   font-family: var(--font-mono);
@@ -345,12 +345,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #333333;
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
   padding-bottom: 8px;
 }
 
 .terminalLabel {
-  color: #A0A0A0;
+  color: var(--color-text-muted, #94a3b8);
   font-size: 11px;
 }
 
@@ -359,13 +359,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: #111111;
+  background: rgba(0, 0, 0, 0.4);
   padding: 8px 12px;
-  border: 1px solid #282828;
+  border: 1px solid var(--color-border, #ffffff1a);
 }
 
 .terminalCommand {
-  color: #FB6320;
+  color: var(--color-orange, #fb6320);
   word-break: break-all;
   user-select: all;
 }
@@ -375,9 +375,9 @@
   align-items: center;
   gap: 5px;
   padding: 5px 10px;
-  background: #262626;
-  color: #FFFFFF;
-  border: 1px solid #404040;
+  background: var(--color-surface-card, #16181f);
+  color: var(--color-text-primary, #f8fafc);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-size: 11px;
   font-family: var(--font-sans);
@@ -387,7 +387,7 @@
 }
 
 .copyIconButton:hover {
-  background: #333333;
+  background: var(--color-surface-cream, #1c1f28);
 }
 
 .copyIconButton:active {
@@ -400,8 +400,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
 }
 
@@ -415,24 +415,24 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .settingHelp {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 .selectInput {
   height: 36px;
   padding: 0 12px;
-  background-color: #FFFFFF;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 13px;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   outline: none;
   cursor: pointer;
 }
@@ -440,7 +440,7 @@
 .toggleSwitch {
   width: 40px;
   height: 22px;
-  background-color: #000000;
+  background-color: var(--color-orange, #fb6320);
   border-radius: 12px;
   position: relative;
   cursor: pointer;
@@ -450,7 +450,7 @@
 }
 
 .toggleSwitch[aria-checked="false"] {
-  background-color: #CDB7AE;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .toggleKnob {
@@ -471,8 +471,8 @@
 /* Footer Actions */
 .footer {
   padding: 16px 28px;
-  border-top: 1px solid #CDB7AE;
-  background-color: #FFEEDD;
+  border-top: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-surface-card, #16181f);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -484,8 +484,8 @@
   gap: 6px;
   padding: 8px 14px;
   background: transparent;
-  border: 1px solid #D92D20;
-  color: #D92D20;
+  border: 1px solid #f87171;
+  color: #f87171;
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -495,7 +495,7 @@
 }
 
 .signOutButton:hover {
-  background-color: rgba(217, 45, 32, 0.08);
+  background-color: rgba(248, 113, 113, 0.12);
 }
 
 .signOutButton:active {
@@ -505,9 +505,9 @@
 .saveButton {
   height: 40px;
   padding: 0 24px;
-  background-color: #000000;
-  color: #FFFFFF;
-  border: 1px solid #000000;
+  background-color: var(--color-bone, #efe6d2);
+  color: #0d0f12;
+  border: 1px solid var(--color-bone, #efe6d2);
   border-radius: 0px;
   font-family: var(--font-sans);
   font-size: 14px;
@@ -521,7 +521,7 @@
 }
 
 .saveButton:hover {
-  background-color: #222222;
+  background-color: #c8baa4;
 }
 
 .saveButton:active {

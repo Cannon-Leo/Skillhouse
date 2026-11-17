@@ -1,13 +1,12 @@
-/* RequestSkillModal.module.css — Skillhouse Design System Specs
- * Modal Surface: #FFECD8 (Surface Cream)
+/* RequestSkillModal.module.css — Skillhouse Dark Mode Theme matching skillhouse.dev
+ * Modal Surface: var(--color-surface-card, #16181f)
  * Input / Dropdown Specs:
- *   - Background: #FFFFFF (crisp pure white with high contrast)
- *   - Border: 1px solid #CDB7AE (Skillhouse signature stroke)
- *   - Border-Radius: 0px (sharp corners matching Figma architecture)
- *   - Height: 42px (touch-friendly 40-42px measure)
- *   - Focus: border-color #FB6320, box-shadow 0 0 0 3px rgba(251, 99, 32, 0.2)
- *   - Typography: Geist Sans 14px, #121316
- *   - Dropdown: Custom positioned ChevronDown glyph, appearance: none
+ *   - Background: var(--color-bg-page, #0d0f12)
+ *   - Border: 1px solid var(--color-border, #ffffff1a)
+ *   - Border-Radius: 0px (sharp corners)
+ *   - Height: 42px
+ *   - Focus: border-color var(--color-orange, #fb6320), box-shadow 0 0 0 3px rgba(251, 99, 32, 0.2)
+ *   - Typography: Geist Sans 14px, #f8fafc
  */
 
 .modal {
@@ -17,14 +16,14 @@
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface-cream, #FFECD8);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0px 0px 0px 1px rgba(16, 25, 40, 0.05),
-    0px 8px 16px -4px rgba(18, 14, 12, 0.12),
-    0px 24px 36px -6px rgba(18, 14, 12, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.2),
+    0px 8px 16px -4px rgba(0, 0, 0, 0.3),
+    0px 24px 36px -6px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   animation: modalScaleEnter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   overflow: hidden;
@@ -53,15 +52,15 @@
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   transition: all var(--transition-fast, 150ms ease);
   z-index: 10;
 }
 
 .closeButton:hover {
-  color: #000000;
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-primary, #f8fafc);
+  border-color: var(--color-border, #ffffff1a);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .closeButton:active {
@@ -70,7 +69,7 @@
 
 .header {
   padding: 32px 36px 18px;
-  border-bottom: 1px solid rgba(205, 183, 174, 0.5);
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -81,7 +80,7 @@
   font-size: 26px;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
 }
 
@@ -89,7 +88,7 @@
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 13.5px;
   line-height: 1.55;
-  color: #55504A;
+  color: var(--color-text-secondary, #cbd5e1);
   margin: 0;
 }
 
@@ -118,12 +117,12 @@
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 13.5px;
   font-weight: 600;
-  color: #121316;
+  color: var(--color-text-primary, #f8fafc);
   line-height: 1.3;
 }
 
 .requiredBadge {
-  color: var(--color-brand, #FB6320);
+  color: var(--color-orange, #fb6320);
   margin-left: 2px;
   font-weight: 700;
 }
@@ -131,7 +130,7 @@
 .optionalBadge {
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 11.5px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   font-weight: 400;
 }
 
@@ -142,73 +141,66 @@
   width: 100%;
   height: 42px;
   padding: 0 14px;
-  background-color: rgba(255, 255, 255, 0.45);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
-  color: #121316;
+  color: var(--color-text-primary, #f8fafc);
   box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.03);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
 
 .input::placeholder {
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   opacity: 0.85;
 }
 
 .input:hover {
-  border-color: #8C847A;
-  background-color: rgba(255, 255, 255, 0.68);
+  border-color: var(--color-border-strong, #ffffff33);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--color-brand, #FB6320);
-  background-color: rgba(255, 255, 255, 0.9);
+  border-color: var(--color-orange, #fb6320);
   box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
 }
 
 /* ==========================================================================
    Design System Textarea Specs
-   Warm translucent cream surface blending harmoniously into modal canvas
    ========================================================================== */
 .textarea {
   width: 100%;
   min-height: 105px;
   padding: 12px 14px;
-  background-color: rgba(255, 255, 255, 0.45);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #121316;
+  color: var(--color-text-primary, #f8fafc);
   box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.03);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   resize: vertical;
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
 
 .textarea::placeholder {
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   opacity: 0.85;
 }
 
 .textarea:hover {
-  border-color: #8C847A;
-  background-color: rgba(255, 255, 255, 0.68);
+  border-color: var(--color-border-strong, #ffffff33);
 }
 
 .textarea:focus {
   outline: none;
-  border-color: var(--color-brand, #FB6320);
-  background-color: rgba(255, 255, 255, 0.9);
+  border-color: var(--color-orange, #fb6320);
   box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
 }
-
-
 
 .inputError {
   border-color: #D92D20 !important;
@@ -222,12 +214,12 @@
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 12px;
   font-weight: 500;
-  color: #D92D20;
+  color: #f87171;
   margin-top: 2px;
 }
 
 /* ==========================================================================
-   Design System Access Preference Pills / Radios (Figma Node 725:11328 specs)
+   Design System Access Preference Pills / Radios
    ========================================================================== */
 .radioGroup {
   display: flex;
@@ -241,29 +233,29 @@
   gap: 8px;
   height: 38px;
   padding: 0 14px;
-  background-color: rgba(255, 236, 217, 0.6);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 13.5px;
-  color: #2E2E2E;
+  color: var(--color-text-secondary, #cbd5e1);
   cursor: pointer;
   white-space: nowrap;
   box-sizing: border-box;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.03);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 140ms ease;
   user-select: none;
 }
 
 .radioLabel:hover {
-  border-color: #8C847A;
-  background-color: #F8D5B8;
+  border-color: var(--color-border-strong, #ffffff33);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .radioLabelActive {
-  border-color: var(--color-brand, #FB6320);
-  background-color: rgba(251, 99, 32, 0.12);
-  color: #000000;
+  border-color: var(--color-orange, #fb6320);
+  background-color: rgba(251, 99, 32, 0.15);
+  color: var(--color-text-primary, #f8fafc);
   font-weight: 500;
 }
 
@@ -279,7 +271,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1.5px solid #8C847A;
+  border: 1.5px solid var(--color-border-strong, #ffffff33);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,8 +281,8 @@
 }
 
 .radioIndicatorChecked {
-  border-color: var(--color-brand, #FB6320);
-  background-color: var(--color-brand, #FB6320);
+  border-color: var(--color-orange, #fb6320);
+  background-color: var(--color-orange, #fb6320);
 }
 
 .radioDot {
@@ -307,7 +299,7 @@
 .helpText {
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 12px;
-  color: #7F776E;
+  color: var(--color-text-muted, #94a3b8);
   line-height: 1.45;
   margin: 2px 0 0;
 }
@@ -317,7 +309,7 @@
    ========================================================================== */
 .footer {
   padding: 18px 36px 26px;
-  border-top: 1px solid rgba(205, 183, 174, 0.5);
+  border-top: 1px solid var(--color-border, #ffffff1a);
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -329,20 +321,20 @@
   height: 40px;
   padding: 0 20px;
   background: transparent;
-  border: 1px solid #CDB7AE;
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #121316;
+  color: var(--color-text-primary, #f8fafc);
   cursor: pointer;
   white-space: nowrap;
   transition: all 150ms ease;
 }
 
 .cancelBtn:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-  border-color: #8C847A;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-border-strong, #ffffff33);
 }
 
 .cancelBtn:active {
@@ -352,15 +344,15 @@
 .submitBtn {
   height: 40px;
   padding: 0 24px;
-  background-color: var(--color-brand, #FB6320);
-  color: #FFFFFF;
-  border: 1px solid var(--color-brand, #FB6320);
+  background-color: var(--color-bone, #efe6d2);
+  color: #0d0f12;
+  border: 1px solid var(--color-bone, #efe6d2);
   border-radius: 0px;
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 150ms ease;
   display: inline-flex;
   align-items: center;
@@ -370,8 +362,8 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background-color: var(--color-brand-hover, #E05215);
-  border-color: var(--color-brand-hover, #E05215);
+  background-color: #c8baa4;
+  border-color: #c8baa4;
   transform: translateY(-1px);
 }
 
@@ -399,9 +391,9 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #ECFDF3;
-  color: #039855;
-  border: 1px solid #A6F4C5;
+  background-color: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -410,7 +402,7 @@
 .successTitle {
   font-family: var(--font-pixel), var(--font-geist-pixel), monospace;
   font-size: 24px;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
 }
 
@@ -418,7 +410,7 @@
   font-family: var(--font-sans), "Geist", -apple-system, sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #55504A;
+  color: var(--color-text-secondary, #cbd5e1);
   max-width: 420px;
   margin: 0;
 }
@@ -426,10 +418,10 @@
 .requestIdTag {
   font-family: monospace;
   font-size: 12px;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   padding: 4px 8px;
-  border-radius: 2px;
-  color: #55504A;
+  border-radius: 0px;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 @media (max-width: 600px) {

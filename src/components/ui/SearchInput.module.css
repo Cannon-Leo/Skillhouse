@@ -11,8 +11,8 @@
   gap: 8px;
   height: 40px;
   padding: 0 14px;
-  background-color: var(--color-surface-cream);
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   border-radius: 0px;
   box-shadow: var(--shadow-xs);
   transition: all var(--transition-fast);
@@ -21,21 +21,21 @@
 }
 
 .variant-white {
-  background-color: var(--color-white);
+  background-color: var(--color-surface-card, #16181f);
 }
 
 .variant-cream {
-  background-color: var(--color-surface-cream);
+  background-color: var(--color-surface-cream, #1c1f28);
 }
 
 .inputWrapper:hover {
-  border-color: var(--color-border-hover);
+  border-color: var(--color-border-strong, #ffffff33);
 }
 
 .inputWrapper.isFocused {
-  border-color: var(--color-brand);
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-focus);
+  border-color: var(--color-orange, #fb6320);
+  background-color: var(--color-surface-card, #16181f);
+  box-shadow: 0 0 0 3px rgba(251, 99, 32, 0.22);
 }
 
 .icon {
@@ -53,7 +53,7 @@
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary, #f8fafc);
   min-width: 0;
 }
 
@@ -68,7 +68,7 @@
   width: 18px;
   height: 18px;
   border-radius: 0px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--color-text-secondary);
   font-size: 11px;
   cursor: pointer;
@@ -76,16 +76,16 @@
 }
 
 .clearButton:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: var(--color-dark);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .shortcutBadge {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-text-muted);
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid #CDB7AE;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border, #ffffff1a);
   padding: 2px 5px;
   border-radius: 0px;
   pointer-events: none;

@@ -366,8 +366,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background-color: var(--color-surface-cream, #FFECD8);
-  border: 1px solid rgba(128, 67, 0, 0.15);
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   margin-top: 24px;
   flex-wrap: wrap;
   gap: 12px;

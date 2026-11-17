@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background-color: rgba(30, 25, 22, 0.48);
+  background-color: rgba(13, 15, 18, 0.75);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   display: flex;
@@ -23,11 +23,11 @@
   width: 100%;
   max-width: 580px;
   height: 100vh;
-  background-color: #FFEEDD;
-  border-left: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border-left: 1px solid var(--color-border, #ffffff1a);
   box-shadow: 
-    inset 1px 0 0 rgba(255, 255, 255, 0.6),
-    -16px 0 40px rgba(0, 0, 0, 0.16);
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    -16px 0 40px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,8 +49,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  background-color: #FFFDF8;
-  border-bottom: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
   flex-shrink: 0;
 }
 
@@ -67,9 +67,9 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 3px 8px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
-  color: #FB6320;
+  background-color: rgba(251, 99, 32, 0.12);
+  border: 1px solid rgba(251, 99, 32, 0.4);
+  color: var(--color-orange, #fb6320);
 }
 
 .priceBadge {
@@ -77,8 +77,8 @@
   font-size: 12px;
   font-weight: 700;
   padding: 3px 8px;
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: var(--color-bone, #efe6d2);
+  color: #0d0f12;
 }
 
 .headerActions {
@@ -94,15 +94,15 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  border: 1px solid #CDB7AE;
-  color: #000000;
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-primary, #f8fafc);
   cursor: pointer;
   border-radius: 0px;
   transition: all 0.1s ease;
 }
 
 .iconBtn:hover {
-  background-color: #FFECD8;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .iconBtn:active {
@@ -136,7 +136,7 @@
   font-family: var(--font-sans);
   font-size: 22px;
   font-weight: 700;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   margin: 0;
   line-height: 1.2;
 }
@@ -145,9 +145,9 @@
   font-family: var(--font-mono);
   font-size: 12px;
   padding: 2px 6px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
-  color: #625E59;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-secondary, #cbd5e1);
 }
 
 .metaRow {
@@ -163,25 +163,25 @@
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: #027A48;
+  color: #34d399;
 }
 
 .verifiedIcon {
-  color: #12B76A;
+  color: #34d399;
 }
 
 .statTag {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #625E59;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 /* Preview Image */
 .previewContainer {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   overflow: hidden;
   position: relative;
 }
@@ -198,15 +198,15 @@
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
-  background-color: #FFECD8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
 }
 
 .modelsLabel {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
 }
 
 .modelsList {
@@ -221,16 +221,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
 }
 
 /* Tab Bar */
 .tabBar {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #CDB7AE;
-  background-color: #FFECD8;
+  border-bottom: 1px solid var(--color-border, #ffffff1a);
+  background-color: var(--color-surface-cream, #1c1f28);
 }
 
 .tabBtn {
@@ -246,20 +246,20 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: #625E59;
+  color: var(--color-text-muted, #94a3b8);
   cursor: pointer;
   white-space: nowrap;
 }
 
 .tabBtn:hover {
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .tabBtn.activeTab {
-  color: #FB6320;
-  border-bottom-color: #FB6320;
+  color: var(--color-orange, #fb6320);
+  border-bottom-color: var(--color-orange, #fb6320);
   font-weight: 600;
-  background-color: #FFEEDD;
+  background-color: var(--color-surface-card, #16181f);
 }
 
 /* Tab 1: Install Panel */
@@ -272,7 +272,7 @@
 .panelDesc {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
   line-height: 1.5;
   margin: 0;
 }
@@ -289,29 +289,29 @@
   font-size: 12px;
   font-weight: 600;
   padding: 6px 12px;
-  background-color: #FFFDF8;
-  border: 1px solid #CDB7AE;
-  color: #464646;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-secondary, #cbd5e1);
   cursor: pointer;
   border-radius: 0px;
   white-space: nowrap;
 }
 
 .formatPill:hover {
-  color: #000000;
-  border-color: #FB6320;
+  color: var(--color-text-primary, #f8fafc);
+  border-color: var(--color-orange, #fb6320);
 }
 
 .formatPill.formatActive {
-  background-color: #FB6320;
+  background-color: var(--color-orange, #fb6320);
   color: #FFFFFF;
-  border-color: #FB6320;
+  border-color: var(--color-orange, #fb6320);
 }
 
 .codeSnippetBox {
   position: relative;
-  background-color: #1C1917;
-  border: 1px solid #292524;
+  background-color: var(--color-bg-page, #0d0f12);
+  border: 1px solid var(--color-border, #ffffff1a);
   padding: 16px;
   border-radius: 0px;
 }
@@ -334,8 +334,8 @@
   align-items: center;
   gap: 4px;
   padding: 4px 8px;
-  background-color: #292524;
-  border: 1px solid #44403C;
+  background-color: var(--color-surface-card, #16181f);
+  border: 1px solid var(--color-border, #ffffff1a);
   color: #E7E5E4;
   font-family: var(--font-sans);
   font-size: 11px;
@@ -345,7 +345,7 @@
 }
 
 .copySnippetBtn:hover {
-  background-color: #44403C;
+  background-color: var(--color-surface-cream, #1c1f28);
 }
 
 .installStatusRow {
@@ -353,11 +353,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background-color: #FFFDF8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   font-family: var(--font-sans);
   font-size: 12px;
-  color: #464646;
+  color: var(--color-text-secondary, #cbd5e1);
 }
 
 .installStatusLeft {
@@ -367,12 +367,13 @@
 }
 
 .statusBotIcon {
-  color: #FB6320;
+  color: var(--color-orange, #fb6320);
 }
 
 .toggleInstallBtn {
   background: none;
-  border: 1px solid #CDB7AE;
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-primary, #f8fafc);
   padding: 4px 8px;
   font-family: var(--font-sans);
   font-size: 11px;
@@ -382,7 +383,7 @@
 }
 
 .toggleInstallBtn:hover {
-  background-color: #FFECD8;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Tab 2: Overview */
@@ -404,14 +405,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #464646;
+  color: var(--color-text-muted, #94a3b8);
   margin: 0;
 }
 
 .descriptionText {
   font-family: var(--font-sans);
   font-size: 14px;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
   line-height: 1.6;
   margin: 0;
 }
@@ -420,8 +421,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  background-color: #FFFDF8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   padding: 12px;
 }
 
@@ -435,7 +436,7 @@
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
-  color: #757575;
+  color: var(--color-text-muted, #94a3b8);
   text-transform: uppercase;
 }
 
@@ -443,21 +444,21 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
-  color: #000000;
+  color: var(--color-text-primary, #f8fafc);
 }
 
 /* Tab 3: Playground */
 .playgroundPanel {
-  background-color: #FFFDF8;
-  border: 1px solid #CDB7AE;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
   padding: 12px;
 }
 
 /* Sticky Footer */
 .drawerFooter {
   padding: 16px 24px;
-  background-color: #FFFDF8;
-  border-top: 1px solid #CDB7AE;
+  background-color: var(--color-surface-card, #16181f);
+  border-top: 1px solid var(--color-border, #ffffff1a);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -469,9 +470,9 @@
   align-items: center;
   gap: 6px;
   padding: 12px 16px;
-  background-color: #FFEEDD;
-  border: 1px solid #CDB7AE;
-  color: #000000;
+  background-color: var(--color-surface-cream, #1c1f28);
+  border: 1px solid var(--color-border, #ffffff1a);
+  color: var(--color-text-primary, #f8fafc);
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
@@ -481,13 +482,13 @@
 }
 
 .bookmarkBtn:hover {
-  background-color: #FFECD8;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .bookmarkBtn.bookmarked {
-  background-color: #FB6320;
+  background-color: var(--color-orange, #fb6320);
   color: #FFFFFF;
-  border-color: #FB6320;
+  border-color: var(--color-orange, #fb6320);
 }
 
 .installPrimaryBtn {
@@ -497,9 +498,9 @@
   justify-content: center;
   gap: 8px;
   padding: 12px 20px;
-  background-color: #FB6320;
-  border: 1px solid #FB6320;
-  color: #FFFFFF;
+  background-color: var(--color-bone, #efe6d2);
+  border: 1px solid var(--color-bone, #efe6d2);
+  color: #0d0f12;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 700;
@@ -510,7 +511,8 @@
 }
 
 .installPrimaryBtn:hover {
-  background-color: #E05215;
+  background-color: #c8baa4;
+  border-color: #c8baa4;
 }
 
 .installPrimaryBtn:active {
