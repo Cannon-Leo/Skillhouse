@@ -24,6 +24,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the Marketplace.  
+Open [http://localhost:3000/product](http://localhost:3000/product) to view the Product Overview and Waitlist page.  
 Open [http://localhost:3000/design-system](http://localhost:3000/design-system) to view the live Interactive Design System Showcase.
 
 ### 3. Core Commands
@@ -82,6 +83,8 @@ frontend/
 ├── public/                     # Static assets & authentic vector SVGs (/figma/*)
 ├── src/
 │   ├── app/                    # Next.js App Router (page.tsx, layout.tsx, globals.css)
+│   │   ├── product/            # Product overview & waitlist page (/product)
+│   │   ├── api/waitlist/       # Waitlist email capture endpoint (/api/waitlist)
 │   │   ├── design-system/      # Design System live showcase route (/design-system)
 │   │   ├── globals.css         # Root CSS design tokens, typography, empirical spacing
 │   │   └── page.module.css     # Marketplace page layout & responsive grid styles
